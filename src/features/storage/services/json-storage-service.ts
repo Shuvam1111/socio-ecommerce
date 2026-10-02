@@ -6,6 +6,7 @@ const dataDirectory = path.join(process.cwd(), 'src', 'data');
 const blobPrefix = 'socio-commerce/runtime';
 const verificationAttempts = 4;
 const initializationLocks = new Map<string, Promise<void>>();
+const updateLocks = new Map<string, Promise<unknown>>();
 const localRuntimeData = new Map<string, unknown>();
 
 type BlobMissingError = Error & { status?: number; statusCode?: number; code?: string };
@@ -43,6 +44,7 @@ async function readBlob<T>(key: string): Promise<T | null> {
     const result = await get(blobPath(key), {
       access: 'private',
       storeId: getBlobStoreId(),
+      useCache: false,
     });
     if (!result) return null;
     return JSON.parse(await new Response(result.stream).text()) as T;
@@ -148,10 +150,19 @@ export async function updateJson<T>(
   fallback: T,
   updater: (current: T) => T | Promise<T>,
 ): Promise<T> {
-  const current = await readJson(key, fallback);
-  const updated = await updater(current);
-  await writeJson(key, updated);
-  return updated;
+  const previous = updateLocks.get(key) ?? Promise.resolve();
+  const operation = previous.then(async () => {
+    const current = await readJson(key, fallback);
+    const updated = await updater(current);
+    await writeJson(key, updated);
+    return updated;
+  });
+  updateLocks.set(key, operation);
+  try {
+    return await operation;
+  } finally {
+    if (updateLocks.get(key) === operation) updateLocks.delete(key);
+  }
 }
 
 export async function exists(key: string): Promise<boolean> {
