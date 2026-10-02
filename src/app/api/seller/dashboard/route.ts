@@ -12,6 +12,11 @@ interface Seller {
   status: 'active' | 'inactive';
 }
 
+interface Vendor {
+  id: string;
+  status: 'pending' | 'approved' | 'rejected';
+}
+
 export async function GET() {
   const authenticatedSellerId = (await cookies()).get('socio-seller-session')?.value;
 
@@ -19,11 +24,21 @@ export async function GET() {
     return NextResponse.json({ message: 'Seller authentication is required.' }, { status: 401 });
   }
 
-  const sellersData = await readJson<{ sellers: Seller[] }>('sellers.json');
+  const [sellersData, vendorsData] = await Promise.all([
+    readJson<{ sellers: Seller[] }>('sellers.json'),
+    readJson<{ vendors: Vendor[] }>('vendors.json'),
+  ]);
   const seller = sellersData.sellers.find((item) => item.id === authenticatedSellerId);
+  const vendor = seller
+    ? vendorsData.vendors.find((item) => item.id === seller.vendorId)
+    : undefined;
 
   if (!seller || seller.status !== 'active') {
     return NextResponse.json({ message: 'Active seller account not found.' }, { status: 401 });
+  }
+
+  if (!vendor || vendor.status !== 'approved') {
+    return NextResponse.json({ message: 'Seller vendor is not approved.' }, { status: 403 });
   }
 
   const [{ products }, { orders }] = await Promise.all([

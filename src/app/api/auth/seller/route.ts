@@ -19,6 +19,11 @@ interface SellerLoginSeller {
   permissions?: string[];
 }
 
+interface SellerLoginVendor {
+  id: string;
+  status: string;
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -36,9 +41,10 @@ export async function POST(request: Request) {
       );
     }
 
-    const [usersData, sellersData] = await Promise.all([
+    const [usersData, sellersData, vendorsData] = await Promise.all([
       readJson<{ users: SellerLoginUser[] }>('users.json', { users: [] }),
       readJson<{ sellers: SellerLoginSeller[] }>('sellers.json', { sellers: [] }),
+      readJson<{ vendors: SellerLoginVendor[] }>('vendors.json', { vendors: [] }),
     ]);
 
     const user = (usersData.users ?? []).find(
@@ -74,6 +80,17 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           message: 'No active seller account is associated with this user.',
+        },
+        { status: 403 },
+      );
+    }
+
+    const vendor = (vendorsData.vendors ?? []).find((item) => item.id === seller.vendorId);
+
+    if (!vendor || vendor.status !== 'approved') {
+      return NextResponse.json(
+        {
+          message: 'The seller vendor is not approved for access.',
         },
         { status: 403 },
       );

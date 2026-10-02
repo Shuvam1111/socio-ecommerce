@@ -4,6 +4,7 @@ import { readJson, updateJson } from '@/features/storage/services/json-storage-s
 type RecordMap = Record<string, unknown>;
 type Dataset = { vendors: RecordMap[] };
 type SellerDataset = { sellers: RecordMap[] };
+type UserDataset = { users: RecordMap[] };
 
 const superSellerPermissions = [
   'manage_products',
@@ -34,6 +35,7 @@ function storeSlug(name: string) {
 export async function POST(request: Request) {
   let createdVendorId: string | undefined;
   let createdSellerId: string | undefined;
+  let createdUserId: string | undefined;
 
   try {
     const registrationData = await request.json();
@@ -42,7 +44,11 @@ export async function POST(request: Request) {
       .trim()
       .toLowerCase();
 
-    const current = await readJson<Dataset>('vendors.json', { vendors: [] });
+    const [current, usersData] = await Promise.all([
+      readJson<Dataset>('vendors.json', { vendors: [] }),
+      readJson<UserDataset>('users.json', { users: [] }),
+    ]);
+    const users = usersData.users ?? [];
     const existing = (current.vendors ?? []).find((candidate) => {
       const contact = candidate.contact as RecordMap | undefined;
       const store = candidate.store as RecordMap | undefined;
@@ -57,9 +63,30 @@ export async function POST(request: Request) {
     }
 
     const vendorId = nextId(current.vendors ?? [], 'VEN');
+    const userId = nextId(users, 'USR');
+    const vendorUsername = String(registrationData.username ?? '').trim();
+    const vendorEmail = String(registrationData.email ?? '').trim();
+    if (!vendorUsername || !vendorEmail || !String(registrationData.password ?? '')) {
+      return NextResponse.json(
+        { success: false, message: 'Account name, email, and password are required.' },
+        { status: 400 },
+      );
+    }
+    if (
+      users.some(
+        (user) =>
+          String(user.username).toLowerCase() === vendorUsername.toLowerCase() ||
+          String(user.email).toLowerCase() === vendorEmail.toLowerCase(),
+      )
+    ) {
+      return NextResponse.json(
+        { success: false, message: 'Username or email is already in use.' },
+        { status: 409 },
+      );
+    }
     const vendor: RecordMap = {
       id: vendorId,
-      ownerUserId: registrationData.ownerUserId ?? null,
+      ownerUserId: userId,
       store: {
         name: registrationData.storeName,
         slug,
@@ -106,10 +133,30 @@ export async function POST(request: Request) {
       approvedAt: null,
     };
 
+    const user: RecordMap = {
+      id: userId,
+      username: vendorUsername,
+      email: vendorEmail,
+      firstName: String(registrationData.firstName ?? ''),
+      lastName: String(registrationData.lastName ?? ''),
+      phone: String(registrationData.phone ?? ''),
+      password: String(registrationData.password),
+      roles: ['super_seller'],
+      activeRole: 'super_seller',
+      vendorId,
+      status: 'active',
+      isVerified: false,
+      createdAt: new Date().toISOString(),
+    };
+
     await updateJson<Dataset>('vendors.json', { vendors: [] }, (data) => ({
       vendors: [...(data.vendors ?? []), vendor],
     }));
     createdVendorId = vendorId;
+    await updateJson<UserDataset>('users.json', { users: [] }, (data) => ({
+      users: [...(data.users ?? []), user],
+    }));
+    createdUserId = userId;
 
     const seller = await updateJson<SellerDataset>('sellers.json', { sellers: [] }, (data) => {
       const sellers = data.sellers ?? [];
@@ -123,7 +170,7 @@ export async function POST(request: Request) {
           ...sellers,
           {
             id: sellerId,
-            userId: registrationData.ownerUserId ?? '',
+            userId,
             vendorId,
             role: 'super_seller',
             employee: {
@@ -166,6 +213,15 @@ export async function POST(request: Request) {
         }));
       } catch (rollbackError) {
         console.error('Vendor rollback failed:', rollbackError);
+      }
+    }
+    if (createdUserId) {
+      try {
+        await updateJson<UserDataset>('users.json', { users: [] }, (data) => ({
+          users: (data.users ?? []).filter((candidate) => candidate.id !== createdUserId),
+        }));
+      } catch (rollbackError) {
+        console.error('User rollback failed:', rollbackError);
       }
     }
     if (createdSellerId) {
