@@ -140,6 +140,38 @@ describe('Admin authentication and authorization', () => {
     expect((await seedResponse.json()).seeded).toContain('users.json');
   });
 
+  it('rejects the wrong password when Blob users.json is missing', async () => {
+    files.clear();
+    const { POST } = await import('@/app/api/auth/admin/route');
+    expect((await POST(request(undefined, { identifier: 'admin', password: 'wrong' }))).status).toBe(
+      401,
+    );
+  });
+
+  it('uses Blob users when users.json exists instead of the bootstrap admin', async () => {
+    files.clear();
+    files.set(
+      usersPath,
+      JSON.stringify({ users: [{ ...admin, username: 'blob-admin', password: 'blob-secret' }] }),
+    );
+    const { POST } = await import('@/app/api/auth/admin/route');
+    expect((await POST(request(undefined, { identifier: 'admin', password: 'Admin@123' }))).status).toBe(
+      401,
+    );
+    expect((await POST(request(undefined, { identifier: 'blob-admin', password: 'blob-secret' }))).status).toBe(
+      200,
+    );
+  });
+
+  it('authenticates without reading a local users.json file', async () => {
+    files.clear();
+    const { POST } = await import('@/app/api/auth/admin/route');
+    const response = await POST(
+      request(undefined, { identifier: 'admin@example.com', password: 'Admin@123' }),
+    );
+    expect(response.status).toBe(200);
+  });
+
   it('creates an HttpOnly Admin cookie on successful login', async () => {
     const { POST } = await import('@/app/api/auth/admin/route');
     const response = await POST(

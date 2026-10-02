@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
-import { requireAdmin } from '@/features/auth/services/admin-authorization';
-import { seedJsonIfMissing } from '@/features/storage/services/json-storage-service';
+import {
+  requireAdmin,
+} from '@/features/auth/services/admin-authorization';
+import { mergeJsonSeed } from '@/features/storage/services/json-storage-service';
 import users from '@/data/users.json';
 import vendors from '@/data/vendors.json';
 import sellers from '@/data/sellers.json';
@@ -31,32 +33,31 @@ const datasets = {
 
 export const dynamic = 'force-dynamic';
 
+async function report(dryRun: boolean) {
+  return Promise.all(
+    Object.entries(datasets).map(([key, value]) => mergeJsonSeed(key, value, dryRun)),
+  );
+}
+
 export async function POST(request: Request) {
-  const { response } = await requireAdmin(request);
-  if (response) return response;
+  const admin = await requireAdmin(request);
+  if (admin.response) return admin.response;
 
   try {
-    const seeded: string[] = [];
-    const skipped: string[] = [];
-
-    for (const [key, value] of Object.entries(datasets)) {
-      if (await seedJsonIfMissing(key, value)) seeded.push(key);
-      else skipped.push(key);
-    }
-
+    const migrationReport = await report(false);
     return NextResponse.json({
       success: true,
-      storeIdConfigured: Boolean(process.env.BLOB_STORE_ID),
-      seeded,
-      skipped,
-      message: seeded.length
-        ? 'Missing Blob datasets were initialized without overwriting existing datasets.'
-        : 'All required Blob datasets already exist; no data was changed.',
+      dryRun: false,
+      seeded: migrationReport
+        .filter(({ recordsToAdd }) => recordsToAdd > 0)
+        .map(({ dataset }) => dataset),
+      report: migrationReport,
+      message: 'Blob seed migration completed using ID-based merges; existing records were preserved.',
     });
   } catch (error) {
-    console.error('Failed to seed Blob datasets:', error);
+    console.error('Failed to migrate Blob datasets:', error);
     return NextResponse.json(
-      { success: false, message: 'Unable to initialize Blob datasets.' },
+      { success: false, message: 'Unable to migrate Blob datasets.' },
       { status: 500 },
     );
   }
