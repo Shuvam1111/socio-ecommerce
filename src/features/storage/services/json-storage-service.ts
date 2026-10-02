@@ -17,17 +17,8 @@ function localPath(key: string) {
   return path.join(dataDirectory, key);
 }
 
-function requireProductionToken(): string {
-  const token = process.env.BLOB_READ_WRITE_TOKEN;
-  if (!token) {
-    throw new Error('BLOB_READ_WRITE_TOKEN is required for production JSON persistence.');
-  }
-  return token;
-}
-
 async function readBlob<T>(key: string): Promise<T | null> {
-  const token = requireProductionToken();
-  const result = await get(blobPath(key), { access: 'private', token });
+  const result = await get(blobPath(key), { access: 'private' });
   if (!result) return null;
   return JSON.parse(await new Response(result.stream).text()) as T;
 }
@@ -51,11 +42,10 @@ export async function readJson<T>(key: string, fallback: T): Promise<T> {
 
 export async function writeJson<T>(key: string, data: T): Promise<void> {
   if (isProductionStorageEnabled()) {
-    const token = requireProductionToken();
     await put(blobPath(key), JSON.stringify(data, null, 2), {
       access: 'private',
-      token,
       addRandomSuffix: false,
+
       allowOverwrite: true,
       contentType: 'application/json',
     });
