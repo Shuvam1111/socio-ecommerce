@@ -1,8 +1,4 @@
-import {
-  readJson,
-  readSeedJson,
-  writeJson,
-} from '@/features/storage/services/json-storage-service';
+import { readJson, writeJson } from '@/features/storage/services/json-storage-service';
 import type { SellerOrder } from '@/features/sellers/types/order';
 import { createNotification } from '@/features/notifications/services/notification-service';
 
@@ -92,7 +88,7 @@ export function validateReviewInput(input: unknown) {
 }
 export async function getReviews(productId: string) {
   const [{ reviews }, { users }] = await Promise.all([
-    readJson<ReviewFile>(reviewsKey, await readSeedJson<ReviewFile>(reviewsKey)),
+    readJson<ReviewFile>(reviewsKey, { reviews: [] }),
     readJson<UsersFile>('users.json', { users: [] }),
   ]);
   const visible = reviews.filter(
@@ -105,14 +101,14 @@ export async function getReviews(productId: string) {
 export async function getReviewSummary(productId: string) {
   const { reviews } = await readJson<ReviewFile>(
     reviewsKey,
-    await readSeedJson<ReviewFile>(reviewsKey),
+    { reviews: [] },
   );
   return aggregateReviews(reviews.filter((review) => review.productId === productId));
 }
 export async function getReviewContext(productId: string, buyerId: string) {
   const [{ reviews }, { orders }] = await Promise.all([
-    readJson<ReviewFile>(reviewsKey, await readSeedJson<ReviewFile>(reviewsKey)),
-    readJson<OrdersFile>(ordersKey, await readSeedJson<OrdersFile>(ordersKey)),
+    readJson<ReviewFile>(reviewsKey, { reviews: [] }),
+    readJson<OrdersFile>(ordersKey, { orders: [] }),
   ]);
   const purchased = orders.some((order) => isEligiblePurchase(order, buyerId, productId));
   const review = reviews.find((item) => item.productId === productId && item.buyerId === buyerId);
@@ -128,8 +124,8 @@ export async function createReview(
   input: { rating: number; title: string; comment: string },
 ) {
   const [reviewFile, orderFile] = await Promise.all([
-    readJson<ReviewFile>(reviewsKey, await readSeedJson<ReviewFile>(reviewsKey)),
-    readJson<OrdersFile>(ordersKey, await readSeedJson<OrdersFile>(ordersKey)),
+    readJson<ReviewFile>(reviewsKey, { reviews: [] }),
+    readJson<OrdersFile>(ordersKey, { orders: [] }),
   ]);
   const order = orderFile.orders.find((candidate) =>
     isEligiblePurchase(candidate, buyerId, productId),
@@ -161,7 +157,7 @@ export async function createReview(
   return review;
 }
 export async function moderateReview(id: string, status: 'approved' | 'rejected') {
-  const file = await readJson<ReviewFile>(reviewsKey, await readSeedJson<ReviewFile>(reviewsKey));
+  const file = await readJson<ReviewFile>(reviewsKey, { reviews: [] });
   const review = file.reviews.find((item) => item.id === id);
   if (!review) throw Object.assign(new Error('Review not found.'), { status: 404 });
   review.status = status;
@@ -188,7 +184,7 @@ export async function moderateReview(id: string, status: 'approved' | 'rejected'
 }
 export async function listReviews() {
   const [{ reviews }, { users }] = await Promise.all([
-    readJson<ReviewFile>(reviewsKey, await readSeedJson<ReviewFile>(reviewsKey)),
+    readJson<ReviewFile>(reviewsKey, { reviews: [] }),
     readJson<UsersFile>('users.json', { users: [] }),
   ]);
   return reviews.map((review) => ({

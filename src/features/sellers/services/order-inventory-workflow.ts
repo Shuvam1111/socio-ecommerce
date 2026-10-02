@@ -1,8 +1,4 @@
-import {
-  readJson,
-  readSeedJson,
-  writeJson,
-} from '@/features/storage/services/json-storage-service';
+import { readJson, writeJson } from '@/features/storage/services/json-storage-service';
 
 import type { SellerOrder, OrderStatus } from '../types/order';
 import type { SellerProduct } from '../types/product';
@@ -74,7 +70,7 @@ function activity(
 }
 
 export async function confirmPayment(orderId: string, transactionId: string | null = null) {
-  const orders = await readJson<OrdersFile>(ordersKey, await readSeedJson<OrdersFile>(ordersKey));
+  const orders = await readJson<OrdersFile>(ordersKey, { orders: [] });
   const order = orders.orders.find((item) => item.id === orderId);
   if (!order) throw Object.assign(new Error('Order not found.'), { status: 404 });
   if (order.status !== 'pending_payment' || !['pending', 'failed'].includes(order.payment.status)) {
@@ -105,7 +101,7 @@ export async function confirmPayment(orderId: string, transactionId: string | nu
 }
 
 export async function markPaymentReceived(orderId: string, actor: string) {
-  const orders = await readJson<OrdersFile>(ordersKey, await readSeedJson<OrdersFile>(ordersKey));
+  const orders = await readJson<OrdersFile>(ordersKey, { orders: [] });
   const order = orders.orders.find((item) => item.id === orderId);
   if (!order) throw Object.assign(new Error('Order not found.'), { status: 404 });
   if (order.payment.status === 'paid') return order;
@@ -139,7 +135,7 @@ export async function markPaymentReceived(orderId: string, actor: string) {
 }
 
 export async function failPayment(orderId: string, reason = 'Mock payment failed.') {
-  const orders = await readJson<OrdersFile>(ordersKey, await readSeedJson<OrdersFile>(ordersKey));
+  const orders = await readJson<OrdersFile>(ordersKey, { orders: [] });
   const order = orders.orders.find((item) => item.id === orderId);
   if (!order) throw Object.assign(new Error('Order not found.'), { status: 404 });
   if (order.status !== 'pending_payment' || !['pending', 'failed'].includes(order.payment.status)) {
@@ -171,9 +167,9 @@ export async function failPayment(orderId: string, reason = 'Mock payment failed
 
 export async function transitionOrder(orderId: string, nextStatus: OrderStatus, actor: string) {
   const [orders, products, activities] = await Promise.all([
-    readJson<OrdersFile>(ordersKey, await readSeedJson<OrdersFile>(ordersKey)),
-    readJson<ProductsFile>(productsKey, await readSeedJson<ProductsFile>(productsKey)),
-    readJson<ActivitiesFile>(activitiesKey, await readSeedJson<ActivitiesFile>(activitiesKey)),
+    readJson<OrdersFile>(ordersKey, { orders: [] }),
+    readJson<ProductsFile>(productsKey, { products: [] }),
+    readJson<ActivitiesFile>(activitiesKey, { activities: [] }),
   ]);
   const order = orders.orders.find((item) => item.id === orderId);
   if (!order) throw Object.assign(new Error('Order not found.'), { status: 404 });
@@ -351,7 +347,7 @@ export async function transitionOrder(orderId: string, nextStatus: OrderStatus, 
 }
 
 export async function loadOrder(orderId: string) {
-  const orders = await readJson<OrdersFile>(ordersKey, await readSeedJson<OrdersFile>(ordersKey));
+  const orders = await readJson<OrdersFile>(ordersKey, { orders: [] });
   return orders.orders.find((item) => item.id === orderId) ?? null;
 }
 
