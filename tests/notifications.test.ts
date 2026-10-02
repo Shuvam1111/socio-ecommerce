@@ -1,22 +1,15 @@
-import { describe, expect, it, beforeEach, afterAll } from 'vitest';
-import fs from 'fs/promises';
-import path from 'path';
+import { describe, expect, it, beforeEach } from 'vitest';
+import { createTestBlobDatasetMap } from './blob-storage-setup';
 import {
   createNotification,
   getUnreadCount,
   markAllNotificationsRead,
   markNotificationRead,
 } from '@/features/notifications/services/notification-service';
-import { resetLocalRuntimeData } from '@/features/storage/services/json-storage-service';
-const file = path.join(process.cwd(), 'src/data/notifications.json');
-let original = '';
-beforeEach(async () => {
-  resetLocalRuntimeData();
-  if (!original) original = await fs.readFile(file, 'utf8');
-  await fs.writeFile(file, '{"notifications":[]}');
-});
-afterAll(async () => {
-  if (original) await fs.writeFile(file, original);
+const files = createTestBlobDatasetMap();
+beforeEach(() => {
+  files.clear();
+  files.set('notifications.json', '{"notifications":[]}');
 });
 describe('notifications', () => {
   it('creates a notification and deduplicates the same event', async () => {

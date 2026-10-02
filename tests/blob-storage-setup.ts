@@ -42,6 +42,23 @@ const response = (value: string | undefined) =>
         }),
       };
 
+const keyForTestPath = (file: string) => `${prefix}${file.split(/[\\/]/).pop()}`;
+
+export function createTestBlobDatasetMap() {
+  return {
+    clear() {
+      objects.clear();
+    },
+    set(file: string, value: string) {
+      objects.set(keyForTestPath(file), value);
+      return this;
+    },
+    get(file: string) {
+      return objects.get(keyForTestPath(file));
+    },
+  };
+}
+
 const initialObjects = new Map(objects);
 (globalThis as typeof globalThis & { __resetTestBlobStorage?: () => void }).__resetTestBlobStorage =
   () => {

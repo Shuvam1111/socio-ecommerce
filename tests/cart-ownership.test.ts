@@ -1,17 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { createTestBlobDatasetMap } from './blob-storage-setup';
 
-let carts = { carts: [] as Array<Record<string, unknown>> };
-
-const fsMock = vi.hoisted(() => ({
-  readFile: vi.fn(async () => JSON.stringify(carts)),
-  writeFile: vi.fn(async (_file: string, value: string) => {
-    carts = JSON.parse(value) as typeof carts;
-  }),
-  rename: vi.fn(async () => undefined),
-}));
-
-vi.mock('fs', () => ({ promises: fsMock }));
-vi.mock('fs/promises', () => ({ default: fsMock, ...fsMock }));
+const files = createTestBlobDatasetMap();
+const carts = {
+  get carts() {
+    return JSON.parse(files.get('carts.json') ?? '{"carts":[]}').carts;
+  },
+};
 
 vi.mock('@/features/marketplace/services/marketplace-service', () => ({
   loadMarketplaceProducts: vi.fn(async () => [
@@ -33,7 +28,8 @@ import { CartAccessError, getCart, mutateCart } from '@/features/marketplace/ser
 
 describe('cart ownership', () => {
   beforeEach(() => {
-    carts = { carts: [] };
+    files.clear();
+    files.set('carts.json', JSON.stringify({ carts: [] }));
   });
 
   it('keeps guest carts accessible without an owner', async () => {
