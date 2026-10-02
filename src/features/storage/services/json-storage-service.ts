@@ -9,6 +9,16 @@ function isProductionStorageEnabled() {
   return process.env.NODE_ENV === 'production';
 }
 
+function getBlobStoreId() {
+  const storeId = process.env.BLOB_STORE_ID;
+
+  if (!storeId) {
+    throw new Error('BLOB_STORE_ID is required for production JSON storage.');
+  }
+
+  return storeId;
+}
+
 function blobPath(key: string) {
   return `${blobPrefix}/${key.replace(/^\/+/, '')}`;
 }
@@ -18,7 +28,10 @@ function localPath(key: string) {
 }
 
 async function readBlob<T>(key: string): Promise<T | null> {
-  const result = await get(blobPath(key), { access: 'private' });
+  const result = await get(blobPath(key), {
+    access: 'private',
+    storeId: getBlobStoreId(),
+  });
   if (!result) return null;
   return JSON.parse(await new Response(result.stream).text()) as T;
 }
@@ -44,6 +57,7 @@ export async function writeJson<T>(key: string, data: T): Promise<void> {
   if (isProductionStorageEnabled()) {
     await put(blobPath(key), JSON.stringify(data, null, 2), {
       access: 'private',
+      storeId: getBlobStoreId(),
       addRandomSuffix: false,
 
       allowOverwrite: true,
