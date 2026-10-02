@@ -1,11 +1,7 @@
-import { promises as fs } from 'fs';
-import path from 'path';
 import { get, put } from '@vercel/blob';
 
-const dataDirectory = path.join(process.cwd(), 'src', 'data');
 const blobPrefix = 'socio-commerce/runtime';
 const verificationAttempts = 4;
-const initializationLocks = new Map<string, Promise<void>>();
 const updateLocks = new Map<string, Promise<unknown>>();
 
 type BlobMissingError = Error & { status?: number; statusCode?: number; code?: string };
@@ -24,14 +20,12 @@ function blobPath(key: string) {
   return `${blobPrefix}/${key.replace(/^\/+/, '')}`;
 }
 
-function localPath(key: string) {
-  return path.join(dataDirectory, key);
-}
-
 function isMissingBlobError(error: unknown) {
   if (!error || typeof error !== 'object') return false;
   const candidate = error as BlobMissingError;
-  return candidate.status === 404 || candidate.statusCode === 404 || candidate.code === 'BLOB_NOT_FOUND';
+  return (
+    candidate.status === 404 || candidate.statusCode === 404 || candidate.code === 'BLOB_NOT_FOUND'
+  );
 }
 
 async function readBlob<T>(key: string): Promise<T | null> {
@@ -49,51 +43,14 @@ async function readBlob<T>(key: string): Promise<T | null> {
   }
 }
 
-async function readLocalJson<T>(key: string): Promise<T> {
-  return JSON.parse(await fs.readFile(localPath(key), 'utf8')) as T;
-}
-
-async function initializeDataset<T>(key: string): Promise<void> {
-  const existingLock = initializationLocks.get(key);
-  if (existingLock) return existingLock;
-
-  const initialization = (async () => {
-    const current = await readBlob<T>(key);
-    if (current !== null) return;
-
-    const seed = await readLocalJson<T>(key);
-    await writeJson(key, seed);
-    const persisted = await readBlob<T>(key);
-    if (persisted === null) {
-      throw new Error(`Blob initialization verification failed for ${blobPath(key)}.`);
-    }
-  })();
-
-  initializationLocks.set(key, initialization);
-  try {
-    await initialization;
-  } finally {
-    initializationLocks.delete(key);
-  }
-}
-
 export function resetLocalRuntimeData() {}
-
-/** Compatibility helper for legacy callers; missing datasets are initialized only by readJson. */
-export async function readSeedJson<T>(_key: string): Promise<T> {
-  return {} as T;
-}
 
 export async function readJson<T>(key: string, _fallback = {} as T): Promise<T> {
   const value = await readBlob<T>(key);
-  if (value !== null) return value;
-
-  await initializeDataset<T>(key);
-  const initialized = await readBlob<T>(key);
-  if (initialized === null) {
-    throw new Error(`Production JSON dataset ${blobPath(key)} is unavailable after initialization.`);
+  if (value === null) {
+    throw new Error(`Production JSON dataset ${blobPath(key)} is unavailable.`);
   }
-  return initialized;
+  return value;
 }
 
 async function readBlobWithRetry<T>(key: string): Promise<T | null> {

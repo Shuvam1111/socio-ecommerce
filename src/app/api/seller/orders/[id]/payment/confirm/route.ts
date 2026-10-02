@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { readJson, readSeedJson } from '@/features/storage/services/json-storage-service';
+import { readJson } from '@/features/storage/services/json-storage-service';
 import {
   loadOrder,
   markPaymentReceived,
@@ -21,10 +21,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ message: 'Seller authentication is required.' }, { status: 401 });
     }
     const { id } = await params;
-    const { sellers } = await readJson<{ sellers: Seller[] }>(
-      'sellers.json',
-      await readSeedJson<{ sellers: Seller[] }>('sellers.json'),
-    );
+    const { sellers } = await readJson<{ sellers: Seller[] }>('sellers.json', { sellers: [] });
     const seller = sellers.find((item) => item.id === sellerId);
     if (!seller) return NextResponse.json({ message: 'Seller not found.' }, { status: 401 });
     if (seller.status !== 'active') {

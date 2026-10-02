@@ -1,10 +1,7 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import { readJson } from '@/features/storage/services/json-storage-service';
 import { safeAdminUser, setAdminSession } from '@/features/auth/services/admin-authorization';
 import { clearSellerSession } from '@/features/sellers/services/seller-authorization';
-
-const usersFilePath = path.join(process.cwd(), 'src', 'data', 'users.json');
 
 export async function POST(request: Request) {
   try {
@@ -25,9 +22,17 @@ export async function POST(request: Request) {
       );
     }
 
-    const file = await fs.readFile(usersFilePath, 'utf-8');
-
-    const data = JSON.parse(file);
+    const data = await readJson<{
+      users?: Array<{
+        id: string;
+        username: string;
+        email: string;
+        password: string;
+        status: string;
+        roles: string[];
+        [key: string]: unknown;
+      }>;
+    }>('users.json', { users: [] });
 
     const users = Array.isArray(data.users) ? data.users : [];
 
@@ -74,8 +79,8 @@ export async function POST(request: Request) {
     const authUser = {
       id: user.id,
       username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstName: typeof user.firstName === 'string' ? user.firstName : undefined,
+      lastName: typeof user.lastName === 'string' ? user.lastName : undefined,
       email: user.email,
       roles: user.roles,
       activeRole: 'admin',

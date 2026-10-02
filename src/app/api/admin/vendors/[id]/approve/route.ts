@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import { readJson, updateJson } from '@/features/storage/services/json-storage-service';
 import { randomBytes } from 'crypto';
 import { requireAdmin } from '@/features/auth/services/admin-authorization';
 
@@ -119,23 +118,11 @@ export async function POST(
   try {
     const { id: vendorId } = await context.params;
 
-    const dataPath = path.join(process.cwd(), 'src', 'data');
-
-    const vendorsPath = path.join(dataPath, 'vendors.json');
-
-    const usersPath = path.join(dataPath, 'users.json');
-
-    const sellersPath = path.join(dataPath, 'sellers.json');
-
-    const [vendorsFile, usersFile, sellersFile] = await Promise.all([
-      fs.readFile(vendorsPath, 'utf-8'),
-      fs.readFile(usersPath, 'utf-8'),
-      fs.readFile(sellersPath, 'utf-8'),
+    const [vendorsData, usersData, sellersData] = await Promise.all([
+      readJson<{ vendors: Vendor[] }>('vendors.json', { vendors: [] }),
+      readJson<{ users: User[] }>('users.json', { users: [] }),
+      readJson<{ sellers: Seller[] }>('sellers.json', { sellers: [] }),
     ]);
-
-    const vendorsData = JSON.parse(vendorsFile);
-    const usersData = JSON.parse(usersFile);
-    const sellersData = JSON.parse(sellersFile);
 
     const vendors: Vendor[] = vendorsData.vendors ?? [];
 
@@ -264,25 +251,11 @@ export async function POST(
      */
     users.push(superSellerUser);
     sellers.push(superSeller);
-    const originalUsers = usersFile;
-    const originalSellers = sellersFile;
-    const originalVendors = vendorsFile;
-    const nextUsers = JSON.stringify({ users }, null, 2);
-    const nextSellers = JSON.stringify({ sellers }, null, 2);
-    const nextVendors = JSON.stringify({ vendors }, null, 2);
-
-    try {
-      await fs.writeFile(usersPath, nextUsers, 'utf-8');
-      await fs.writeFile(sellersPath, nextSellers, 'utf-8');
-      await fs.writeFile(vendorsPath, nextVendors, 'utf-8');
-    } catch (writeError) {
-      await Promise.allSettled([
-        fs.writeFile(usersPath, originalUsers, 'utf-8'),
-        fs.writeFile(sellersPath, originalSellers, 'utf-8'),
-        fs.writeFile(vendorsPath, originalVendors, 'utf-8'),
-      ]);
-      throw writeError;
-    }
+    await Promise.all([
+      updateJson('users.json', { users: [] as User[] }, () => ({ users })),
+      updateJson('sellers.json', { sellers: [] as Seller[] }, () => ({ sellers })),
+      updateJson('vendors.json', { vendors: [] as Vendor[] }, () => ({ vendors })),
+    ]);
 
     return NextResponse.json({
       message: 'Vendor approved successfully.',
