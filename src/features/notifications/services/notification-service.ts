@@ -1,11 +1,5 @@
-import fs from 'fs/promises';
-import path from 'path';
 import { randomUUID } from 'crypto';
-import {
-  readJson,
-  readSeedJson,
-  writeJson,
-} from '@/features/storage/services/json-storage-service';
+import { readJson, updateJson, writeJson } from '@/features/storage/services/json-storage-service';
 import { getAdminContext } from '@/features/auth/services/admin-authorization';
 
 export type NotificationRole = 'admin' | 'seller' | 'super_seller' | 'buyer';
@@ -37,7 +31,7 @@ type NotificationFile = { notifications: NotificationRecord[] };
 const fileKey = 'notifications.json';
 
 async function readFile() {
-  return readJson(fileKey, await readSeedJson<NotificationFile>(fileKey));
+  return readJson<NotificationFile>(fileKey, { notifications: [] });
 }
 async function writeFile(data: NotificationFile) {
   await writeJson(fileKey, data);
@@ -118,9 +112,10 @@ export async function markAllNotificationsRead(recipientId: string) {
 }
 
 export async function resolveNotificationPrincipal(request: Request) {
-  const users = JSON.parse(
-    await fs.readFile(path.join(process.cwd(), 'src/data/users.json'), 'utf8'),
-  ) as { users: Array<{ id: string; roles: string[]; status: string }> };
+  const users = await readJson<{ users: Array<{ id: string; roles: string[]; status: string }> }>(
+    'users.json',
+    { users: [] },
+  );
   const token = request.headers.get('x-user-token');
   if (token?.startsWith('demo-user-token-')) {
     const id = token.slice('demo-user-token-'.length);
@@ -132,9 +127,9 @@ export async function resolveNotificationPrincipal(request: Request) {
   const cookie = request.headers.get('cookie') ?? '';
   const sellerSession = cookie.match(/(?:^|;\\s*)socio-seller-session=([^;]+)/)?.[1];
   if (sellerSession) {
-    const sellers = JSON.parse(
-      await fs.readFile(path.join(process.cwd(), 'src/data/sellers.json'), 'utf8'),
-    ) as { sellers: Array<{ id: string; userId: string; role: NotificationRole; status: string }> };
+    const sellers = await readJson<{
+      sellers: Array<{ id: string; userId: string; role: NotificationRole; status: string }>;
+    }>('sellers.json', { sellers: [] });
     const seller = sellers.sellers.find(
       (item) => item.id === sellerSession && item.status === 'active',
     );
@@ -171,9 +166,9 @@ export async function notifyOrderRecipients(
   });
   if (!event.sellerMessage) return;
   const sellerIds = [...new Set(order.items.map((item) => item.sellerId))];
-  const sellers = JSON.parse(
-    await fs.readFile(path.join(process.cwd(), 'src/data/sellers.json'), 'utf8'),
-  ) as { sellers: Array<{ id: string; userId: string; status: string; role: NotificationRole }> };
+  const sellers = await readJson<{
+    sellers: Array<{ id: string; userId: string; status: string; role: NotificationRole }>;
+  }>('sellers.json', { sellers: [] });
   for (const sellerId of sellerIds) {
     const seller = sellers.sellers.find((item) => item.id === sellerId && item.status === 'active');
     if (seller)

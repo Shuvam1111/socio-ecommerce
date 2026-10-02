@@ -1,6 +1,5 @@
-import fs from 'fs/promises';
-import path from 'path';
 import { createHmac, timingSafeEqual } from 'crypto';
+import { readJson } from '@/features/storage/services/json-storage-service';
 import { NextResponse } from 'next/server';
 
 export const ADMIN_SESSION_COOKIE = 'socio-admin-session';
@@ -46,8 +45,7 @@ export async function getAdminContext(request: Request) {
 
   if (!sessionId) return null;
 
-  const file = await fs.readFile(path.join(process.cwd(), 'src', 'data', 'users.json'), 'utf8');
-  const data = JSON.parse(file) as { users?: AdminUser[] };
+  const data = await readJson<{ users?: AdminUser[] }>('users.json', { users: [] });
   const user = data.users?.find((candidate) => candidate.id === sessionId);
 
   if (!user || user.status !== 'active' || !user.roles.includes('admin')) return null;

@@ -1,6 +1,5 @@
-import fs from 'fs/promises';
-import path from 'path';
 import type { NextResponse } from 'next/server';
+import { readJson, updateJson } from '@/features/storage/services/json-storage-service';
 
 export type SellerRole = 'seller' | 'super_seller';
 export type SellerStatus = 'active' | 'inactive';
@@ -37,9 +36,8 @@ export interface UserRecord {
   [key: string]: unknown;
 }
 
-async function readJson<T>(fileName: string): Promise<T> {
-  const file = await fs.readFile(path.join(process.cwd(), 'src', 'data', fileName), 'utf8');
-  return JSON.parse(file) as T;
+async function readDataset<T>(fileName: string, fallback = {} as T): Promise<T> {
+  return readJson<T>(fileName, fallback);
 }
 
 export async function getSellerContext(request: Request) {
@@ -47,8 +45,8 @@ export async function getSellerContext(request: Request) {
     .get('cookie')
     ?.match(/(?:^|;\s*)socio-seller-session=([^;]+)/)?.[1];
   const [sellersData, usersData] = await Promise.all([
-    readJson<{ sellers: SellerRecord[] }>('sellers.json'),
-    readJson<{ users: UserRecord[] }>('users.json'),
+    readDataset('sellers.json', { sellers: [] as SellerRecord[] }),
+    readDataset('users.json', { users: [] as UserRecord[] }),
   ]);
   const seller = sellersData.sellers.find((item) => item.id === sessionId);
   const user = seller ? usersData.users.find((item) => item.id === seller.userId) : undefined;
@@ -84,14 +82,8 @@ export async function writeSellerData(
   usersData: { users: UserRecord[] },
 ) {
   await Promise.all([
-    fs.writeFile(
-      path.join(process.cwd(), 'src', 'data', 'sellers.json'),
-      JSON.stringify(sellersData, null, 2),
-    ),
-    fs.writeFile(
-      path.join(process.cwd(), 'src', 'data', 'users.json'),
-      JSON.stringify(usersData, null, 2),
-    ),
+    updateJson('sellers.json', { sellers: [] as SellerRecord[] }, () => sellersData),
+    updateJson('users.json', { users: [] as UserRecord[] }, () => usersData),
   ]);
 }
 
@@ -157,5 +149,3 @@ export function isSellerPermission(value: unknown): value is SellerPermission {
 export function isNextResponse(value: unknown): value is NextResponse {
   return value instanceof Response;
 }
-
-export { path };

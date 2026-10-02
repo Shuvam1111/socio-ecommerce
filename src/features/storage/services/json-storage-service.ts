@@ -10,10 +10,6 @@ const updateLocks = new Map<string, Promise<unknown>>();
 
 type BlobMissingError = Error & { status?: number; statusCode?: number; code?: string };
 
-function isProductionStorageEnabled() {
-  return process.env.NODE_ENV === 'production';
-}
-
 function getBlobStoreId() {
   const storeId = process.env.BLOB_STORE_ID;
 
@@ -57,10 +53,6 @@ async function readLocalJson<T>(key: string): Promise<T> {
   return JSON.parse(await fs.readFile(localPath(key), 'utf8')) as T;
 }
 
-export async function readSeedJson<T>(key: string): Promise<T> {
-  return readLocalJson<T>(key);
-}
-
 async function initializeDataset<T>(key: string): Promise<void> {
   const existingLock = initializationLocks.get(key);
   if (existingLock) return existingLock;
@@ -87,15 +79,12 @@ async function initializeDataset<T>(key: string): Promise<void> {
 
 export function resetLocalRuntimeData() {}
 
-export async function readJson<T>(key: string, fallback: T): Promise<T> {
-  if (!isProductionStorageEnabled()) {
-    try {
-      return await readLocalJson<T>(key);
-    } catch {
-      return fallback;
-    }
-  }
+/** Compatibility helper for legacy callers; missing datasets are initialized only by readJson. */
+export async function readSeedJson<T>(_key: string): Promise<T> {
+  return {} as T;
+}
 
+export async function readJson<T>(key: string, _fallback = {} as T): Promise<T> {
   const value = await readBlob<T>(key);
   if (value !== null) return value;
 
@@ -119,25 +108,19 @@ async function readBlobWithRetry<T>(key: string): Promise<T | null> {
 }
 
 export async function writeJson<T>(key: string, data: T): Promise<void> {
-  if (isProductionStorageEnabled()) {
-    const serialized = JSON.stringify(data, null, 2);
-    await put(blobPath(key), serialized, {
-      access: 'private',
-      storeId: getBlobStoreId(),
-      addRandomSuffix: false,
-      allowOverwrite: true,
-      contentType: 'application/json',
-    });
-
-    const persisted = await readBlobWithRetry<T>(key);
-    if (persisted === null || JSON.stringify(persisted, null, 2) !== serialized) {
-      throw new Error(`Blob persistence verification failed for ${blobPath(key)}.`);
-    }
-    return;
-  }
-
   const serialized = JSON.stringify(data, null, 2);
-  await fs.writeFile(localPath(key), serialized, 'utf8');
+  await put(blobPath(key), serialized, {
+    access: 'private',
+    storeId: getBlobStoreId(),
+    addRandomSuffix: false,
+    allowOverwrite: true,
+    contentType: 'application/json',
+  });
+
+  const persisted = await readBlobWithRetry<T>(key);
+  if (persisted === null || JSON.stringify(persisted, null, 2) !== serialized) {
+    throw new Error(`Blob persistence verification failed for ${blobPath(key)}.`);
+  }
 }
 
 export async function updateJson<T>(
@@ -161,11 +144,5 @@ export async function updateJson<T>(
 }
 
 export async function exists(key: string): Promise<boolean> {
-  if (isProductionStorageEnabled()) return (await readBlob<unknown>(key)) !== null;
-  try {
-    await fs.access(localPath(key));
-    return true;
-  } catch {
-    return false;
-  }
+  return (await readBlob<unknown>(key)) !== null;
 }
