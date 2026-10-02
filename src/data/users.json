@@ -1,0 +1,429 @@
+{
+  "users": [
+    {
+      "id": "USR-000001",
+      "username": "admin",
+      "firstName": "System",
+      "lastName": "Admin",
+      "email": "admin@example.com",
+      "phone": "9800000000",
+      "password": "Admin@123",
+      "roles": [
+        "admin"
+      ],
+      "activeRole": "admin",
+      "status": "active",
+      "isVerified": true,
+      "createdAt": "2026-09-28T10:00:00Z"
+    },
+    {
+      "id": "USR-000002",
+      "username": "ramshrestha",
+      "firstName": "Ram",
+      "lastName": "Shrestha",
+      "email": "ram@example.com",
+      "phone": "9811111111",
+      "password": "Ram@123",
+      "roles": [
+        "vendor"
+      ],
+      "activeRole": "vendor",
+      "status": "active",
+      "isVerified": true,
+      "createdAt": "2026-09-28T10:05:00Z"
+    },
+    {
+      "id": "USR-000003",
+      "username": "ramstore",
+      "firstName": "Ram",
+      "lastName": "Shrestha",
+      "email": "seller@ramstore.com",
+      "phone": "9811111111",
+      "password": "Seller@123",
+      "roles": [
+        "super_seller"
+      ],
+      "activeRole": "super_seller",
+      "vendorId": "VEN-000001",
+      "status": "active",
+      "isVerified": true,
+      "createdAt": "2026-09-28T10:10:00Z"
+    },
+    {
+      "id": "USR-000004",
+      "username": "sita",
+      "firstName": "Sita",
+      "lastName": "Thapa",
+      "email": "sita@ramstore.com",
+      "phone": "9822222222",
+      "password": "Sita@123",
+      "roles": [
+        "seller"
+      ],
+      "activeRole": "seller",
+      "vendorId": "VEN-000001",
+      "status": "active",
+      "isVerified": true,
+      "createdAt": "2026-09-28T10:15:00Z"
+    },
+    {
+      "id": "USR-000005",
+      "username": "hari",
+      "firstName": "Hari",
+      "lastName": "Gurung",
+      "email": "hari@example.com",
+      "phone": "9833333333",
+      "password": "Hari@123",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-09-28T10:20:00Z"
+    },
+    {
+      "id": "USR-000006",
+      "username": "anita",
+      "firstName": "Anita",
+      "lastName": "Rai",
+      "email": "anita@example.com",
+      "phone": "9844444444",
+      "password": "Anita@123",
+      "roles": [
+        "buyer",
+        "influencer",
+        "affiliate_marketer"
+      ],
+      "activeRole": "influencer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "promoted",
+      "createdAt": "2026-09-28T10:25:00Z"
+    },
+    {
+      "id": "USR-000007",
+      "username": "shuvam",
+      "firstName": "bhibeigiue",
+      "lastName": "rbhisbhbi",
+      "email": "shuvamrimal111@gmail.com",
+      "phone": "9862887116",
+      "password": "Shuvam123",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": false,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-09-28T07:38:23.594Z"
+    },
+    {
+      "id": "USR-000008",
+      "username": "ramelectronics_manager",
+      "firstName": "Ram",
+      "lastName": "Shrestha",
+      "email": "ramstore@example.com",
+      "phone": "9811111111",
+      "password": "Ram@123",
+      "roles": [
+        "super_seller"
+      ],
+      "activeRole": "super_seller",
+      "vendorId": "VEN-000001",
+      "status": "active",
+      "isVerified": true,
+      "createdAt": "2026-09-28T07:58:38.189Z"
+    },
+    {
+      "id": "USR-000009",
+      "username": "shuvamrimal111@gmail.com",
+      "firstName": "Shuvam",
+      "lastName": "Rimal",
+      "email": "shuvamrimal1@gmail.com",
+      "phone": "shuvam",
+      "password": "Shuvam123",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": false,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-09-28T08:16:56.272Z"
+    },
+    {
+      "id": "USR-000010",
+      "username": "suman",
+      "firstName": "Suman",
+      "lastName": "Karki",
+      "email": "suman@demo.sociocommerce.test",
+      "phone": "9850000000",
+      "password": "Demo@100",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-06-03T10:00:00Z"
+    },
+    {
+      "id": "USR-000011",
+      "username": "riya",
+      "firstName": "Riya",
+      "lastName": "Thapa",
+      "email": "riya@demo.sociocommerce.test",
+      "phone": "9850013791",
+      "password": "Demo@101",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-07-04T10:00:00Z"
+    },
+    {
+      "id": "USR-000012",
+      "username": "bikash",
+      "firstName": "Bikash",
+      "lastName": "Adhikari",
+      "email": "bikash@demo.sociocommerce.test",
+      "phone": "9850027582",
+      "password": "Demo@102",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-08-05T10:00:00Z"
+    },
+    {
+      "id": "USR-000013",
+      "username": "prabin",
+      "firstName": "Prabin",
+      "lastName": "Shrestha",
+      "email": "prabin@demo.sociocommerce.test",
+      "phone": "9850041373",
+      "password": "Demo@103",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-09-06T10:00:00Z"
+    },
+    {
+      "id": "USR-000014",
+      "username": "nisha",
+      "firstName": "Nisha",
+      "lastName": "Gurung",
+      "email": "nisha@demo.sociocommerce.test",
+      "phone": "9850055164",
+      "password": "Demo@104",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-06-07T10:00:00Z"
+    },
+    {
+      "id": "USR-000015",
+      "username": "aayush",
+      "firstName": "Aayush",
+      "lastName": "Poudel",
+      "email": "aayush@demo.sociocommerce.test",
+      "phone": "9850068955",
+      "password": "Demo@105",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-07-08T10:00:00Z"
+    },
+    {
+      "id": "USR-000016",
+      "username": "sneha",
+      "firstName": "Sneha",
+      "lastName": "Basnet",
+      "email": "sneha@demo.sociocommerce.test",
+      "phone": "9850082746",
+      "password": "Demo@106",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-08-09T10:00:00Z"
+    },
+    {
+      "id": "USR-000017",
+      "username": "roshan",
+      "firstName": "Roshan",
+      "lastName": "KC",
+      "email": "roshan@demo.sociocommerce.test",
+      "phone": "9850096537",
+      "password": "Demo@107",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-09-10T10:00:00Z"
+    },
+    {
+      "id": "USR-000018",
+      "username": "meena",
+      "firstName": "Meena",
+      "lastName": "Joshi",
+      "email": "meena@demo.sociocommerce.test",
+      "phone": "9850110328",
+      "password": "Demo@108",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-06-11T10:00:00Z"
+    },
+    {
+      "id": "USR-000019",
+      "username": "dipesh",
+      "firstName": "Dipesh",
+      "lastName": "Maharjan",
+      "email": "dipesh@demo.sociocommerce.test",
+      "phone": "9850124119",
+      "password": "Demo@109",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-07-12T10:00:00Z"
+    },
+    {
+      "id": "USR-000020",
+      "username": "kabita",
+      "firstName": "Kabita",
+      "lastName": "Bhandari",
+      "email": "kabita@demo.sociocommerce.test",
+      "phone": "9850137910",
+      "password": "Demo@110",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-08-13T10:00:00Z"
+    },
+    {
+      "id": "USR-000021",
+      "username": "nikhil",
+      "firstName": "Nikhil",
+      "lastName": "Rana",
+      "email": "nikhil@demo.sociocommerce.test",
+      "phone": "9850151701",
+      "password": "Demo@111",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-09-14T10:00:00Z"
+    },
+    {
+      "id": "USR-000022",
+      "username": "aashna",
+      "firstName": "Aashna",
+      "lastName": "Shakya",
+      "email": "aashna@demo.sociocommerce.test",
+      "phone": "9850165492",
+      "password": "Demo@112",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "USR-000023",
+      "username": "sagar",
+      "firstName": "Sagar",
+      "lastName": "Lama",
+      "email": "sagar@demo.sociocommerce.test",
+      "phone": "9850179283",
+      "password": "Demo@113",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-07-16T10:00:00Z"
+    },
+    {
+      "id": "USR-000024",
+      "username": "priyanka",
+      "firstName": "Priyanka",
+      "lastName": "Tamang",
+      "email": "priyanka@demo.sociocommerce.test",
+      "phone": "9850193074",
+      "password": "Demo@114",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-08-17T10:00:00Z"
+    },
+    {
+      "id": "USR-000025",
+      "username": "ujwal",
+      "firstName": "Ujwal",
+      "lastName": "Bhattarai",
+      "email": "ujwal@demo.sociocommerce.test",
+      "phone": "9850206865",
+      "password": "Demo@115",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": true,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-09-18T10:00:00Z"
+    }
+  ]
+}

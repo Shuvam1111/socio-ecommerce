@@ -1,0 +1,41 @@
+{
+  "refunds": [
+    {
+      "id": "REF-000001",
+
+      "orderId": "ORD-000003",
+      "orderNumber": "SC-20260928-0003",
+
+      "paymentId": "PAY-000003",
+
+      "buyerId": "USR-000005",
+
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000002",
+
+      "amount": 4150,
+      "currency": "NPR",
+
+      "reason": "Product was damaged during delivery.",
+
+      "status": "requested",
+
+      "requestedBy": "USR-000005",
+      "requestedAt": "2026-09-29T09:00:00Z",
+
+      "reviewedBy": null,
+      "reviewedAt": null,
+
+      "processedAt": null,
+
+      "refundMethod": "original_payment_method",
+
+      "transactionId": null,
+
+      "sellerNote": null,
+
+      "createdAt": "2026-09-29T09:00:00Z",
+      "updatedAt": "2026-09-29T09:00:00Z"
+    }
+  ]
+}

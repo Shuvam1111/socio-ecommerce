@@ -1,0 +1,81 @@
+{
+  "categories": [
+    {
+      "id": "CAT-001",
+      "name": "Electronic Devices",
+      "slug": "electronic-devices",
+      "icon": "/images/categories/electronics.png",
+      "status": "active"
+    },
+    {
+      "id": "CAT-002",
+      "name": "Electronic Accessories",
+      "slug": "electronic-accessories",
+      "icon": "/images/categories/accessories.png",
+      "status": "active"
+    },
+    {
+      "id": "CAT-003",
+      "name": "Women's Fashion",
+      "slug": "womens-fashion",
+      "icon": "/images/categories/womens-fashion.png",
+      "status": "active"
+    },
+    {
+      "id": "CAT-004",
+      "name": "Men's Fashion",
+      "slug": "mens-fashion",
+      "icon": "/images/categories/mens-fashion.png",
+      "status": "active"
+    },
+    {
+      "id": "CAT-005",
+      "name": "Health & Beauty",
+      "slug": "health-beauty",
+      "icon": "/images/categories/beauty.png",
+      "status": "active"
+    },
+    {
+      "id": "CAT-006",
+      "name": "Home & Lifestyle",
+      "slug": "home-lifestyle",
+      "icon": "/images/categories/home.png",
+      "status": "active"
+    },
+    {
+      "id": "CAT-007",
+      "name": "Groceries & Pets",
+      "slug": "groceries-pets",
+      "icon": "/images/categories/grocery.png",
+      "status": "active"
+    },
+    {
+      "id": "CAT-008",
+      "name": "Babies & Toys",
+      "slug": "babies-toys",
+      "icon": "/images/categories/babies-toys.png",
+      "status": "active"
+    },
+    {
+      "id": "CAT-009",
+      "name": "Sports & Outdoor",
+      "slug": "sports-outdoor",
+      "icon": "/images/categories/sports.png",
+      "status": "active"
+    },
+    {
+      "id": "CAT-010",
+      "name": "Motors, Tools & DIY",
+      "slug": "motors-tools-diy",
+      "icon": "/images/categories/tools.png",
+      "status": "active"
+    },
+    {
+      "id": "CAT-011",
+      "name": "Books & Media",
+      "slug": "books-media",
+      "icon": "/images/categories/books.png",
+      "status": "active"
+    }
+  ]
+}

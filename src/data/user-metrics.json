@@ -1,0 +1,29 @@
+{
+  "userMetrics": [
+    {
+      "userId": "USR-000005",
+      "followers": 120,
+      "following": 85,
+      "profileViews": 450,
+      "productViews": 80,
+      "trackedClicks": 35,
+      "qualifiedShares": 3,
+      "completedOrders": 2,
+      "totalSalesGenerated": 0,
+      "promotionStatus": "not_eligible"
+    },
+    {
+      "userId": "USR-000006",
+      "followers": 2500,
+      "following": 450,
+      "profileViews": 5200,
+      "productViews": 4300,
+      "trackedClicks": 570,
+      "qualifiedShares": 25,
+      "completedOrders": 16,
+      "totalSalesGenerated": 699930,
+      "promotionStatus": "promoted",
+      "eligibleRoles": ["influencer", "affiliate_marketer"]
+    }
+  ]
+}

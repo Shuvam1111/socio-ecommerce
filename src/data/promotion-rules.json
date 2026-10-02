@@ -1,0 +1,32 @@
+{
+  "promotionRules": [
+    {
+      "id": "RULE-001",
+      "fromRole": "buyer",
+      "toRole": "influencer",
+      "conditions": {
+        "minimumFollowers": 1000,
+        "minimumTrackedClicks": 100,
+        "minimumQualifiedShares": 10,
+        "minimumCompletedOrders": 0
+      },
+      "logic": "ALL",
+      "automaticPromotion": true,
+      "status": "active"
+    },
+    {
+      "id": "RULE-002",
+      "fromRole": "buyer",
+      "toRole": "affiliate_marketer",
+      "conditions": {
+        "minimumFollowers": 0,
+        "minimumTrackedClicks": 250,
+        "minimumQualifiedShares": 5,
+        "minimumCompletedOrders": 5
+      },
+      "logic": "ALL",
+      "automaticPromotion": true,
+      "status": "active"
+    }
+  ]
+}

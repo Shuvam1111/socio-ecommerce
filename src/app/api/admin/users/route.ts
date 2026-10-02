@@ -1,0 +1,54 @@
+import { NextResponse } from 'next/server';
+import fs from 'fs/promises';
+import path from 'path';
+import { requireAdmin } from '@/features/auth/services/admin-authorization';
+
+export async function GET(request: Request) {
+  const { response } = await requireAdmin(request);
+  if (response) return response;
+
+  try {
+    const filePath = path.join(process.cwd(), 'src', 'data', 'users.json');
+
+    const file = await fs.readFile(filePath, 'utf-8');
+
+    const data = JSON.parse(file);
+    const search = new URL(request.url).searchParams.get('search')?.trim().toLowerCase() ?? '';
+    const role = new URL(request.url).searchParams.get('role');
+    const status = new URL(request.url).searchParams.get('status');
+    const verification = new URL(request.url).searchParams.get('verification');
+
+    const users = (data.users ?? [])
+      .filter((user: Record<string, unknown>) => {
+        const text = [user.firstName, user.lastName, user.username, user.email]
+          .filter((value): value is string => typeof value === 'string')
+          .join(' ')
+          .toLowerCase();
+        const roles = Array.isArray(user.roles) ? user.roles : [];
+        return (
+          (!search || text.includes(search)) &&
+          (!role || roles.includes(role)) &&
+          (!status || user.status === status) &&
+          (!verification ||
+            (verification === 'verified' ? user.isVerified === true : user.isVerified === false))
+        );
+      })
+      .map((user: Record<string, unknown>) => {
+        const { password: _password, ...safeUser } = user;
+        return safeUser;
+      });
+
+    return NextResponse.json({
+      users,
+    });
+  } catch (error) {
+    console.error('Failed to load users:', error);
+
+    return NextResponse.json(
+      {
+        message: 'Unable to load users.',
+      },
+      { status: 500 },
+    );
+  }
+}

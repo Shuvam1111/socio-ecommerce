@@ -1,0 +1,3701 @@
+{
+  "products": [
+    {
+      "id": "PROD-000001",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000001",
+      "categoryId": "CAT-001",
+      "subcategoryId": "SUB-001",
+      "name": "Example Smartphone Pro",
+      "slug": "example-smartphone-pro",
+      "brand": "Example",
+      "model": "Pro X",
+      "description": "A modern smartphone with a high-resolution display, powerful processor and long-lasting battery.",
+      "shortDescription": "12GB RAM, 256GB storage and 5000mAh battery.",
+      "images": [
+        "/images/products/smartphone-1.jpg",
+        "/images/products/smartphone-2.jpg",
+        "/images/products/smartphone-3.jpg"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 59999,
+        "salePrice": 54999,
+        "currency": "NPR",
+        "discountPercentage": 8.33
+      },
+      "inventory": {
+        "sku": "EX-PRO-X-256-BLK",
+        "barcode": "890000000001",
+        "quantity": 24,
+        "availableQuantity": 23,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [
+        {
+          "id": "VAR-001",
+          "attributes": {
+            "storage": "256GB",
+            "color": "Black"
+          },
+          "sku": "EX-PRO-X-256-BLK",
+          "barcode": "890000000001",
+          "price": 54999,
+          "quantity": 10
+        },
+        {
+          "id": "VAR-002",
+          "attributes": {
+            "storage": "256GB",
+            "color": "White"
+          },
+          "sku": "EX-PRO-X-256-WHT",
+          "barcode": "890000000002",
+          "price": 54999,
+          "quantity": 8
+        },
+        {
+          "id": "VAR-003",
+          "attributes": {
+            "storage": "512GB",
+            "color": "Black"
+          },
+          "sku": "EX-PRO-X-512-BLK",
+          "barcode": "890000000003",
+          "price": 64999,
+          "quantity": 7
+        }
+      ],
+      "attributes": {
+        "display": "6.7 inch",
+        "ram": "12GB",
+        "storage": "256GB",
+        "battery": "5000mAh",
+        "operatingSystem": "Android"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 100,
+        "estimatedDeliveryDays": "2-5"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 5,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.5,
+        "count": 2
+      },
+      "soldCount": 16,
+      "viewCount": 250,
+      "status": "approved",
+      "createdAt": "2026-09-28T10:30:00Z",
+      "updatedAt": "2026-09-28T10:30:00Z"
+    },
+    {
+      "id": "PROD-000002",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000002",
+      "categoryId": "CAT-002",
+      "subcategoryId": "SUB-009",
+      "name": "65W Fast Charger",
+      "slug": "65w-fast-charger",
+      "brand": "Example",
+      "model": "FC-65",
+      "description": "Universal 65W fast charger suitable for smartphones, tablets and compatible laptops.",
+      "shortDescription": "Compact 65W USB-C fast charger.",
+      "images": [
+        "/images/products/charger-1.jpg",
+        "/images/products/charger-2.jpg"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 2999,
+        "salePrice": 2499,
+        "currency": "NPR",
+        "discountPercentage": 16.67
+      },
+      "inventory": {
+        "sku": "FC-65-WHT",
+        "barcode": "890000000010",
+        "quantity": 49,
+        "availableQuantity": 49,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 10
+      },
+      "variants": [],
+      "attributes": {
+        "power": "65W",
+        "port": "USB-C",
+        "color": "White"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 80,
+        "estimatedDeliveryDays": "2-5"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 5,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.2,
+        "count": 1
+      },
+      "soldCount": 31,
+      "viewCount": 410,
+      "status": "approved",
+      "createdAt": "2026-09-28T10:35:00Z",
+      "updatedAt": "2026-09-28T10:35:00Z"
+    },
+    {
+      "id": "PROD-000003",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000001",
+      "categoryId": "CAT-001",
+      "subcategoryId": "SUB-001",
+      "name": "PixelWave 5G Smartphone",
+      "slug": "pixelwave-5g-smartphone",
+      "brand": "Himalayan",
+      "model": "HIM-1",
+      "description": "The PixelWave 5G Smartphone combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable pixelwave 5g smartphone for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 72000,
+        "salePrice": 65990,
+        "currency": "NPR",
+        "discountPercentage": 8
+      },
+      "inventory": {
+        "sku": "SKU-3",
+        "barcode": "8900000000",
+        "quantity": 0,
+        "availableQuantity": 0,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-001",
+        "Brand": "Himalayan",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 3.8,
+        "count": 8
+      },
+      "soldCount": 12,
+      "viewCount": 340,
+      "status": "pending",
+      "createdAt": "2026-06-02T10:00:00Z",
+      "updatedAt": "2026-09-10T10:00:00Z"
+    },
+    {
+      "id": "PROD-000004",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000002",
+      "categoryId": "CAT-001",
+      "subcategoryId": "SUB-003",
+      "name": "ProBook 14 Business Laptop",
+      "slug": "probook-14-business-laptop",
+      "brand": "Kumari",
+      "model": "KUM-2",
+      "description": "The ProBook 14 Business Laptop combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable probook 14 business laptop for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 118000,
+        "salePrice": 104500,
+        "currency": "NPR",
+        "discountPercentage": 11
+      },
+      "inventory": {
+        "sku": "SKU-4",
+        "barcode": "8900000001",
+        "quantity": 19,
+        "availableQuantity": 19,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-001",
+        "Brand": "Kumari",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 3.9,
+        "count": 15
+      },
+      "soldCount": 25,
+      "viewCount": 437,
+      "status": "approved",
+      "createdAt": "2026-07-03T10:00:00Z",
+      "updatedAt": "2026-09-11T10:00:00Z"
+    },
+    {
+      "id": "PROD-000005",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000003",
+      "categoryId": "CAT-002",
+      "subcategoryId": "SUB-011",
+      "name": "Wireless Noise-Canceling Headphones",
+      "slug": "wireless-noise-canceling-headphones",
+      "brand": "Auralis",
+      "model": "AUR-3",
+      "description": "The Wireless Noise-Canceling Headphones combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable wireless noise-canceling headphones for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 12500,
+        "salePrice": 8990,
+        "currency": "NPR",
+        "discountPercentage": 28
+      },
+      "inventory": {
+        "sku": "SKU-5",
+        "barcode": "8900000002",
+        "quantity": 20,
+        "availableQuantity": 20,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-002",
+        "Brand": "Auralis",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4,
+        "count": 22
+      },
+      "soldCount": 38,
+      "viewCount": 534,
+      "status": "approved",
+      "createdAt": "2026-08-04T10:00:00Z",
+      "updatedAt": "2026-09-12T10:00:00Z"
+    },
+    {
+      "id": "PROD-000006",
+      "vendorId": "VEN-000002",
+      "sellerId": "SEL-000004",
+      "categoryId": "CAT-002",
+      "subcategoryId": "SUB-009",
+      "name": "SwiftCharge 65W GaN Charger",
+      "slug": "swiftcharge-65w-gan-charger",
+      "brand": "Voltix",
+      "model": "VOL-4",
+      "description": "The SwiftCharge 65W GaN Charger combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable swiftcharge 65w gan charger for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 4800,
+        "salePrice": 3590,
+        "currency": "NPR",
+        "discountPercentage": 25
+      },
+      "inventory": {
+        "sku": "SKU-6",
+        "barcode": "8900000003",
+        "quantity": 21,
+        "availableQuantity": 21,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-002",
+        "Brand": "Voltix",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.1,
+        "count": 29
+      },
+      "soldCount": 51,
+      "viewCount": 631,
+      "status": "approved",
+      "createdAt": "2026-09-05T10:00:00Z",
+      "updatedAt": "2026-09-13T10:00:00Z"
+    },
+    {
+      "id": "PROD-000007",
+      "vendorId": "VEN-000002",
+      "sellerId": "SEL-000005",
+      "categoryId": "CAT-001",
+      "subcategoryId": "SUB-006",
+      "name": "Mirrorless Creator Camera",
+      "slug": "mirrorless-creator-camera",
+      "brand": "Kamera Nepal",
+      "model": "KAM-5",
+      "description": "The Mirrorless Creator Camera combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable mirrorless creator camera for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 135000,
+        "salePrice": 124900,
+        "currency": "NPR",
+        "discountPercentage": 7
+      },
+      "inventory": {
+        "sku": "SKU-7",
+        "barcode": "8900000004",
+        "quantity": 22,
+        "availableQuantity": 22,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-001",
+        "Brand": "Kamera Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.2,
+        "count": 36
+      },
+      "soldCount": 64,
+      "viewCount": 728,
+      "status": "approved",
+      "createdAt": "2026-06-06T10:00:00Z",
+      "updatedAt": "2026-09-14T10:00:00Z"
+    },
+    {
+      "id": "PROD-000008",
+      "vendorId": "VEN-000003",
+      "sellerId": "SEL-000006",
+      "categoryId": "CAT-001",
+      "subcategoryId": "SUB-006",
+      "name": "Compact Travel Tripod",
+      "slug": "compact-travel-tripod",
+      "brand": "FrameCraft",
+      "model": "FRA-6",
+      "description": "The Compact Travel Tripod combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable compact travel tripod for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 8500,
+        "salePrice": 6990,
+        "currency": "NPR",
+        "discountPercentage": 18
+      },
+      "inventory": {
+        "sku": "SKU-8",
+        "barcode": "8900000005",
+        "quantity": 23,
+        "availableQuantity": 22,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-001",
+        "Brand": "FrameCraft",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.3,
+        "count": 43
+      },
+      "soldCount": 77,
+      "viewCount": 825,
+      "status": "approved",
+      "createdAt": "2026-07-07T10:00:00Z",
+      "updatedAt": "2026-09-15T10:00:00Z"
+    },
+    {
+      "id": "PROD-000009",
+      "vendorId": "VEN-000003",
+      "sellerId": "SEL-000007",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-023",
+      "name": "ErgoMesh Office Chair",
+      "slug": "ergomesh-office-chair",
+      "brand": "NepalCraft",
+      "model": "NEP-7",
+      "description": "The ErgoMesh Office Chair combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable ergomesh office chair for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 28000,
+        "salePrice": 23990,
+        "currency": "NPR",
+        "discountPercentage": 14
+      },
+      "inventory": {
+        "sku": "SKU-9",
+        "barcode": "8900000006",
+        "quantity": 24,
+        "availableQuantity": 24,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "NepalCraft",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.4,
+        "count": 50
+      },
+      "soldCount": 90,
+      "viewCount": 922,
+      "status": "approved",
+      "createdAt": "2026-08-08T10:00:00Z",
+      "updatedAt": "2026-09-16T10:00:00Z"
+    },
+    {
+      "id": "PROD-000010",
+      "vendorId": "VEN-000004",
+      "sellerId": "SEL-000008",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-023",
+      "name": "Solid Wood Study Desk",
+      "slug": "solid-wood-study-desk",
+      "brand": "Urban Living",
+      "model": "URB-8",
+      "description": "The Solid Wood Study Desk combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable solid wood study desk for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 38000,
+        "salePrice": 32990,
+        "currency": "NPR",
+        "discountPercentage": 13
+      },
+      "inventory": {
+        "sku": "SKU-10",
+        "barcode": "8900000007",
+        "quantity": 4,
+        "availableQuantity": 4,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "Urban Living",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.5,
+        "count": 57
+      },
+      "soldCount": 103,
+      "viewCount": 1019,
+      "status": "approved",
+      "createdAt": "2026-09-09T10:00:00Z",
+      "updatedAt": "2026-09-17T10:00:00Z"
+    },
+    {
+      "id": "PROD-000011",
+      "vendorId": "VEN-000004",
+      "sellerId": "SEL-000009",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-024",
+      "name": "Smart Air Fryer 5L",
+      "slug": "smart-air-fryer-5l",
+      "brand": "KitchPro",
+      "model": "KIT-9",
+      "description": "The Smart Air Fryer 5L combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable smart air fryer 5l for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 18000,
+        "salePrice": 14990,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-11",
+        "barcode": "8900000008",
+        "quantity": 26,
+        "availableQuantity": 26,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "KitchPro",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.6,
+        "count": 64
+      },
+      "soldCount": 116,
+      "viewCount": 1116,
+      "status": "approved",
+      "createdAt": "2026-06-10T10:00:00Z",
+      "updatedAt": "2026-09-18T10:00:00Z"
+    },
+    {
+      "id": "PROD-000012",
+      "vendorId": "VEN-000005",
+      "sellerId": "SEL-000010",
+      "categoryId": "CAT-009",
+      "subcategoryId": "SUB-031",
+      "name": "Mountain Trail Hiking Backpack",
+      "slug": "mountain-trail-hiking-backpack",
+      "brand": "Trailmark",
+      "model": "TRA-10",
+      "description": "The Mountain Trail Hiking Backpack combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable mountain trail hiking backpack for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 9500,
+        "salePrice": 7490,
+        "currency": "NPR",
+        "discountPercentage": 21
+      },
+      "inventory": {
+        "sku": "SKU-12",
+        "barcode": "8900000009",
+        "quantity": 27,
+        "availableQuantity": 27,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-009",
+        "Brand": "Trailmark",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.7,
+        "count": 71
+      },
+      "soldCount": 129,
+      "viewCount": 1213,
+      "status": "approved",
+      "createdAt": "2026-07-11T10:00:00Z",
+      "updatedAt": "2026-09-19T10:00:00Z"
+    },
+    {
+      "id": "PROD-000013",
+      "vendorId": "VEN-000005",
+      "sellerId": "SEL-000011",
+      "categoryId": "CAT-009",
+      "subcategoryId": "SUB-030",
+      "name": "Professional Football Size 5",
+      "slug": "professional-football-size-5",
+      "brand": "PeakPlay",
+      "model": "PEA-11",
+      "description": "The Professional Football Size 5 combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable professional football size 5 for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 3200,
+        "salePrice": 2690,
+        "currency": "NPR",
+        "discountPercentage": 16
+      },
+      "inventory": {
+        "sku": "SKU-13",
+        "barcode": "8900000010",
+        "quantity": 28,
+        "availableQuantity": 27,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-009",
+        "Brand": "PeakPlay",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.8,
+        "count": 78
+      },
+      "soldCount": 142,
+      "viewCount": 1310,
+      "status": "approved",
+      "createdAt": "2026-08-12T10:00:00Z",
+      "updatedAt": "2026-09-20T10:00:00Z"
+    },
+    {
+      "id": "PROD-000014",
+      "vendorId": "VEN-000006",
+      "sellerId": "SEL-000012",
+      "categoryId": "CAT-009",
+      "subcategoryId": "SUB-030",
+      "name": "Adjustable Dumbbell Pair",
+      "slug": "adjustable-dumbbell-pair",
+      "brand": "FitForge",
+      "model": "FIT-12",
+      "description": "The Adjustable Dumbbell Pair combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable adjustable dumbbell pair for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 16000,
+        "salePrice": 13900,
+        "currency": "NPR",
+        "discountPercentage": 13
+      },
+      "inventory": {
+        "sku": "SKU-14",
+        "barcode": "8900000011",
+        "quantity": 29,
+        "availableQuantity": 27,
+        "reservedQuantity": 2,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-009",
+        "Brand": "FitForge",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.9,
+        "count": 85
+      },
+      "soldCount": 155,
+      "viewCount": 1407,
+      "status": "approved",
+      "createdAt": "2026-09-13T10:00:00Z",
+      "updatedAt": "2026-09-21T10:00:00Z"
+    },
+    {
+      "id": "PROD-000015",
+      "vendorId": "VEN-000006",
+      "sellerId": "SEL-000013",
+      "categoryId": "CAT-004",
+      "subcategoryId": "SUB-018",
+      "name": "Everyday Cotton Overshirt",
+      "slug": "everyday-cotton-overshirt",
+      "brand": "Kathmandu Threads",
+      "model": "KAT-13",
+      "description": "The Everyday Cotton Overshirt combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable everyday cotton overshirt for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 3200,
+        "salePrice": 2490,
+        "currency": "NPR",
+        "discountPercentage": 22
+      },
+      "inventory": {
+        "sku": "SKU-15",
+        "barcode": "8900000012",
+        "quantity": 30,
+        "availableQuantity": 30,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-004",
+        "Brand": "Kathmandu Threads",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 3.8,
+        "count": 92
+      },
+      "soldCount": 168,
+      "viewCount": 1504,
+      "status": "approved",
+      "createdAt": "2026-06-14T10:00:00Z",
+      "updatedAt": "2026-09-22T10:00:00Z"
+    },
+    {
+      "id": "PROD-000016",
+      "vendorId": "VEN-000007",
+      "sellerId": "SEL-000014",
+      "categoryId": "CAT-004",
+      "subcategoryId": "SUB-018",
+      "name": "Classic Denim Straight Jeans",
+      "slug": "classic-denim-straight-jeans",
+      "brand": "Kathmandu Threads",
+      "model": "KAT-14",
+      "description": "The Classic Denim Straight Jeans combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable classic denim straight jeans for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 4500,
+        "salePrice": 3690,
+        "currency": "NPR",
+        "discountPercentage": 18
+      },
+      "inventory": {
+        "sku": "SKU-16",
+        "barcode": "8900000013",
+        "quantity": 0,
+        "availableQuantity": 0,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-004",
+        "Brand": "Kathmandu Threads",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 3.9,
+        "count": 99
+      },
+      "soldCount": 181,
+      "viewCount": 1601,
+      "status": "approved",
+      "createdAt": "2026-07-15T10:00:00Z",
+      "updatedAt": "2026-09-23T10:00:00Z"
+    },
+    {
+      "id": "PROD-000017",
+      "vendorId": "VEN-000007",
+      "sellerId": "SEL-000015",
+      "categoryId": "CAT-004",
+      "subcategoryId": "SUB-018",
+      "name": "Urban Knit Hoodie",
+      "slug": "urban-knit-hoodie",
+      "brand": "Himalayan Wear",
+      "model": "HIM-15",
+      "description": "The Urban Knit Hoodie combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable urban knit hoodie for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 5200,
+        "salePrice": 4290,
+        "currency": "NPR",
+        "discountPercentage": 18
+      },
+      "inventory": {
+        "sku": "SKU-17",
+        "barcode": "8900000014",
+        "quantity": 4,
+        "availableQuantity": 4,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-004",
+        "Brand": "Himalayan Wear",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4,
+        "count": 106
+      },
+      "soldCount": 194,
+      "viewCount": 1698,
+      "status": "approved",
+      "createdAt": "2026-08-16T10:00:00Z",
+      "updatedAt": "2026-09-24T10:00:00Z"
+    },
+    {
+      "id": "PROD-000018",
+      "vendorId": "VEN-000008",
+      "sellerId": "SEL-000016",
+      "categoryId": "CAT-003",
+      "subcategoryId": "SUB-013",
+      "name": "Linen Kurta Set",
+      "slug": "linen-kurta-set",
+      "brand": "Sajilo Fashion",
+      "model": "SAJ-16",
+      "description": "The Linen Kurta Set combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable linen kurta set for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 4800,
+        "salePrice": 3990,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-18",
+        "barcode": "8900000015",
+        "quantity": 33,
+        "availableQuantity": 32,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-003",
+        "Brand": "Sajilo Fashion",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.1,
+        "count": 113
+      },
+      "soldCount": 207,
+      "viewCount": 1795,
+      "status": "approved",
+      "createdAt": "2026-09-17T10:00:00Z",
+      "updatedAt": "2026-09-25T10:00:00Z"
+    },
+    {
+      "id": "PROD-000019",
+      "vendorId": "VEN-000008",
+      "sellerId": "SEL-000017",
+      "categoryId": "CAT-003",
+      "subcategoryId": "SUB-014",
+      "name": "Everyday Canvas Sneakers",
+      "slug": "everyday-canvas-sneakers",
+      "brand": "FootNest",
+      "model": "FOO-17",
+      "description": "The Everyday Canvas Sneakers combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable everyday canvas sneakers for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 6500,
+        "salePrice": 5490,
+        "currency": "NPR",
+        "discountPercentage": 16
+      },
+      "inventory": {
+        "sku": "SKU-19",
+        "barcode": "8900000016",
+        "quantity": 34,
+        "availableQuantity": 34,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-003",
+        "Brand": "FootNest",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.2,
+        "count": 120
+      },
+      "soldCount": 220,
+      "viewCount": 1892,
+      "status": "approved",
+      "createdAt": "2026-06-18T10:00:00Z",
+      "updatedAt": "2026-09-26T10:00:00Z"
+    },
+    {
+      "id": "PROD-000020",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000001",
+      "categoryId": "CAT-003",
+      "subcategoryId": "SUB-015",
+      "name": "Handwoven Dhaka Tote Bag",
+      "slug": "handwoven-dhaka-tote-bag",
+      "brand": "Sajilo Fashion",
+      "model": "SAJ-18",
+      "description": "The Handwoven Dhaka Tote Bag combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable handwoven dhaka tote bag for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 2100,
+        "salePrice": 1690,
+        "currency": "NPR",
+        "discountPercentage": 20
+      },
+      "inventory": {
+        "sku": "SKU-20",
+        "barcode": "8900000017",
+        "quantity": 35,
+        "availableQuantity": 35,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-003",
+        "Brand": "Sajilo Fashion",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.3,
+        "count": 12
+      },
+      "soldCount": 23,
+      "viewCount": 1989,
+      "status": "pending",
+      "createdAt": "2026-07-19T10:00:00Z",
+      "updatedAt": "2026-09-27T10:00:00Z"
+    },
+    {
+      "id": "PROD-000021",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000002",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-022",
+      "name": "Full HD Wireless Projector",
+      "slug": "full-hd-wireless-projector",
+      "brand": "Event Essentials",
+      "model": "EVE-19",
+      "description": "The Full HD Wireless Projector combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable full hd wireless projector for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 48000,
+        "salePrice": 41900,
+        "currency": "NPR",
+        "discountPercentage": 13
+      },
+      "inventory": {
+        "sku": "SKU-21",
+        "barcode": "8900000018",
+        "quantity": 36,
+        "availableQuantity": 36,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "Event Essentials",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.4,
+        "count": 19
+      },
+      "soldCount": 36,
+      "viewCount": 2086,
+      "status": "approved",
+      "createdAt": "2026-08-20T10:00:00Z",
+      "updatedAt": "2026-09-10T10:00:00Z"
+    },
+    {
+      "id": "PROD-000022",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000003",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-022",
+      "name": "Portable PA Speaker 300W",
+      "slug": "portable-pa-speaker-300w",
+      "brand": "SoundSquare",
+      "model": "SOU-20",
+      "description": "The Portable PA Speaker 300W combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable portable pa speaker 300w for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 68000,
+        "salePrice": 57900,
+        "currency": "NPR",
+        "discountPercentage": 15
+      },
+      "inventory": {
+        "sku": "SKU-22",
+        "barcode": "8900000019",
+        "quantity": 37,
+        "availableQuantity": 37,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "SoundSquare",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.5,
+        "count": 26
+      },
+      "soldCount": 49,
+      "viewCount": 2183,
+      "status": "approved",
+      "createdAt": "2026-09-21T10:00:00Z",
+      "updatedAt": "2026-09-11T10:00:00Z"
+    },
+    {
+      "id": "PROD-000023",
+      "vendorId": "VEN-000002",
+      "sellerId": "SEL-000004",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-022",
+      "name": "Wireless Lavalier Microphone",
+      "slug": "wireless-lavalier-microphone",
+      "brand": "SoundSquare",
+      "model": "SOU-21",
+      "description": "The Wireless Lavalier Microphone combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable wireless lavalier microphone for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 12500,
+        "salePrice": 9990,
+        "currency": "NPR",
+        "discountPercentage": 20
+      },
+      "inventory": {
+        "sku": "SKU-23",
+        "barcode": "8900000020",
+        "quantity": 38,
+        "availableQuantity": 37,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "SoundSquare",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.6,
+        "count": 33
+      },
+      "soldCount": 62,
+      "viewCount": 2280,
+      "status": "approved",
+      "createdAt": "2026-06-22T10:00:00Z",
+      "updatedAt": "2026-09-12T10:00:00Z"
+    },
+    {
+      "id": "PROD-000024",
+      "vendorId": "VEN-000002",
+      "sellerId": "SEL-000005",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-022",
+      "name": "Warm String Light Set",
+      "slug": "warm-string-light-set",
+      "brand": "Event Essentials",
+      "model": "EVE-22",
+      "description": "The Warm String Light Set combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable warm string light set for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 4500,
+        "salePrice": 3290,
+        "currency": "NPR",
+        "discountPercentage": 27
+      },
+      "inventory": {
+        "sku": "SKU-24",
+        "barcode": "8900000021",
+        "quantity": 4,
+        "availableQuantity": 4,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "Event Essentials",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.7,
+        "count": 40
+      },
+      "soldCount": 75,
+      "viewCount": 2377,
+      "status": "approved",
+      "createdAt": "2026-07-23T10:00:00Z",
+      "updatedAt": "2026-09-13T10:00:00Z"
+    },
+    {
+      "id": "PROD-000025",
+      "vendorId": "VEN-000003",
+      "sellerId": "SEL-000006",
+      "categoryId": "CAT-011",
+      "subcategoryId": "SUB-034",
+      "name": "Modern Nepali Web Development",
+      "slug": "modern-nepali-web-development",
+      "brand": "Book World Nepal",
+      "model": "BOO-23",
+      "description": "The Modern Nepali Web Development combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable modern nepali web development for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 1800,
+        "salePrice": 1490,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-25",
+        "barcode": "8900000022",
+        "quantity": 40,
+        "availableQuantity": 38,
+        "reservedQuantity": 2,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-011",
+        "Brand": "Book World Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.8,
+        "count": 47
+      },
+      "soldCount": 88,
+      "viewCount": 2474,
+      "status": "approved",
+      "createdAt": "2026-08-24T10:00:00Z",
+      "updatedAt": "2026-09-14T10:00:00Z"
+    },
+    {
+      "id": "PROD-000026",
+      "vendorId": "VEN-000003",
+      "sellerId": "SEL-000007",
+      "categoryId": "CAT-011",
+      "subcategoryId": "SUB-034",
+      "name": "Practical Database Systems",
+      "slug": "practical-database-systems",
+      "brand": "Book World Nepal",
+      "model": "BOO-24",
+      "description": "The Practical Database Systems combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable practical database systems for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 2200,
+        "salePrice": 1890,
+        "currency": "NPR",
+        "discountPercentage": 14
+      },
+      "inventory": {
+        "sku": "SKU-26",
+        "barcode": "8900000023",
+        "quantity": 41,
+        "availableQuantity": 41,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-011",
+        "Brand": "Book World Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.9,
+        "count": 54
+      },
+      "soldCount": 101,
+      "viewCount": 2571,
+      "status": "inactive",
+      "createdAt": "2026-09-25T10:00:00Z",
+      "updatedAt": "2026-09-15T10:00:00Z"
+    },
+    {
+      "id": "PROD-000027",
+      "vendorId": "VEN-000004",
+      "sellerId": "SEL-000008",
+      "categoryId": "CAT-011",
+      "subcategoryId": "SUB-034",
+      "name": "The Kathmandu Stories",
+      "slug": "the-kathmandu-stories",
+      "brand": "Book World Nepal",
+      "model": "BOO-25",
+      "description": "The The Kathmandu Stories combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable the kathmandu stories for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 950,
+        "salePrice": 790,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-27",
+        "barcode": "8900000024",
+        "quantity": 42,
+        "availableQuantity": 42,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-011",
+        "Brand": "Book World Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 3.8,
+        "count": 61
+      },
+      "soldCount": 114,
+      "viewCount": 2668,
+      "status": "approved",
+      "createdAt": "2026-06-02T10:00:00Z",
+      "updatedAt": "2026-09-16T10:00:00Z"
+    },
+    {
+      "id": "PROD-000028",
+      "vendorId": "VEN-000004",
+      "sellerId": "SEL-000009",
+      "categoryId": "CAT-007",
+      "subcategoryId": "SUB-025",
+      "name": "Premium Arabica Coffee Beans",
+      "slug": "premium-arabica-coffee-beans",
+      "brand": "Himalayan Pantry",
+      "model": "HIM-26",
+      "description": "The Premium Arabica Coffee Beans combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable premium arabica coffee beans for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 1450,
+        "salePrice": 1190,
+        "currency": "NPR",
+        "discountPercentage": 18
+      },
+      "inventory": {
+        "sku": "SKU-28",
+        "barcode": "8900000025",
+        "quantity": 43,
+        "availableQuantity": 42,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-007",
+        "Brand": "Himalayan Pantry",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 3.9,
+        "count": 68
+      },
+      "soldCount": 127,
+      "viewCount": 2765,
+      "status": "approved",
+      "createdAt": "2026-07-03T10:00:00Z",
+      "updatedAt": "2026-09-17T10:00:00Z"
+    },
+    {
+      "id": "PROD-000029",
+      "vendorId": "VEN-000005",
+      "sellerId": "SEL-000010",
+      "categoryId": "CAT-007",
+      "subcategoryId": "SUB-025",
+      "name": "Organic Dog Food 3KG",
+      "slug": "organic-dog-food-3kg",
+      "brand": "PawCare",
+      "model": "PAW-27",
+      "description": "The Organic Dog Food 3KG combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable organic dog food 3kg for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 3200,
+        "salePrice": 2790,
+        "currency": "NPR",
+        "discountPercentage": 13
+      },
+      "inventory": {
+        "sku": "SKU-29",
+        "barcode": "8900000026",
+        "quantity": 0,
+        "availableQuantity": 0,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-007",
+        "Brand": "PawCare",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4,
+        "count": 75
+      },
+      "soldCount": 140,
+      "viewCount": 2862,
+      "status": "approved",
+      "createdAt": "2026-08-04T10:00:00Z",
+      "updatedAt": "2026-09-18T10:00:00Z"
+    },
+    {
+      "id": "PROD-000030",
+      "vendorId": "VEN-000005",
+      "sellerId": "SEL-000011",
+      "categoryId": "CAT-010",
+      "subcategoryId": "SUB-032",
+      "name": "Rechargeable Work Light",
+      "slug": "rechargeable-work-light",
+      "brand": "ToolMate Nepal",
+      "model": "TOO-28",
+      "description": "The Rechargeable Work Light combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable rechargeable work light for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 4200,
+        "salePrice": 3490,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-30",
+        "barcode": "8900000027",
+        "quantity": 45,
+        "availableQuantity": 45,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-010",
+        "Brand": "ToolMate Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.1,
+        "count": 82
+      },
+      "soldCount": 153,
+      "viewCount": 2959,
+      "status": "approved",
+      "createdAt": "2026-09-05T10:00:00Z",
+      "updatedAt": "2026-09-19T10:00:00Z"
+    },
+    {
+      "id": "PROD-000031",
+      "vendorId": "VEN-000006",
+      "sellerId": "SEL-000012",
+      "categoryId": "CAT-010",
+      "subcategoryId": "SUB-032",
+      "name": "Cordless Drill 20V",
+      "slug": "cordless-drill-20v",
+      "brand": "ToolMate Nepal",
+      "model": "TOO-29",
+      "description": "The Cordless Drill 20V combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable cordless drill 20v for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 15500,
+        "salePrice": 12900,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-31",
+        "barcode": "8900000028",
+        "quantity": 4,
+        "availableQuantity": 4,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-010",
+        "Brand": "ToolMate Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.2,
+        "count": 89
+      },
+      "soldCount": 166,
+      "viewCount": 3056,
+      "status": "approved",
+      "createdAt": "2026-06-06T10:00:00Z",
+      "updatedAt": "2026-09-20T10:00:00Z"
+    },
+    {
+      "id": "PROD-000032",
+      "vendorId": "VEN-000006",
+      "sellerId": "SEL-000013",
+      "categoryId": "CAT-008",
+      "subcategoryId": "SUB-028",
+      "name": "Kids STEM Discovery Kit",
+      "slug": "kids-stem-discovery-kit",
+      "brand": "BrightBox",
+      "model": "BRI-30",
+      "description": "The Kids STEM Discovery Kit combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable kids stem discovery kit for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 3600,
+        "salePrice": 2990,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-32",
+        "barcode": "8900000029",
+        "quantity": 47,
+        "availableQuantity": 47,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-008",
+        "Brand": "BrightBox",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.3,
+        "count": 96
+      },
+      "soldCount": 179,
+      "viewCount": 3153,
+      "status": "rejected",
+      "createdAt": "2026-07-07T10:00:00Z",
+      "updatedAt": "2026-09-21T10:00:00Z"
+    },
+    {
+      "id": "PROD-000033",
+      "vendorId": "VEN-000007",
+      "sellerId": "SEL-000014",
+      "categoryId": "CAT-008",
+      "subcategoryId": "SUB-028",
+      "name": "Soft Plush Elephant",
+      "slug": "soft-plush-elephant",
+      "brand": "BrightBox",
+      "model": "BRI-31",
+      "description": "The Soft Plush Elephant combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable soft plush elephant for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 1800,
+        "salePrice": 1490,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-33",
+        "barcode": "8900000030",
+        "quantity": 48,
+        "availableQuantity": 47,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-008",
+        "Brand": "BrightBox",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.4,
+        "count": 103
+      },
+      "soldCount": 192,
+      "viewCount": 3250,
+      "status": "approved",
+      "createdAt": "2026-08-08T10:00:00Z",
+      "updatedAt": "2026-09-22T10:00:00Z"
+    },
+    {
+      "id": "PROD-000034",
+      "vendorId": "VEN-000007",
+      "sellerId": "SEL-000015",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-024",
+      "name": "Smart LED Bulb Four Pack",
+      "slug": "smart-led-bulb-four-pack",
+      "brand": "Smart Home Nepal",
+      "model": "SMA-32",
+      "description": "The Smart LED Bulb Four Pack combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable smart led bulb four pack for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 3600,
+        "salePrice": 2890,
+        "currency": "NPR",
+        "discountPercentage": 20
+      },
+      "inventory": {
+        "sku": "SKU-34",
+        "barcode": "8900000031",
+        "quantity": 49,
+        "availableQuantity": 49,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "Smart Home Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.5,
+        "count": 110
+      },
+      "soldCount": 205,
+      "viewCount": 3347,
+      "status": "approved",
+      "createdAt": "2026-09-09T10:00:00Z",
+      "updatedAt": "2026-09-23T10:00:00Z"
+    },
+    {
+      "id": "PROD-000035",
+      "vendorId": "VEN-000008",
+      "sellerId": "SEL-000016",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-024",
+      "name": "Wi-Fi Security Camera",
+      "slug": "wi-fi-security-camera",
+      "brand": "Smart Home Nepal",
+      "model": "SMA-33",
+      "description": "The Wi-Fi Security Camera combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable wi-fi security camera for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 8500,
+        "salePrice": 6990,
+        "currency": "NPR",
+        "discountPercentage": 18
+      },
+      "inventory": {
+        "sku": "SKU-35",
+        "barcode": "8900000032",
+        "quantity": 50,
+        "availableQuantity": 50,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "Smart Home Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.6,
+        "count": 117
+      },
+      "soldCount": 218,
+      "viewCount": 3444,
+      "status": "approved",
+      "createdAt": "2026-06-10T10:00:00Z",
+      "updatedAt": "2026-09-24T10:00:00Z"
+    },
+    {
+      "id": "PROD-000036",
+      "vendorId": "VEN-000008",
+      "sellerId": "SEL-000017",
+      "categoryId": "CAT-002",
+      "subcategoryId": "SUB-010",
+      "name": "Mechanical Keyboard RGB",
+      "slug": "mechanical-keyboard-rgb",
+      "brand": "KeyCraft",
+      "model": "KEY-34",
+      "description": "The Mechanical Keyboard RGB combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable mechanical keyboard rgb for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 7800,
+        "salePrice": 6490,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-36",
+        "barcode": "8900000033",
+        "quantity": 51,
+        "availableQuantity": 49,
+        "reservedQuantity": 2,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-002",
+        "Brand": "KeyCraft",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.7,
+        "count": 9
+      },
+      "soldCount": 21,
+      "viewCount": 3541,
+      "status": "approved",
+      "createdAt": "2026-07-11T10:00:00Z",
+      "updatedAt": "2026-09-25T10:00:00Z"
+    },
+    {
+      "id": "PROD-000037",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000001",
+      "categoryId": "CAT-002",
+      "subcategoryId": "SUB-010",
+      "name": "Precision Gaming Mouse",
+      "slug": "precision-gaming-mouse",
+      "brand": "KeyCraft",
+      "model": "KEY-35",
+      "description": "The Precision Gaming Mouse combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable precision gaming mouse for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 3200,
+        "salePrice": 2690,
+        "currency": "NPR",
+        "discountPercentage": 16
+      },
+      "inventory": {
+        "sku": "SKU-37",
+        "barcode": "8900000034",
+        "quantity": 52,
+        "availableQuantity": 52,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-002",
+        "Brand": "KeyCraft",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.8,
+        "count": 16
+      },
+      "soldCount": 34,
+      "viewCount": 3638,
+      "status": "pending",
+      "createdAt": "2026-08-12T10:00:00Z",
+      "updatedAt": "2026-09-26T10:00:00Z"
+    },
+    {
+      "id": "PROD-000038",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000002",
+      "categoryId": "CAT-002",
+      "subcategoryId": "SUB-012",
+      "name": "UltraSpeed 1TB SSD",
+      "slug": "ultraspeed-1tb-ssd",
+      "brand": "DataCore",
+      "model": "DAT-36",
+      "description": "The UltraSpeed 1TB SSD combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable ultraspeed 1tb ssd for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 12500,
+        "salePrice": 10490,
+        "currency": "NPR",
+        "discountPercentage": 16
+      },
+      "inventory": {
+        "sku": "SKU-38",
+        "barcode": "8900000035",
+        "quantity": 4,
+        "availableQuantity": 3,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-002",
+        "Brand": "DataCore",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.9,
+        "count": 23
+      },
+      "soldCount": 47,
+      "viewCount": 3735,
+      "status": "approved",
+      "createdAt": "2026-09-13T10:00:00Z",
+      "updatedAt": "2026-09-27T10:00:00Z"
+    },
+    {
+      "id": "PROD-000039",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000003",
+      "categoryId": "CAT-002",
+      "subcategoryId": "SUB-011",
+      "name": "Portable Bluetooth Speaker",
+      "slug": "portable-bluetooth-speaker",
+      "brand": "Auralis",
+      "model": "AUR-37",
+      "description": "The Portable Bluetooth Speaker combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable portable bluetooth speaker for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 6500,
+        "salePrice": 5290,
+        "currency": "NPR",
+        "discountPercentage": 19
+      },
+      "inventory": {
+        "sku": "SKU-39",
+        "barcode": "8900000036",
+        "quantity": 19,
+        "availableQuantity": 19,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-002",
+        "Brand": "Auralis",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 3.8,
+        "count": 30
+      },
+      "soldCount": 60,
+      "viewCount": 3832,
+      "status": "approved",
+      "createdAt": "2026-06-14T10:00:00Z",
+      "updatedAt": "2026-09-10T10:00:00Z"
+    },
+    {
+      "id": "PROD-000040",
+      "vendorId": "VEN-000002",
+      "sellerId": "SEL-000004",
+      "categoryId": "CAT-001",
+      "subcategoryId": "SUB-002",
+      "name": "Tablet 10-inch Study Edition",
+      "slug": "tablet-10-inch-study-edition",
+      "brand": "Himalayan",
+      "model": "HIM-38",
+      "description": "The Tablet 10-inch Study Edition combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable tablet 10-inch study edition for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 32000,
+        "salePrice": 27990,
+        "currency": "NPR",
+        "discountPercentage": 13
+      },
+      "inventory": {
+        "sku": "SKU-40",
+        "barcode": "8900000037",
+        "quantity": 20,
+        "availableQuantity": 20,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-001",
+        "Brand": "Himalayan",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 3.9,
+        "count": 37
+      },
+      "soldCount": 73,
+      "viewCount": 3929,
+      "status": "approved",
+      "createdAt": "2026-07-15T10:00:00Z",
+      "updatedAt": "2026-09-11T10:00:00Z"
+    },
+    {
+      "id": "PROD-000041",
+      "vendorId": "VEN-000002",
+      "sellerId": "SEL-000005",
+      "categoryId": "CAT-001",
+      "subcategoryId": "SUB-007",
+      "name": "Gaming Console Digital Edition",
+      "slug": "gaming-console-digital-edition",
+      "brand": "PlayPeak",
+      "model": "PLA-39",
+      "description": "The Gaming Console Digital Edition combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable gaming console digital edition for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 78000,
+        "salePrice": 72900,
+        "currency": "NPR",
+        "discountPercentage": 7
+      },
+      "inventory": {
+        "sku": "SKU-41",
+        "barcode": "8900000038",
+        "quantity": 21,
+        "availableQuantity": 21,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-001",
+        "Brand": "PlayPeak",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4,
+        "count": 44
+      },
+      "soldCount": 86,
+      "viewCount": 4026,
+      "status": "approved",
+      "createdAt": "2026-08-16T10:00:00Z",
+      "updatedAt": "2026-09-12T10:00:00Z"
+    },
+    {
+      "id": "PROD-000042",
+      "vendorId": "VEN-000003",
+      "sellerId": "SEL-000006",
+      "categoryId": "CAT-001",
+      "subcategoryId": "SUB-008",
+      "name": "4K Smart Television 55-inch",
+      "slug": "4k-smart-television-55-inch",
+      "brand": "ViewPeak",
+      "model": "VIE-40",
+      "description": "The 4K Smart Television 55-inch combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable 4k smart television 55-inch for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 95000,
+        "salePrice": 84900,
+        "currency": "NPR",
+        "discountPercentage": 11
+      },
+      "inventory": {
+        "sku": "SKU-42",
+        "barcode": "8900000039",
+        "quantity": 0,
+        "availableQuantity": 0,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-001",
+        "Brand": "ViewPeak",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.1,
+        "count": 51
+      },
+      "soldCount": 99,
+      "viewCount": 4123,
+      "status": "approved",
+      "createdAt": "2026-09-17T10:00:00Z",
+      "updatedAt": "2026-09-13T10:00:00Z"
+    },
+    {
+      "id": "PROD-000043",
+      "vendorId": "VEN-000003",
+      "sellerId": "SEL-000007",
+      "categoryId": "CAT-001",
+      "subcategoryId": "SUB-006",
+      "name": "Mirrorless Camera Prime Lens",
+      "slug": "mirrorless-camera-prime-lens",
+      "brand": "FrameCraft",
+      "model": "FRA-41",
+      "description": "The Mirrorless Camera Prime Lens combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable mirrorless camera prime lens for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 52000,
+        "salePrice": 46900,
+        "currency": "NPR",
+        "discountPercentage": 10
+      },
+      "inventory": {
+        "sku": "SKU-43",
+        "barcode": "8900000040",
+        "quantity": 23,
+        "availableQuantity": 22,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-001",
+        "Brand": "FrameCraft",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.2,
+        "count": 58
+      },
+      "soldCount": 112,
+      "viewCount": 4220,
+      "status": "approved",
+      "createdAt": "2026-06-18T10:00:00Z",
+      "updatedAt": "2026-09-14T10:00:00Z"
+    },
+    {
+      "id": "PROD-000044",
+      "vendorId": "VEN-000004",
+      "sellerId": "SEL-000008",
+      "categoryId": "CAT-001",
+      "subcategoryId": "SUB-006",
+      "name": "LED Ring Light 18-inch",
+      "slug": "led-ring-light-18-inch",
+      "brand": "FrameCraft",
+      "model": "FRA-42",
+      "description": "The LED Ring Light 18-inch combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable led ring light 18-inch for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 6200,
+        "salePrice": 4990,
+        "currency": "NPR",
+        "discountPercentage": 20
+      },
+      "inventory": {
+        "sku": "SKU-44",
+        "barcode": "8900000041",
+        "quantity": 24,
+        "availableQuantity": 24,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-001",
+        "Brand": "FrameCraft",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.3,
+        "count": 65
+      },
+      "soldCount": 125,
+      "viewCount": 4317,
+      "status": "approved",
+      "createdAt": "2026-07-19T10:00:00Z",
+      "updatedAt": "2026-09-15T10:00:00Z"
+    },
+    {
+      "id": "PROD-000045",
+      "vendorId": "VEN-000004",
+      "sellerId": "SEL-000009",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-023",
+      "name": "Minimalist Side Table",
+      "slug": "minimalist-side-table",
+      "brand": "Urban Living",
+      "model": "URB-43",
+      "description": "The Minimalist Side Table combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable minimalist side table for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 9500,
+        "salePrice": 7990,
+        "currency": "NPR",
+        "discountPercentage": 16
+      },
+      "inventory": {
+        "sku": "SKU-45",
+        "barcode": "8900000042",
+        "quantity": 4,
+        "availableQuantity": 4,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "Urban Living",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.4,
+        "count": 72
+      },
+      "soldCount": 138,
+      "viewCount": 4414,
+      "status": "approved",
+      "createdAt": "2026-08-20T10:00:00Z",
+      "updatedAt": "2026-09-16T10:00:00Z"
+    },
+    {
+      "id": "PROD-000046",
+      "vendorId": "VEN-000005",
+      "sellerId": "SEL-000010",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-023",
+      "name": "Three-Seater Fabric Sofa",
+      "slug": "three-seater-fabric-sofa",
+      "brand": "Urban Living",
+      "model": "URB-44",
+      "description": "The Three-Seater Fabric Sofa combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable three-seater fabric sofa for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 88000,
+        "salePrice": 74900,
+        "currency": "NPR",
+        "discountPercentage": 15
+      },
+      "inventory": {
+        "sku": "SKU-46",
+        "barcode": "8900000043",
+        "quantity": 26,
+        "availableQuantity": 26,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "Urban Living",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.5,
+        "count": 79
+      },
+      "soldCount": 151,
+      "viewCount": 4511,
+      "status": "approved",
+      "createdAt": "2026-09-21T10:00:00Z",
+      "updatedAt": "2026-09-17T10:00:00Z"
+    },
+    {
+      "id": "PROD-000047",
+      "vendorId": "VEN-000005",
+      "sellerId": "SEL-000011",
+      "categoryId": "CAT-009",
+      "subcategoryId": "SUB-030",
+      "name": "Yoga Mat Eco Grip",
+      "slug": "yoga-mat-eco-grip",
+      "brand": "FitForge",
+      "model": "FIT-45",
+      "description": "The Yoga Mat Eco Grip combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable yoga mat eco grip for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 2200,
+        "salePrice": 1790,
+        "currency": "NPR",
+        "discountPercentage": 19
+      },
+      "inventory": {
+        "sku": "SKU-47",
+        "barcode": "8900000044",
+        "quantity": 27,
+        "availableQuantity": 25,
+        "reservedQuantity": 2,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-009",
+        "Brand": "FitForge",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.6,
+        "count": 86
+      },
+      "soldCount": 164,
+      "viewCount": 408,
+      "status": "approved",
+      "createdAt": "2026-06-22T10:00:00Z",
+      "updatedAt": "2026-09-18T10:00:00Z"
+    },
+    {
+      "id": "PROD-000048",
+      "vendorId": "VEN-000006",
+      "sellerId": "SEL-000012",
+      "categoryId": "CAT-009",
+      "subcategoryId": "SUB-031",
+      "name": "Carbon Fiber Badminton Racket",
+      "slug": "carbon-fiber-badminton-racket",
+      "brand": "PeakPlay",
+      "model": "PEA-46",
+      "description": "The Carbon Fiber Badminton Racket combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable carbon fiber badminton racket for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 7200,
+        "salePrice": 5990,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-48",
+        "barcode": "8900000045",
+        "quantity": 28,
+        "availableQuantity": 27,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-009",
+        "Brand": "PeakPlay",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.7,
+        "count": 93
+      },
+      "soldCount": 177,
+      "viewCount": 505,
+      "status": "approved",
+      "createdAt": "2026-07-23T10:00:00Z",
+      "updatedAt": "2026-09-19T10:00:00Z"
+    },
+    {
+      "id": "PROD-000049",
+      "vendorId": "VEN-000006",
+      "sellerId": "SEL-000013",
+      "categoryId": "CAT-009",
+      "subcategoryId": "SUB-031",
+      "name": "Leather Weekend Duffel",
+      "slug": "leather-weekend-duffel",
+      "brand": "Trailmark",
+      "model": "TRA-47",
+      "description": "The Leather Weekend Duffel combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable leather weekend duffel for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 7800,
+        "salePrice": 6490,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-49",
+        "barcode": "8900000046",
+        "quantity": 29,
+        "availableQuantity": 29,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-009",
+        "Brand": "Trailmark",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.8,
+        "count": 100
+      },
+      "soldCount": 190,
+      "viewCount": 602,
+      "status": "inactive",
+      "createdAt": "2026-08-24T10:00:00Z",
+      "updatedAt": "2026-09-20T10:00:00Z"
+    },
+    {
+      "id": "PROD-000050",
+      "vendorId": "VEN-000007",
+      "sellerId": "SEL-000014",
+      "categoryId": "CAT-004",
+      "subcategoryId": "SUB-018",
+      "name": "Classic Polo Shirt",
+      "slug": "classic-polo-shirt",
+      "brand": "Kathmandu Threads",
+      "model": "KAT-48",
+      "description": "The Classic Polo Shirt combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable classic polo shirt for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 2600,
+        "salePrice": 2190,
+        "currency": "NPR",
+        "discountPercentage": 16
+      },
+      "inventory": {
+        "sku": "SKU-50",
+        "barcode": "8900000047",
+        "quantity": 30,
+        "availableQuantity": 30,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-004",
+        "Brand": "Kathmandu Threads",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.9,
+        "count": 107
+      },
+      "soldCount": 203,
+      "viewCount": 699,
+      "status": "approved",
+      "createdAt": "2026-09-25T10:00:00Z",
+      "updatedAt": "2026-09-21T10:00:00Z"
+    },
+    {
+      "id": "PROD-000051",
+      "vendorId": "VEN-000007",
+      "sellerId": "SEL-000015",
+      "categoryId": "CAT-004",
+      "subcategoryId": "SUB-018",
+      "name": "Waterproof Trail Jacket",
+      "slug": "waterproof-trail-jacket",
+      "brand": "Himalayan Wear",
+      "model": "HIM-49",
+      "description": "The Waterproof Trail Jacket combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable waterproof trail jacket for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 8900,
+        "salePrice": 7490,
+        "currency": "NPR",
+        "discountPercentage": 16
+      },
+      "inventory": {
+        "sku": "SKU-51",
+        "barcode": "8900000048",
+        "quantity": 31,
+        "availableQuantity": 31,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-004",
+        "Brand": "Himalayan Wear",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 3.8,
+        "count": 114
+      },
+      "soldCount": 216,
+      "viewCount": 796,
+      "status": "approved",
+      "createdAt": "2026-06-02T10:00:00Z",
+      "updatedAt": "2026-09-22T10:00:00Z"
+    },
+    {
+      "id": "PROD-000052",
+      "vendorId": "VEN-000008",
+      "sellerId": "SEL-000016",
+      "categoryId": "CAT-003",
+      "subcategoryId": "SUB-013",
+      "name": "Floral Summer Dress",
+      "slug": "floral-summer-dress",
+      "brand": "Sajilo Fashion",
+      "model": "SAJ-50",
+      "description": "The Floral Summer Dress combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable floral summer dress for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 5600,
+        "salePrice": 4690,
+        "currency": "NPR",
+        "discountPercentage": 16
+      },
+      "inventory": {
+        "sku": "SKU-52",
+        "barcode": "8900000049",
+        "quantity": 4,
+        "availableQuantity": 4,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-003",
+        "Brand": "Sajilo Fashion",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 3.9,
+        "count": 121
+      },
+      "soldCount": 19,
+      "viewCount": 893,
+      "status": "approved",
+      "createdAt": "2026-07-03T10:00:00Z",
+      "updatedAt": "2026-09-23T10:00:00Z"
+    },
+    {
+      "id": "PROD-000053",
+      "vendorId": "VEN-000008",
+      "sellerId": "SEL-000017",
+      "categoryId": "CAT-003",
+      "subcategoryId": "SUB-014",
+      "name": "Daily Comfort Flats",
+      "slug": "daily-comfort-flats",
+      "brand": "FootNest",
+      "model": "FOO-51",
+      "description": "The Daily Comfort Flats combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable daily comfort flats for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 4200,
+        "salePrice": 3490,
+        "currency": "NPR",
+        "discountPercentage": 17
+      },
+      "inventory": {
+        "sku": "SKU-53",
+        "barcode": "8900000050",
+        "quantity": 33,
+        "availableQuantity": 32,
+        "reservedQuantity": 1,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-003",
+        "Brand": "FootNest",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4,
+        "count": 13
+      },
+      "soldCount": 32,
+      "viewCount": 990,
+      "status": "approved",
+      "createdAt": "2026-08-04T10:00:00Z",
+      "updatedAt": "2026-09-24T10:00:00Z"
+    },
+    {
+      "id": "PROD-000054",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000001",
+      "categoryId": "CAT-011",
+      "subcategoryId": "SUB-035",
+      "name": "Academic Success Planner",
+      "slug": "academic-success-planner",
+      "brand": "Book World Nepal",
+      "model": "BOO-52",
+      "description": "The Academic Success Planner combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable academic success planner for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 850,
+        "salePrice": 690,
+        "currency": "NPR",
+        "discountPercentage": 19
+      },
+      "inventory": {
+        "sku": "SKU-54",
+        "barcode": "8900000051",
+        "quantity": 34,
+        "availableQuantity": 34,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-011",
+        "Brand": "Book World Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.1,
+        "count": 20
+      },
+      "soldCount": 45,
+      "viewCount": 1087,
+      "status": "pending",
+      "createdAt": "2026-09-05T10:00:00Z",
+      "updatedAt": "2026-09-25T10:00:00Z"
+    },
+    {
+      "id": "PROD-000055",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000002",
+      "categoryId": "CAT-011",
+      "subcategoryId": "SUB-035",
+      "name": "Network Engineering Handbook",
+      "slug": "network-engineering-handbook",
+      "brand": "Book World Nepal",
+      "model": "BOO-53",
+      "description": "The Network Engineering Handbook combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable network engineering handbook for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 2600,
+        "salePrice": 2190,
+        "currency": "NPR",
+        "discountPercentage": 16
+      },
+      "inventory": {
+        "sku": "SKU-55",
+        "barcode": "8900000052",
+        "quantity": 0,
+        "availableQuantity": 0,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-011",
+        "Brand": "Book World Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.2,
+        "count": 27
+      },
+      "soldCount": 58,
+      "viewCount": 1184,
+      "status": "approved",
+      "createdAt": "2026-06-06T10:00:00Z",
+      "updatedAt": "2026-09-26T10:00:00Z"
+    },
+    {
+      "id": "PROD-000056",
+      "vendorId": "VEN-000001",
+      "sellerId": "SEL-000003",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-022",
+      "name": "Party Decoration Starter Set",
+      "slug": "party-decoration-starter-set",
+      "brand": "Event Essentials",
+      "model": "EVE-54",
+      "description": "The Party Decoration Starter Set combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable party decoration starter set for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 6800,
+        "salePrice": 5490,
+        "currency": "NPR",
+        "discountPercentage": 19
+      },
+      "inventory": {
+        "sku": "SKU-56",
+        "barcode": "8900000053",
+        "quantity": 36,
+        "availableQuantity": 36,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "Event Essentials",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.3,
+        "count": 34
+      },
+      "soldCount": 71,
+      "viewCount": 1281,
+      "status": "approved",
+      "createdAt": "2026-07-07T10:00:00Z",
+      "updatedAt": "2026-09-27T10:00:00Z"
+    },
+    {
+      "id": "PROD-000057",
+      "vendorId": "VEN-000002",
+      "sellerId": "SEL-000004",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-022",
+      "name": "Conference LED Uplight Pair",
+      "slug": "conference-led-uplight-pair",
+      "brand": "Event Essentials",
+      "model": "EVE-55",
+      "description": "The Conference LED Uplight Pair combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable conference led uplight pair for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 15000,
+        "salePrice": 11900,
+        "currency": "NPR",
+        "discountPercentage": 21
+      },
+      "inventory": {
+        "sku": "SKU-57",
+        "barcode": "8900000054",
+        "quantity": 37,
+        "availableQuantity": 37,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "Event Essentials",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.4,
+        "count": 41
+      },
+      "soldCount": 84,
+      "viewCount": 1378,
+      "status": "approved",
+      "createdAt": "2026-08-08T10:00:00Z",
+      "updatedAt": "2026-09-10T10:00:00Z"
+    },
+    {
+      "id": "PROD-000058",
+      "vendorId": "VEN-000002",
+      "sellerId": "SEL-000005",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-024",
+      "name": "Smart Door Sensor Kit",
+      "slug": "smart-door-sensor-kit",
+      "brand": "Smart Home Nepal",
+      "model": "SMA-56",
+      "description": "The Smart Door Sensor Kit combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable smart door sensor kit for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 5500,
+        "salePrice": 4490,
+        "currency": "NPR",
+        "discountPercentage": 18
+      },
+      "inventory": {
+        "sku": "SKU-58",
+        "barcode": "8900000055",
+        "quantity": 38,
+        "availableQuantity": 36,
+        "reservedQuantity": 2,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "Smart Home Nepal",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.5,
+        "count": 48
+      },
+      "soldCount": 97,
+      "viewCount": 1475,
+      "status": "approved",
+      "createdAt": "2026-09-09T10:00:00Z",
+      "updatedAt": "2026-09-11T10:00:00Z"
+    },
+    {
+      "id": "PROD-000059",
+      "vendorId": "VEN-000003",
+      "sellerId": "SEL-000006",
+      "categoryId": "CAT-006",
+      "subcategoryId": "SUB-024",
+      "name": "Instant Water Heater 15L",
+      "slug": "instant-water-heater-15l",
+      "brand": "KitchPro",
+      "model": "KIT-57",
+      "description": "The Instant Water Heater 15L combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable instant water heater 15l for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 24500,
+        "salePrice": 21900,
+        "currency": "NPR",
+        "discountPercentage": 11
+      },
+      "inventory": {
+        "sku": "SKU-59",
+        "barcode": "8900000056",
+        "quantity": 4,
+        "availableQuantity": 4,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-006",
+        "Brand": "KitchPro",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": true,
+        "shippingFee": 0,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.6,
+        "count": 55
+      },
+      "soldCount": 110,
+      "viewCount": 1572,
+      "status": "approved",
+      "createdAt": "2026-06-10T10:00:00Z",
+      "updatedAt": "2026-09-12T10:00:00Z"
+    },
+    {
+      "id": "PROD-000060",
+      "vendorId": "VEN-000003",
+      "sellerId": "SEL-000007",
+      "categoryId": "CAT-002",
+      "subcategoryId": "SUB-009",
+      "name": "Travel Power Bank 20000mAh",
+      "slug": "travel-power-bank-20000mah",
+      "brand": "Voltix",
+      "model": "VOL-58",
+      "description": "The Travel Power Bank 20000mAh combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable travel power bank 20000mah for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 4200,
+        "salePrice": 3390,
+        "currency": "NPR",
+        "discountPercentage": 19
+      },
+      "inventory": {
+        "sku": "SKU-60",
+        "barcode": "8900000057",
+        "quantity": 40,
+        "availableQuantity": 40,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-002",
+        "Brand": "Voltix",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.7,
+        "count": 62
+      },
+      "soldCount": 123,
+      "viewCount": 1669,
+      "status": "approved",
+      "createdAt": "2026-07-11T10:00:00Z",
+      "updatedAt": "2026-09-13T10:00:00Z"
+    },
+    {
+      "id": "PROD-000061",
+      "vendorId": "VEN-000004",
+      "sellerId": "SEL-000008",
+      "categoryId": "CAT-002",
+      "subcategoryId": "SUB-009",
+      "name": "USB-C Braided Cable",
+      "slug": "usb-c-braided-cable",
+      "brand": "Voltix",
+      "model": "VOL-59",
+      "description": "The USB-C Braided Cable combines dependable performance, thoughtful design, and practical value for homes and businesses in Nepal.",
+      "shortDescription": "Reliable usb-c braided cable for modern Nepali living.",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+      ],
+      "video": null,
+      "pricing": {
+        "regularPrice": 1200,
+        "salePrice": 890,
+        "currency": "NPR",
+        "discountPercentage": 26
+      },
+      "inventory": {
+        "sku": "SKU-61",
+        "barcode": "8900000058",
+        "quantity": 41,
+        "availableQuantity": 41,
+        "reservedQuantity": 0,
+        "lowStockThreshold": 5
+      },
+      "variants": [],
+      "attributes": {
+        "Category": "CAT-002",
+        "Brand": "Voltix",
+        "Warranty": "1 year seller warranty"
+      },
+      "shipping": {
+        "freeShipping": false,
+        "shippingFee": 150,
+        "estimatedDeliveryDays": "2-4 business days"
+      },
+      "returnPolicy": {
+        "returnable": true,
+        "returnDays": 7
+      },
+      "commission": {
+        "influencerPercentage": 2,
+        "affiliatePercentage": 3
+      },
+      "rating": {
+        "average": 4.8,
+        "count": 69
+      },
+      "soldCount": 136,
+      "viewCount": 1766,
+      "status": "rejected",
+      "createdAt": "2026-08-12T10:00:00Z",
+      "updatedAt": "2026-09-14T10:00:00Z"
+    }
+  ]
+}

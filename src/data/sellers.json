@@ -1,0 +1,340 @@
+{
+  "sellers": [
+    {
+      "id": "SEL-000001",
+      "userId": "USR-000003",
+      "vendorId": "VEN-000001",
+      "role": "super_seller",
+      "employee": {
+        "employeeCode": "EMP-001",
+        "designation": "Store Manager",
+        "joiningDate": "2026-09-28"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "add_sellers",
+        "remove_sellers",
+        "manage_seller_permissions",
+        "view_sales"
+      ],
+      "createdBy": "USR-000002",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000002",
+      "userId": "USR-000004",
+      "vendorId": "VEN-000001",
+      "role": "seller",
+      "employee": {
+        "employeeCode": "EMP-002",
+        "designation": "Sales Staff",
+        "joiningDate": "2026-09-28"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "process_orders",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000001",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000003",
+      "userId": "USR-000008",
+      "vendorId": "VEN-000001",
+      "role": "super_seller",
+      "employee": {
+        "employeeCode": "EMP-003",
+        "designation": "Store Manager",
+        "joiningDate": "2026-09-28"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "add_sellers",
+        "remove_sellers",
+        "manage_seller_permissions",
+        "view_sales"
+      ],
+      "createdBy": "USR-000002",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000004",
+      "userId": "USR-000010",
+      "vendorId": "VEN-000002",
+      "role": "super_seller",
+      "employee": {
+        "employeeCode": "EMP-5",
+        "designation": "Store Manager",
+        "joiningDate": "2026-08-10"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "add_sellers",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000004",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000005",
+      "userId": "USR-000011",
+      "vendorId": "VEN-000002",
+      "role": "seller",
+      "employee": {
+        "employeeCode": "EMP-6",
+        "designation": "Sales Associate",
+        "joiningDate": "2026-08-11"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "process_orders",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000005",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000006",
+      "userId": "USR-000012",
+      "vendorId": "VEN-000003",
+      "role": "super_seller",
+      "employee": {
+        "employeeCode": "EMP-7",
+        "designation": "Store Manager",
+        "joiningDate": "2026-06-10"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "add_sellers",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000006",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000007",
+      "userId": "USR-000013",
+      "vendorId": "VEN-000003",
+      "role": "seller",
+      "employee": {
+        "employeeCode": "EMP-8",
+        "designation": "Sales Associate",
+        "joiningDate": "2026-06-11"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "process_orders",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000007",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000008",
+      "userId": "USR-000014",
+      "vendorId": "VEN-000004",
+      "role": "super_seller",
+      "employee": {
+        "employeeCode": "EMP-9",
+        "designation": "Store Manager",
+        "joiningDate": "2026-07-10"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "add_sellers",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000008",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000009",
+      "userId": "USR-000015",
+      "vendorId": "VEN-000004",
+      "role": "seller",
+      "employee": {
+        "employeeCode": "EMP-10",
+        "designation": "Sales Associate",
+        "joiningDate": "2026-07-11"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "process_orders",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000009",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000010",
+      "userId": "USR-000016",
+      "vendorId": "VEN-000005",
+      "role": "super_seller",
+      "employee": {
+        "employeeCode": "EMP-11",
+        "designation": "Store Manager",
+        "joiningDate": "2026-08-10"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "add_sellers",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000010",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000011",
+      "userId": "USR-000017",
+      "vendorId": "VEN-000005",
+      "role": "seller",
+      "employee": {
+        "employeeCode": "EMP-12",
+        "designation": "Sales Associate",
+        "joiningDate": "2026-08-11"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "process_orders",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000011",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000012",
+      "userId": "USR-000018",
+      "vendorId": "VEN-000006",
+      "role": "super_seller",
+      "employee": {
+        "employeeCode": "EMP-13",
+        "designation": "Store Manager",
+        "joiningDate": "2026-06-10"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "add_sellers",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000012",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000013",
+      "userId": "USR-000019",
+      "vendorId": "VEN-000006",
+      "role": "seller",
+      "employee": {
+        "employeeCode": "EMP-14",
+        "designation": "Sales Associate",
+        "joiningDate": "2026-06-11"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "process_orders",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000013",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000014",
+      "userId": "USR-000020",
+      "vendorId": "VEN-000007",
+      "role": "super_seller",
+      "employee": {
+        "employeeCode": "EMP-15",
+        "designation": "Store Manager",
+        "joiningDate": "2026-07-10"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "add_sellers",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000014",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000015",
+      "userId": "USR-000021",
+      "vendorId": "VEN-000007",
+      "role": "seller",
+      "employee": {
+        "employeeCode": "EMP-16",
+        "designation": "Sales Associate",
+        "joiningDate": "2026-07-11"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "process_orders",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000015",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000016",
+      "userId": "USR-000022",
+      "vendorId": "VEN-000008",
+      "role": "super_seller",
+      "employee": {
+        "employeeCode": "EMP-17",
+        "designation": "Store Manager",
+        "joiningDate": "2026-08-10"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "add_sellers",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000016",
+      "status": "active"
+    },
+    {
+      "id": "SEL-000017",
+      "userId": "USR-000023",
+      "vendorId": "VEN-000008",
+      "role": "seller",
+      "employee": {
+        "employeeCode": "EMP-18",
+        "designation": "Sales Associate",
+        "joiningDate": "2026-08-11"
+      },
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "process_orders",
+        "view_sales"
+      ],
+      "createdBy": "SEL-000017",
+      "status": "active"
+    }
+  ]
+}

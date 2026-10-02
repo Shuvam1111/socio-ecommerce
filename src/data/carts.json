@@ -1,0 +1,1546 @@
+{
+  "carts": [
+    {
+      "id": "588f68c5-6885-4b25-a9e3-208fa77a8ae6",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T04:01:53.545Z"
+    },
+    {
+      "id": "a731801e-eb73-449d-8fec-a9b91018e627",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": "VAR-001"
+        }
+      ],
+      "updatedAt": "2026-10-01T04:23:19.663Z"
+    },
+    {
+      "id": "e6beb41e-4941-4cf6-a118-cafd5750252c",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T04:44:11.924Z"
+    },
+    {
+      "id": "e5d8d7ae-bb09-46f2-b85c-efcc02455b8d",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T04:44:14.403Z"
+    },
+    {
+      "id": "751079ec-8c7a-4f71-a592-11c8a3e0564b",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T04:44:14.481Z"
+    },
+    {
+      "id": "a751334a-6f15-4270-a3f9-8283382ac7e4",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": "VAR-001"
+        }
+      ],
+      "updatedAt": "2026-10-01T06:23:33.156Z"
+    },
+    {
+      "id": "291c510f-08e5-4fb1-a780-9ea442b52890",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": "VAR-001"
+        }
+      ],
+      "updatedAt": "2026-10-01T06:43:05.716Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "d44c611e-bcbd-4d51-88cb-1d53c436ac72",
+      "items": [],
+      "updatedAt": "2026-10-01T06:40:13.086Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "8cf3d4ae-97bc-4e9a-873f-f7850fff105c",
+      "items": [],
+      "updatedAt": "2026-10-01T06:40:17.897Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "034e6ffe-a9f1-4b47-bb33-60df1e6ed03f",
+      "items": [],
+      "updatedAt": "2026-10-01T06:40:17.956Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "593803c8-8f4a-4e13-866e-70e46e1f6df6",
+      "items": [],
+      "updatedAt": "2026-10-01T06:40:17.976Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "fabd0606-34f0-450b-ba83-1312e03452d3",
+      "items": [],
+      "updatedAt": "2026-10-01T06:40:35.859Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "62594b2b-db9c-45a8-b8da-d83646619be6",
+      "items": [],
+      "updatedAt": "2026-10-01T06:40:35.914Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "26d2f1b1-d7e2-4ba0-88f4-b327742fa11c",
+      "items": [],
+      "updatedAt": "2026-10-01T06:40:35.939Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "90deb1bf-269c-4f3f-879d-5a6bb982d719",
+      "items": [],
+      "updatedAt": "2026-10-01T06:40:36.991Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "56f0f0b2-891c-4df9-acf8-1385732aad9e",
+      "items": [],
+      "updatedAt": "2026-10-01T06:40:44.888Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "c34b0660-3def-409d-b3b1-badb739def32",
+      "items": [],
+      "updatedAt": "2026-10-01T06:41:03.638Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "070ca256-c82a-4833-8b82-65f7195af230",
+      "items": [],
+      "updatedAt": "2026-10-01T06:41:04.017Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "0979556e-8b89-4e82-9f73-63dcb72610ee",
+      "items": [],
+      "updatedAt": "2026-10-01T06:41:04.267Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b6eb3cb2-fc88-43de-8963-2965b3b0d40c",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T06:42:09.172Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "214285a2-474d-41c2-8a12-36d02d77cffb",
+      "items": [
+        {
+          "productId": "PROD-000002",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T06:42:13.204Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "3804112e-9c5f-431a-80ed-fd87ce2496da",
+      "items": [],
+      "updatedAt": "2026-10-01T06:42:20.823Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "d4d5ba7b-4758-4d0a-aa9f-57b6767c0c27",
+      "items": [],
+      "updatedAt": "2026-10-01T06:42:21.905Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "15fcaaca-2a86-4675-9763-16b32e377a28",
+      "items": [],
+      "updatedAt": "2026-10-01T06:42:30.038Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "137f6804-cf51-4e12-b5b1-9bc8a6983839",
+      "items": [],
+      "updatedAt": "2026-10-01T06:42:30.052Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "973813fe-9d7d-4945-b3b0-5c8c27a82a99",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T06:42:33.005Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "4c9f42b7-a3b8-4993-9f61-5eceef603189",
+      "items": [
+        {
+          "productId": "PROD-000002",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T06:42:36.381Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "726962ec-be27-439a-9e35-6f542bb755a0",
+      "items": [],
+      "updatedAt": "2026-10-01T06:42:40.864Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "d005e72b-68be-48bc-b6e8-d6b7e8bff79b",
+      "items": [],
+      "updatedAt": "2026-10-01T06:42:40.902Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "9534f246-65a2-47ed-b3de-3e1512feeaf0",
+      "items": [],
+      "updatedAt": "2026-10-01T06:42:52.107Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "68e6f85f-e474-4a50-9a68-d8072ed01dad",
+      "items": [],
+      "updatedAt": "2026-10-01T06:42:52.186Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "3e459b28-fd39-4f2f-bccc-c55be2a971dd",
+      "items": [],
+      "updatedAt": "2026-10-01T06:42:52.205Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "f110af8c-76c1-48e4-afdc-0fd324166dcc",
+      "items": [],
+      "updatedAt": "2026-10-01T06:42:52.389Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "1ed75b3d-25f9-4954-8278-0afd3c392d0e",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:05.154Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "2052ed50-70a4-4c0e-aeb7-b283dbb05a75",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:05.172Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "42f580b2-45c5-4a7a-b9ca-7491b09103df",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:05.377Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "69d416ee-d3e5-470d-8026-3bc86e46e116",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:05.743Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b03e9f1e-824a-4a84-9a08-22bcab039006",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:07.148Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "564c54b8-07d5-4ea8-98be-4ffdda4408b5",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:07.318Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b0e165ff-8614-4733-8e26-51547df4e6ae",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:14.425Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "643289f8-3555-43d6-9d58-1d1b39e175c6",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:14.448Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "f8711c84-3e26-48ac-b63a-c9a1ad3c3828",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:14.458Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "d661163c-ec78-4790-a531-fc3158153ead",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:14.490Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "02cc8ad9-929b-4233-80de-d32332d4bb59",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:15.140Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "67a58063-f497-4efc-b28a-55534d037d6d",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:15.206Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5442b02c-bfb5-4be7-ac03-daba324cd71a",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:16.997Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b1462dcf-0eef-48d3-a5c2-76edcdc15eda",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:22.309Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "117975e5-2423-4e50-822b-8ec9493bd733",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:35.826Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "6db7f54d-53a5-4538-94a1-5c11c6177db0",
+      "items": [],
+      "updatedAt": "2026-10-01T06:43:36.473Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "987ca7b0-bff2-4f04-bb37-49544d87f554",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:21.165Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "bcd77139-7be8-45b2-9830-e119198b89aa",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:21.185Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7fe0d207-348f-49f2-b4ca-43fa83b11c1a",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:21.213Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "3b4f6bd6-3f50-4946-8b06-e1d168134402",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:21.229Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "6f27ae83-03e1-4caa-b165-17c6654e97c6",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:21.483Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "a9ddf55b-8f22-45e9-acd6-559a073c5e1b",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:21.583Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "54b02cb7-4a1b-49f7-8e8a-741479adda6a",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T06:44:25.336Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "26310a8b-e270-4e4d-b232-670ac48d6ab7",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:30.066Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "0a303743-1d6e-4df1-8209-22ada7913554",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:30.251Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "6c7729fe-c7e1-43d4-98f1-c6e7c7826ca1",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:36.546Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "6bcc5e28-93c7-4e44-a626-2fa9792ca080",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:36.588Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "2795e8ff-7c15-45b1-9fff-6a186251c57f",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:36.831Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "2892d911-9996-4a1a-ba21-b2d648e75524",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:37.190Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "a50adc29-1928-4ec2-ae3e-2321bd5d3292",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:37.209Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "c12b9d60-eab7-440b-b182-e566361b9d68",
+      "items": [],
+      "updatedAt": "2026-10-01T06:44:45.214Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "4c1a9ee7-5926-416a-9250-9654a1619ecf",
+      "items": [],
+      "updatedAt": "2026-10-01T06:45:01.044Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "64ea5b19-9be2-4750-908c-5e7c130db57d",
+      "items": [],
+      "updatedAt": "2026-10-01T06:45:01.070Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "3a6a58c5-17b6-49e7-bf5b-68e3d8c7ddd0",
+      "items": [],
+      "updatedAt": "2026-10-01T06:45:01.373Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "059c4052-1b1b-45ea-88af-4f503ad09051",
+      "items": [],
+      "updatedAt": "2026-10-01T06:45:39.101Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "0b143d33-8088-4640-b07b-aaf01a71bbd8",
+      "items": [],
+      "updatedAt": "2026-10-01T06:45:39.137Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "805458e0-cf4b-4eb2-81f7-5fa51f264455",
+      "items": [],
+      "updatedAt": "2026-10-01T06:45:39.179Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "34a81287-fd44-4749-a066-c7b564e508f0",
+      "items": [],
+      "updatedAt": "2026-10-01T06:45:39.796Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "52e62370-c556-429a-b1cc-68cccc42254a",
+      "items": [],
+      "updatedAt": "2026-10-01T06:45:39.905Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "61db9cc9-b9dc-4597-98e3-be04802c8d21",
+      "items": [],
+      "updatedAt": "2026-10-01T06:50:55.475Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "20907c79-78c4-4403-bff0-e56ab2f28da8",
+      "items": [],
+      "updatedAt": "2026-10-01T06:50:55.500Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "079309f4-4192-4350-bcb9-72da15ac02ee",
+      "items": [],
+      "updatedAt": "2026-10-01T06:50:55.543Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "3ad9333a-2af5-4017-adbe-46a6bb81247b",
+      "items": [],
+      "updatedAt": "2026-10-01T06:50:56.035Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "52c9e71e-e041-4509-83e5-174a663bde3a",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T06:50:57.954Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "efe6b1af-fc0a-416d-a632-0b3ed6bbd4cf",
+      "items": [
+        {
+          "productId": "PROD-000002",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T06:51:00.668Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5daef3b7-d617-464d-ad66-62688b399689",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:05.278Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5a8bb983-84ef-4309-9712-e15237526b67",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:05.872Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "ef17e123-1655-4221-9945-3b81e01192a9",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:10.350Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5e46c138-4843-43e2-a2b6-a067a1e71d93",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:10.719Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "9df46b6d-31c5-4e3b-91b1-d3f2961bd36a",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:11.208Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "f8f6e838-1547-432f-a894-b80c757fc709",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:14.196Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b6f7ae48-5677-494e-b51d-de476af42a2f",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:14.577Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "3e159ed8-04be-4f84-8b19-3ff0588d4491",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 2,
+          "selectedVariantId": "VAR-001"
+        }
+      ],
+      "updatedAt": "2026-10-01T06:51:22.049Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "3b3a7764-56ff-44b9-b9ba-761d6e837d13",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:25.823Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "1e4856e7-ba5c-4a58-a903-384ed2703f4e",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:51.332Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "d5ed211f-9296-476d-b2f6-f01c0ac7b709",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:51.352Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "855d836a-87cc-4469-8de7-5588516e89c9",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:51.683Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7b5f27d8-b610-47a8-b1c0-fc52a00b384e",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:52.472Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7b2befe2-f06d-4b11-abef-f3036887c141",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:53.454Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b78e33f4-1f29-4a58-8d58-97af276cff69",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:53.536Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "e318c955-2fa8-4af9-9c51-ca525f504572",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:53.560Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "62d4f43e-26f0-41bf-a933-785b7333873a",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:53.704Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "18edf75d-df77-47af-ac9b-67dc71930124",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:54.034Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "02084ec3-08f0-4ff4-b8b2-f696d084fa0c",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:54.297Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b65e7c9a-20d4-41da-939e-16687a4b2394",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:54.321Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "87d011f8-7b1d-4464-a333-1370d0f6a6bb",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:54.535Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b14e3ebe-df39-4e15-8904-34176e20b27e",
+      "items": [],
+      "updatedAt": "2026-10-01T06:51:54.581Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "592c9004-542b-45ab-8aa6-ae80daf839ac",
+      "items": [],
+      "updatedAt": "2026-10-01T11:50:56.840Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "4e630d03-f5d9-4024-8990-2fcbb60a5f86",
+      "items": [],
+      "updatedAt": "2026-10-01T11:50:56.867Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "89203a89-8b84-48c5-b270-af41fd5b57fc",
+      "items": [],
+      "updatedAt": "2026-10-01T11:50:56.901Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "4f1582b3-3d5f-4a64-aa9c-410c3558c87d",
+      "items": [],
+      "updatedAt": "2026-10-01T11:50:57.515Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "40b1594f-ee52-4edd-a95f-b928fcc0f100",
+      "items": [],
+      "updatedAt": "2026-10-01T11:50:57.620Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5d0d286e-79fd-4f12-a8f4-45ad3b51871f",
+      "items": [],
+      "updatedAt": "2026-10-01T11:50:58.034Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "f81b2c0e-8cf8-43e8-b19d-7732a63b9c16",
+      "items": [],
+      "updatedAt": "2026-10-01T11:50:58.107Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "633cab74-c02f-403e-a6ce-86d3caf23742",
+      "items": [],
+      "updatedAt": "2026-10-01T11:50:58.170Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "450b0013-fcf9-4710-a496-7299fc909783",
+      "items": [],
+      "updatedAt": "2026-10-01T11:50:58.187Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "efdb2b27-2ed0-4e65-872e-739a8deebcd8",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:05.012Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "4df34a2c-10d8-4cb6-a57f-3629af43a7d5",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:05.033Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "e8b92d5a-725e-422a-b11c-e93556a8f575",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:05.744Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "47de4cc4-4035-4f6d-8554-5350e96b57b6",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:05.955Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b579880f-53ea-46c9-8b72-08b8a80d9fa8",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:06.036Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "dec3bfda-9264-4a7f-939f-6536780e9a23",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:06.238Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "e6700a7d-89e4-4f24-98f6-3925cc4f7dfd",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:06.317Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "df163f3b-da2e-43bf-8ee4-dbc546bcfdc5",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:06.367Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "97c693ab-4c89-4a99-8b06-5aed70fc1447",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:06.603Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "40b98faa-93c9-4c91-a416-3b0f81815033",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:09.889Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "669a15bf-6f55-4d39-b5c8-d97520f82235",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:09.931Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "f2b0436d-aeec-4472-b496-5acaffcb40ea",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:19.078Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "64103791-39f2-4739-bb2b-d715eba41aa9",
+      "items": [],
+      "updatedAt": "2026-10-01T11:51:19.221Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "209ae4dc-428f-4a84-8bf2-0bedec6057dc",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:05.519Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "12fd4efc-dae5-46e5-a6db-b83ad0a73358",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:05.538Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "e4f20c91-b77d-47ec-bbfb-260f618819ff",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:06.570Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5b1a8bc7-a9ac-49aa-8b2a-134fa3f4c7e9",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:06.724Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "c4f87ff2-d6b8-42df-aa2b-e652a08b22d1",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:06.833Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "a22f377a-95c7-424d-827c-246961a37434",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:06.935Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "d9299342-92b4-4dae-a915-a6fcacbd4867",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:07.219Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "35ed2805-e8ea-4cb7-b965-595428132d87",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:07.254Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "364b09ef-7eb5-4a65-a324-bf702df329e6",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:07.697Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "1ebfc200-1267-4d1f-9d86-6bf7f8f70085",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:15.559Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b431c905-0b3b-4a24-9bfb-3a74cfc3e280",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:15.604Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "4cdf1ffa-c063-4f42-84e8-4528c9e601aa",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:24.057Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "ee6d5145-7c3e-4591-8309-f40a8157e170",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:24.084Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "ad8c0b26-00ce-4982-981f-6ebe2d175290",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:39.915Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "ee5ddcfe-f87f-4e83-b7e1-0d6cb75b4f98",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:39.949Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "37bf89c8-f76e-4b1a-a781-f565151bbdf1",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:40.164Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "03b0e426-9c6e-4108-aebc-1bd341e6a106",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:44.023Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "ca792cd1-dfea-4ca2-a8d3-b4e6a2bd6ed7",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:44.078Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "f9350894-5c50-4777-a99a-860847187d87",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:47.122Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b773f9fb-c76c-429e-b68c-d97a0313c24e",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:47.178Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "49a42b06-6782-499b-b610-1b4bf374b8f6",
+      "items": [],
+      "updatedAt": "2026-10-01T11:54:52.317Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "6e9b70f6-b0d7-4d45-af52-58e9e685a578",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:07.952Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "0debf7d5-1c41-4c1a-b7df-d7baad2506b0",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:08.070Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "e07bb7fa-056b-42f3-a890-d7997a7ffd30",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:08.122Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "ed601947-26f4-4bf8-8e13-404ad707c857",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:08.496Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "efa877ac-68a2-4334-a645-5a8159a67548",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:08.561Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "eb2c7333-e4a7-47e4-bdb8-b45d351a877b",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:08.628Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "0c226dc0-a376-4669-b7f9-3b8468363210",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:09.009Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "6610d6fc-0e43-4b16-adac-64d835ac4a75",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:09.035Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "8f158677-345f-4a59-8090-a542755a7828",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T11:57:09.097Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "56ea65b0-6ce9-4089-9372-1b2601f8271b",
+      "items": [
+        {
+          "productId": "PROD-000002",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T11:57:13.269Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "6ed64053-bacd-41e9-9781-52c888c81303",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:16.519Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5926aa60-11d6-45f1-b530-16733ad96abf",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:16.715Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "cd8a9b54-1ccb-46cb-9929-9aae442e1244",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:24.114Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "e1c3234e-d71b-40a7-9fc5-878b7bc6a35b",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:24.205Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "c9356bc3-d185-4b89-b85a-6d7ba5da7c2f",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:24.270Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "37eb99cf-19e0-4cfd-855f-82087fa2ae20",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:24.293Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5ac428e4-49b9-4f0b-bd73-1526ac605ea4",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:24.528Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "42d315f1-e711-474a-97f6-0163b5a45b05",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:24.564Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "9e7d0230-6c3a-4ffb-bf19-86c553e0e77c",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:25.251Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "3624650c-d878-4887-9f25-dac1a0abd8a5",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:25.288Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "20354e5f-bfeb-4d1e-93ac-a4bbb688435c",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:25.337Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "44c88dfd-1c39-41c7-b8c0-5e920e6fa155",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:25.492Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "936dcfbc-4475-4d64-b747-51358fb4733a",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:28.805Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "061334b4-75c0-4d5d-aaf8-d1c282e54c24",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:28.831Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "427c35e9-2366-4131-a3ce-4f223efc4c5b",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": "VAR-001"
+        }
+      ],
+      "updatedAt": "2026-10-01T11:57:32.899Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7d053dca-c174-4fff-8f7c-dfd6a970ba5d",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": "VAR-001"
+        }
+      ],
+      "updatedAt": "2026-10-01T11:57:39.216Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5ae7b7ae-83c7-4ab8-8730-d6214bc3dec0",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:44.431Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "dc39630d-673a-4226-a61a-da507fb7da95",
+      "items": [],
+      "updatedAt": "2026-10-01T11:57:44.670Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "a0b80b06-735b-4eb3-a175-ab26629b630e",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T11:59:39.788Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "64ce407d-f1f6-4b52-af3b-f03a0fe33ad8",
+      "items": [],
+      "updatedAt": "2026-10-01T12:00:01.614Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "6b0fadb5-551a-45c8-9319-2cd5b00df733",
+      "items": [],
+      "updatedAt": "2026-10-01T12:00:01.994Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "1144bb95-94d0-418b-83c1-14c82133daf9",
+      "items": [],
+      "updatedAt": "2026-10-01T12:00:02.028Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "ac05e478-5ec3-460f-a925-74210de7f824",
+      "items": [],
+      "updatedAt": "2026-10-01T12:00:06.065Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "05aad4e8-d9a9-41ac-848e-faa24612a3a2",
+      "items": [],
+      "updatedAt": "2026-10-01T12:00:06.103Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7a5a722b-3f5d-4374-9285-0971d8d09e68",
+      "items": [],
+      "updatedAt": "2026-10-01T12:00:07.295Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7b0f3d05-9966-44bf-bc17-7823742c551e",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:20.927Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "43b74541-8da0-4cd4-8f0d-aa00d2e858d9",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:22.213Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "53a5055d-04a4-4f5e-8307-1e34aebd8d3b",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:22.308Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "cf4b3ba6-e272-4c41-bc1a-799ba40b9b93",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:22.401Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "9b776179-fb8d-4514-a311-1584e9ff85a0",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:22.468Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5ef22053-b9ca-4696-a64e-a4174194ee1e",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:22.518Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "788da068-9a1b-4e80-8b3c-01cfe6739d2f",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:22.764Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7fabe51d-e438-41a4-9cd0-77c3e5e1f5f6",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T12:02:24.252Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "44c2bbce-ae90-401d-8376-343b15b86456",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:30.469Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "cf996da3-fba4-4fd4-816d-15af347bae9a",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:38.178Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "f1c85acd-9d0b-41c4-a15d-95104a19aee5",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:38.292Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "280df35f-27b7-46e0-9548-63171fbede26",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:38.489Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "3738f100-282f-4ba1-8606-27147b901ea1",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:38.554Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "9aa1c0c6-a0f7-4009-a034-bb575da6e40b",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:38.602Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "eeecb49c-eeee-4d71-b83f-91412dc2289b",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:39.373Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "644f4448-8bbf-4974-848b-f67ba6eee8b9",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:41.096Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "b4c99689-3fc3-4ab8-9dce-e7f3987a7cd4",
+      "items": [],
+      "updatedAt": "2026-10-01T12:02:41.129Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "1f0160d2-3405-404d-a301-d188a6dd985a",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": "VAR-001"
+        }
+      ],
+      "updatedAt": "2026-10-01T12:02:57.665Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "df8c8414-9b92-4f5b-9af6-92c052e8417e",
+      "items": [],
+      "updatedAt": "2026-10-01T12:03:17.343Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5b0baf42-da9f-4ec1-86fa-2d0cd967bc84",
+      "items": [],
+      "updatedAt": "2026-10-01T12:03:17.359Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "d349e198-cdcb-401b-86c4-879719d69617",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:11.128Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "48b4e80d-cc7f-4fbd-be57-707827d6b514",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:11.161Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7cca6bc4-5f04-4203-ac1a-4aabf59be985",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:11.800Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "1ff8c0ac-294b-401c-b7e0-5e5431169662",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:19.973Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "a6f77c33-3f85-46ae-a0f6-09b59d0bdbc8",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:20.156Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "08957511-00e4-46ea-9f7f-1a90fac28060",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:20.202Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "02595de9-fb33-4375-83d2-83e41d17b6c1",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:20.524Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "6879e31b-23d9-4523-b49b-ac2aea5e8fc7",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:20.563Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5116d338-9677-4d4b-8f99-ef4148b599a8",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:21.028Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5bf27412-e1d6-4d8c-bb1e-51def86c589e",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:21.087Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "3567d24b-9c44-4775-8457-d7b290ab3adf",
+      "items": [],
+      "updatedAt": "2026-10-01T12:05:21.134Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "166874be-9f19-4b09-8b40-4e6176093137",
+      "items": [
+        {
+          "productId": "PROD-000002",
+          "quantity": 1,
+          "selectedVariantId": null
+        }
+      ],
+      "updatedAt": "2026-10-01T12:05:54.783Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "5b34a993-0699-44b1-8141-f0a54349ef55",
+      "items": [],
+      "updatedAt": "2026-10-01T12:06:00.206Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "d07af635-4d08-4b17-acff-5f3355c4d96a",
+      "items": [],
+      "updatedAt": "2026-10-01T12:06:00.228Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "9dc44dc8-6bc5-4a74-b68d-026596ce2a71",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:24.337Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "0eba141c-b168-4508-8818-b6644df91964",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:24.360Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "f358e3eb-c59e-44d4-8dd8-17689011d138",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:24.931Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "bb098e44-3628-49df-ad07-2342bd999ec8",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:24.998Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "4bf56c32-95ac-4c21-bd1c-a46818369126",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:25.488Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "1304ecf9-07bc-41e2-8677-044b3a7918e8",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:25.576Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "a12d9688-5dce-4b9a-b11e-d3467e3c4cf9",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:25.643Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "e70ffdae-8166-460a-bb8c-e8053d0aa447",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:25.722Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7b73042e-438b-492f-9322-6e0794d2cf1e",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:25.753Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "1f85edb8-7dcf-4791-bf34-2d2b8cb6045c",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:28.987Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "420f4648-3040-47b1-88a0-6532f45338aa",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:29.130Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "c61afb89-facf-4c41-9fa9-6c57fc4b85e7",
+      "items": [
+        {
+          "productId": "PROD-000001",
+          "quantity": 1,
+          "selectedVariantId": "VAR-001"
+        }
+      ],
+      "updatedAt": "2026-10-01T12:08:34.365Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7df761e1-fde8-4b7d-beb6-942d144bd790",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:39.919Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "723ecfd7-db40-4de6-9be3-0d808acf5d13",
+      "items": [],
+      "updatedAt": "2026-10-01T12:08:39.932Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "370f76d3-7702-48ce-bcc2-0412847c288a",
+      "items": [],
+      "updatedAt": "2026-10-01T12:10:31.617Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "c943d0be-49d4-426a-88a0-8377c5d11afd",
+      "items": [],
+      "updatedAt": "2026-10-01T12:10:32.742Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "196ab21a-62cc-4d60-8f1f-1af5965b49cf",
+      "items": [],
+      "updatedAt": "2026-10-01T12:10:32.817Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "8fe6d7f6-6ff7-4a75-8b79-78033e67369a",
+      "items": [],
+      "updatedAt": "2026-10-01T12:10:32.882Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "7fba6573-b564-4cfd-9f6c-e03647783687",
+      "items": [],
+      "updatedAt": "2026-10-01T12:10:32.924Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "9f27ff00-e004-47e4-a8bf-c2d15dde6e5d",
+      "items": [],
+      "updatedAt": "2026-10-01T12:10:32.980Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "085bafea-2090-422b-98fa-21d765fb6337",
+      "items": [],
+      "updatedAt": "2026-10-01T12:10:33.894Z",
+      "ownerId": "USR-000005"
+    },
+    {
+      "id": "a6457e9c-9879-4ec4-bd5c-fc61d5b006c0",
+      "items": [],
+      "updatedAt": "2026-10-01T12:10:33.913Z",
+      "ownerId": "USR-000005"
+    }
+  ]
+}

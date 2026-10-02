@@ -1,0 +1,460 @@
+{
+  "vendors": [
+    {
+      "id": "VEN-000001",
+      "ownerUserId": "USR-000002",
+      "store": {
+        "name": "Ram Electronics",
+        "slug": "ram-electronics",
+        "description": "Mobile phones, laptops and electronic accessories.",
+        "logo": "/images/vendors/ram-electronics/logo.png",
+        "coverImage": "/images/vendors/ram-electronics/cover.jpg"
+      },
+      "business": {
+        "businessType": "Individual",
+        "legalName": "Ram Electronics Pvt. Ltd.",
+        "registrationNumber": "REG-123456",
+        "panNumber": "PAN-987654321",
+        "vatRegistered": true
+      },
+      "contact": {
+        "email": "ramstore@example.com",
+        "phone": "9811111111",
+        "alternatePhone": "9801111111"
+      },
+      "address": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "New Road",
+        "postalCode": "44600"
+      },
+      "pickupAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "New Road"
+      },
+      "returnAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "New Road"
+      },
+      "documents": {
+        "businessRegistration": "/documents/vendors/VEN-000001/business-registration.pdf",
+        "panDocument": "/documents/vendors/VEN-000001/pan.pdf",
+        "ownerIdentity": "/documents/vendors/VEN-000001/identity.pdf"
+      },
+      "bankAccount": {
+        "bankName": "Global IME Bank",
+        "accountName": "Ram Electronics Pvt. Ltd.",
+        "accountNumber": "1234567890",
+        "verified": true
+      },
+      "superSellerId": "SEL-000003",
+      "status": "approved",
+      "createdAt": "2026-09-28T10:05:00Z",
+      "approvedAt": "2026-09-28T07:58:38.189Z"
+    },
+    {
+      "id": "VEN-000002",
+      "ownerUserId": "USR-000010",
+      "store": {
+        "name": "Urban Living Store",
+        "slug": "urban-living-store",
+        "description": "Curated urban living store products from trusted Nepali sellers.",
+        "logo": "/images/vendors/vendor-2/logo.png",
+        "coverImage": "/images/vendors/vendor-2/cover.jpg"
+      },
+      "business": {
+        "businessType": "Private",
+        "legalName": "Urban Living Store Pvt. Ltd.",
+        "registrationNumber": "REG-100002",
+        "panNumber": "PAN-900000002",
+        "vatRegistered": true
+      },
+      "contact": {
+        "email": "hello2@demo.sociocommerce.test",
+        "phone": "9811000002",
+        "alternatePhone": "9801000002"
+      },
+      "address": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 2",
+        "postalCode": "44600"
+      },
+      "pickupAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 2"
+      },
+      "returnAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 2"
+      },
+      "documents": {
+        "businessRegistration": "/documents/vendors/VEN-000002/registration.pdf",
+        "panDocument": "/documents/vendors/VEN-000002/pan.pdf",
+        "ownerIdentity": "/documents/vendors/VEN-000002/identity.pdf"
+      },
+      "bankAccount": {
+        "bankName": "Nabil Bank",
+        "accountName": "Urban Living Store Pvt. Ltd.",
+        "accountNumber": "9810000002",
+        "verified": true
+      },
+      "superSellerId": "SEL-000005",
+      "status": "approved",
+      "createdAt": "2026-06-08T10:00:00Z",
+      "approvedAt": "2026-06-12T10:00:00Z"
+    },
+    {
+      "id": "VEN-000003",
+      "ownerUserId": "USR-000011",
+      "store": {
+        "name": "Camera Corner Nepal",
+        "slug": "camera-corner-nepal",
+        "description": "Curated camera corner nepal products from trusted Nepali sellers.",
+        "logo": "/images/vendors/vendor-3/logo.png",
+        "coverImage": "/images/vendors/vendor-3/cover.jpg"
+      },
+      "business": {
+        "businessType": "Private",
+        "legalName": "Camera Corner Nepal Pvt. Ltd.",
+        "registrationNumber": "REG-100003",
+        "panNumber": "PAN-900000003",
+        "vatRegistered": true
+      },
+      "contact": {
+        "email": "hello3@demo.sociocommerce.test",
+        "phone": "9811000003",
+        "alternatePhone": "9801000003"
+      },
+      "address": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 3",
+        "postalCode": "44600"
+      },
+      "pickupAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 3"
+      },
+      "returnAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 3"
+      },
+      "documents": {
+        "businessRegistration": "/documents/vendors/VEN-000003/registration.pdf",
+        "panDocument": "/documents/vendors/VEN-000003/pan.pdf",
+        "ownerIdentity": "/documents/vendors/VEN-000003/identity.pdf"
+      },
+      "bankAccount": {
+        "bankName": "Nabil Bank",
+        "accountName": "Camera Corner Nepal Pvt. Ltd.",
+        "accountNumber": "9810000003",
+        "verified": true
+      },
+      "superSellerId": "SEL-000006",
+      "status": "approved",
+      "createdAt": "2026-07-08T10:00:00Z",
+      "approvedAt": "2026-07-12T10:00:00Z"
+    },
+    {
+      "id": "VEN-000004",
+      "ownerUserId": "USR-000012",
+      "store": {
+        "name": "Sports Arena",
+        "slug": "sports-arena",
+        "description": "Curated sports arena products from trusted Nepali sellers.",
+        "logo": "/images/vendors/vendor-4/logo.png",
+        "coverImage": "/images/vendors/vendor-4/cover.jpg"
+      },
+      "business": {
+        "businessType": "Private",
+        "legalName": "Sports Arena Pvt. Ltd.",
+        "registrationNumber": "REG-100004",
+        "panNumber": "PAN-900000004",
+        "vatRegistered": true
+      },
+      "contact": {
+        "email": "hello4@demo.sociocommerce.test",
+        "phone": "9811000004",
+        "alternatePhone": "9801000004"
+      },
+      "address": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 4",
+        "postalCode": "44600"
+      },
+      "pickupAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 4"
+      },
+      "returnAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 4"
+      },
+      "documents": {
+        "businessRegistration": "/documents/vendors/VEN-000004/registration.pdf",
+        "panDocument": "/documents/vendors/VEN-000004/pan.pdf",
+        "ownerIdentity": "/documents/vendors/VEN-000004/identity.pdf"
+      },
+      "bankAccount": {
+        "bankName": "Nabil Bank",
+        "accountName": "Sports Arena Pvt. Ltd.",
+        "accountNumber": "9810000004",
+        "verified": true
+      },
+      "superSellerId": "SEL-000007",
+      "status": "approved",
+      "createdAt": "2026-08-08T10:00:00Z",
+      "approvedAt": "2026-08-12T10:00:00Z"
+    },
+    {
+      "id": "VEN-000005",
+      "ownerUserId": "USR-000013",
+      "store": {
+        "name": "Event Essentials",
+        "slug": "event-essentials",
+        "description": "Curated event essentials products from trusted Nepali sellers.",
+        "logo": "/images/vendors/vendor-5/logo.png",
+        "coverImage": "/images/vendors/vendor-5/cover.jpg"
+      },
+      "business": {
+        "businessType": "Private",
+        "legalName": "Event Essentials Pvt. Ltd.",
+        "registrationNumber": "REG-100005",
+        "panNumber": "PAN-900000005",
+        "vatRegistered": true
+      },
+      "contact": {
+        "email": "hello5@demo.sociocommerce.test",
+        "phone": "9811000005",
+        "alternatePhone": "9801000005"
+      },
+      "address": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 5",
+        "postalCode": "44600"
+      },
+      "pickupAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 5"
+      },
+      "returnAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 5"
+      },
+      "documents": {
+        "businessRegistration": "/documents/vendors/VEN-000005/registration.pdf",
+        "panDocument": "/documents/vendors/VEN-000005/pan.pdf",
+        "ownerIdentity": "/documents/vendors/VEN-000005/identity.pdf"
+      },
+      "bankAccount": {
+        "bankName": "Nabil Bank",
+        "accountName": "Event Essentials Pvt. Ltd.",
+        "accountNumber": "9810000005",
+        "verified": true
+      },
+      "superSellerId": "SEL-000008",
+      "status": "approved",
+      "createdAt": "2026-09-08T10:00:00Z",
+      "approvedAt": "2026-09-12T10:00:00Z"
+    },
+    {
+      "id": "VEN-000006",
+      "ownerUserId": "USR-000014",
+      "store": {
+        "name": "Smart Home Nepal",
+        "slug": "smart-home-nepal",
+        "description": "Curated smart home nepal products from trusted Nepali sellers.",
+        "logo": "/images/vendors/vendor-6/logo.png",
+        "coverImage": "/images/vendors/vendor-6/cover.jpg"
+      },
+      "business": {
+        "businessType": "Private",
+        "legalName": "Smart Home Nepal Pvt. Ltd.",
+        "registrationNumber": "REG-100006",
+        "panNumber": "PAN-900000006",
+        "vatRegistered": true
+      },
+      "contact": {
+        "email": "hello6@demo.sociocommerce.test",
+        "phone": "9811000006",
+        "alternatePhone": "9801000006"
+      },
+      "address": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 6",
+        "postalCode": "44600"
+      },
+      "pickupAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 6"
+      },
+      "returnAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 6"
+      },
+      "documents": {
+        "businessRegistration": "/documents/vendors/VEN-000006/registration.pdf",
+        "panDocument": "/documents/vendors/VEN-000006/pan.pdf",
+        "ownerIdentity": "/documents/vendors/VEN-000006/identity.pdf"
+      },
+      "bankAccount": {
+        "bankName": "Nabil Bank",
+        "accountName": "Smart Home Nepal Pvt. Ltd.",
+        "accountNumber": "9810000006",
+        "verified": true
+      },
+      "superSellerId": "SEL-000009",
+      "status": "approved",
+      "createdAt": "2026-10-08T10:00:00Z",
+      "approvedAt": "2026-10-12T10:00:00Z"
+    },
+    {
+      "id": "VEN-000007",
+      "ownerUserId": "USR-000015",
+      "store": {
+        "name": "Fashion Avenue",
+        "slug": "fashion-avenue",
+        "description": "Curated fashion avenue products from trusted Nepali sellers.",
+        "logo": "/images/vendors/vendor-7/logo.png",
+        "coverImage": "/images/vendors/vendor-7/cover.jpg"
+      },
+      "business": {
+        "businessType": "Private",
+        "legalName": "Fashion Avenue Pvt. Ltd.",
+        "registrationNumber": "REG-100007",
+        "panNumber": "PAN-900000007",
+        "vatRegistered": true
+      },
+      "contact": {
+        "email": "hello7@demo.sociocommerce.test",
+        "phone": "9811000007",
+        "alternatePhone": "9801000007"
+      },
+      "address": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 7",
+        "postalCode": "44600"
+      },
+      "pickupAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 7"
+      },
+      "returnAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 7"
+      },
+      "documents": {
+        "businessRegistration": "/documents/vendors/VEN-000007/registration.pdf",
+        "panDocument": "/documents/vendors/VEN-000007/pan.pdf",
+        "ownerIdentity": "/documents/vendors/VEN-000007/identity.pdf"
+      },
+      "bankAccount": {
+        "bankName": "Nabil Bank",
+        "accountName": "Fashion Avenue Pvt. Ltd.",
+        "accountNumber": "9810000007",
+        "verified": true
+      },
+      "superSellerId": "SEL-000010",
+      "status": "pending",
+      "createdAt": "2026-11-08T10:00:00Z",
+      "approvedAt": null
+    },
+    {
+      "id": "VEN-000008",
+      "ownerUserId": "USR-000016",
+      "store": {
+        "name": "Book World Nepal",
+        "slug": "book-world-nepal",
+        "description": "Curated book world nepal products from trusted Nepali sellers.",
+        "logo": "/images/vendors/vendor-8/logo.png",
+        "coverImage": "/images/vendors/vendor-8/cover.jpg"
+      },
+      "business": {
+        "businessType": "Private",
+        "legalName": "Book World Nepal Pvt. Ltd.",
+        "registrationNumber": "REG-100008",
+        "panNumber": "PAN-900000008",
+        "vatRegistered": true
+      },
+      "contact": {
+        "email": "hello8@demo.sociocommerce.test",
+        "phone": "9811000008",
+        "alternatePhone": "9801000008"
+      },
+      "address": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 8",
+        "postalCode": "44600"
+      },
+      "pickupAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 8"
+      },
+      "returnAddress": {
+        "province": "Bagmati",
+        "district": "Kathmandu",
+        "city": "Kathmandu",
+        "street": "Market Lane 8"
+      },
+      "documents": {
+        "businessRegistration": "/documents/vendors/VEN-000008/registration.pdf",
+        "panDocument": "/documents/vendors/VEN-000008/pan.pdf",
+        "ownerIdentity": "/documents/vendors/VEN-000008/identity.pdf"
+      },
+      "bankAccount": {
+        "bankName": "Nabil Bank",
+        "accountName": "Book World Nepal Pvt. Ltd.",
+        "accountNumber": "9810000008",
+        "verified": true
+      },
+      "superSellerId": "SEL-000011",
+      "status": "approved",
+      "createdAt": "2026-12-08T10:00:00Z",
+      "approvedAt": "2026-12-12T10:00:00Z"
+    }
+  ]
+}

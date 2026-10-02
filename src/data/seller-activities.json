@@ -1,0 +1,79 @@
+{
+  "activities": [
+    {
+      "id": "ACT-000001",
+
+      "sellerId": "SEL-000002",
+      "vendorId": "VEN-000001",
+
+      "action": "ORDER_STATUS_CHANGED",
+
+      "entityType": "order",
+      "entityId": "ORD-000003",
+
+      "details": {
+        "from": "paid",
+        "to": "processing"
+      },
+
+      "createdAt": "2026-09-28T11:15:00Z"
+    },
+
+    {
+      "id": "ACT-000002",
+
+      "sellerId": "SEL-000002",
+      "vendorId": "VEN-000001",
+
+      "action": "ORDER_STATUS_CHANGED",
+
+      "entityType": "order",
+      "entityId": "ORD-000003",
+
+      "details": {
+        "from": "processing",
+        "to": "ready_to_deliver"
+      },
+
+      "createdAt": "2026-09-28T13:00:00Z"
+    },
+
+    {
+      "id": "ACT-000003",
+
+      "sellerId": "SEL-000002",
+      "vendorId": "VEN-000001",
+
+      "action": "ORDER_STATUS_CHANGED",
+
+      "entityType": "order",
+      "entityId": "ORD-000003",
+
+      "details": {
+        "from": "ready_to_deliver",
+        "to": "out_for_delivery"
+      },
+
+      "createdAt": "2026-09-28T14:00:00Z"
+    },
+
+    {
+      "id": "ACT-000004",
+
+      "sellerId": "SEL-000002",
+      "vendorId": "VEN-000001",
+
+      "action": "ORDER_STATUS_CHANGED",
+
+      "entityType": "order",
+      "entityId": "ORD-000003",
+
+      "details": {
+        "from": "out_for_delivery",
+        "to": "delivered"
+      },
+
+      "createdAt": "2026-09-28T16:00:00Z"
+    }
+  ]
+}

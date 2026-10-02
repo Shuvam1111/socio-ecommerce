@@ -1,0 +1,44 @@
+{
+  "socialShares": [
+    {
+      "id": "SHARE-000001",
+      "userId": "USR-000006",
+      "productId": "PROD-000001",
+      "reviewId": "REV-000001",
+      "platform": "facebook",
+      "trackingCode": "USR000006-PROD000001-A8F2",
+      "trackingUrl": "/go/USR000006-PROD000001-A8F2",
+      "externalUrl": "https://www.facebook.com/example",
+      "metrics": {
+        "views": 2500,
+        "clicks": 350,
+        "uniqueClicks": 280,
+        "orders": 12,
+        "completedOrders": 10,
+        "salesAmount": 549990
+      },
+      "status": "active",
+      "createdAt": "2026-09-28T11:20:00Z"
+    },
+    {
+      "id": "SHARE-000002",
+      "userId": "USR-000006",
+      "productId": "PROD-000002",
+      "reviewId": null,
+      "platform": "instagram",
+      "trackingCode": "USR000006-PROD000002-B7K4",
+      "trackingUrl": "/go/USR000006-PROD000002-B7K4",
+      "externalUrl": "https://www.instagram.com/example",
+      "metrics": {
+        "views": 1800,
+        "clicks": 220,
+        "uniqueClicks": 190,
+        "orders": 7,
+        "completedOrders": 6,
+        "salesAmount": 149940
+      },
+      "status": "active",
+      "createdAt": "2026-09-28T11:30:00Z"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "platformName": "Social Commerce",
+  "marketplaceEnabled": true,
+  "maintenanceMode": false,
+  "allowBuyerRegistration": true,
+  "allowSellerRegistration": true,
+  "allowProductSubmission": true
+}

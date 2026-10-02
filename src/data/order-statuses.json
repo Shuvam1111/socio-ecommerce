@@ -1,0 +1,79 @@
+{
+  "orderStatuses": [
+    {
+      "id": "pending_payment",
+      "label": "Pending Payment",
+      "description": "Waiting for the buyer's payment.",
+      "sellerAction": false
+    },
+    {
+      "id": "paid",
+      "label": "Paid",
+      "description": "Payment has been successfully received.",
+      "sellerAction": true,
+      "nextStatuses": [
+        "processing",
+        "cancelled"
+      ]
+    },
+    {
+      "id": "processing",
+      "label": "Processing",
+      "description": "Seller is preparing the order.",
+      "sellerAction": true,
+      "nextStatuses": [
+        "ready_to_deliver",
+        "cancelled"
+      ]
+    },
+    {
+      "id": "ready_to_deliver",
+      "label": "Ready to Deliver",
+      "description": "Order is prepared and ready for delivery.",
+      "sellerAction": true,
+      "nextStatuses": [
+        "out_for_delivery"
+      ]
+    },
+    {
+      "id": "out_for_delivery",
+      "label": "Out for Delivery",
+      "description": "Order has been handed over for delivery.",
+      "sellerAction": true,
+      "nextStatuses": [
+        "delivered"
+      ]
+    },
+    {
+      "id": "delivered",
+      "label": "Delivered",
+      "description": "Buyer has received the order.",
+      "sellerAction": false,
+      "nextStatuses": [
+        "refund_requested"
+      ]
+    },
+    {
+      "id": "cancelled",
+      "label": "Cancelled",
+      "description": "Order was cancelled.",
+      "sellerAction": false
+    },
+    {
+      "id": "refund_requested",
+      "label": "Refund Requested",
+      "description": "Buyer has requested a refund.",
+      "sellerAction": true,
+      "nextStatuses": [
+        "refunded",
+        "delivered"
+      ]
+    },
+    {
+      "id": "refunded",
+      "label": "Refunded",
+      "description": "Payment has been refunded.",
+      "sellerAction": false
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "roles": [
+    {
+      "id": "admin",
+      "name": "Admin",
+      "description": "Platform administrator",
+      "permissions": [
+        "manage_users",
+        "manage_vendors",
+        "approve_vendors",
+        "manage_categories",
+        "manage_products",
+        "approve_products",
+        "manage_orders",
+        "manage_reports",
+        "manage_settings"
+      ]
+    },
+    {
+      "id": "vendor",
+      "name": "Vendor",
+      "description": "Business owner operating a store",
+      "permissions": [
+        "manage_store",
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "manage_sellers",
+        "view_sales",
+        "view_reports"
+      ]
+    },
+    {
+      "id": "super_seller",
+      "name": "Super Seller",
+      "description": "Primary seller automatically created for a vendor",
+      "permissions": [
+        "manage_products",
+        "manage_inventory",
+        "manage_orders",
+        "add_sellers",
+        "remove_sellers",
+        "manage_seller_permissions",
+        "view_sales"
+      ]
+    },
+    {
+      "id": "seller",
+      "name": "Seller",
+      "description": "Seller or employee working under a vendor",
+      "permissions": ["manage_products", "manage_inventory", "process_orders", "view_sales"]
+    },
+    {
+      "id": "buyer",
+      "name": "Buyer",
+      "description": "Customer who purchases products",
+      "permissions": [
+        "browse_products",
+        "purchase_products",
+        "write_reviews",
+        "share_products",
+        "create_content"
+      ]
+    },
+    {
+      "id": "influencer",
+      "name": "Influencer",
+      "description": "Buyer promoted based on social influence",
+      "permissions": [
+        "promote_products",
+        "create_content",
+        "share_products",
+        "generate_referral_links",
+        "earn_commission"
+      ]
+    },
+    {
+      "id": "affiliate_marketer",
+      "name": "Affiliate Marketer",
+      "description": "User who promotes products through tracked links",
+      "permissions": [
+        "create_affiliate_links",
+        "share_products",
+        "track_clicks",
+        "track_sales",
+        "earn_commission"
+      ]
+    }
+  ]
+}
