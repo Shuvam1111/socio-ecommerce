@@ -77,7 +77,7 @@ export async function POST(request: Request) {
         roles: ['buyer'],
         activeRole: 'buyer',
         status: 'active',
-        isVerified: false,
+        isVerified: true,
         promotionStatus: 'not_eligible',
         createdAt: new Date().toISOString(),
       };

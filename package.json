@@ -12,7 +12,8 @@
     "type-check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "prepare": "husky"
+    "prepare": "husky",
+    "migrate:buyers": "node scripts/migrate-buyer-verification.mjs"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
