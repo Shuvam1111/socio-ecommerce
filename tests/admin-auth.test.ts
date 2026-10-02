@@ -123,6 +123,23 @@ describe('Admin authentication and authorization', () => {
     expect((await GET(request('socio-admin-session=ADM-INACTIVE'))).status).toBe(403);
   });
 
+  it('authenticates the bundled admin and authorizes seed when users.json is missing', async () => {
+    files.clear();
+    const { POST: login } = await import('@/app/api/auth/admin/route');
+    const loginResponse = await login(
+      request(undefined, { identifier: 'admin', password: 'Admin@123' }),
+    );
+    expect(loginResponse.status).toBe(200);
+
+    const cookie = loginResponse.cookies.get('socio-admin-session');
+    expect(cookie?.value).toContain('USR-000001.');
+
+    const { POST: seed } = await import('@/app/api/admin/storage/seed/route');
+    const seedResponse = await seed(request(`socio-admin-session=${cookie?.value}`));
+    expect(seedResponse.status).toBe(200);
+    expect((await seedResponse.json()).seeded).toContain('users.json');
+  });
+
   it('creates an HttpOnly Admin cookie on successful login', async () => {
     const { POST } = await import('@/app/api/auth/admin/route');
     const response = await POST(
