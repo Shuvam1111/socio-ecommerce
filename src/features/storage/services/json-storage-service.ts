@@ -55,16 +55,23 @@ export async function readJson<T>(key: string, fallback: T): Promise<T> {
 
 export async function writeJson<T>(key: string, data: T): Promise<void> {
   if (isProductionStorageEnabled()) {
-    await put(blobPath(key), JSON.stringify(data, null, 2), {
+    const serialized = JSON.stringify(data, null, 2);
+    await put(blobPath(key), serialized, {
       access: 'private',
       storeId: getBlobStoreId(),
       addRandomSuffix: false,
-
       allowOverwrite: true,
       contentType: 'application/json',
     });
+
+    // Confirm the committed object is readable from the same explicitly targeted store.
+    const persisted = await readBlob<T>(key);
+    if (persisted === null || JSON.stringify(persisted, null, 2) !== serialized) {
+      throw new Error(`Blob persistence verification failed for ${blobPath(key)}.`);
+    }
     return;
   }
+
 
   const file = localPath(key);
   const temporary = `${file}.${process.pid}.tmp`;
