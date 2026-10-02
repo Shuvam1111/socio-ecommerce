@@ -1,4 +1,6 @@
-import { get, put } from '@vercel/blob';
+import * as BlobSdk from '@vercel/blob';
+
+const { get, put } = BlobSdk;
 
 const blobPrefix = 'socio-commerce/runtime';
 const verificationAttempts = 4;
@@ -27,6 +29,33 @@ function getBlobStoreId() {
 
 function blobPath(key: string) {
   return `${blobPrefix}/${key.replace(/^\/+/, '')}`;
+}
+
+function getBlobErrorDiagnostics(error: unknown) {
+  if (!error || typeof error !== 'object') return { type: typeof error };
+  const candidate = error as BlobMissingError;
+  const notFoundConstructor = Object.prototype.hasOwnProperty.call(BlobSdk, 'BlobNotFoundError')
+    ? (Reflect.get(BlobSdk, 'BlobNotFoundError') as
+        | (abstract new (...args: never[]) => object)
+        | undefined)
+    : undefined;
+  const cause = candidate.cause;
+  const causeObject = cause && typeof cause === 'object' ? (cause as BlobMissingError) : undefined;
+  return {
+    constructorName: candidate.constructor?.name,
+    name: candidate.name,
+    message: candidate.message,
+    code: candidate.code,
+    status: candidate.status,
+    statusCode: candidate.statusCode,
+    causeConstructorName: causeObject?.constructor?.name,
+    causeName: causeObject?.name,
+    causeMessage: causeObject?.message,
+    isBlobNotFoundError: Boolean(notFoundConstructor && candidate instanceof notFoundConstructor),
+    causeIsBlobNotFoundError: Boolean(
+      notFoundConstructor && causeObject instanceof notFoundConstructor,
+    ),
+  };
 }
 
 function isMissingBlobError(error: unknown): boolean {
@@ -60,7 +89,15 @@ async function readBlob<T>(key: string): Promise<T | null> {
     if (!result) return null;
     return JSON.parse(await new Response(result.stream).text()) as T;
   } catch (error) {
-    if (isMissingBlobError(error)) return null;
+    const missing = isMissingBlobError(error);
+    console.error('[v0] Blob dataset read failed', {
+      key,
+      path: blobPath(key),
+      packageVersion: '2.8.0',
+      missing,
+      error: getBlobErrorDiagnostics(error),
+    });
+    if (missing) return null;
     throw new Error(`Unable to read production JSON dataset ${blobPath(key)}.`, { cause: error });
   }
 }
