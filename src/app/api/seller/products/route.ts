@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { readJson, updateJson } from '@/features/storage/services/json-storage-service';
+
 import {
   loadCategories,
   loadSubcategories,
@@ -84,19 +84,15 @@ interface ProductsData {
   products: Product[];
 }
 
-function getProductsPath() {
-  return path.join(process.cwd(), 'src', 'data', 'products.json');
-}
-
 async function getSeller(sellerId: string) {
-  const sellersPath = path.join(process.cwd(), 'src', 'data', 'sellers.json');
-
-  const file = await fs.readFile(sellersPath, 'utf-8');
-
-  const data = JSON.parse(file) as SellersData;
-
+  const data = await readJson<SellersData>('sellers.json', { sellers: [] });
   return data.sellers.find((seller) => seller.id === sellerId && seller.status === 'active');
 }
+
+async function loadProducts() {
+  return readJson<ProductsData>('products.json', { products: [] });
+}
+
 
 export async function GET(request: NextRequest) {
   try {
@@ -122,9 +118,8 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const file = await fs.readFile(getProductsPath(), 'utf-8');
+    const data = await loadProducts();
 
-    const data = JSON.parse(file) as ProductsData;
 
     const products = data.products.filter((product) => {
       if (seller.role === 'super_seller') {
@@ -185,13 +180,17 @@ export async function POST(request: NextRequest) {
     }
 
     try {
-      const taxonomy = validateProductTaxonomy(
-        body.categoryId,
-        body.subcategoryId,
-        await loadCategories(),
-        await loadSubcategories(),
-      );
-      if (!taxonomy.valid) return NextResponse.json({ message: taxonomy.message }, { status: 400 });
+      const categories = await loadCategories();
+      const subcategories = await loadSubcategories();
+      if (categories.length > 0 || subcategories.length > 0) {
+        const taxonomy = validateProductTaxonomy(
+          body.categoryId,
+          body.subcategoryId,
+          categories,
+          subcategories,
+        );
+        if (!taxonomy.valid) return NextResponse.json({ message: taxonomy.message }, { status: 400 });
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : '';
       if (
@@ -201,11 +200,8 @@ export async function POST(request: NextRequest) {
         throw error;
     }
 
-    const productsPath = getProductsPath();
+    const data = await loadProducts();
 
-    const file = await fs.readFile(productsPath, 'utf-8');
-
-    const data = JSON.parse(file) as ProductsData;
 
     const skuExists = data.products.some((product) => product.inventory.sku === body.inventory.sku);
 
@@ -220,7 +216,11 @@ export async function POST(request: NextRequest) {
 
     const now = new Date().toISOString();
 
-    const productNumber = data.products.length + 1;
+    const productNumber =
+      data.products.reduce((highest, item) => {
+        const match = item.id.match(/^PROD-(\d+)$/);
+        return Math.max(highest, match ? Number(match[1]) : 0);
+      }, 0) + 1;
 
     const images = (
       Array.isArray(body.images) && body.images.length > 0
@@ -337,9 +337,12 @@ export async function POST(request: NextRequest) {
       updatedAt: now,
     };
 
-    data.products.push(product);
-
-    await fs.writeFile(productsPath, JSON.stringify(data, null, 2), 'utf-8');
+    await updateJson<ProductsData>('products.json', { products: [] }, (current) => {
+      if (current.products.some((item) => item.inventory.sku === product.inventory.sku)) {
+        throw new Error('DUPLICATE_SKU');
+      }
+      return { products: [...current.products, product] };
+    });
 
     return NextResponse.json(
       {

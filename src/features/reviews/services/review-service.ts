@@ -1,5 +1,3 @@
-import fs from 'fs/promises';
-import path from 'path';
 import {
   readJson,
   readSeedJson,
@@ -33,13 +31,13 @@ type User = {
   status?: string;
 };
 type UsersFile = { users: User[] };
-const dataDir = path.join(process.cwd(), 'src', 'data');
+
 const reviewsKey = 'reviews.json';
 const ordersKey = 'orders.json';
-const usersPath = path.join(dataDir, 'users.json');
 async function read<T>(file: string): Promise<T> {
-  return JSON.parse(await fs.readFile(file, 'utf8')) as T;
+  return readJson<T>(file, {} as T);
 }
+
 
 export function buyerIdFromToken(token: string | null) {
   return token?.startsWith('demo-user-token-') ? token.slice('demo-user-token-'.length) : null;
@@ -95,7 +93,7 @@ export function validateReviewInput(input: unknown) {
 export async function getReviews(productId: string) {
   const [{ reviews }, { users }] = await Promise.all([
     readJson<ReviewFile>(reviewsKey, await readSeedJson<ReviewFile>(reviewsKey)),
-    read<UsersFile>(usersPath),
+    readJson<UsersFile>('users.json', { users: [] }),
   ]);
   const visible = reviews.filter(
     (review) =>
@@ -191,7 +189,7 @@ export async function moderateReview(id: string, status: 'approved' | 'rejected'
 export async function listReviews() {
   const [{ reviews }, { users }] = await Promise.all([
     readJson<ReviewFile>(reviewsKey, await readSeedJson<ReviewFile>(reviewsKey)),
-    read<UsersFile>(usersPath),
+    readJson<UsersFile>('users.json', { users: [] }),
   ]);
   return reviews.map((review) => ({
     ...publicReview(review, users),
