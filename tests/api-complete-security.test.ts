@@ -187,7 +187,11 @@ function request(method: string, path: string, sellerId?: string, body?: unknown
 const params = (id: string) => ({ params: Promise.resolve({ id }) });
 
 describe('complete API security coverage', () => {
-  beforeEach(seed);
+  beforeEach(async () => {
+    const { resetLocalRuntimeData } = await import('@/features/storage/services/json-storage-service');
+    resetLocalRuntimeData();
+    seed();
+  });
 
   it('tests product detail, update, delete, ownership, and inventory protection', async () => {
     const route = await import('@/app/api/seller/products/[id]/route');

@@ -84,6 +84,10 @@ async function initializeDataset<T>(key: string): Promise<void> {
   }
 }
 
+export function resetLocalRuntimeData() {
+  localRuntimeData.clear();
+}
+
 export async function readJson<T>(key: string, fallback: T): Promise<T> {
   if (!isProductionStorageEnabled()) {
     if (localRuntimeData.has(key)) return localRuntimeData.get(key) as T;
@@ -134,6 +138,8 @@ export async function writeJson<T>(key: string, data: T): Promise<void> {
     return;
   }
 
+  const serialized = JSON.stringify(data, null, 2);
+  await fs.writeFile(localPath(key), serialized, 'utf8');
   localRuntimeData.set(key, data);
 }
 

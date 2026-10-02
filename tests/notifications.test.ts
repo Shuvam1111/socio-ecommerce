@@ -7,9 +7,11 @@ import {
   markAllNotificationsRead,
   markNotificationRead,
 } from '@/features/notifications/services/notification-service';
+import { resetLocalRuntimeData } from '@/features/storage/services/json-storage-service';
 const file = path.join(process.cwd(), 'src/data/notifications.json');
 let original = '';
 beforeEach(async () => {
+  resetLocalRuntimeData();
   if (!original) original = await fs.readFile(file, 'utf8');
   await fs.writeFile(file, '{"notifications":[]}');
 });
