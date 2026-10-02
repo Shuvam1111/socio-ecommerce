@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import type { SellerOrder } from '@/features/sellers/types/order';
 import type { SellerProduct } from '@/features/sellers/types/product';
+import { resetLocalRuntimeData } from '@/features/storage/services/json-storage-service';
 
 const files = new Map<string, string>();
 
@@ -27,6 +28,7 @@ const dataPath = (name: string) => `${process.cwd()}/src/data/${name}`;
 const productsPath = dataPath('products.json');
 const ordersPath = dataPath('orders.json');
 const activitiesPath = dataPath('inventory-activities.json');
+const notificationsPath = dataPath('notifications.json');
 
 function product(overrides: Partial<SellerProduct> = {}): SellerProduct {
   return {
@@ -114,6 +116,7 @@ function seed(products: SellerProduct[], orders: SellerOrder[]) {
   files.set(productsPath, JSON.stringify({ products }));
   files.set(ordersPath, JSON.stringify({ orders }));
   files.set(activitiesPath, JSON.stringify({ activities: [] }));
+  files.set(notificationsPath, JSON.stringify({ notifications: [] }));
 }
 
 async function workflow() {
@@ -124,7 +127,10 @@ function savedProducts() {
   return JSON.parse(files.get(productsPath) ?? '{}').products as SellerProduct[];
 }
 
-beforeEach(() => seed([product()], [order()]));
+beforeEach(() => {
+  resetLocalRuntimeData();
+  seed([product()], [order()]);
+});
 
 describe('payment confirmation and inventory workflow', () => {
   it('confirms mock payment without reserving inventory and rejects duplicates', async () => {
