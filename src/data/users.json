@@ -424,6 +424,23 @@
       "isVerified": true,
       "promotionStatus": "not_eligible",
       "createdAt": "2026-09-18T10:00:00Z"
+    },
+    {
+      "id": "USR-000026",
+      "username": "shuvamrimal11@gmail.com",
+      "firstName": "Shuvam",
+      "lastName": "Rimal",
+      "email": "shuvamrimal11@gmail.com",
+      "phone": "+9779862887116",
+      "password": "Shuvam@123",
+      "roles": [
+        "buyer"
+      ],
+      "activeRole": "buyer",
+      "status": "active",
+      "isVerified": false,
+      "promotionStatus": "not_eligible",
+      "createdAt": "2026-10-02T06:40:18.809Z"
     }
   ]
 }
