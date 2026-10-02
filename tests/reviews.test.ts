@@ -39,13 +39,21 @@ describe('reviews', () => {
     ).toBe(false);
   });
 
-  it('aggregates only approved or published reviews', () => {
+  it('aggregates only published reviews', () => {
     expect(
       aggregateReviews([
         { rating: 5, status: 'approved' },
         { rating: 4, status: 'published' },
+        { rating: 2, status: 'pending' },
         { rating: 1, status: 'rejected' },
       ] as never),
-    ).toEqual({ average: 4.5, count: 2 });
+    ).toEqual({ average: 4, count: 1 });
+  });
+
+  it('does not treat pending reviews as publicly visible', () => {
+    expect(aggregateReviews([{ rating: 5, status: 'pending' }] as never)).toEqual({
+      average: 0,
+      count: 0,
+    });
   });
 });

@@ -10,7 +10,11 @@ export async function PATCH(request: Request) {
   const auth = await requireAdmin(request);
   if (auth.response) return auth.response;
   const body = await request.json().catch(() => null);
-  if (!body || typeof body.id !== 'string' || !['approved', 'rejected'].includes(body.status))
+  if (
+    !body ||
+    typeof body.id !== 'string' ||
+    !['approved', 'published', 'rejected'].includes(body.status)
+  )
     return NextResponse.json(
       { message: 'Review id and moderation status are required.' },
       { status: 400 },
