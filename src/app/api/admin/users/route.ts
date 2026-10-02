@@ -1,18 +1,15 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
 import { requireAdmin } from '@/features/auth/services/admin-authorization';
+import { readJson } from '@/features/storage/services/json-storage-service';
 
 export async function GET(request: Request) {
   const { response } = await requireAdmin(request);
   if (response) return response;
 
   try {
-    const filePath = path.join(process.cwd(), 'src', 'data', 'users.json');
-
-    const file = await fs.readFile(filePath, 'utf-8');
-
-    const data = JSON.parse(file);
+    const data = await readJson<{ users: Array<Record<string, unknown>> }>('users.json', {
+      users: [],
+    });
     const search = new URL(request.url).searchParams.get('search')?.trim().toLowerCase() ?? '';
     const role = new URL(request.url).searchParams.get('role');
     const status = new URL(request.url).searchParams.get('status');
