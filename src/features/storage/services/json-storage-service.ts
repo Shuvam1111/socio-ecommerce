@@ -6,6 +6,7 @@ const dataDirectory = path.join(process.cwd(), 'src', 'data');
 const blobPrefix = 'socio-commerce/runtime';
 const verificationAttempts = 4;
 const initializationLocks = new Map<string, Promise<void>>();
+const localRuntimeData = new Map<string, unknown>();
 
 type BlobMissingError = Error & { status?: number; statusCode?: number; code?: string };
 
@@ -85,6 +86,7 @@ async function initializeDataset<T>(key: string): Promise<void> {
 
 export async function readJson<T>(key: string, fallback: T): Promise<T> {
   if (!isProductionStorageEnabled()) {
+    if (localRuntimeData.has(key)) return localRuntimeData.get(key) as T;
     try {
       return await readLocalJson<T>(key);
     } catch {
@@ -132,10 +134,7 @@ export async function writeJson<T>(key: string, data: T): Promise<void> {
     return;
   }
 
-  const file = localPath(key);
-  const temporary = `${file}.${process.pid}.tmp`;
-  await fs.writeFile(temporary, JSON.stringify(data, null, 2), 'utf8');
-  await fs.rename(temporary, file);
+  localRuntimeData.set(key, data);
 }
 
 export async function updateJson<T>(
