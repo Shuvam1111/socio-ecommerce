@@ -4,7 +4,16 @@ const blobPrefix = 'socio-commerce/runtime';
 const verificationAttempts = 4;
 const updateLocks = new Map<string, Promise<unknown>>();
 
-type BlobMissingError = Error & { status?: number; statusCode?: number; code?: string };
+type BlobMissingError = Error & {
+  status?: number;
+  statusCode?: number;
+  code?: string;
+  name?: string;
+  cause?: unknown;
+};
+
+const missingBlobMessage = 'vercel blob: the requested blob does not exist';
+
 
 function getBlobStoreId() {
   const storeId = process.env.BLOB_STORE_ID;
@@ -20,17 +29,25 @@ function blobPath(key: string) {
   return `${blobPrefix}/${key.replace(/^\/+/, '')}`;
 }
 
-function isMissingBlobError(error: unknown) {
+function isMissingBlobError(error: unknown): boolean {
   if (!error || typeof error !== 'object') return false;
-  const candidate = error as BlobMissingError & { name?: string; message?: string };
-  const message = candidate.message?.toLowerCase() ?? '';
-  return (
+  const candidate = error as BlobMissingError;
+  const message = candidate.message?.trim().toLowerCase();
+  const constructorName = (candidate.constructor as { name?: string } | undefined)?.name;
+
+  if (
     candidate.status === 404 ||
     candidate.statusCode === 404 ||
     candidate.code === 'BLOB_NOT_FOUND' ||
     candidate.name === 'BlobNotFoundError' ||
-    message.includes('requested blob does not exist')
-  );
+    constructorName === 'BlobNotFoundError' ||
+    message === missingBlobMessage ||
+    message === 'the requested blob does not exist'
+  ) {
+    return true;
+  }
+
+  return candidate.cause !== error && isMissingBlobError(candidate.cause);
 }
 
 async function readBlob<T>(key: string): Promise<T | null> {

@@ -52,6 +52,14 @@ describe('json storage service', () => {
     expect(putMock).not.toHaveBeenCalled();
   });
 
+  it('returns null for the actual @vercel/blob v2.8 BlobNotFoundError shape', async () => {
+    const missingError = new Error('Vercel Blob: The requested blob does not exist');
+    Object.defineProperty(missingError, 'constructor', { value: { name: 'BlobNotFoundError' } });
+    getMock.mockRejectedValue(missingError);
+    const { readJsonIfPresent } = await import('@/features/storage/services/json-storage-service');
+    await expect(readJsonIfPresent('categories.json')).resolves.toBeNull();
+  });
+
   it('does not use local seed data when Blob fails unexpectedly', async () => {
     getMock.mockRejectedValue(new Error('permission denied'));
     const { readJson } = await import('@/features/storage/services/json-storage-service');
@@ -59,6 +67,14 @@ describe('json storage service', () => {
       'Unable to read production JSON dataset',
     );
     expect(putMock).not.toHaveBeenCalled();
+  });
+
+  it('does not classify authentication or configuration errors as missing datasets', async () => {
+    getMock.mockRejectedValue(new Error('Vercel Blob: Invalid token'));
+    const { readJsonIfPresent } = await import('@/features/storage/services/json-storage-service');
+    await expect(readJsonIfPresent('categories.json')).rejects.toThrow(
+      'Unable to read production JSON dataset',
+    );
   });
 
   it('treats an empty Blob dataset as valid', async () => {
