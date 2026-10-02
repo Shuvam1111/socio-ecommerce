@@ -1,154 +1,103 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
 
-const usersFilePath = path.join(process.cwd(), 'src', 'data', 'users.json');
+import { updateJson } from '@/features/storage/services/json-storage-service';
+
+type StoredUser = {
+  id: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  password: string;
+  roles: string[];
+  activeRole: string;
+  status: string;
+  isVerified: boolean;
+  promotionStatus: string;
+  createdAt: string;
+};
+
+type UsersFile = { users: StoredUser[] };
+
+const emptyUsersFile: UsersFile = { users: [] };
+
+class RegistrationError extends Error {}
 
 export async function POST(request: Request) {
   try {
     const registrationData = await request.json();
-
-    const firstName = String(registrationData.firstName ?? '').trim();
-
-    const lastName = String(registrationData.lastName ?? '').trim();
-
-    const username = String(registrationData.username ?? '').trim();
-
-    const email = String(registrationData.email ?? '')
-      .trim()
-      .toLowerCase();
-
-    const phone = String(registrationData.phone ?? '').trim();
-
-    const password = String(registrationData.password ?? '');
-
-    const confirmPassword = String(registrationData.confirmPassword ?? '');
+    const firstName = typeof registrationData.firstName === 'string' ? registrationData.firstName.trim() : '';
+    const lastName = typeof registrationData.lastName === 'string' ? registrationData.lastName.trim() : '';
+    const username = typeof registrationData.username === 'string' ? registrationData.username.trim() : '';
+    const email = typeof registrationData.email === 'string' ? registrationData.email.trim().toLowerCase() : '';
+    const phone = typeof registrationData.phone === 'string' ? registrationData.phone.trim() : '';
+    const password = typeof registrationData.password === 'string' ? registrationData.password : '';
+    const confirmPassword = typeof registrationData.confirmPassword === 'string' ? registrationData.confirmPassword : '';
 
     if (!firstName || !lastName || !username || !email || !phone || !password || !confirmPassword) {
-      return NextResponse.json(
-        {
-          message: 'All fields are required.',
-        },
-        { status: 400 },
-      );
+      return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ message: 'Enter a valid email address.' }, { status: 400 });
+    }
+
+    if (password.length < 8) {
+      return NextResponse.json({ message: 'Password must be at least 8 characters.' }, { status: 400 });
     }
 
     if (password !== confirmPassword) {
-      return NextResponse.json(
-        {
-          message: 'Passwords do not match.',
-        },
-        { status: 400 },
-      );
+      return NextResponse.json({ message: 'Passwords do not match.' }, { status: 400 });
     }
 
-    const file = await fs.readFile(usersFilePath, 'utf-8');
+    let createdUser: StoredUser | undefined;
+    await updateJson<UsersFile>('users.json', emptyUsersFile, (data) => {
+      const users = Array.isArray(data.users) ? data.users : [];
+      const usernameExists = users.some((user) => user.username.toLowerCase() === username.toLowerCase());
+      if (usernameExists) throw new RegistrationError('Username is already registered.');
+      const emailExists = users.some((user) => user.email.toLowerCase() === email);
+      if (emailExists) throw new RegistrationError('Email is already registered.');
+      const phoneExists = users.some((user) => user.phone === phone);
+      if (phoneExists) throw new RegistrationError('Phone number is already registered.');
 
-    const data = JSON.parse(file);
+      const lastUserNumber = users.reduce((maximum, user) => {
+        const match = user.id.match(/^USR-(\d+)$/);
+        return match ? Math.max(maximum, Number(match[1])) : maximum;
+      }, 0);
 
-    const users = Array.isArray(data.users) ? data.users : [];
+      createdUser = {
+        id: `USR-${String(lastUserNumber + 1).padStart(6, '0')}`,
+        username,
+        firstName,
+        lastName,
+        email,
+        phone,
+        password,
+        roles: ['buyer'],
+        activeRole: 'buyer',
+        status: 'active',
+        isVerified: false,
+        promotionStatus: 'not_eligible',
+        createdAt: new Date().toISOString(),
+      };
+      return { users: [...users, createdUser] };
+    });
 
-    const usernameExists = users.some(
-      (user: { username: string }) => user.username.toLowerCase() === username.toLowerCase(),
-    );
-
-    if (usernameExists) {
-      return NextResponse.json(
-        {
-          message: 'Username is already registered.',
-        },
-        { status: 409 },
-      );
-    }
-
-    const emailExists = users.some((user: { email: string }) => user.email.toLowerCase() === email);
-
-    if (emailExists) {
-      return NextResponse.json(
-        {
-          message: 'Email is already registered.',
-        },
-        { status: 409 },
-      );
-    }
-
-    const phoneExists = users.some((user: { phone: string }) => user.phone === phone);
-
-    if (phoneExists) {
-      return NextResponse.json(
-        {
-          message: 'Phone number is already registered.',
-        },
-        { status: 409 },
-      );
-    }
-
-    const lastUserNumber = users.reduce((maximum: number, user: { id: string }) => {
-      const match = user.id.match(/^USR-(\d+)$/);
-
-      if (!match) {
-        return maximum;
-      }
-
-      return Math.max(maximum, Number(match[1]));
-    }, 0);
-
-    const userId = `USR-${String(lastUserNumber + 1).padStart(6, '0')}`;
-
-    const newUser = {
-      id: userId,
-      username,
-      firstName,
-      lastName,
-      email,
-      phone,
-      password,
-      roles: ['buyer'],
-      activeRole: 'buyer',
-      status: 'active',
-      isVerified: false,
-      promotionStatus: 'not_eligible',
-      createdAt: new Date().toISOString(),
-    };
-
-    users.push(newUser);
-
-    await fs.writeFile(
-      usersFilePath,
-      JSON.stringify(
-        {
-          users,
-        },
-        null,
-        2,
-      ),
-      'utf-8',
-    );
-
+    if (!createdUser) throw new Error('Registration did not create a user.');
+    const { password: _password, ...safeUser } = createdUser;
     return NextResponse.json(
-      {
-        success: true,
-        message: 'User registered successfully.',
-        user: {
-          id: newUser.id,
-          username: newUser.username,
-          firstName: newUser.firstName,
-          lastName: newUser.lastName,
-          email: newUser.email,
-          phone: newUser.phone,
-          roles: newUser.roles,
-          activeRole: newUser.activeRole,
-        },
-      },
+      { success: true, message: 'User registered successfully.', user: safeUser },
       { status: 201 },
     );
   } catch (error) {
-    console.error('User registration error:', error);
+    if (error instanceof RegistrationError) {
+      return NextResponse.json({ message: error.message }, { status: 409 });
+    }
 
+    console.error('User registration error:', error);
     return NextResponse.json(
-      {
-        message: 'Unable to register user. Please try again.',
-      },
+      { message: 'Unable to register user. Please try again.' },
       { status: 500 },
     );
   }
