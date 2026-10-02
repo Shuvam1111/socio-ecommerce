@@ -107,3 +107,9 @@ export async function updateJson<T>(
 export async function exists(key: string): Promise<boolean> {
   return (await readBlob<unknown>(key)) !== null;
 }
+
+export async function seedJsonIfMissing<T>(key: string, seed: T): Promise<boolean> {
+  if (await exists(key)) return false;
+  await writeJson(key, seed);
+  return true;
+}
