@@ -141,13 +141,52 @@ export async function POST(
       );
     }
 
-    if (vendor.status !== 'pending' || vendor.superSellerId) {
+    if (vendor.status !== 'pending') {
       return NextResponse.json(
         {
-          message: 'Only pending vendors can be approved.',
+          message: `Only pending vendors can be approved. Current status: ${vendor.status}.`,
         },
         { status: 400 },
       );
+    }
+
+    const existingVendorUser = users.find(
+      (user) => user.vendorId === vendor.id && user.roles.includes('super_seller'),
+    );
+    const existingVendorSeller = sellers.find(
+      (seller) => seller.vendorId === vendor.id && seller.role === 'super_seller',
+    );
+
+    if (vendor.superSellerId) {
+      const linkedSeller = sellers.find(
+        (seller) => seller.id === vendor.superSellerId && seller.vendorId === vendor.id,
+      );
+
+      if (!linkedSeller) {
+        return NextResponse.json(
+          { message: 'Vendor has an invalid Super Seller relationship.' },
+          { status: 409 },
+        );
+      }
+
+      vendor.status = 'approved';
+      vendor.approvedAt = new Date().toISOString();
+      await updateJson('vendors.json', { vendors: [] as Vendor[] }, () => ({ vendors }));
+
+      return NextResponse.json({
+        message: 'Vendor approved successfully.',
+        vendor,
+        superSeller: {
+          user: existingVendorUser
+            ? {
+                id: existingVendorUser.id,
+                username: existingVendorUser.username,
+                email: existingVendorUser.email,
+              }
+            : null,
+          seller: linkedSeller,
+        },
+      });
     }
 
     const owner = users.find((user) => user.id === vendor.ownerUserId);
@@ -161,15 +200,9 @@ export async function POST(
       );
     }
 
-    const existingVendorUser = users.find(
-      (user) => user.vendorId === vendor.id && user.roles.includes('super_seller'),
-    );
-    const existingVendorSeller = sellers.find(
-      (seller) => seller.vendorId === vendor.id && seller.role === 'super_seller',
-    );
     if (existingVendorUser || existingVendorSeller) {
       return NextResponse.json(
-        { message: 'Vendor already has a Super Seller relationship.' },
+        { message: 'Vendor has an incomplete Super Seller relationship.' },
         { status: 409 },
       );
     }
