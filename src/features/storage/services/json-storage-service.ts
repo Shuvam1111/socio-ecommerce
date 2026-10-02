@@ -49,8 +49,12 @@ export function resetLocalRuntimeData() {
   ).__resetTestBlobStorage?.();
 }
 
+export async function readJsonIfPresent<T>(key: string): Promise<T | null> {
+  return readBlob<T>(key);
+}
+
 export async function readJson<T>(key: string, _fallback = {} as T): Promise<T> {
-  const value = await readBlob<T>(key);
+  const value = await readJsonIfPresent<T>(key);
   if (value === null) {
     throw new Error(`Production JSON dataset ${blobPath(key)} is unavailable.`);
   }

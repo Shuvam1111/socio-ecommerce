@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { readJson } from '@/features/storage/services/json-storage-service';
+import { readJsonIfPresent } from '@/features/storage/services/json-storage-service';
+import bootstrapUsers from '@/data/users.json';
 import { safeAdminUser, setAdminSession } from '@/features/auth/services/admin-authorization';
 import { clearSellerSession } from '@/features/sellers/services/seller-authorization';
 
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const data = await readJson<{
+    const storedData = await readJsonIfPresent<{
       users?: Array<{
         id: string;
         username: string;
@@ -32,9 +33,14 @@ export async function POST(request: Request) {
         roles: string[];
         [key: string]: unknown;
       }>;
-    }>('users.json', { users: [] });
+    }>('users.json');
+    const users = storedData?.users ?? bootstrapUsers.users;
 
-    const users = Array.isArray(data.users) ? data.users : [];
+    if (!storedData) {
+      console.warn(
+        '[v0] Admin bootstrap login enabled because users.json is missing; seed Blob datasets immediately.',
+      );
+    }
 
     const user = users.find(
       (currentUser: {
