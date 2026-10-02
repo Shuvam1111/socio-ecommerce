@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readJson, updateJson } from '@/features/storage/services/json-storage-service';
 
-
 import type { SellerProduct } from '@/features/sellers/types/product';
 import type {
   InventoryActivity,
@@ -27,8 +26,6 @@ interface ProductsFile {
 interface InventoryActivitiesFile {
   activities: InventoryActivity[];
 }
-
-
 
 async function getAuthenticatedSeller(request: NextRequest) {
   const sellerId = request.cookies.get('socio-seller-session')?.value;
@@ -228,7 +225,6 @@ export async function POST(
       activities: [],
     });
 
-
     const activity: InventoryActivity = {
       id: generateActivityId(activitiesData.activities),
 
@@ -261,7 +257,11 @@ export async function POST(
 
     activitiesData.activities.unshift(activity);
 
-    await updateJson<InventoryActivitiesFile>('inventory-activities.json', { activities: [] }, () => activitiesData);
+    await updateJson<InventoryActivitiesFile>(
+      'inventory-activities.json',
+      { activities: [] },
+      () => activitiesData,
+    );
 
     return NextResponse.json({
       message: 'Inventory updated successfully.',

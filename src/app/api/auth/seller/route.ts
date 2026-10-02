@@ -19,7 +19,6 @@ interface SellerLoginSeller {
   permissions?: string[];
 }
 
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -41,7 +40,6 @@ export async function POST(request: Request) {
       readJson<{ users: SellerLoginUser[] }>('users.json', { users: [] }),
       readJson<{ sellers: SellerLoginSeller[] }>('sellers.json', { sellers: [] }),
     ]);
-
 
     const user = (usersData.users ?? []).find(
       (item: { username: string; email: string; password: string }) =>

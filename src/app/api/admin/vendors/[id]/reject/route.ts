@@ -27,7 +27,7 @@ export async function POST(
       );
     }
 
-    const data = await readJson<{ vendors: Array<Record<string, any>> }>('vendors.json', {
+    const data = await readJson<{ vendors: Array<Record<string, unknown>> }>('vendors.json', {
       vendors: [],
     });
 

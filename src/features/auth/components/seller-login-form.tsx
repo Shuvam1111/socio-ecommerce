@@ -42,7 +42,6 @@ export function SellerLoginForm() {
       localStorage.setItem('socio-seller', JSON.stringify(result.user));
       localStorage.setItem('socio-seller-token', result.token);
 
-
       toast.success('Seller login successful.', {
         description: `Welcome back, ${result.user.firstName}!`,
       });

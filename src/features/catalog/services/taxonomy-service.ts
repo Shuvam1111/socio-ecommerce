@@ -1,6 +1,5 @@
 import { readJson, writeJson } from '@/features/storage/services/json-storage-service';
 
-
 export type TaxonomyStatus = 'active' | 'inactive';
 export interface CategoryRecord {
   id: string;
@@ -42,8 +41,9 @@ async function writeDataset(name: string, data: unknown) {
 
 export const createSlug = slugify;
 export async function loadCategories() {
-  return (await readDataset<{ categories: CategoryRecord[] }>('categories.json', { categories: [] })).categories;
-
+  return (
+    await readDataset<{ categories: CategoryRecord[] }>('categories.json', { categories: [] })
+  ).categories;
 }
 export async function loadSubcategories() {
   return (
@@ -51,11 +51,9 @@ export async function loadSubcategories() {
       subcategories: [],
     })
   ).subcategories;
-
 }
 export async function loadProducts() {
   return (await readDataset<ProductsData>('products.json', { products: [] })).products;
-
 }
 export async function saveCategories(categories: CategoryRecord[]) {
   await writeDataset('categories.json', { categories });

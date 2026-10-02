@@ -12,7 +12,14 @@ vi.mock('@vercel/blob', () => ({
 function blobResult(path: string) {
   const value = blobObjects.get(path);
   if (value === undefined) return null;
-  return { stream: new ReadableStream({ start(controller) { controller.enqueue(new TextEncoder().encode(value)); controller.close(); } }) };
+  return {
+    stream: new ReadableStream({
+      start(controller) {
+        controller.enqueue(new TextEncoder().encode(value));
+        controller.close();
+      },
+    }),
+  };
 }
 
 describe('json storage service', () => {
@@ -31,25 +38,26 @@ describe('json storage service', () => {
   it('reads an existing Blob dataset without using a fallback', async () => {
     blobObjects.set('socio-commerce/runtime/users.json', JSON.stringify({ users: [] }));
     const { readJson } = await import('@/features/storage/services/json-storage-service');
-    await expect(readJson('users.json', { users: [{ id: 'seed' }] })).resolves.toEqual({ users: [] });
+    await expect(readJson('users.json', { users: [{ id: 'seed' }] })).resolves.toEqual({
+      users: [],
+    });
     expect(putMock).not.toHaveBeenCalled();
   });
 
-  it('initializes a missing Blob dataset from its local seed', async () => {
+  it('fails clearly when a Blob dataset is missing', async () => {
     const { readJson } = await import('@/features/storage/services/json-storage-service');
-    const result = await readJson('roles.json', { roles: [] });
-    expect(result).toEqual(expect.objectContaining({ roles: expect.any(Array) }));
-    expect(putMock).toHaveBeenCalledWith(
-      'socio-commerce/runtime/roles.json',
-      expect.any(String),
-      expect.objectContaining({ storeId: 'test-store', allowOverwrite: true }),
+    await expect(readJson('roles.json', { roles: [] })).rejects.toThrow(
+      'Production JSON dataset socio-commerce/runtime/roles.json is unavailable.',
     );
+    expect(putMock).not.toHaveBeenCalled();
   });
 
   it('does not use local seed data when Blob fails unexpectedly', async () => {
     getMock.mockRejectedValue(new Error('permission denied'));
     const { readJson } = await import('@/features/storage/services/json-storage-service');
-    await expect(readJson('users.json', { users: [] })).rejects.toThrow('Unable to read production JSON dataset');
+    await expect(readJson('users.json', { users: [] })).rejects.toThrow(
+      'Unable to read production JSON dataset',
+    );
     expect(putMock).not.toHaveBeenCalled();
   });
 

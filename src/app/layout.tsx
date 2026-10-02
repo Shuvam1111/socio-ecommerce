@@ -25,6 +25,9 @@ const geistMono = Geist_Mono({
   display: 'swap',
 });
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: 'Socio Commerce',
   description: 'A modern social commerce platform.',

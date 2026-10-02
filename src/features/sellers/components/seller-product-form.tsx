@@ -4,15 +4,9 @@ import { useEffect, useState } from 'react';
 import { ArrowLeft, Plus, Save, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 
-import {
-  createSellerProduct,
-  updateSellerProduct,
-} from '../services/seller-product-service';
+import { createSellerProduct, updateSellerProduct } from '../services/seller-product-service';
 
-import type {
-  CreateSellerProductInput,
-  SellerProduct,
-} from '../types/product';
+import type { CreateSellerProductInput, SellerProduct } from '../types/product';
 
 interface SellerProductFormProps {
   product?: SellerProduct | null;
@@ -40,11 +34,7 @@ const emptyVariant = (): VariantForm => ({
   quantity: '0',
 });
 
-export function SellerProductForm({
-  product,
-  onSuccess,
-  onCancel,
-}: SellerProductFormProps) {
+export function SellerProductForm({ product, onSuccess, onCancel }: SellerProductFormProps) {
   const isEditing = Boolean(product);
 
   const [saving, setSaving] = useState(false);
@@ -55,44 +45,33 @@ export function SellerProductForm({
   const [model, setModel] = useState('');
 
   const [categoryId, setCategoryId] = useState('');
-  const [subcategoryId, setSubcategoryId] =
-    useState('');
+  const [subcategoryId, setSubcategoryId] = useState('');
 
   const [description, setDescription] = useState('');
-  const [shortDescription, setShortDescription] =
-    useState('');
+  const [shortDescription, setShortDescription] = useState('');
 
   const [primaryImage, setPrimaryImage] = useState('');
   const [secondaryImages, setSecondaryImages] = useState<string[]>([]);
 
-  const [regularPrice, setRegularPrice] =
-    useState('');
+  const [regularPrice, setRegularPrice] = useState('');
   const [salePrice, setSalePrice] = useState('');
 
   const [sku, setSku] = useState('');
   const [barcode, setBarcode] = useState('');
   const [quantity, setQuantity] = useState('0');
-  const [lowStockThreshold, setLowStockThreshold] =
-    useState('5');
+  const [lowStockThreshold, setLowStockThreshold] = useState('5');
 
-  const [shippingFee, setShippingFee] =
-    useState('0');
-  const [freeShipping, setFreeShipping] =
-    useState(false);
-  const [estimatedDeliveryDays, setEstimatedDeliveryDays] =
-    useState('2-5');
+  const [shippingFee, setShippingFee] = useState('0');
+  const [freeShipping, setFreeShipping] = useState(false);
+  const [estimatedDeliveryDays, setEstimatedDeliveryDays] = useState('2-5');
 
   const [returnable, setReturnable] = useState(true);
   const [returnDays, setReturnDays] = useState('7');
 
-  const [influencerPercentage, setInfluencerPercentage] =
-    useState('5');
-  const [affiliatePercentage, setAffiliatePercentage] =
-    useState('3');
+  const [influencerPercentage, setInfluencerPercentage] = useState('5');
+  const [affiliatePercentage, setAffiliatePercentage] = useState('3');
 
-  const [variants, setVariants] = useState<
-    VariantForm[]
-  >([]);
+  const [variants, setVariants] = useState<VariantForm[]>([]);
 
   useEffect(() => {
     if (!product) {
@@ -113,55 +92,29 @@ export function SellerProductForm({
     setPrimaryImage(product.images[0] ?? '');
     setSecondaryImages(product.images.slice(1));
 
-    setRegularPrice(
-      String(product.pricing.regularPrice),
-    );
+    setRegularPrice(String(product.pricing.regularPrice));
 
-    setSalePrice(
-      String(product.pricing.salePrice),
-    );
+    setSalePrice(String(product.pricing.salePrice));
 
     setSku(product.inventory.sku);
     setBarcode(product.inventory.barcode);
-    setQuantity(
-      String(product.inventory.quantity),
-    );
+    setQuantity(String(product.inventory.quantity));
 
-    setLowStockThreshold(
-      String(
-        product.inventory.lowStockThreshold,
-      ),
-    );
+    setLowStockThreshold(String(product.inventory.lowStockThreshold));
 
-    setShippingFee(
-      String(product.shipping.shippingFee),
-    );
+    setShippingFee(String(product.shipping.shippingFee));
 
-    setFreeShipping(
-      product.shipping.freeShipping,
-    );
+    setFreeShipping(product.shipping.freeShipping);
 
-    setEstimatedDeliveryDays(
-      product.shipping.estimatedDeliveryDays,
-    );
+    setEstimatedDeliveryDays(product.shipping.estimatedDeliveryDays);
 
     setReturnable(product.returnPolicy.returnable);
 
-    setReturnDays(
-      String(product.returnPolicy.returnDays),
-    );
+    setReturnDays(String(product.returnPolicy.returnDays));
 
-    setInfluencerPercentage(
-      String(
-        product.commission.influencerPercentage,
-      ),
-    );
+    setInfluencerPercentage(String(product.commission.influencerPercentage));
 
-    setAffiliatePercentage(
-      String(
-        product.commission.affiliatePercentage,
-      ),
-    );
+    setAffiliatePercentage(String(product.commission.affiliatePercentage));
 
     setVariants(
       product.variants.map((variant) => ({
@@ -200,31 +153,18 @@ export function SellerProductForm({
       return 0;
     }
 
-    return Number(
-      (((regular - sale) / regular) * 100).toFixed(
-        2,
-      ),
-    );
+    return Number((((regular - sale) / regular) * 100).toFixed(2));
   }
 
   function addVariant() {
-    setVariants((current) => [
-      ...current,
-      emptyVariant(),
-    ]);
+    setVariants((current) => [...current, emptyVariant()]);
   }
 
   function removeVariant(id: string) {
-    setVariants((current) =>
-      current.filter((variant) => variant.id !== id),
-    );
+    setVariants((current) => current.filter((variant) => variant.id !== id));
   }
 
-  function updateVariant(
-    id: string,
-    field: keyof VariantForm,
-    value: string,
-  ) {
+  function updateVariant(id: string, field: keyof VariantForm, value: string) {
     setVariants((current) =>
       current.map((variant) =>
         variant.id === id
@@ -237,9 +177,7 @@ export function SellerProductForm({
     );
   }
 
-  async function handleSubmit(
-    event: React.FormEvent<HTMLFormElement>,
-  ) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!name.trim()) {
@@ -265,7 +203,10 @@ export function SellerProductForm({
       return;
     }
 
-    if (secondaryImages.length > 8 || secondaryImages.some((image) => !image.trim() || !imagePattern.test(image.trim()))) {
+    if (
+      secondaryImages.length > 8 ||
+      secondaryImages.some((image) => !image.trim() || !imagePattern.test(image.trim()))
+    ) {
       toast.error('Add up to 8 valid secondary image URLs.');
       return;
     }
@@ -290,9 +231,7 @@ export function SellerProductForm({
     }
 
     if (sale > regular) {
-      toast.error(
-        'Sale price cannot be greater than regular price.',
-      );
+      toast.error('Sale price cannot be greater than regular price.');
       return;
     }
 
@@ -311,8 +250,7 @@ export function SellerProductForm({
       model: model.trim(),
 
       description: description.trim(),
-      shortDescription:
-        shortDescription.trim(),
+      shortDescription: shortDescription.trim(),
 
       images: imageValues,
       video: product?.video ?? null,
@@ -321,8 +259,7 @@ export function SellerProductForm({
         regularPrice: regular,
         salePrice: sale,
         currency: 'NPR',
-        discountPercentage:
-          calculateDiscount(),
+        discountPercentage: calculateDiscount(),
       },
 
       inventory: {
@@ -330,28 +267,17 @@ export function SellerProductForm({
         barcode: barcode.trim(),
         quantity: stock,
         availableQuantity: product
-          ? Math.max(
-              0,
-              stock -
-                product.inventory.reservedQuantity,
-            )
+          ? Math.max(0, stock - product.inventory.reservedQuantity)
           : stock,
-        reservedQuantity:
-          product?.inventory.reservedQuantity ?? 0,
-        lowStockThreshold: Number(
-          lowStockThreshold,
-        ),
+        reservedQuantity: product?.inventory.reservedQuantity ?? 0,
+        lowStockThreshold: Number(lowStockThreshold),
       },
 
       variants: variants.map((variant) => ({
         id: variant.id,
         attributes: {
-          ...(variant.storage
-            ? { storage: variant.storage }
-            : {}),
-          ...(variant.color
-            ? { color: variant.color }
-            : {}),
+          ...(variant.storage ? { storage: variant.storage } : {}),
+          ...(variant.color ? { color: variant.color } : {}),
         },
         sku: variant.sku,
         barcode: variant.barcode,
@@ -373,12 +299,8 @@ export function SellerProductForm({
       },
 
       commission: {
-        influencerPercentage: Number(
-          influencerPercentage,
-        ),
-        affiliatePercentage: Number(
-          affiliatePercentage,
-        ),
+        influencerPercentage: Number(influencerPercentage),
+        affiliatePercentage: Number(affiliatePercentage),
       },
     };
 
@@ -387,23 +309,15 @@ export function SellerProductForm({
 
       if (product) {
         await updateSellerProduct(product.id, payload);
-        toast.success(
-          'Product updated successfully.',
-        );
+        toast.success('Product updated successfully.');
       } else {
         await createSellerProduct(payload);
-        toast.success(
-          'Product created successfully and sent for approval.',
-        );
+        toast.success('Product created successfully and sent for approval.');
       }
 
       onSuccess();
     } catch (error) {
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : 'Unable to save product.',
-      );
+      toast.error(error instanceof Error ? error.message : 'Unable to save product.');
     } finally {
       setSaving(false);
     }
@@ -423,55 +337,27 @@ export function SellerProductForm({
 
           <div>
             <h1 className="text-2xl font-bold text-foreground">
-              {isEditing
-                ? 'Edit Product'
-                : 'Add Product'}
+              {isEditing ? 'Edit Product' : 'Add Product'}
             </h1>
 
             <p className="mt-1 text-sm text-muted-foreground">
-              {isEditing
-                ? 'Update your product information.'
-                : 'Add a new product to your store.'}
+              {isEditing ? 'Update your product information.' : 'Add a new product to your store.'}
             </p>
           </div>
         </div>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-6 p-6"
-      >
+      <form onSubmit={handleSubmit} className="space-y-6 p-6">
         {/* Basic information */}
-        <Section
-          title="Basic Information"
-          description="Enter the main product details."
-        >
+        <Section title="Basic Information" description="Enter the main product details.">
           <div className="grid gap-4 md:grid-cols-2">
-            <Field
-              label="Product Name"
-              value={name}
-              onChange={handleNameChange}
-              required
-            />
+            <Field label="Product Name" value={name} onChange={handleNameChange} required />
 
-            <Field
-              label="Slug"
-              value={slug}
-              onChange={setSlug}
-              required
-            />
+            <Field label="Slug" value={slug} onChange={setSlug} required />
 
-            <Field
-              label="Brand"
-              value={brand}
-              onChange={setBrand}
-            />
+            <Field label="Brand" value={brand} onChange={setBrand} />
 
-            <Field
-              label="Model"
-              value={model}
-              onChange={setModel}
-            />
+            <Field label="Model" value={model} onChange={setModel} />
 
             <Field
               label="Category ID"
@@ -496,11 +382,7 @@ export function SellerProductForm({
 
             <textarea
               value={shortDescription}
-              onChange={(event) =>
-                setShortDescription(
-                  event.target.value,
-                )
-              }
+              onChange={(event) => setShortDescription(event.target.value)}
               rows={2}
               className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary"
             />
@@ -509,16 +391,12 @@ export function SellerProductForm({
           <div className="mt-4">
             <label className="mb-2 block text-sm font-medium text-foreground">
               Description
-              <span className="ml-1 text-destructive">
-                *
-              </span>
+              <span className="ml-1 text-destructive">*</span>
             </label>
 
             <textarea
               value={description}
-              onChange={(event) =>
-                setDescription(event.target.value)
-              }
+              onChange={(event) => setDescription(event.target.value)}
               rows={5}
               required
               className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary"
@@ -542,7 +420,9 @@ export function SellerProductForm({
             <div className="space-y-3">
               <div>
                 <p className="text-sm font-medium text-foreground">Secondary Product Images</p>
-                <p className="mt-1 text-xs text-muted-foreground">Add up to 8 additional image URLs.</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Add up to 8 additional image URLs.
+                </p>
               </div>
               {secondaryImages.map((image, index) => (
                 <div key={`secondary-image-${index}`} className="flex gap-2">
@@ -550,14 +430,22 @@ export function SellerProductForm({
                     aria-label={`Secondary product image ${index + 1}`}
                     value={image}
                     onChange={(event) =>
-                      setSecondaryImages((current) => current.map((item, itemIndex) => itemIndex === index ? event.target.value : item))
+                      setSecondaryImages((current) =>
+                        current.map((item, itemIndex) =>
+                          itemIndex === index ? event.target.value : item,
+                        ),
+                      )
                     }
                     placeholder="https://example.com/product-detail.jpg"
                     className="h-10 min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary"
                   />
                   <button
                     type="button"
-                    onClick={() => setSecondaryImages((current) => current.filter((_, itemIndex) => itemIndex !== index))}
+                    onClick={() =>
+                      setSecondaryImages((current) =>
+                        current.filter((_, itemIndex) => itemIndex !== index),
+                      )
+                    }
                     className="rounded-lg border border-border px-3 text-sm text-destructive hover:bg-secondary"
                   >
                     Remove
@@ -566,7 +454,9 @@ export function SellerProductForm({
               ))}
               <button
                 type="button"
-                onClick={() => setSecondaryImages((current) => current.length < 8 ? [...current, ''] : current)}
+                onClick={() =>
+                  setSecondaryImages((current) => (current.length < 8 ? [...current, ''] : current))
+                }
                 disabled={secondaryImages.length >= 8}
                 className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-50"
               >
@@ -578,10 +468,7 @@ export function SellerProductForm({
         </Section>
 
         {/* Pricing */}
-        <Section
-          title="Pricing"
-          description="Set regular and sale prices."
-        >
+        <Section title="Pricing" description="Set regular and sale prices.">
           <div className="grid gap-4 md:grid-cols-3">
             <Field
               label="Regular Price (NPR)"
@@ -600,9 +487,7 @@ export function SellerProductForm({
             />
 
             <div>
-              <p className="mb-2 text-sm font-medium text-foreground">
-                Discount
-              </p>
+              <p className="mb-2 text-sm font-medium text-foreground">Discount</p>
 
               <div className="flex h-10 items-center rounded-lg border border-border bg-secondary px-3 text-sm text-foreground">
                 {calculateDiscount()}%
@@ -612,23 +497,11 @@ export function SellerProductForm({
         </Section>
 
         {/* Inventory */}
-        <Section
-          title="Inventory"
-          description="Manage SKU, barcode and stock."
-        >
+        <Section title="Inventory" description="Manage SKU, barcode and stock.">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <Field
-              label="SKU"
-              value={sku}
-              onChange={setSku}
-              required
-            />
+            <Field label="SKU" value={sku} onChange={setSku} required />
 
-            <Field
-              label="Barcode"
-              value={barcode}
-              onChange={setBarcode}
-            />
+            <Field label="Barcode" value={barcode} onChange={setBarcode} />
 
             <Field
               label="Quantity"
@@ -648,85 +521,47 @@ export function SellerProductForm({
         </Section>
 
         {/* Variants */}
-        <Section
-          title="Variants"
-          description="Add product variations such as storage or color."
-        >
+        <Section title="Variants" description="Add product variations such as storage or color.">
           <div className="space-y-4">
             {variants.map((variant) => (
-              <div
-                key={variant.id}
-                className="rounded-lg border border-border p-4"
-              >
+              <div key={variant.id} className="rounded-lg border border-border p-4">
                 <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
                   <Field
                     label="Storage"
                     value={variant.storage}
-                    onChange={(value) =>
-                      updateVariant(
-                        variant.id,
-                        'storage',
-                        value,
-                      )
-                    }
+                    onChange={(value) => updateVariant(variant.id, 'storage', value)}
                   />
 
                   <Field
                     label="Color"
                     value={variant.color}
-                    onChange={(value) =>
-                      updateVariant(
-                        variant.id,
-                        'color',
-                        value,
-                      )
-                    }
+                    onChange={(value) => updateVariant(variant.id, 'color', value)}
                   />
 
                   <Field
                     label="SKU"
                     value={variant.sku}
-                    onChange={(value) =>
-                      updateVariant(
-                        variant.id,
-                        'sku',
-                        value,
-                      )
-                    }
+                    onChange={(value) => updateVariant(variant.id, 'sku', value)}
                   />
 
                   <Field
                     label="Price"
                     type="number"
                     value={variant.price}
-                    onChange={(value) =>
-                      updateVariant(
-                        variant.id,
-                        'price',
-                        value,
-                      )
-                    }
+                    onChange={(value) => updateVariant(variant.id, 'price', value)}
                   />
 
                   <Field
                     label="Quantity"
                     type="number"
                     value={variant.quantity}
-                    onChange={(value) =>
-                      updateVariant(
-                        variant.id,
-                        'quantity',
-                        value,
-                      )
-                    }
+                    onChange={(value) => updateVariant(variant.id, 'quantity', value)}
                   />
                 </div>
 
                 <button
                   type="button"
-                  onClick={() =>
-                    removeVariant(variant.id)
-                  }
+                  onClick={() => removeVariant(variant.id)}
                   className="mt-3 inline-flex items-center gap-2 text-sm text-destructive"
                 >
                   <Trash2 className="size-4" />
@@ -747,10 +582,7 @@ export function SellerProductForm({
         </Section>
 
         {/* Shipping */}
-        <Section
-          title="Shipping"
-          description="Configure delivery information."
-        >
+        <Section title="Shipping" description="Configure delivery information.">
           <div className="grid gap-4 md:grid-cols-3">
             <Field
               label="Shipping Fee (NPR)"
@@ -771,11 +603,7 @@ export function SellerProductForm({
                 <input
                   type="checkbox"
                   checked={freeShipping}
-                  onChange={(event) =>
-                    setFreeShipping(
-                      event.target.checked,
-                    )
-                  }
+                  onChange={(event) => setFreeShipping(event.target.checked)}
                   className="size-4 accent-primary"
                 />
                 Free Shipping
@@ -785,21 +613,14 @@ export function SellerProductForm({
         </Section>
 
         {/* Return */}
-        <Section
-          title="Return Policy"
-          description="Configure product returns."
-        >
+        <Section title="Return Policy" description="Configure product returns.">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="flex items-end">
               <label className="flex h-10 cursor-pointer items-center gap-2 text-sm text-foreground">
                 <input
                   type="checkbox"
                   checked={returnable}
-                  onChange={(event) =>
-                    setReturnable(
-                      event.target.checked,
-                    )
-                  }
+                  onChange={(event) => setReturnable(event.target.checked)}
                   className="size-4 accent-primary"
                 />
                 Product is returnable
@@ -855,11 +676,7 @@ export function SellerProductForm({
           >
             <Save className="size-4" />
 
-            {saving
-              ? 'Saving...'
-              : isEditing
-                ? 'Update Product'
-                : 'Create Product'}
+            {saving ? 'Saving...' : isEditing ? 'Update Product' : 'Create Product'}
           </button>
         </div>
       </form>
@@ -879,13 +696,9 @@ function Section({
   return (
     <section className="rounded-xl border border-border bg-card p-5">
       <div className="mb-5">
-        <h2 className="font-semibold text-foreground">
-          {title}
-        </h2>
+        <h2 className="font-semibold text-foreground">{title}</h2>
 
-        <p className="mt-1 text-sm text-muted-foreground">
-          {description}
-        </p>
+        <p className="mt-1 text-sm text-muted-foreground">{description}</p>
       </div>
 
       {children}
@@ -915,19 +728,13 @@ function Field({
       <label className="mb-2 block text-sm font-medium text-foreground">
         {label}
 
-        {required && (
-          <span className="ml-1 text-destructive">
-            *
-          </span>
-        )}
+        {required && <span className="ml-1 text-destructive">*</span>}
       </label>
 
       <input
         type={type}
         value={value}
-        onChange={(event) =>
-          onChange(event.target.value)
-        }
+        onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         required={required}
         disabled={disabled}

@@ -69,10 +69,11 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
       body: JSON.stringify({ status: next }),
     });
     if (response.ok)
-      setItems((current) =>
-        current.map((item) =>
-          'vendorId' in item && item.id === id ? { ...item, status: next } : item,
-        ) as Product[] | Order[],
+      setItems(
+        (current) =>
+          current.map((item) =>
+            'vendorId' in item && item.id === id ? { ...item, status: next } : item,
+          ) as Product[] | Order[],
       );
   }
   async function saveSettings() {

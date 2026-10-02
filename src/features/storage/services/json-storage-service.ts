@@ -43,7 +43,11 @@ async function readBlob<T>(key: string): Promise<T | null> {
   }
 }
 
-export function resetLocalRuntimeData() {}
+export function resetLocalRuntimeData() {
+  (
+    globalThis as typeof globalThis & { __resetTestBlobStorage?: () => void }
+  ).__resetTestBlobStorage?.();
+}
 
 export async function readJson<T>(key: string, _fallback = {} as T): Promise<T> {
   const value = await readBlob<T>(key);

@@ -34,7 +34,6 @@ async function read<T>(file: string): Promise<T> {
   return readJson<T>(file, {} as T);
 }
 
-
 export function buyerIdFromToken(token: string | null) {
   return token?.startsWith('demo-user-token-') ? token.slice('demo-user-token-'.length) : null;
 }
@@ -99,10 +98,7 @@ export async function getReviews(productId: string) {
   return visible.map((review) => publicReview(review, users));
 }
 export async function getReviewSummary(productId: string) {
-  const { reviews } = await readJson<ReviewFile>(
-    reviewsKey,
-    { reviews: [] },
-  );
+  const { reviews } = await readJson<ReviewFile>(reviewsKey, { reviews: [] });
   return aggregateReviews(reviews.filter((review) => review.productId === productId));
 }
 export async function getReviewContext(productId: string, buyerId: string) {
