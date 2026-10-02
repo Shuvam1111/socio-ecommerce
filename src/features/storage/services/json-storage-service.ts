@@ -4,6 +4,10 @@ import { get, put } from '@vercel/blob';
 
 const dataDirectory = path.join(process.cwd(), 'src', 'data');
 const blobPrefix = 'socio-commerce/runtime';
+const verificationAttempts = 4;
+const initializationLocks = new Map<string, Promise<void>>();
+
+type BlobMissingError = Error & { status?: number; statusCode?: number; code?: string };
 
 function isProductionStorageEnabled() {
   return process.env.NODE_ENV === 'production';
@@ -27,30 +31,87 @@ function localPath(key: string) {
   return path.join(dataDirectory, key);
 }
 
-async function readBlob<T>(key: string): Promise<T | null> {
-  const result = await get(blobPath(key), {
-    access: 'private',
-    storeId: getBlobStoreId(),
-  });
-  if (!result) return null;
-  return JSON.parse(await new Response(result.stream).text()) as T;
+function isMissingBlobError(error: unknown) {
+  if (!error || typeof error !== 'object') return false;
+  const candidate = error as BlobMissingError;
+  return candidate.status === 404 || candidate.statusCode === 404 || candidate.code === 'BLOB_NOT_FOUND';
 }
 
-export async function readSeedJson<T>(key: string): Promise<T> {
+async function readBlob<T>(key: string): Promise<T | null> {
+  try {
+    const result = await get(blobPath(key), {
+      access: 'private',
+      storeId: getBlobStoreId(),
+    });
+    if (!result) return null;
+    return JSON.parse(await new Response(result.stream).text()) as T;
+  } catch (error) {
+    if (isMissingBlobError(error)) return null;
+    throw new Error(`Unable to read production JSON dataset ${blobPath(key)}.`, { cause: error });
+  }
+}
+
+async function readLocalJson<T>(key: string): Promise<T> {
   return JSON.parse(await fs.readFile(localPath(key), 'utf8')) as T;
 }
 
+export async function readSeedJson<T>(key: string): Promise<T> {
+  return readLocalJson<T>(key);
+}
+
+async function initializeDataset<T>(key: string): Promise<void> {
+  const existingLock = initializationLocks.get(key);
+  if (existingLock) return existingLock;
+
+  const initialization = (async () => {
+    const current = await readBlob<T>(key);
+    if (current !== null) return;
+
+    const seed = await readLocalJson<T>(key);
+    await writeJson(key, seed);
+    const persisted = await readBlob<T>(key);
+    if (persisted === null) {
+      throw new Error(`Blob initialization verification failed for ${blobPath(key)}.`);
+    }
+  })();
+
+  initializationLocks.set(key, initialization);
+  try {
+    await initialization;
+  } finally {
+    initializationLocks.delete(key);
+  }
+}
+
 export async function readJson<T>(key: string, fallback: T): Promise<T> {
-  if (isProductionStorageEnabled()) {
-    const value = await readBlob<T>(key);
-    return value ?? fallback;
+  if (!isProductionStorageEnabled()) {
+    try {
+      return await readLocalJson<T>(key);
+    } catch {
+      return fallback;
+    }
   }
 
-  try {
-    return JSON.parse(await fs.readFile(localPath(key), 'utf8')) as T;
-  } catch {
-    return fallback;
+  const value = await readBlob<T>(key);
+  if (value !== null) return value;
+
+  await initializeDataset<T>(key);
+  const initialized = await readBlob<T>(key);
+  if (initialized === null) {
+    throw new Error(`Production JSON dataset ${blobPath(key)} is unavailable after initialization.`);
   }
+  return initialized;
+}
+
+async function readBlobWithRetry<T>(key: string): Promise<T | null> {
+  for (let attempt = 0; attempt < verificationAttempts; attempt += 1) {
+    const persisted = await readBlob<T>(key);
+    if (persisted !== null) return persisted;
+    if (attempt < verificationAttempts - 1) {
+      await new Promise((resolve) => setTimeout(resolve, 150 * (attempt + 1)));
+    }
+  }
+  return null;
 }
 
 export async function writeJson<T>(key: string, data: T): Promise<void> {
@@ -64,18 +125,12 @@ export async function writeJson<T>(key: string, data: T): Promise<void> {
       contentType: 'application/json',
     });
 
-    // Confirm the committed object is readable from the same explicitly targeted store.
-    // Blob reads can briefly lag an overwrite, so retry before treating the write as failed.
-    let persisted: T | null = null;
-    for (let attempt = 0; attempt < 3; attempt += 1) {
-      persisted = await readBlob<T>(key);
-      if (persisted !== null && JSON.stringify(persisted, null, 2) === serialized) return;
-      if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 250 * (attempt + 1)));
+    const persisted = await readBlobWithRetry<T>(key);
+    if (persisted === null || JSON.stringify(persisted, null, 2) !== serialized) {
+      throw new Error(`Blob persistence verification failed for ${blobPath(key)}.`);
     }
-    throw new Error(`Blob persistence verification failed for ${blobPath(key)}.`);
     return;
   }
-
 
   const file = localPath(key);
   const temporary = `${file}.${process.pid}.tmp`;
