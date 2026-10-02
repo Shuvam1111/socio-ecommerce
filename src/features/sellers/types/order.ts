@@ -9,16 +9,9 @@ export type OrderStatus =
   | 'refund_requested'
   | 'refunded';
 
-export type PaymentStatus =
-  | 'pending'
-  | 'paid'
-  | 'failed'
-  | 'refunded'
-  | 'partially_refunded';
+export type PaymentStatus = 'pending' | 'paid' | 'failed' | 'refunded' | 'partially_refunded';
 
-export type PaymentMethod =
-  | 'online'
-  | 'cash_on_delivery';
+export type PaymentMethod = 'online' | 'cash_on_delivery';
 
 export interface OrderItem {
   productId: string;

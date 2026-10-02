@@ -24,10 +24,7 @@ export type {
 } from './types/product';
 export { SellerInventoryPage } from './components/seller-inventory-page';
 
-export {
-  getSellerInventory,
-  adjustSellerInventory,
-} from './services/seller-inventory-service';
+export { getSellerInventory, adjustSellerInventory } from './services/seller-inventory-service';
 
 export type {
   InventoryAdjustmentType,

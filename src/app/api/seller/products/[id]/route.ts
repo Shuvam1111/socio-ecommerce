@@ -92,7 +92,6 @@ async function loadProducts() {
   return readJson<ProductsData>('products.json', { products: [] });
 }
 
-
 function canAccessProduct(product: Product, seller: Seller) {
   return (
     product.vendorId === seller.vendorId &&
@@ -226,7 +225,8 @@ export async function PUT(
           categories,
           subcategories,
         );
-        if (!taxonomy.valid) return NextResponse.json({ message: taxonomy.message }, { status: 400 });
+        if (!taxonomy.valid)
+          return NextResponse.json({ message: taxonomy.message }, { status: 400 });
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : '';

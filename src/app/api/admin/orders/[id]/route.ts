@@ -4,7 +4,7 @@ import { getPlatformOrder } from '@/features/admin/services/platform-operations-
 export async function GET(request: Request, { params }: { params: Promise<unknown> }) {
   const auth = await requireAdmin(request);
   if (auth.response) return auth.response;
-  const order = await getPlatformOrder((await params as { id: string }).id);
+  const order = await getPlatformOrder(((await params) as { id: string }).id);
   return order
     ? NextResponse.json({ order })
     : NextResponse.json({ message: 'Order not found.' }, { status: 404 });

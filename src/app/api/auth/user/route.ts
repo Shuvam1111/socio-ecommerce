@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 
 import { readJson } from '@/features/storage/services/json-storage-service';
 
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -20,15 +19,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const data = await readJson<{ users: Array<{
-      username: string;
-      email: string;
-      password: string;
-      status: string;
-      roles: string[];
-      [key: string]: unknown;
-    }> }>('users.json', { users: [] });
-
+    const data = await readJson<{
+      users: Array<{
+        username: string;
+        email: string;
+        password: string;
+        status: string;
+        roles: string[];
+        [key: string]: unknown;
+      }>;
+    }>('users.json', { users: [] });
 
     const user = (data.users ?? []).find(
       (item: { username: string; email: string; password: string }) =>

@@ -1,18 +1,21 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-import { get, put } from '@vercel/blob';
+import * as BlobSdk from '@vercel/blob';
 
-const dataDirectory = path.join(process.cwd(), 'src', 'data');
+const { get, put } = BlobSdk;
+
 const blobPrefix = 'socio-commerce/runtime';
 const verificationAttempts = 4;
-const initializationLocks = new Map<string, Promise<void>>();
 const updateLocks = new Map<string, Promise<unknown>>();
 
-type BlobMissingError = Error & { status?: number; statusCode?: number; code?: string };
+type BlobMissingError = Error & {
+  status?: number;
+  statusCode?: number;
+  code?: string;
+  name?: string;
+  cause?: unknown;
+};
 
-function isProductionStorageEnabled() {
-  return process.env.NODE_ENV === 'production';
-}
+const missingBlobMessage = 'vercel blob: the requested blob does not exist';
+
 
 function getBlobStoreId() {
   const storeId = process.env.BLOB_STORE_ID;
@@ -28,14 +31,52 @@ function blobPath(key: string) {
   return `${blobPrefix}/${key.replace(/^\/+/, '')}`;
 }
 
-function localPath(key: string) {
-  return path.join(dataDirectory, key);
+function getBlobErrorDiagnostics(error: unknown) {
+  if (!error || typeof error !== 'object') return { type: typeof error };
+  const candidate = error as BlobMissingError;
+  const notFoundConstructor = Object.prototype.hasOwnProperty.call(BlobSdk, 'BlobNotFoundError')
+    ? (Reflect.get(BlobSdk, 'BlobNotFoundError') as
+        | (abstract new (...args: never[]) => object)
+        | undefined)
+    : undefined;
+  const cause = candidate.cause;
+  const causeObject = cause && typeof cause === 'object' ? (cause as BlobMissingError) : undefined;
+  return {
+    constructorName: candidate.constructor?.name,
+    name: candidate.name,
+    message: candidate.message,
+    code: candidate.code,
+    status: candidate.status,
+    statusCode: candidate.statusCode,
+    causeConstructorName: causeObject?.constructor?.name,
+    causeName: causeObject?.name,
+    causeMessage: causeObject?.message,
+    isBlobNotFoundError: Boolean(notFoundConstructor && candidate instanceof notFoundConstructor),
+    causeIsBlobNotFoundError: Boolean(
+      notFoundConstructor && causeObject instanceof notFoundConstructor,
+    ),
+  };
 }
 
-function isMissingBlobError(error: unknown) {
+function isMissingBlobError(error: unknown): boolean {
   if (!error || typeof error !== 'object') return false;
   const candidate = error as BlobMissingError;
-  return candidate.status === 404 || candidate.statusCode === 404 || candidate.code === 'BLOB_NOT_FOUND';
+  const message = candidate.message?.trim().toLowerCase();
+  const constructorName = (candidate.constructor as { name?: string } | undefined)?.name;
+
+  if (
+    candidate.status === 404 ||
+    candidate.statusCode === 404 ||
+    candidate.code === 'BLOB_NOT_FOUND' ||
+    candidate.name === 'BlobNotFoundError' ||
+    constructorName === 'BlobNotFoundError' ||
+    message === missingBlobMessage ||
+    message === 'the requested blob does not exist'
+  ) {
+    return true;
+  }
+
+  return candidate.cause !== error && isMissingBlobError(candidate.cause);
 }
 
 async function readBlob<T>(key: string): Promise<T | null> {
@@ -48,63 +89,35 @@ async function readBlob<T>(key: string): Promise<T | null> {
     if (!result) return null;
     return JSON.parse(await new Response(result.stream).text()) as T;
   } catch (error) {
-    if (isMissingBlobError(error)) return null;
+    const missing = isMissingBlobError(error);
+    console.error('[v0] Blob dataset read failed', {
+      key,
+      path: blobPath(key),
+      packageVersion: '2.8.0',
+      missing,
+      error: getBlobErrorDiagnostics(error),
+    });
+    if (missing) return null;
     throw new Error(`Unable to read production JSON dataset ${blobPath(key)}.`, { cause: error });
   }
 }
 
-async function readLocalJson<T>(key: string): Promise<T> {
-  return JSON.parse(await fs.readFile(localPath(key), 'utf8')) as T;
+export function resetLocalRuntimeData() {
+  (
+    globalThis as typeof globalThis & { __resetTestBlobStorage?: () => void }
+  ).__resetTestBlobStorage?.();
 }
 
-export async function readSeedJson<T>(key: string): Promise<T> {
-  return readLocalJson<T>(key);
+export async function readJsonIfPresent<T>(key: string): Promise<T | null> {
+  return readBlob<T>(key);
 }
 
-async function initializeDataset<T>(key: string): Promise<void> {
-  const existingLock = initializationLocks.get(key);
-  if (existingLock) return existingLock;
-
-  const initialization = (async () => {
-    const current = await readBlob<T>(key);
-    if (current !== null) return;
-
-    const seed = await readLocalJson<T>(key);
-    await writeJson(key, seed);
-    const persisted = await readBlob<T>(key);
-    if (persisted === null) {
-      throw new Error(`Blob initialization verification failed for ${blobPath(key)}.`);
-    }
-  })();
-
-  initializationLocks.set(key, initialization);
-  try {
-    await initialization;
-  } finally {
-    initializationLocks.delete(key);
+export async function readJson<T>(key: string, _fallback = {} as T): Promise<T> {
+  const value = await readJsonIfPresent<T>(key);
+  if (value === null) {
+    throw new Error(`Production JSON dataset ${blobPath(key)} is unavailable.`);
   }
-}
-
-export function resetLocalRuntimeData() {}
-
-export async function readJson<T>(key: string, fallback: T): Promise<T> {
-  if (!isProductionStorageEnabled()) {
-    try {
-      return await readLocalJson<T>(key);
-    } catch {
-      return fallback;
-    }
-  }
-
-  const value = await readBlob<T>(key);
-  if (value !== null) return value;
-
-  await initializeDataset<T>(key);
-  const initialized = await readBlob<T>(key);
-  if (initialized === null) {
-    throw new Error(`Production JSON dataset ${blobPath(key)} is unavailable after initialization.`);
-  }
-  return initialized;
+  return value;
 }
 
 async function readBlobWithRetry<T>(key: string): Promise<T | null> {
@@ -119,25 +132,19 @@ async function readBlobWithRetry<T>(key: string): Promise<T | null> {
 }
 
 export async function writeJson<T>(key: string, data: T): Promise<void> {
-  if (isProductionStorageEnabled()) {
-    const serialized = JSON.stringify(data, null, 2);
-    await put(blobPath(key), serialized, {
-      access: 'private',
-      storeId: getBlobStoreId(),
-      addRandomSuffix: false,
-      allowOverwrite: true,
-      contentType: 'application/json',
-    });
-
-    const persisted = await readBlobWithRetry<T>(key);
-    if (persisted === null || JSON.stringify(persisted, null, 2) !== serialized) {
-      throw new Error(`Blob persistence verification failed for ${blobPath(key)}.`);
-    }
-    return;
-  }
-
   const serialized = JSON.stringify(data, null, 2);
-  await fs.writeFile(localPath(key), serialized, 'utf8');
+  await put(blobPath(key), serialized, {
+    access: 'private',
+    storeId: getBlobStoreId(),
+    addRandomSuffix: false,
+    allowOverwrite: true,
+    contentType: 'application/json',
+  });
+
+  const persisted = await readBlobWithRetry<T>(key);
+  if (persisted === null || JSON.stringify(persisted, null, 2) !== serialized) {
+    throw new Error(`Blob persistence verification failed for ${blobPath(key)}.`);
+  }
 }
 
 export async function updateJson<T>(
@@ -161,11 +168,11 @@ export async function updateJson<T>(
 }
 
 export async function exists(key: string): Promise<boolean> {
-  if (isProductionStorageEnabled()) return (await readBlob<unknown>(key)) !== null;
-  try {
-    await fs.access(localPath(key));
-    return true;
-  } catch {
-    return false;
-  }
+  return (await readBlob<unknown>(key)) !== null;
+}
+
+export async function seedJsonIfMissing<T>(key: string, seed: T): Promise<boolean> {
+  if (await exists(key)) return false;
+  await writeJson(key, seed);
+  return true;
 }

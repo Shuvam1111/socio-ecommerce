@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import { readJson } from '@/features/storage/services/json-storage-service';
 import { requireAdmin } from '@/features/auth/services/admin-authorization';
 
 export async function GET(request: Request) {
@@ -8,11 +7,7 @@ export async function GET(request: Request) {
   if (response) return response;
 
   try {
-    const filePath = path.join(process.cwd(), 'src', 'data', 'sellers.json');
-
-    const file = await fs.readFile(filePath, 'utf-8');
-
-    const data = JSON.parse(file);
+    const data = await readJson<{ sellers?: unknown[] }>('sellers.json', { sellers: [] });
 
     return NextResponse.json({
       sellers: data.sellers ?? [],

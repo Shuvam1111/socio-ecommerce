@@ -16,30 +16,18 @@ import {
 
 import { toast } from 'sonner';
 
-import {
-  adjustSellerInventory,
-  getSellerInventory,
-} from '../services/seller-inventory-service';
+import { adjustSellerInventory, getSellerInventory } from '../services/seller-inventory-service';
 
-import type {
-  InventoryAdjustmentType,
-  SellerInventoryItem,
-} from '../types/inventory';
+import type { InventoryAdjustmentType, SellerInventoryItem } from '../types/inventory';
 
-type StockFilter =
-  | 'all'
-  | 'in_stock'
-  | 'low_stock'
-  | 'out_of_stock';
+type StockFilter = 'all' | 'in_stock' | 'low_stock' | 'out_of_stock';
 
 interface AdjustmentState {
   product: SellerInventoryItem;
   type: InventoryAdjustmentType;
 }
 
-function getStockLabel(
-  status: SellerInventoryItem['status'],
-) {
+function getStockLabel(status: SellerInventoryItem['status']) {
   if (status === 'out_of_stock') {
     return 'Out of stock';
   }
@@ -52,43 +40,25 @@ function getStockLabel(
 }
 
 export function SellerInventoryPage() {
-  const [inventory, setInventory] =
-    useState<SellerInventoryItem[]>(
-      [],
-    );
+  const [inventory, setInventory] = useState<SellerInventoryItem[]>([]);
 
-  const [loading, setLoading] =
-    useState(true);
+  const [loading, setLoading] = useState(true);
 
-  const [search, setSearch] =
-    useState('');
+  const [search, setSearch] = useState('');
 
-  const [stockFilter, setStockFilter] =
-    useState<StockFilter>('all');
+  const [stockFilter, setStockFilter] = useState<StockFilter>('all');
 
-  const [
-    adjustment,
-    setAdjustment,
-  ] =
-    useState<AdjustmentState | null>(
-      null,
-    );
+  const [adjustment, setAdjustment] = useState<AdjustmentState | null>(null);
 
-  const [quantity, setQuantity] =
-    useState('');
+  const [quantity, setQuantity] = useState('');
 
-  const [reason, setReason] =
-    useState('');
+  const [reason, setReason] = useState('');
 
-  const [saving, setSaving] =
-    useState(false);
+  const [saving, setSaving] = useState(false);
 
-  const [refreshing, setRefreshing] =
-    useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
-  async function loadInventory(
-    showLoading = true,
-  ) {
+  async function loadInventory(showLoading = true) {
     try {
       if (showLoading) {
         setLoading(true);
@@ -96,18 +66,11 @@ export function SellerInventoryPage() {
         setRefreshing(true);
       }
 
-      const result =
-        await getSellerInventory();
+      const result = await getSellerInventory();
 
-      setInventory(
-        result.inventory,
-      );
+      setInventory(result.inventory);
     } catch (error) {
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : 'Unable to load inventory.',
-      );
+      toast.error(error instanceof Error ? error.message : 'Unable to load inventory.');
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -115,105 +78,48 @@ export function SellerInventoryPage() {
   }
 
   useEffect(() => {
-    const timer =
-      window.setTimeout(() => {
-        void loadInventory();
-      }, 0);
+    const timer = window.setTimeout(() => {
+      void loadInventory();
+    }, 0);
 
     return () => {
-      window.clearTimeout(
-        timer,
-      );
+      window.clearTimeout(timer);
     };
   }, []);
 
-  const filteredInventory =
-    useMemo(() => {
-      const query =
-        search
-          .trim()
-          .toLowerCase();
+  const filteredInventory = useMemo(() => {
+    const query = search.trim().toLowerCase();
 
-      return inventory.filter(
-        (item) => {
-          const matchesSearch =
-            !query ||
-            item.productName
-              .toLowerCase()
-              .includes(query) ||
-            item.sku
-              .toLowerCase()
-              .includes(query) ||
-            item.barcode
-              .toLowerCase()
-              .includes(query);
+    return inventory.filter((item) => {
+      const matchesSearch =
+        !query ||
+        item.productName.toLowerCase().includes(query) ||
+        item.sku.toLowerCase().includes(query) ||
+        item.barcode.toLowerCase().includes(query);
 
-          const matchesFilter =
-            stockFilter === 'all' ||
-            item.status ===
-              stockFilter;
+      const matchesFilter = stockFilter === 'all' || item.status === stockFilter;
 
-          return (
-            matchesSearch &&
-            matchesFilter
-          );
-        },
-      );
-    }, [
-      inventory,
-      search,
-      stockFilter,
-    ]);
+      return matchesSearch && matchesFilter;
+    });
+  }, [inventory, search, stockFilter]);
 
-  const stats =
-    useMemo(() => {
-      return {
-        products:
-          inventory.length,
+  const stats = useMemo(() => {
+    return {
+      products: inventory.length,
 
-        totalUnits:
-          inventory.reduce(
-            (sum, item) =>
-              sum + item.quantity,
-            0,
-          ),
+      totalUnits: inventory.reduce((sum, item) => sum + item.quantity, 0),
 
-        availableUnits:
-          inventory.reduce(
-            (sum, item) =>
-              sum +
-              item.availableQuantity,
-            0,
-          ),
+      availableUnits: inventory.reduce((sum, item) => sum + item.availableQuantity, 0),
 
-        reservedUnits:
-          inventory.reduce(
-            (sum, item) =>
-              sum +
-              item.reservedQuantity,
-            0,
-          ),
+      reservedUnits: inventory.reduce((sum, item) => sum + item.reservedQuantity, 0),
 
-        lowStock:
-          inventory.filter(
-            (item) =>
-              item.status ===
-              'low_stock',
-          ).length,
+      lowStock: inventory.filter((item) => item.status === 'low_stock').length,
 
-        outOfStock:
-          inventory.filter(
-            (item) =>
-              item.status ===
-              'out_of_stock',
-          ).length,
-      };
-    }, [inventory]);
+      outOfStock: inventory.filter((item) => item.status === 'out_of_stock').length,
+    };
+  }, [inventory]);
 
-  function openAdjustment(
-    product: SellerInventoryItem,
-    type: InventoryAdjustmentType,
-  ) {
+  function openAdjustment(product: SellerInventoryItem, type: InventoryAdjustmentType) {
     setAdjustment({
       product,
       type,
@@ -233,80 +139,50 @@ export function SellerInventoryPage() {
     setReason('');
   }
 
-  async function handleAdjustmentSubmit(
-    event: React.FormEvent<HTMLFormElement>,
-  ) {
+  async function handleAdjustmentSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!adjustment) {
       return;
     }
 
-    const amount =
-      Number(quantity);
+    const amount = Number(quantity);
 
-    if (
-      !Number.isInteger(amount) ||
-      amount <= 0
-    ) {
-      toast.error(
-        'Enter a valid positive whole number.',
-      );
+    if (!Number.isInteger(amount) || amount <= 0) {
+      toast.error('Enter a valid positive whole number.');
       return;
     }
 
-    if (
-      adjustment.type ===
-        'decrease' &&
-      amount >
-        adjustment.product
-          .availableQuantity
-    ) {
-      toast.error(
-        'You cannot decrease more than the available stock.',
-      );
+    if (adjustment.type === 'decrease' && amount > adjustment.product.availableQuantity) {
+      toast.error('You cannot decrease more than the available stock.');
       return;
     }
 
     if (!reason.trim()) {
-      toast.error(
-        'Please enter a reason for the adjustment.',
-      );
+      toast.error('Please enter a reason for the adjustment.');
       return;
     }
 
     try {
       setSaving(true);
 
-      await adjustSellerInventory(
-        adjustment.product
-          .productId,
-        {
-          type: adjustment.type,
-          quantity: amount,
-          reason:
-            reason.trim(),
-        },
-      );
+      await adjustSellerInventory(adjustment.product.productId, {
+        type: adjustment.type,
+        quantity: amount,
+        reason: reason.trim(),
+      });
 
       toast.success(
-        adjustment.type ===
-          'increase'
+        adjustment.type === 'increase'
           ? 'Stock increased successfully.'
           : 'Stock decreased successfully.',
       );
 
       closeAdjustment();
 
-      await loadInventory(
-        false,
-      );
+      await loadInventory(false);
     } catch (error) {
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : 'Unable to adjust inventory.',
-      );
+      toast.error(error instanceof Error ? error.message : 'Unable to adjust inventory.');
     } finally {
       setSaving(false);
     }
@@ -317,9 +193,7 @@ export function SellerInventoryPage() {
       <div className="border-b border-border bg-card">
         <div className="flex items-center justify-between gap-4 px-6 py-5">
           <div>
-            <h1 className="text-2xl font-bold text-foreground">
-              Inventory
-            </h1>
+            <h1 className="text-2xl font-bold text-foreground">Inventory</h1>
 
             <p className="mt-1 text-sm text-muted-foreground">
               Manage stock levels for your products.
@@ -328,22 +202,11 @@ export function SellerInventoryPage() {
 
           <button
             type="button"
-            onClick={() =>
-              void loadInventory(
-                false,
-              )
-            }
+            onClick={() => void loadInventory(false)}
             disabled={refreshing}
             className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary disabled:opacity-50"
           >
-            <RefreshCw
-              className={
-                refreshing
-                  ? 'size-4 animate-spin'
-                  : 'size-4'
-              }
-            />
-
+            <RefreshCw className={refreshing ? 'size-4 animate-spin' : 'size-4'} />
             Refresh
           </button>
         </div>
@@ -351,41 +214,17 @@ export function SellerInventoryPage() {
 
       <div className="space-y-6 p-6">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-          <StatCard
-            label="Products"
-            value={stats.products}
-            icon={Package}
-          />
+          <StatCard label="Products" value={stats.products} icon={Package} />
 
-          <StatCard
-            label="Total Units"
-            value={stats.totalUnits}
-            icon={Box}
-          />
+          <StatCard label="Total Units" value={stats.totalUnits} icon={Box} />
 
-          <StatCard
-            label="Available"
-            value={stats.availableUnits}
-            icon={CheckCircle2}
-          />
+          <StatCard label="Available" value={stats.availableUnits} icon={CheckCircle2} />
 
-          <StatCard
-            label="Reserved"
-            value={stats.reservedUnits}
-            icon={Box}
-          />
+          <StatCard label="Reserved" value={stats.reservedUnits} icon={Box} />
 
-          <StatCard
-            label="Low Stock"
-            value={stats.lowStock}
-            icon={AlertTriangle}
-          />
+          <StatCard label="Low Stock" value={stats.lowStock} icon={AlertTriangle} />
 
-          <StatCard
-            label="Out of Stock"
-            value={stats.outOfStock}
-            icon={XCircle}
-          />
+          <StatCard label="Out of Stock" value={stats.outOfStock} icon={XCircle} />
         </div>
 
         <div className="rounded-xl border border-border bg-card p-4">
@@ -396,11 +235,7 @@ export function SellerInventoryPage() {
               <input
                 type="text"
                 value={search}
-                onChange={(event) =>
-                  setSearch(
-                    event.target.value,
-                  )
-                }
+                onChange={(event) => setSearch(event.target.value)}
                 placeholder="Search product, SKU or barcode..."
                 className="w-full rounded-lg border border-border bg-background py-2.5 pl-9 pr-4 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
               />
@@ -408,29 +243,16 @@ export function SellerInventoryPage() {
 
             <select
               value={stockFilter}
-              onChange={(event) =>
-                setStockFilter(
-                  event.target
-                    .value as StockFilter,
-                )
-              }
+              onChange={(event) => setStockFilter(event.target.value as StockFilter)}
               className="rounded-lg border border-border bg-background px-3 py-2.5 text-sm text-foreground outline-none focus:border-primary"
             >
-              <option value="all">
-                All Stock
-              </option>
+              <option value="all">All Stock</option>
 
-              <option value="in_stock">
-                In Stock
-              </option>
+              <option value="in_stock">In Stock</option>
 
-              <option value="low_stock">
-                Low Stock
-              </option>
+              <option value="low_stock">Low Stock</option>
 
-              <option value="out_of_stock">
-                Out of Stock
-              </option>
+              <option value="out_of_stock">Out of Stock</option>
             </select>
           </div>
         </div>
@@ -440,14 +262,11 @@ export function SellerInventoryPage() {
             <div className="flex min-h-64 items-center justify-center">
               <RefreshCw className="size-6 animate-spin text-primary" />
             </div>
-          ) : filteredInventory.length ===
-            0 ? (
+          ) : filteredInventory.length === 0 ? (
             <div className="flex min-h-64 flex-col items-center justify-center px-6 text-center">
               <Package className="size-10 text-muted-foreground" />
 
-              <h2 className="mt-3 font-semibold text-foreground">
-                No inventory found
-              </h2>
+              <h2 className="mt-3 font-semibold text-foreground">No inventory found</h2>
 
               <p className="mt-1 text-sm text-muted-foreground">
                 Try changing your search or stock filter.
@@ -493,129 +312,83 @@ export function SellerInventoryPage() {
                 </thead>
 
                 <tbody>
-                  {filteredInventory.map(
-                    (item) => (
-                      <tr
-                        key={
-                          item.productId
-                        }
-                        className="border-b border-border last:border-b-0"
-                      >
-                        <td className="px-5 py-4">
-                          <div className="flex items-center gap-3">
-                            <div className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-secondary">
-                              {item.productImage ? (
-                                // eslint-disable-next-line @next/next/no-img-element
-                                <img
-                                  src={
-                                    item.productImage
-                                  }
-                                  alt={
-                                    item.productName
-                                  }
-                                  className="size-full object-cover"
-                                />
-                              ) : (
-                                <Package className="size-5 text-muted-foreground" />
-                              )}
-                            </div>
-
-                            <div className="min-w-0">
-                              <p className="max-w-[240px] truncate font-medium text-foreground">
-                                {
-                                  item.productName
-                                }
-                              </p>
-
-                              {item.barcode && (
-                                <p className="text-xs text-muted-foreground">
-                                  {
-                                    item.barcode
-                                  }
-                                </p>
-                              )}
-                            </div>
+                  {filteredInventory.map((item) => (
+                    <tr key={item.productId} className="border-b border-border last:border-b-0">
+                      <td className="px-5 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-secondary">
+                            {item.productImage ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={item.productImage}
+                                alt={item.productName}
+                                className="size-full object-cover"
+                              />
+                            ) : (
+                              <Package className="size-5 text-muted-foreground" />
+                            )}
                           </div>
-                        </td>
 
-                        <td className="px-5 py-4 text-sm text-muted-foreground">
-                          {item.sku}
-                        </td>
+                          <div className="min-w-0">
+                            <p className="max-w-[240px] truncate font-medium text-foreground">
+                              {item.productName}
+                            </p>
 
-                        <td className="px-5 py-4 font-medium text-foreground">
-                          {item.quantity}
-                        </td>
-
-                        <td className="px-5 py-4 text-sm text-muted-foreground">
-                          {
-                            item.reservedQuantity
-                          }
-                        </td>
-
-                        <td className="px-5 py-4">
-                          <span className="font-semibold text-foreground">
-                            {
-                              item.availableQuantity
-                            }
-                          </span>
-                        </td>
-
-                        <td className="px-5 py-4 text-sm text-muted-foreground">
-                          {
-                            item.lowStockThreshold
-                          }
-                        </td>
-
-                        <td className="px-5 py-4">
-                          <StockBadge
-                            status={
-                              item.status
-                            }
-                          />
-                        </td>
-
-                        <td className="px-5 py-4">
-                          <div className="flex justify-end gap-2">
-                            <button
-                              type="button"
-                              onClick={() =>
-                                openAdjustment(
-                                  item,
-                                  'increase',
-                                )
-                              }
-                              className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-foreground transition-colors hover:bg-secondary"
-                              title="Increase stock"
-                            >
-                              <ArrowUp className="size-4" />
-
-                              Add
-                            </button>
-
-                            <button
-                              type="button"
-                              onClick={() =>
-                                openAdjustment(
-                                  item,
-                                  'decrease',
-                                )
-                              }
-                              disabled={
-                                item.availableQuantity <=
-                                0
-                              }
-                              className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-destructive transition-colors hover:bg-destructive/10 disabled:cursor-not-allowed disabled:opacity-40"
-                              title="Decrease stock"
-                            >
-                              <ArrowDown className="size-4" />
-
-                              Remove
-                            </button>
+                            {item.barcode && (
+                              <p className="text-xs text-muted-foreground">{item.barcode}</p>
+                            )}
                           </div>
-                        </td>
-                      </tr>
-                    ),
-                  )}
+                        </div>
+                      </td>
+
+                      <td className="px-5 py-4 text-sm text-muted-foreground">{item.sku}</td>
+
+                      <td className="px-5 py-4 font-medium text-foreground">{item.quantity}</td>
+
+                      <td className="px-5 py-4 text-sm text-muted-foreground">
+                        {item.reservedQuantity}
+                      </td>
+
+                      <td className="px-5 py-4">
+                        <span className="font-semibold text-foreground">
+                          {item.availableQuantity}
+                        </span>
+                      </td>
+
+                      <td className="px-5 py-4 text-sm text-muted-foreground">
+                        {item.lowStockThreshold}
+                      </td>
+
+                      <td className="px-5 py-4">
+                        <StockBadge status={item.status} />
+                      </td>
+
+                      <td className="px-5 py-4">
+                        <div className="flex justify-end gap-2">
+                          <button
+                            type="button"
+                            onClick={() => openAdjustment(item, 'increase')}
+                            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-foreground transition-colors hover:bg-secondary"
+                            title="Increase stock"
+                          >
+                            <ArrowUp className="size-4" />
+                            Add
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => openAdjustment(item, 'decrease')}
+                            disabled={item.availableQuantity <= 0}
+                            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-2 text-xs font-medium text-destructive transition-colors hover:bg-destructive/10 disabled:cursor-not-allowed disabled:opacity-40"
+                            title="Decrease stock"
+                          >
+                            <ArrowDown className="size-4" />
+                            Remove
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -628,66 +401,40 @@ export function SellerInventoryPage() {
           <div className="w-full max-w-md rounded-xl border border-border bg-card shadow-xl">
             <div className="border-b border-border px-5 py-4">
               <h2 className="font-semibold text-foreground">
-                {adjustment.type ===
-                'increase'
-                  ? 'Increase Stock'
-                  : 'Decrease Stock'}
+                {adjustment.type === 'increase' ? 'Increase Stock' : 'Decrease Stock'}
               </h2>
 
-              <p className="mt-1 text-sm text-muted-foreground">
-                {adjustment.product.productName}
-              </p>
+              <p className="mt-1 text-sm text-muted-foreground">{adjustment.product.productName}</p>
             </div>
 
-            <form
-              onSubmit={
-                handleAdjustmentSubmit
-              }
-              className="space-y-4 p-5"
-            >
+            <form onSubmit={handleAdjustmentSubmit} className="space-y-4 p-5">
               <div className="grid grid-cols-2 gap-4 rounded-lg bg-secondary/50 p-4">
                 <div>
-                  <p className="text-xs text-muted-foreground">
-                    Current Stock
-                  </p>
+                  <p className="text-xs text-muted-foreground">Current Stock</p>
 
                   <p className="mt-1 text-lg font-semibold text-foreground">
-                    {
-                      adjustment.product
-                        .quantity
-                    }
+                    {adjustment.product.quantity}
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-xs text-muted-foreground">
-                    Available
-                  </p>
+                  <p className="text-xs text-muted-foreground">Available</p>
 
                   <p className="mt-1 text-lg font-semibold text-foreground">
-                    {
-                      adjustment.product
-                        .availableQuantity
-                    }
+                    {adjustment.product.availableQuantity}
                   </p>
                 </div>
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-foreground">
-                  Quantity
-                </label>
+                <label className="mb-2 block text-sm font-medium text-foreground">Quantity</label>
 
                 <input
                   type="number"
                   min="1"
                   step="1"
                   value={quantity}
-                  onChange={(event) =>
-                    setQuantity(
-                      event.target.value,
-                    )
-                  }
+                  onChange={(event) => setQuantity(event.target.value)}
                   placeholder="Enter quantity"
                   required
                   className="h-10 w-full rounded-lg border border-border bg-background px-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary"
@@ -695,20 +442,13 @@ export function SellerInventoryPage() {
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-medium text-foreground">
-                  Reason
-                </label>
+                <label className="mb-2 block text-sm font-medium text-foreground">Reason</label>
 
                 <textarea
                   value={reason}
-                  onChange={(event) =>
-                    setReason(
-                      event.target.value,
-                    )
-                  }
+                  onChange={(event) => setReason(event.target.value)}
                   placeholder={
-                    adjustment.type ===
-                    'increase'
+                    adjustment.type === 'increase'
                       ? 'Example: New stock received'
                       : 'Example: Damaged item'
                   }
@@ -721,9 +461,7 @@ export function SellerInventoryPage() {
               <div className="flex justify-end gap-3 pt-2">
                 <button
                   type="button"
-                  onClick={
-                    closeAdjustment
-                  }
+                  onClick={closeAdjustment}
                   disabled={saving}
                   className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-foreground hover:bg-secondary disabled:opacity-50"
                 >
@@ -735,14 +473,11 @@ export function SellerInventoryPage() {
                   disabled={saving}
                   className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90 disabled:opacity-50"
                 >
-                  {saving && (
-                    <RefreshCw className="size-4 animate-spin" />
-                  )}
+                  {saving && <RefreshCw className="size-4 animate-spin" />}
 
                   {saving
                     ? 'Saving...'
-                    : adjustment.type ===
-                        'increase'
+                    : adjustment.type === 'increase'
                       ? 'Add Stock'
                       : 'Remove Stock'}
                 </button>
@@ -767,52 +502,38 @@ function StatCard({
   return (
     <div className="rounded-xl border border-border bg-card p-5">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
-          {label}
-        </p>
+        <p className="text-sm text-muted-foreground">{label}</p>
 
         <Icon className="size-5 text-muted-foreground" />
       </div>
 
-      <p className="mt-3 text-2xl font-bold text-foreground">
-        {value}
-      </p>
+      <p className="mt-3 text-2xl font-bold text-foreground">{value}</p>
     </div>
   );
 }
 
-function StockBadge({
-  status,
-}: {
-  status: SellerInventoryItem['status'];
-}) {
+function StockBadge({ status }: { status: SellerInventoryItem['status'] }) {
   const config = {
     in_stock: {
       label: 'In stock',
-      className:
-        'bg-success/10 text-success',
+      className: 'bg-success/10 text-success',
     },
 
     low_stock: {
       label: 'Low stock',
-      className:
-        'bg-amber-500/10 text-amber-600',
+      className: 'bg-amber-500/10 text-amber-600',
     },
 
     out_of_stock: {
       label: 'Out of stock',
-      className:
-        'bg-destructive/10 text-destructive',
+      className: 'bg-destructive/10 text-destructive',
     },
   };
 
-  const item =
-    config[status];
+  const item = config[status];
 
   return (
-    <span
-      className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${item.className}`}
-    >
+    <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${item.className}`}>
       {item.label}
     </span>
   );

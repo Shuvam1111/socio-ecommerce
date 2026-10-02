@@ -16,7 +16,9 @@ if (mode === '--production' && process.env.NODE_ENV !== 'production') {
 }
 
 function isBuyer(user) {
-  return user?.activeRole === 'buyer' || (Array.isArray(user?.roles) && user.roles.includes('buyer'));
+  return (
+    user?.activeRole === 'buyer' || (Array.isArray(user?.roles) && user.roles.includes('buyer'))
+  );
 }
 
 async function readUsers() {
@@ -61,4 +63,10 @@ if (updatedCount > 0) {
   });
 }
 
-console.log(JSON.stringify({ target: mode === '--production' ? 'production-blob' : 'local-file', buyers: buyers.length, updated: updatedCount }));
+console.log(
+  JSON.stringify({
+    target: mode === '--production' ? 'production-blob' : 'local-file',
+    buyers: buyers.length,
+    updated: updatedCount,
+  }),
+);

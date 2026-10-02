@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { readJson, updateJson } from '@/features/storage/services/json-storage-service';
 
 import type { SellerProduct } from '@/features/sellers/types/product';
 import type {
@@ -28,22 +27,6 @@ interface InventoryActivitiesFile {
   activities: InventoryActivity[];
 }
 
-const sellersPath = path.join(process.cwd(), 'src', 'data', 'sellers.json');
-
-const productsPath = path.join(process.cwd(), 'src', 'data', 'products.json');
-
-const activitiesPath = path.join(process.cwd(), 'src', 'data', 'inventory-activities.json');
-
-async function readJsonFile<T>(filePath: string): Promise<T> {
-  const file = await fs.readFile(filePath, 'utf-8');
-
-  return JSON.parse(file) as T;
-}
-
-async function writeJsonFile<T>(filePath: string, data: T) {
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
-}
-
 async function getAuthenticatedSeller(request: NextRequest) {
   const sellerId = request.cookies.get('socio-seller-session')?.value;
 
@@ -51,7 +34,7 @@ async function getAuthenticatedSeller(request: NextRequest) {
     return null;
   }
 
-  const data = await readJsonFile<SellersFile>(sellersPath);
+  const data = await readJson<SellersFile>('sellers.json', { sellers: [] });
 
   return (
     data.sellers.find((seller) => seller.id === sellerId && seller.status === 'active') ?? null
@@ -141,7 +124,7 @@ export async function POST(
       );
     }
 
-    const productsData = await readJsonFile<ProductsFile>(productsPath);
+    const productsData = await readJson<ProductsFile>('products.json', { products: [] });
 
     const productIndex = productsData.products.findIndex((product) => product.id === productId);
 
@@ -236,17 +219,11 @@ export async function POST(
       updatedAt: now,
     };
 
-    await writeJsonFile(productsPath, productsData);
+    await updateJson<ProductsFile>('products.json', { products: [] }, () => productsData);
 
-    let activitiesData: InventoryActivitiesFile;
-
-    try {
-      activitiesData = await readJsonFile<InventoryActivitiesFile>(activitiesPath);
-    } catch {
-      activitiesData = {
-        activities: [],
-      };
-    }
+    const activitiesData = await readJson<InventoryActivitiesFile>('inventory-activities.json', {
+      activities: [],
+    });
 
     const activity: InventoryActivity = {
       id: generateActivityId(activitiesData.activities),
@@ -280,7 +257,11 @@ export async function POST(
 
     activitiesData.activities.unshift(activity);
 
-    await writeJsonFile(activitiesPath, activitiesData);
+    await updateJson<InventoryActivitiesFile>(
+      'inventory-activities.json',
+      { activities: [] },
+      () => activitiesData,
+    );
 
     return NextResponse.json({
       message: 'Inventory updated successfully.',

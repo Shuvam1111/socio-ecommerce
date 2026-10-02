@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readJson, readSeedJson } from '@/features/storage/services/json-storage-service';
+import { readJson } from '@/features/storage/services/json-storage-service';
 import type { SellerOrder } from '@/features/sellers/types/order';
 
 interface StoredSeller {
@@ -32,8 +32,8 @@ export async function GET(request: NextRequest) {
     }
 
     const [sellersData, ordersData] = await Promise.all([
-      readJson<SellersData>('sellers.json', await readSeedJson<SellersData>('sellers.json')),
-      readJson<OrdersData>('orders.json', await readSeedJson<OrdersData>('orders.json')),
+      readJson<SellersData>('sellers.json', { sellers: [] }),
+      readJson<OrdersData>('orders.json', { orders: [] }),
     ]);
 
     const seller = sellersData.sellers.find(

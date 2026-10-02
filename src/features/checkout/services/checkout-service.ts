@@ -1,10 +1,6 @@
 import type { SellerOrder, PaymentMethod, ShippingAddress } from '@/features/sellers/types/order';
 
-import {
-  readJson,
-  readSeedJson,
-  writeJson,
-} from '@/features/storage/services/json-storage-service';
+import { readJson, writeJson } from '@/features/storage/services/json-storage-service';
 import { createNotification } from '@/features/notifications/services/notification-service';
 import {
   loadMarketplaceProducts,
@@ -53,7 +49,7 @@ export async function resolveBuyerId(token: string | null, guestId?: string) {
   if (!token) return guestId ? `GUEST-${guestId}` : null;
   const match = /^demo-user-token-(.+)$/.exec(token);
   if (!match) return guestId ? `GUEST-${guestId}` : null;
-  const users = await readJson<UsersFile>(usersKey, await readSeedJson<UsersFile>(usersKey));
+  const users = await readJson<UsersFile>(usersKey, { users: [] });
   const user = users.users.find(
     (candidate) =>
       candidate.id === match[1] &&
@@ -102,7 +98,7 @@ export async function createCheckoutOrder(items: CheckoutItemInput[], input: Che
     };
   });
   const subtotal = checkedItems.reduce((sum, item) => sum + item.totalPrice, 0);
-  const orders = await readJson<OrdersFile>(ordersKey, await readSeedJson<OrdersFile>(ordersKey));
+  const orders = await readJson<OrdersFile>(ordersKey, { orders: [] });
   const buyerId = input.buyerId ?? 'GUEST-checkout';
   const now = new Date().toISOString();
   const id = nextId(orders.orders);
@@ -158,7 +154,7 @@ export async function createCheckoutOrder(items: CheckoutItemInput[], input: Che
 }
 
 export async function getBuyerOrders(buyerId: string) {
-  const orders = await readJson<OrdersFile>(ordersKey, await readSeedJson<OrdersFile>(ordersKey));
+  const orders = await readJson<OrdersFile>(ordersKey, { orders: [] });
   return orders.orders.filter((order) => order.buyerId === buyerId);
 }
 export async function getBuyerOrder(buyerId: string, id: string) {

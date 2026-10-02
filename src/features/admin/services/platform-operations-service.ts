@@ -1,20 +1,14 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { readJson, updateJson } from '@/features/storage/services/json-storage-service';
 import type { SellerOrder } from '@/features/sellers/types/order';
 import type { SellerProduct } from '@/features/sellers/types/product';
 import { createNotification } from '@/features/notifications/services/notification-service';
 
 type JsonMap = Record<string, unknown>;
-const dataDir = path.join(process.cwd(), 'src', 'data');
-const file = (name: string) => path.join(dataDir, name);
-async function read<T extends JsonMap>(name: string): Promise<T> {
-  return JSON.parse(await fs.readFile(file(name), 'utf8')) as T;
+async function read<T extends JsonMap>(name: string, fallback = {} as T): Promise<T> {
+  return readJson<T>(name, fallback);
 }
 async function write(name: string, data: unknown) {
-  const target = file(name);
-  const temp = `${target}.${process.pid}.tmp`;
-  await fs.writeFile(temp, JSON.stringify(data, null, 2));
-  await fs.rename(temp, target);
+  await updateJson(name, data as JsonMap, () => data as JsonMap);
 }
 
 export async function getPlatformMetrics() {

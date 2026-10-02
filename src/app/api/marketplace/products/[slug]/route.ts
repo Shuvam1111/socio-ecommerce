@@ -21,9 +21,15 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
       (subcategory && subcategory.status !== 'active')
     )
       return NextResponse.json({ message: 'Product not found.' }, { status: 404 });
-    const [reviews, reviewSummary] = await Promise.all([getReviews(product.id), getReviewSummary(product.id)]);
+    const [reviews, reviewSummary] = await Promise.all([
+      getReviews(product.id),
+      getReviewSummary(product.id),
+    ]);
     return NextResponse.json({
-      product: { ...toMarketplaceProduct(product, category.name, subcategory?.name ?? null), rating: reviewSummary },
+      product: {
+        ...toMarketplaceProduct(product, category.name, subcategory?.name ?? null),
+        rating: reviewSummary,
+      },
       reviews,
     });
   } catch {

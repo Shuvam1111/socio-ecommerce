@@ -93,7 +93,6 @@ async function loadProducts() {
   return readJson<ProductsData>('products.json', { products: [] });
 }
 
-
 export async function GET(request: NextRequest) {
   try {
     const sellerId = request.headers.get('x-seller-id');
@@ -119,7 +118,6 @@ export async function GET(request: NextRequest) {
     }
 
     const data = await loadProducts();
-
 
     const products = data.products.filter((product) => {
       if (seller.role === 'super_seller') {
@@ -189,7 +187,8 @@ export async function POST(request: NextRequest) {
           categories,
           subcategories,
         );
-        if (!taxonomy.valid) return NextResponse.json({ message: taxonomy.message }, { status: 400 });
+        if (!taxonomy.valid)
+          return NextResponse.json({ message: taxonomy.message }, { status: 400 });
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : '';
@@ -201,7 +200,6 @@ export async function POST(request: NextRequest) {
     }
 
     const data = await loadProducts();
-
 
     const skuExists = data.products.some((product) => product.inventory.sku === body.inventory.sku);
 

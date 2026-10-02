@@ -27,13 +27,18 @@ class RegistrationError extends Error {}
 export async function POST(request: Request) {
   try {
     const registrationData = await request.json();
-    const firstName = typeof registrationData.firstName === 'string' ? registrationData.firstName.trim() : '';
-    const lastName = typeof registrationData.lastName === 'string' ? registrationData.lastName.trim() : '';
-    const username = typeof registrationData.username === 'string' ? registrationData.username.trim() : '';
-    const email = typeof registrationData.email === 'string' ? registrationData.email.trim().toLowerCase() : '';
+    const firstName =
+      typeof registrationData.firstName === 'string' ? registrationData.firstName.trim() : '';
+    const lastName =
+      typeof registrationData.lastName === 'string' ? registrationData.lastName.trim() : '';
+    const username =
+      typeof registrationData.username === 'string' ? registrationData.username.trim() : '';
+    const email =
+      typeof registrationData.email === 'string' ? registrationData.email.trim().toLowerCase() : '';
     const phone = typeof registrationData.phone === 'string' ? registrationData.phone.trim() : '';
     const password = typeof registrationData.password === 'string' ? registrationData.password : '';
-    const confirmPassword = typeof registrationData.confirmPassword === 'string' ? registrationData.confirmPassword : '';
+    const confirmPassword =
+      typeof registrationData.confirmPassword === 'string' ? registrationData.confirmPassword : '';
 
     if (!firstName || !lastName || !username || !email || !phone || !password || !confirmPassword) {
       return NextResponse.json({ message: 'All fields are required.' }, { status: 400 });
@@ -44,7 +49,10 @@ export async function POST(request: Request) {
     }
 
     if (password.length < 8) {
-      return NextResponse.json({ message: 'Password must be at least 8 characters.' }, { status: 400 });
+      return NextResponse.json(
+        { message: 'Password must be at least 8 characters.' },
+        { status: 400 },
+      );
     }
 
     if (password !== confirmPassword) {
@@ -58,7 +66,9 @@ export async function POST(request: Request) {
     let createdUser: StoredUser | undefined;
     await updateJson<UsersFile>('users.json', emptyUsersFile, (data) => {
       const users = Array.isArray(data.users) ? data.users : [];
-      const usernameExists = users.some((user) => user.username.toLowerCase() === username.toLowerCase());
+      const usernameExists = users.some(
+        (user) => user.username.toLowerCase() === username.toLowerCase(),
+      );
       if (usernameExists) throw new RegistrationError('Username is already registered.');
       const emailExists = users.some((user) => user.email.toLowerCase() === email);
       if (emailExists) throw new RegistrationError('Email is already registered.');

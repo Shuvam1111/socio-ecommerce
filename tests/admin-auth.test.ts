@@ -1,19 +1,8 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { createTestBlobDatasetMap } from './blob-storage-setup';
 import { createAdminSessionValue } from '@/features/auth/services/admin-authorization';
 
-const files = new Map<string, string>();
-
-vi.mock('fs/promises', () => {
-  const readFile = vi.fn(async (file: string) => {
-    const value = files.get(file);
-    if (value === undefined) throw new Error(`Missing fixture: ${file}`);
-    return value;
-  });
-  const writeFile = vi.fn(async (file: string, value: string) => {
-    files.set(file, value);
-  });
-  return { default: { readFile, writeFile }, readFile, writeFile };
-});
+const files = createTestBlobDatasetMap();
 
 const dataPath = (name: string) => `${process.cwd()}/src/data/${name}`;
 const usersPath = dataPath('users.json');

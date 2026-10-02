@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readJson } from '@/features/sellers/services/seller-authorization';
+import { readJson } from '@/features/storage/services/json-storage-service';
 import type { SellerProduct } from '@/features/sellers/types/product';
 import type { InventorySummary, SellerInventoryItem } from '@/features/sellers/types/inventory';
 

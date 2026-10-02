@@ -1,28 +1,11 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { createTestBlobDatasetMap } from './blob-storage-setup';
 
 import type { SellerOrder } from '@/features/sellers/types/order';
 import type { SellerProduct } from '@/features/sellers/types/product';
 import { resetLocalRuntimeData } from '@/features/storage/services/json-storage-service';
 
-const files = new Map<string, string>();
-
-vi.mock('fs/promises', () => {
-  const readFile = vi.fn(async (file: string) => {
-    const value = files.get(file);
-    if (value === undefined) throw new Error(`Missing test fixture: ${file}`);
-    return value;
-  });
-  const writeFile = vi.fn(async (file: string, value: string) => {
-    files.set(file.replace(/\\.\d+\.tmp$/, ''), value);
-  });
-  const rename = vi.fn(async (from: string, to: string) => {
-    const value = files.get(from);
-    if (value === undefined) throw new Error(`Missing temporary fixture: ${from}`);
-    files.set(to, value);
-    files.delete(from);
-  });
-  return { default: { readFile, writeFile, rename }, readFile, writeFile, rename };
-});
+const files = createTestBlobDatasetMap();
 
 const dataPath = (name: string) => `${process.cwd()}/src/data/${name}`;
 const productsPath = dataPath('products.json');

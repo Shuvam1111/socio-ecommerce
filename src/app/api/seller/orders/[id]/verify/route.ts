@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { readJson, readSeedJson } from '@/features/storage/services/json-storage-service';
+import { readJson } from '@/features/storage/services/json-storage-service';
 
 import { transitionOrder } from '@/features/sellers/services/order-inventory-workflow';
 
@@ -27,11 +27,8 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
       return NextResponse.json({ message: 'Seller authentication is required.' }, { status: 401 });
     const { id } = await params;
     const [sellersData, ordersData] = await Promise.all([
-      readJson<{ sellers: Seller[] }>(
-        'sellers.json',
-        await readSeedJson<{ sellers: Seller[] }>('sellers.json'),
-      ),
-      readJson<OrdersFile>('orders.json', await readSeedJson<OrdersFile>('orders.json')),
+      readJson<{ sellers: Seller[] }>('sellers.json', { sellers: [] }),
+      readJson<OrdersFile>('orders.json', { orders: [] }),
     ]);
     const seller = sellersData.sellers.find((item) => item.id === sellerId);
     if (!seller) return NextResponse.json({ message: 'Seller not found.' }, { status: 401 });

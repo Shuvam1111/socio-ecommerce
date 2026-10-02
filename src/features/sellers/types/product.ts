@@ -1,8 +1,4 @@
-export type ProductStatus =
-  | 'pending'
-  | 'approved'
-  | 'rejected'
-  | 'inactive';
+export type ProductStatus = 'pending' | 'approved' | 'rejected' | 'inactive';
 
 export interface ProductPricing {
   regularPrice: number;

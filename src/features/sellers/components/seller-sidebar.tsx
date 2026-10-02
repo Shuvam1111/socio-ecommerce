@@ -41,7 +41,6 @@ const baseNavigation = [
     href: '/seller/dashboard/orders',
     icon: ShoppingCart,
   },
-
 ];
 
 const superSellerNavigation = {
@@ -63,11 +62,7 @@ const bottomNavigation = [
   },
 ];
 
-export function SellerSidebar({
-  open,
-  onClose,
-  isSuperSeller,
-}: SellerSidebarProps) {
+export function SellerSidebar({ open, onClose, isSuperSeller }: SellerSidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -102,12 +97,8 @@ export function SellerSidebar({
         {/* Header */}
         <div className="flex h-16 items-center justify-between border-b border-border px-5">
           <div>
-            <p className="font-bold text-foreground">
-              Socio Commerce
-            </p>
-            <p className="text-xs text-muted-foreground">
-              Seller Dashboard
-            </p>
+            <p className="font-bold text-foreground">Socio Commerce</p>
+            <p className="text-xs text-muted-foreground">Seller Dashboard</p>
           </div>
 
           <button
@@ -125,9 +116,7 @@ export function SellerSidebar({
           {navigation.map((item) => {
             const Icon = item.icon;
 
-            const active =
-              pathname === item.href ||
-              pathname.startsWith(`${item.href}/`);
+            const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
             return (
               <button

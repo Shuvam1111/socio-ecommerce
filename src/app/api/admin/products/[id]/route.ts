@@ -10,7 +10,7 @@ export async function POST(request: Request, { params }: { params: Promise<unkno
   try {
     return NextResponse.json({
       product: await moderateProduct(
-        (await params as { id: string }).id,
+        ((await params) as { id: string }).id,
         body.status as 'approved' | 'rejected' | 'inactive',
       ),
     });

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readJson, readSeedJson } from '@/features/storage/services/json-storage-service';
+import { readJson } from '@/features/storage/services/json-storage-service';
 import type { SellerOrder, OrderStatus } from '@/features/sellers/types/order';
 import { transitionOrder } from '@/features/sellers/services/order-inventory-workflow';
 
@@ -42,8 +42,8 @@ export async function GET(
     const { id } = await context.params;
 
     const [sellersData, ordersData] = await Promise.all([
-      readJson<SellersData>('sellers.json', await readSeedJson<SellersData>('sellers.json')),
-      readJson<OrdersData>('orders.json', await readSeedJson<OrdersData>('orders.json')),
+      readJson<SellersData>('sellers.json', { sellers: [] }),
+      readJson<OrdersData>('orders.json', { orders: [] }),
     ]);
 
     const seller = sellersData.sellers.find(
@@ -116,10 +116,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     ];
     if (!body.status || !allowed.includes(body.status))
       return NextResponse.json({ message: 'Invalid order status.' }, { status: 400 });
-    const sellers = await readJson<SellersData>(
-      'sellers.json',
-      await readSeedJson<SellersData>('sellers.json'),
-    );
+    const sellers = await readJson<SellersData>('sellers.json', { sellers: [] });
     const seller = sellers.sellers.find((item) => item.id === sellerId);
     if (!seller) return NextResponse.json({ message: 'Seller not found.' }, { status: 401 });
     if (seller.status !== 'active')
@@ -127,10 +124,7 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
         { message: 'Inactive sellers cannot process orders.' },
         { status: 403 },
       );
-    const orders = await readJson<OrdersData>(
-      'orders.json',
-      await readSeedJson<OrdersData>('orders.json'),
-    );
+    const orders = await readJson<OrdersData>('orders.json', { orders: [] });
     const order = orders.orders.find((item) => item.id === id);
     if (!order) return NextResponse.json({ message: 'Order not found.' }, { status: 404 });
     if (

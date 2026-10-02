@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import { readJson, updateJson } from '@/features/storage/services/json-storage-service';
 import { requireAdmin } from '@/features/auth/services/admin-authorization';
 
 export async function POST(
@@ -28,15 +27,13 @@ export async function POST(
       );
     }
 
-    const filePath = path.join(process.cwd(), 'src', 'data', 'vendors.json');
-
-    const file = await fs.readFile(filePath, 'utf-8');
-
-    const data = JSON.parse(file);
+    const data = await readJson<{ vendors: Array<Record<string, unknown>> }>('vendors.json', {
+      vendors: [],
+    });
 
     const vendors = data.vendors ?? [];
 
-    const vendor = vendors.find((item: { id: string }) => item.id === vendorId);
+    const vendor = vendors.find((item) => item.id === vendorId);
 
     if (!vendor) {
       return NextResponse.json(
@@ -59,7 +56,7 @@ export async function POST(
     vendor.status = 'rejected';
     vendor.rejectionReason = reason;
 
-    await fs.writeFile(filePath, JSON.stringify({ vendors }, null, 2), 'utf-8');
+    await updateJson('vendors.json', { vendors: [] }, () => ({ vendors }));
 
     return NextResponse.json({
       message: 'Vendor rejected successfully.',

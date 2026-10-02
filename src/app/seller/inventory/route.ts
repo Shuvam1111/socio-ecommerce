@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { readJson } from '@/features/storage/services/json-storage-service';
 
 import type { SellerProduct } from '@/features/sellers/types/product';
-import type {
-  SellerInventoryItem,
-  InventorySummary,
-} from '@/features/sellers/types/inventory';
+import type { SellerInventoryItem, InventorySummary } from '@/features/sellers/types/inventory';
 
 interface SellerRecord {
   id: string;
@@ -24,26 +20,6 @@ interface ProductsFile {
   products: SellerProduct[];
 }
 
-const sellersPath = path.join(
-  process.cwd(),
-  'src',
-  'data',
-  'sellers.json',
-);
-
-const productsPath = path.join(
-  process.cwd(),
-  'src',
-  'data',
-  'products.json',
-);
-
-async function readJsonFile<T>(filePath: string): Promise<T> {
-  const file = await fs.readFile(filePath, 'utf-8');
-
-  return JSON.parse(file) as T;
-}
-
 async function getAuthenticatedSeller(request: NextRequest) {
   const sellerId = request.headers.get('x-seller-id');
 
@@ -51,23 +27,14 @@ async function getAuthenticatedSeller(request: NextRequest) {
     return null;
   }
 
-  const data = await readJsonFile<SellersFile>(
-    sellersPath,
-  );
+  const data = await readJson<SellersFile>('sellers.json', { sellers: [] });
 
   return (
-    data.sellers.find(
-      (seller) =>
-        seller.id === sellerId &&
-        seller.status === 'active',
-    ) ?? null
+    data.sellers.find((seller) => seller.id === sellerId && seller.status === 'active') ?? null
   );
 }
 
-function getStockStatus(
-  availableQuantity: number,
-  lowStockThreshold: number,
-) {
+function getStockStatus(availableQuantity: number, lowStockThreshold: number) {
   if (availableQuantity <= 0) {
     return 'out_of_stock' as const;
   }
@@ -94,86 +61,54 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const productsData =
-      await readJsonFile<ProductsFile>(
-        productsPath,
-      );
+    const productsData = await readJson<ProductsFile>('products.json', { products: [] });
 
     const products =
       seller.role === 'super_seller'
-        ? productsData.products.filter(
-            (product) =>
-              product.vendorId === seller.vendorId,
-          )
+        ? productsData.products.filter((product) => product.vendorId === seller.vendorId)
         : productsData.products.filter(
-            (product) =>
-              product.vendorId === seller.vendorId &&
-              product.sellerId === seller.id,
+            (product) => product.vendorId === seller.vendorId && product.sellerId === seller.id,
           );
 
-    const inventory: SellerInventoryItem[] =
-      products.map((product) => ({
-        productId: product.id,
-        vendorId: product.vendorId,
-        sellerId: product.sellerId,
+    const inventory: SellerInventoryItem[] = products.map((product) => ({
+      productId: product.id,
+      vendorId: product.vendorId,
+      sellerId: product.sellerId,
 
-        productName: product.name,
-        productImage:
-          product.images[0] ?? null,
+      productName: product.name,
+      productImage: product.images[0] ?? null,
 
-        sku: product.inventory.sku,
-        barcode: product.inventory.barcode,
+      sku: product.inventory.sku,
+      barcode: product.inventory.barcode,
 
-        quantity:
-          product.inventory.quantity,
+      quantity: product.inventory.quantity,
 
-        reservedQuantity:
-          product.inventory.reservedQuantity,
+      reservedQuantity: product.inventory.reservedQuantity,
 
-        availableQuantity:
-          product.inventory.availableQuantity,
+      availableQuantity: product.inventory.availableQuantity,
 
-        lowStockThreshold:
-          product.inventory.lowStockThreshold,
+      lowStockThreshold: product.inventory.lowStockThreshold,
 
-        status: getStockStatus(
-          product.inventory.availableQuantity,
-          product.inventory.lowStockThreshold,
-        ),
+      status: getStockStatus(
+        product.inventory.availableQuantity,
+        product.inventory.lowStockThreshold,
+      ),
 
-        updatedAt: product.updatedAt,
-      }));
+      updatedAt: product.updatedAt,
+    }));
 
     const summary: InventorySummary = {
       totalProducts: inventory.length,
 
-      totalUnits: inventory.reduce(
-        (sum, item) =>
-          sum + item.quantity,
-        0,
-      ),
+      totalUnits: inventory.reduce((sum, item) => sum + item.quantity, 0),
 
-      availableUnits: inventory.reduce(
-        (sum, item) =>
-          sum + item.availableQuantity,
-        0,
-      ),
+      availableUnits: inventory.reduce((sum, item) => sum + item.availableQuantity, 0),
 
-      reservedUnits: inventory.reduce(
-        (sum, item) =>
-          sum + item.reservedQuantity,
-        0,
-      ),
+      reservedUnits: inventory.reduce((sum, item) => sum + item.reservedQuantity, 0),
 
-      lowStockProducts: inventory.filter(
-        (item) =>
-          item.status === 'low_stock',
-      ).length,
+      lowStockProducts: inventory.filter((item) => item.status === 'low_stock').length,
 
-      outOfStockProducts: inventory.filter(
-        (item) =>
-          item.status === 'out_of_stock',
-      ).length,
+      outOfStockProducts: inventory.filter((item) => item.status === 'out_of_stock').length,
     };
 
     return NextResponse.json({
@@ -181,10 +116,7 @@ export async function GET(request: NextRequest) {
       summary,
     });
   } catch (error) {
-    console.error(
-      'GET /api/seller/inventory error:',
-      error,
-    );
+    console.error('GET /api/seller/inventory error:', error);
 
     return NextResponse.json(
       {

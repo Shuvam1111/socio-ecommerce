@@ -1,19 +1,8 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { createTestBlobDatasetMap } from './blob-storage-setup';
 import { NextRequest } from 'next/server';
 
-const files = new Map<string, string>();
-
-vi.mock('fs', () => {
-  const readFile = vi.fn(async (file: string) => {
-    const value = files.get(file);
-    if (value === undefined) throw new Error(`Missing test fixture: ${file}`);
-    return value;
-  });
-  const writeFile = vi.fn(async (file: string, value: string) => {
-    files.set(file, value);
-  });
-  return { promises: { readFile, writeFile } };
-});
+const files = createTestBlobDatasetMap();
 
 const dataPath = (name: string) => `${process.cwd()}/src/data/${name}`;
 const sellersPath = dataPath('sellers.json');
@@ -82,6 +71,8 @@ function seed() {
     }),
   );
   files.set(activitiesPath, JSON.stringify({ activities: [] }));
+  files.set('categories.json', JSON.stringify({ categories: [{ id: 'CAT', name: 'Test', slug: 'test', status: 'active' }] }));
+  files.set('subcategories.json', JSON.stringify({ subcategories: [] }));
 }
 
 function request(method: string, path: string, sellerId?: string, body?: unknown) {
