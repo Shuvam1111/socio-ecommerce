@@ -33,7 +33,6 @@ type UsersFile = { users: User[] };
 const reviewsKey = 'reviews.json';
 const ordersKey = 'orders.json';
 
-
 export function buyerIdFromToken(token: string | null) {
   return token?.startsWith('demo-user-token-') ? token.slice('demo-user-token-'.length) : null;
 }
@@ -60,16 +59,14 @@ export function isEligiblePurchase(order: SellerOrder, buyerId: string, productI
 }
 
 export function aggregateReviews(reviews: ReviewRecord[]) {
-  const approved = reviews.filter(
-    (review) => review.status === 'approved' || review.status === 'published',
-  );
+  const published = reviews.filter((review) => review.status === 'published');
   return {
-    average: approved.length
+    average: published.length
       ? Number(
-          (approved.reduce((sum, review) => sum + review.rating, 0) / approved.length).toFixed(1),
+          (published.reduce((sum, review) => sum + review.rating, 0) / published.length).toFixed(1),
         )
       : 0,
-    count: approved.length,
+    count: published.length,
   };
 }
 export function validateReviewInput(input: unknown) {
@@ -93,9 +90,7 @@ export async function getReviews(productId: string) {
     readJson<UsersFile>('users.json', { users: [] }),
   ]);
   const visible = reviews.filter(
-    (review) =>
-      review.productId === productId &&
-      (review.status === 'approved' || review.status === 'published'),
+    (review) => review.productId === productId && review.status === 'published',
   );
   return visible.map((review) => publicReview(review, users));
 }
@@ -154,7 +149,7 @@ export async function createReview(
     rating: input.rating,
     title: input.title.trim(),
     comment: input.comment.trim(),
-    status: 'pending',
+    status: 'published',
     verifiedPurchase: true,
     createdAt: now,
     updatedAt: now,
@@ -179,7 +174,7 @@ export async function updateBuyerReview(
   review.rating = input.rating;
   review.title = input.title?.trim() ?? '';
   review.comment = input.comment.trim();
-  review.status = 'pending';
+  review.status = 'published';
   review.updatedAt = new Date().toISOString();
   await writeJson(reviewsKey, file);
   await refreshProductRating(review.productId);
@@ -198,11 +193,11 @@ export async function refreshProductRating(productId: string) {
   }));
   return rating;
 }
-export async function moderateReview(id: string, status: 'approved' | 'rejected') {
+export async function moderateReview(id: string, status: 'published' | 'rejected' | 'approved') {
   const file = await readJson<ReviewFile>(reviewsKey, { reviews: [] });
   const review = file.reviews.find((item) => item.id === id);
   if (!review) throw Object.assign(new Error('Review not found.'), { status: 404 });
-  review.status = status;
+  review.status = status === 'approved' ? 'published' : status;
   review.updatedAt = new Date().toISOString();
   await writeJson(reviewsKey, file);
   await refreshProductRating(review.productId);
