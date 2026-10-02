@@ -1,4 +1,5 @@
-import { readJson, writeJson } from '@/features/storage/services/json-storage-service';
+import { readJson, updateJson, writeJson } from '@/features/storage/services/json-storage-service';
+import type { SellerProduct } from '@/features/sellers/types/product';
 import type { SellerOrder } from '@/features/sellers/types/order';
 import { createNotification } from '@/features/notifications/services/notification-service';
 
@@ -6,7 +7,8 @@ export type ReviewStatus = 'pending' | 'approved' | 'rejected' | 'published';
 export type ReviewRecord = {
   id: string;
   productId: string;
-  orderId: string;
+  orderId?: string;
+
   buyerId: string;
   rating: number;
   title: string;
@@ -30,9 +32,7 @@ type UsersFile = { users: User[] };
 
 const reviewsKey = 'reviews.json';
 const ordersKey = 'orders.json';
-async function read<T>(file: string): Promise<T> {
-  return readJson<T>(file, {} as T);
-}
+
 
 export function buyerIdFromToken(token: string | null) {
   return token?.startsWith('demo-user-token-') ? token.slice('demo-user-token-'.length) : null;
@@ -73,13 +73,15 @@ export function aggregateReviews(reviews: ReviewRecord[]) {
   };
 }
 export function validateReviewInput(input: unknown) {
+  if (!input || typeof input !== 'object') return false;
   const body = input as { rating?: unknown; title?: unknown; comment?: unknown };
   return (
+    typeof body.rating === 'number' &&
     Number.isInteger(body.rating) &&
-    Number(body.rating) >= 1 &&
-    Number(body.rating) <= 5 &&
-    typeof body.title === 'string' &&
-    body.title.trim().length <= 100 &&
+    body.rating >= 1 &&
+    body.rating <= 5 &&
+    (body.title === undefined ||
+      (typeof body.title === 'string' && body.title.trim().length <= 100)) &&
     typeof body.comment === 'string' &&
     body.comment.trim().length > 0 &&
     body.comment.trim().length <= 2000
@@ -112,6 +114,10 @@ export async function getReviewContext(productId: string, buyerId: string) {
     eligible: purchased && !review,
     reviewed: Boolean(review),
     reviewId: review?.id ?? null,
+    review: review
+      ? { id: review.id, rating: review.rating, title: review.title, comment: review.comment }
+      : null,
+    pending: review?.status === 'pending',
   };
 }
 export async function createReview(
@@ -134,6 +140,11 @@ export async function createReview(
     )
   )
     throw Object.assign(new Error('You have already reviewed this product.'), { status: 409 });
+  const productFile = await readJson<{ products: SellerProduct[] }>('products.json', {
+    products: [],
+  });
+  if (!productFile.products.some((product) => product.id === productId))
+    throw Object.assign(new Error('Product not found.'), { status: 404 });
   const now = new Date().toISOString();
   const review: ReviewRecord = {
     id: `REV-${String(reviewFile.reviews.length + 1).padStart(6, '0')}`,
@@ -150,7 +161,42 @@ export async function createReview(
   };
   reviewFile.reviews.push(review);
   await writeJson(reviewsKey, reviewFile);
+  await refreshProductRating(productId);
   return review;
+}
+
+export async function updateBuyerReview(
+  reviewId: string,
+  productId: string,
+  buyerId: string,
+  input: { rating: number; title?: string; comment: string },
+) {
+  const file = await readJson<ReviewFile>(reviewsKey, { reviews: [] });
+  const review = file.reviews.find(
+    (item) => item.id === reviewId && item.buyerId === buyerId && item.productId === productId,
+  );
+  if (!review) throw Object.assign(new Error('Review not found.'), { status: 404 });
+  review.rating = input.rating;
+  review.title = input.title?.trim() ?? '';
+  review.comment = input.comment.trim();
+  review.status = 'pending';
+  review.updatedAt = new Date().toISOString();
+  await writeJson(reviewsKey, file);
+  await refreshProductRating(review.productId);
+  return review;
+}
+
+export async function refreshProductRating(productId: string) {
+  const { reviews } = await readJson<ReviewFile>(reviewsKey, { reviews: [] });
+  const rating = aggregateReviews(reviews.filter((review) => review.productId === productId));
+  await updateJson<{ products: SellerProduct[] }>('products.json', { products: [] }, (data) => ({
+    products: (data.products ?? []).map((product) =>
+      product.id === productId
+        ? { ...product, rating, updatedAt: new Date().toISOString() }
+        : product,
+    ),
+  }));
+  return rating;
 }
 export async function moderateReview(id: string, status: 'approved' | 'rejected') {
   const file = await readJson<ReviewFile>(reviewsKey, { reviews: [] });
@@ -159,6 +205,7 @@ export async function moderateReview(id: string, status: 'approved' | 'rejected'
   review.status = status;
   review.updatedAt = new Date().toISOString();
   await writeJson(reviewsKey, file);
+  await refreshProductRating(review.productId);
   try {
     await createNotification({
       recipientId: review.buyerId,
