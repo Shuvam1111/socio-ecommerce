@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
+import { readJson, updateJson } from '@/features/storage/services/json-storage-service';
+
 import {
   loadCategories,
   loadSubcategories,
@@ -83,25 +83,15 @@ interface ProductsData {
   products: Product[];
 }
 
-function getProductsPath() {
-  return path.join(process.cwd(), 'src', 'data', 'products.json');
-}
-
 async function getSeller(sellerId: string) {
-  const sellersPath = path.join(process.cwd(), 'src', 'data', 'sellers.json');
-
-  const file = await fs.readFile(sellersPath, 'utf-8');
-
-  const data = JSON.parse(file) as SellersData;
-
+  const data = await readJson<SellersData>('sellers.json', { sellers: [] });
   return data.sellers.find((seller) => seller.id === sellerId && seller.status === 'active');
 }
 
 async function loadProducts() {
-  const file = await fs.readFile(getProductsPath(), 'utf-8');
-
-  return JSON.parse(file) as ProductsData;
+  return readJson<ProductsData>('products.json', { products: [] });
 }
+
 
 function canAccessProduct(product: Product, seller: Seller) {
   return (
@@ -227,13 +217,17 @@ export async function PUT(
 
     const data = await loadProducts();
     try {
-      const taxonomy = validateProductTaxonomy(
-        body.categoryId ?? data.products.find((item) => item.id === id)?.categoryId,
-        body.subcategoryId ?? data.products.find((item) => item.id === id)?.subcategoryId,
-        await loadCategories(),
-        await loadSubcategories(),
-      );
-      if (!taxonomy.valid) return NextResponse.json({ message: taxonomy.message }, { status: 400 });
+      const categories = await loadCategories();
+      const subcategories = await loadSubcategories();
+      if (categories.length > 0 || subcategories.length > 0) {
+        const taxonomy = validateProductTaxonomy(
+          body.categoryId ?? data.products.find((item) => item.id === id)?.categoryId,
+          body.subcategoryId ?? data.products.find((item) => item.id === id)?.subcategoryId,
+          categories,
+          subcategories,
+        );
+        if (!taxonomy.valid) return NextResponse.json({ message: taxonomy.message }, { status: 400 });
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : '';
       if (
@@ -322,9 +316,13 @@ export async function PUT(
       updatedAt: new Date().toISOString(),
     };
 
-    data.products[productIndex] = updatedProduct;
-
-    await fs.writeFile(getProductsPath(), JSON.stringify(data, null, 2), 'utf-8');
+    await updateJson<ProductsData>('products.json', { products: [] }, (current) => {
+      const index = current.products.findIndex((item) => item.id === id);
+      if (index === -1) throw new Error('PRODUCT_NOT_FOUND');
+      const next = [...current.products];
+      next[index] = updatedProduct;
+      return { products: next };
+    });
 
     return NextResponse.json({
       message: 'Product updated successfully.',
@@ -397,9 +395,9 @@ export async function DELETE(
       );
     }
 
-    data.products = data.products.filter((item) => item.id !== id);
-
-    await fs.writeFile(getProductsPath(), JSON.stringify(data, null, 2), 'utf-8');
+    await updateJson<ProductsData>('products.json', { products: [] }, (current) => ({
+      products: current.products.filter((item) => item.id !== id),
+    }));
 
     return NextResponse.json({
       message: 'Product deleted successfully.',

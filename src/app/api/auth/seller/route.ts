@@ -1,7 +1,24 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import { readJson } from '@/features/storage/services/json-storage-service';
 import { clearAdminSession } from '@/features/auth/services/admin-authorization';
+
+interface SellerLoginUser {
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  status: string;
+}
+
+interface SellerLoginSeller {
+  id: string;
+  userId: string;
+  vendorId: string;
+  role: string;
+  status: string;
+  permissions?: string[];
+}
+
 
 export async function POST(request: Request) {
   try {
@@ -20,17 +37,11 @@ export async function POST(request: Request) {
       );
     }
 
-    const usersPath = path.join(process.cwd(), 'src', 'data', 'users.json');
-
-    const sellersPath = path.join(process.cwd(), 'src', 'data', 'sellers.json');
-
-    const [usersFile, sellersFile] = await Promise.all([
-      fs.readFile(usersPath, 'utf-8'),
-      fs.readFile(sellersPath, 'utf-8'),
+    const [usersData, sellersData] = await Promise.all([
+      readJson<{ users: SellerLoginUser[] }>('users.json', { users: [] }),
+      readJson<{ sellers: SellerLoginSeller[] }>('sellers.json', { sellers: [] }),
     ]);
 
-    const usersData = JSON.parse(usersFile);
-    const sellersData = JSON.parse(sellersFile);
 
     const user = (usersData.users ?? []).find(
       (item: { username: string; email: string; password: string }) =>

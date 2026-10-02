@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import { readJson } from '@/features/storage/services/json-storage-service';
+
 import type { SellerProduct } from '@/features/sellers/types/product';
 import { loadCategories, loadSubcategories } from '@/features/catalog/services/taxonomy-service';
 
@@ -31,13 +31,9 @@ export type MarketplaceDetailProduct = Omit<
   subcategoryName: string | null;
 };
 
-function productsPath() {
-  return path.join(process.cwd(), 'src', 'data', 'products.json');
-}
-
 export async function loadMarketplaceProducts(): Promise<SellerProduct[]> {
-  const file = await fs.readFile(productsPath(), 'utf8');
-  const data = JSON.parse(file) as ProductsData;
+  const data = await readJson<ProductsData>('products.json', { products: [] });
+
   return data.products.filter((product) => product.status === 'approved');
 }
 

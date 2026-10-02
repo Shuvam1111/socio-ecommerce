@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import { readJson, updateJson } from '@/features/storage/services/json-storage-service';
+
 import type { SellerProduct } from '@/features/sellers/types/product';
 import {
   getAvailableQuantity,
@@ -25,20 +25,11 @@ export class CartAccessError extends Error {
 interface CartsData {
   carts: StoredCart[];
 }
-const cartPath = () => path.join(process.cwd(), 'src', 'data', 'carts.json');
 async function readCarts() {
-  try {
-    return JSON.parse(await fs.readFile(cartPath(), 'utf8')) as CartsData;
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return { carts: [] };
-    throw error;
-  }
+  return readJson<CartsData>('carts.json', { carts: [] });
 }
 async function writeCarts(data: CartsData) {
-  const target = cartPath();
-  const temp = `${target}.tmp`;
-  await fs.writeFile(temp, JSON.stringify(data, null, 2));
-  await fs.rename(temp, target);
+  await updateJson<CartsData>('carts.json', { carts: [] }, () => data);
 }
 export function validateCartQuantity(quantity: unknown) {
   return typeof quantity === 'number' && Number.isInteger(quantity) && quantity >= 1;

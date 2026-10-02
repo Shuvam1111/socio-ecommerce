@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import { readJson, writeJson } from '@/features/storage/services/json-storage-service';
+
 
 export type TaxonomyStatus = 'active' | 'inactive';
 export interface CategoryRecord {
@@ -26,35 +26,42 @@ interface ProductsData {
   products: Array<{ categoryId?: string; subcategoryId?: string | null }>;
 }
 
-const dataPath = (name: string) => path.join(process.cwd(), 'src', 'data', name);
 const normalize = (value: string) => value.trim().toLowerCase();
+
 const slugify = (value: string) =>
   normalize(value)
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
 
-async function readJson<T>(name: string): Promise<T> {
-  return JSON.parse(await fs.readFile(dataPath(name), 'utf8')) as T;
+async function readDataset<T>(name: string, fallback: T): Promise<T> {
+  return readJson<T>(name, fallback);
 }
-async function writeJson(name: string, data: unknown) {
-  await fs.writeFile(dataPath(name), JSON.stringify(data, null, 2), 'utf8');
+async function writeDataset(name: string, data: unknown) {
+  await writeJson(name, data);
 }
+
 export const createSlug = slugify;
 export async function loadCategories() {
-  return (await readJson<{ categories: CategoryRecord[] }>('categories.json')).categories;
+  return (await readDataset<{ categories: CategoryRecord[] }>('categories.json', { categories: [] })).categories;
+
 }
 export async function loadSubcategories() {
-  return (await readJson<{ subcategories: SubcategoryRecord[] }>('subcategories.json'))
-    .subcategories;
+  return (
+    await readDataset<{ subcategories: SubcategoryRecord[] }>('subcategories.json', {
+      subcategories: [],
+    })
+  ).subcategories;
+
 }
 export async function loadProducts() {
-  return (await readJson<ProductsData>('products.json')).products;
+  return (await readDataset<ProductsData>('products.json', { products: [] })).products;
+
 }
 export async function saveCategories(categories: CategoryRecord[]) {
-  await writeJson('categories.json', { categories });
+  await writeDataset('categories.json', { categories });
 }
 export async function saveSubcategories(subcategories: SubcategoryRecord[]) {
-  await writeJson('subcategories.json', { subcategories });
+  await writeDataset('subcategories.json', { subcategories });
 }
 export function validateStatus(status: unknown): status is TaxonomyStatus {
   return status === 'active' || status === 'inactive';

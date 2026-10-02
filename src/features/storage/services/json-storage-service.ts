@@ -1,4 +1,4 @@
-import fs from 'fs/promises';
+import { promises as fs } from 'fs';
 import path from 'path';
 import { get, put } from '@vercel/blob';
 
@@ -7,7 +7,6 @@ const blobPrefix = 'socio-commerce/runtime';
 const verificationAttempts = 4;
 const initializationLocks = new Map<string, Promise<void>>();
 const updateLocks = new Map<string, Promise<unknown>>();
-const localRuntimeData = new Map<string, unknown>();
 
 type BlobMissingError = Error & { status?: number; statusCode?: number; code?: string };
 
@@ -86,13 +85,10 @@ async function initializeDataset<T>(key: string): Promise<void> {
   }
 }
 
-export function resetLocalRuntimeData() {
-  localRuntimeData.clear();
-}
+export function resetLocalRuntimeData() {}
 
 export async function readJson<T>(key: string, fallback: T): Promise<T> {
   if (!isProductionStorageEnabled()) {
-    if (localRuntimeData.has(key)) return localRuntimeData.get(key) as T;
     try {
       return await readLocalJson<T>(key);
     } catch {
@@ -142,7 +138,6 @@ export async function writeJson<T>(key: string, data: T): Promise<void> {
 
   const serialized = JSON.stringify(data, null, 2);
   await fs.writeFile(localPath(key), serialized, 'utf8');
-  localRuntimeData.set(key, data);
 }
 
 export async function updateJson<T>(
