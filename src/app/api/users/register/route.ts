@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { updateJson } from '@/features/storage/services/json-storage-service';
+import { exists, updateJson } from '@/features/storage/services/json-storage-service';
 
 type StoredUser = {
   id: string;
@@ -49,6 +49,10 @@ export async function POST(request: Request) {
 
     if (password !== confirmPassword) {
       return NextResponse.json({ message: 'Passwords do not match.' }, { status: 400 });
+    }
+
+    if (process.env.NODE_ENV === 'production' && !(await exists('users.json'))) {
+      throw new Error('Production users.json is missing from the configured Blob store.');
     }
 
     let createdUser: StoredUser | undefined;
