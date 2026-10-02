@@ -22,9 +22,14 @@ function blobPath(key: string) {
 
 function isMissingBlobError(error: unknown) {
   if (!error || typeof error !== 'object') return false;
-  const candidate = error as BlobMissingError;
+  const candidate = error as BlobMissingError & { name?: string; message?: string };
+  const message = candidate.message?.toLowerCase() ?? '';
   return (
-    candidate.status === 404 || candidate.statusCode === 404 || candidate.code === 'BLOB_NOT_FOUND'
+    candidate.status === 404 ||
+    candidate.statusCode === 404 ||
+    candidate.code === 'BLOB_NOT_FOUND' ||
+    candidate.name === 'BlobNotFoundError' ||
+    message.includes('requested blob does not exist')
   );
 }
 
