@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+
+import { readJson } from '@/features/storage/services/json-storage-service';
+
 
 export async function POST(request: Request) {
   try {
@@ -19,11 +20,15 @@ export async function POST(request: Request) {
       );
     }
 
-    const filePath = path.join(process.cwd(), 'src', 'data', 'users.json');
+    const data = await readJson<{ users: Array<{
+      username: string;
+      email: string;
+      password: string;
+      status: string;
+      roles: string[];
+      [key: string]: unknown;
+    }> }>('users.json', { users: [] });
 
-    const file = await fs.readFile(filePath, 'utf-8');
-
-    const data = JSON.parse(file);
 
     const user = (data.users ?? []).find(
       (item: { username: string; email: string; password: string }) =>

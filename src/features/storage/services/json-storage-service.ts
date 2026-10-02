@@ -65,10 +65,14 @@ export async function writeJson<T>(key: string, data: T): Promise<void> {
     });
 
     // Confirm the committed object is readable from the same explicitly targeted store.
-    const persisted = await readBlob<T>(key);
-    if (persisted === null || JSON.stringify(persisted, null, 2) !== serialized) {
-      throw new Error(`Blob persistence verification failed for ${blobPath(key)}.`);
+    // Blob reads can briefly lag an overwrite, so retry before treating the write as failed.
+    let persisted: T | null = null;
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      persisted = await readBlob<T>(key);
+      if (persisted !== null && JSON.stringify(persisted, null, 2) === serialized) return;
+      if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 250 * (attempt + 1)));
     }
+    throw new Error(`Blob persistence verification failed for ${blobPath(key)}.`);
     return;
   }
 
