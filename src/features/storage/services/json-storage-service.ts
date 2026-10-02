@@ -74,7 +74,7 @@ function isMissingBlobError(error: unknown): boolean {
     message === 'the requested blob does not exist'
   ) {
     return true;
-  }
+}
 
   return candidate.cause !== error && isMissingBlobError(candidate.cause);
 }
@@ -126,7 +126,8 @@ async function readBlobWithRetry<T>(key: string): Promise<T | null> {
     if (persisted !== null) return persisted;
     if (attempt < verificationAttempts - 1) {
       await new Promise((resolve) => setTimeout(resolve, 150 * (attempt + 1)));
-    }
+}
+
   }
   return null;
 }
@@ -175,4 +176,62 @@ export async function seedJsonIfMissing<T>(key: string, seed: T): Promise<boolea
   if (await exists(key)) return false;
   await writeJson(key, seed);
   return true;
+}
+
+type DatasetRecord = { id?: string | number };
+type DatasetValue = DatasetRecord[] | Record<string, unknown>;
+
+function recordsFor(value: DatasetValue): DatasetRecord[] {
+  if (Array.isArray(value)) return value;
+  const collection = Object.values(value).find(Array.isArray);
+  return (collection as DatasetRecord[] | undefined) ?? [];
+}
+
+function mergeRecords(existing: DatasetValue, seed: DatasetValue): DatasetValue {
+  if (Array.isArray(existing) && Array.isArray(seed)) {
+    const ids = new Set(existing.map((record) => record.id).filter((id) => id !== undefined));
+    return [...existing, ...seed.filter((record) => record.id === undefined || !ids.has(record.id))];
+  }
+
+  if (Array.isArray(existing) || Array.isArray(seed)) return existing;
+
+  const key = Object.keys(seed).find((candidate) => Array.isArray(seed[candidate]));
+  if (!key || !Array.isArray(existing[key]) || !Array.isArray(seed[key])) return existing;
+
+  const current = existing[key] as DatasetRecord[];
+  const ids = new Set(current.map((record) => record.id).filter((id) => id !== undefined));
+  return {
+    ...existing,
+    [key]: [...current, ...(seed[key] as DatasetRecord[]).filter(
+      (record) => record.id === undefined || !ids.has(record.id),
+    )],
+  };
+}
+
+export type MigrationReport = {
+  dataset: string;
+  existingRecords: number;
+  seedRecords: number;
+  recordsToAdd: number;
+  recordsPreserved: number;
+};
+
+export async function mergeJsonSeed<T extends DatasetValue>(
+  key: string,
+  seed: T,
+  dryRun = false,
+): Promise<MigrationReport> {
+  const existing = await readJsonIfPresent<T>(key);
+  const seedRecords = recordsFor(seed).filter((record) => record.id !== undefined);
+  if (existing === null) {
+    if (!dryRun) await writeJson(key, seed);
+    return { dataset: key, existingRecords: 0, seedRecords: seedRecords.length, recordsToAdd: seedRecords.length, recordsPreserved: 0 };
+  }
+  const existingRecords = recordsFor(existing);
+  const ids = new Set(existingRecords.map((record) => record.id).filter((id) => id !== undefined));
+  const recordsToAdd = seedRecords.filter(
+    (record) => record.id !== undefined && !ids.has(record.id),
+  ).length;
+  if (!dryRun && recordsToAdd > 0) await writeJson(key, mergeRecords(existing, seed) as T);
+  return { dataset: key, existingRecords: existingRecords.length, seedRecords: seedRecords.length, recordsToAdd, recordsPreserved: existingRecords.length };
 }
