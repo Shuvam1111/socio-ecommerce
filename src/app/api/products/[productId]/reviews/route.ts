@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import {
   createReview,
   getBuyerReviewContext,
+  updateBuyerReview,
   getReviews,
   validateReviewInput,
   buyerIdFromToken,
@@ -12,6 +13,36 @@ export async function GET(
 ) {
   return NextResponse.json({ reviews: await getReviews((await params).productId) });
 }
+export async function PATCH(
+  request: Request,
+  { params }: { params: Promise<{ productId: string }> },
+) {
+  const buyerId = buyerIdFromToken(request.headers.get('x-user-token'));
+  if (!buyerId)
+    return NextResponse.json({ message: 'Buyer authentication is required.' }, { status: 401 });
+  const body = await request.json().catch(() => null);
+  if (!validateReviewInput(body))
+    return NextResponse.json(
+      { message: 'Rating, title, and comment are invalid.' },
+      { status: 400 },
+    );
+  const reviewId = new URL(request.url).searchParams.get('reviewId');
+  if (!reviewId) return NextResponse.json({ message: 'Review ID is required.' }, { status: 400 });
+  try {
+    const review = await updateBuyerReview(reviewId, (await params).productId, buyerId, body);
+    return NextResponse.json({ review });
+  } catch (error) {
+    const status =
+      error instanceof Error && 'status' in error
+        ? Number((error as { status: number }).status)
+        : 500;
+    return NextResponse.json(
+      { message: error instanceof Error ? error.message : 'Unable to update review.' },
+      { status },
+    );
+  }
+}
+
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ productId: string }> },
