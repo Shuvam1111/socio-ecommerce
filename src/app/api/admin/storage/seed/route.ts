@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
-import { requireAdmin } from '@/features/auth/services/admin-authorization';
+import {
+  BOOTSTRAP_ADMIN,
+  requireAdmin,
+} from '@/features/auth/services/admin-authorization';
 import { seedJsonIfMissing } from '@/features/storage/services/json-storage-service';
-import users from '@/data/users.json';
 import vendors from '@/data/vendors.json';
 import sellers from '@/data/sellers.json';
 import products from '@/data/products.json';
@@ -15,7 +17,7 @@ import platformSettings from '@/data/platform-settings.json';
 import inventoryActivities from '@/data/inventory-activities.json';
 
 const datasets = {
-  'users.json': users,
+  'users.json': { users: [BOOTSTRAP_ADMIN] },
   'vendors.json': vendors,
   'sellers.json': sellers,
   'products.json': products,

@@ -1,8 +1,23 @@
 import { NextResponse } from 'next/server';
 import { readJsonIfPresent } from '@/features/storage/services/json-storage-service';
-import bootstrapUsers from '@/data/users.json';
-import { safeAdminUser, setAdminSession } from '@/features/auth/services/admin-authorization';
+import {
+  BOOTSTRAP_ADMIN,
+  safeAdminUser,
+  setAdminSession,
+} from '@/features/auth/services/admin-authorization';
 import { clearSellerSession } from '@/features/sellers/services/seller-authorization';
+
+type LoginUser = {
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  status: string;
+  roles: readonly string[];
+  firstName?: unknown;
+  lastName?: unknown;
+  [key: string]: unknown;
+};
 
 export async function POST(request: Request) {
   try {
@@ -24,17 +39,9 @@ export async function POST(request: Request) {
     }
 
     const storedData = await readJsonIfPresent<{
-      users?: Array<{
-        id: string;
-        username: string;
-        email: string;
-        password: string;
-        status: string;
-        roles: string[];
-        [key: string]: unknown;
-      }>;
+      users?: LoginUser[];
     }>('users.json');
-    const users = storedData?.users ?? bootstrapUsers.users;
+    const users: LoginUser[] = storedData?.users ?? [BOOTSTRAP_ADMIN];
 
     if (!storedData) {
       console.warn(
@@ -43,13 +50,7 @@ export async function POST(request: Request) {
     }
 
     const user = users.find(
-      (currentUser: {
-        username: string;
-        email: string;
-        password: string;
-        status: string;
-        roles: string[];
-      }) =>
+      (currentUser: LoginUser) =>
         (currentUser.username.toLowerCase() === identifier ||
           currentUser.email.toLowerCase() === identifier) &&
         currentUser.password === password,
