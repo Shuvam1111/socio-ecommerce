@@ -33,6 +33,7 @@ type Product = {
   brand: string;
   model: string;
   pricing: { salePrice: number; regularPrice: number };
+  images: string[];
 };
 type Order = {
   id: string;
@@ -112,6 +113,11 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
       setError('Prices cannot be negative.');
       return;
     }
+    const images = editing.images.map((image) => image.trim());
+    if (images.some((image) => !image || !/^https?:\/\/[^\s]+$/i.test(image))) {
+      setError('Use valid http(s) image URLs and remove empty image entries.');
+      return;
+    }
     setSaving(true);
     const response = await fetch(`/api/admin/products/${editing.id}`, {
       method: 'PATCH',
@@ -123,6 +129,7 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
         brand: editing.brand,
         model: editing.model,
         pricing: editing.pricing,
+        images,
       }),
     });
     const data = await response.json();
@@ -137,7 +144,29 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
           Product[] | Order[],
     );
     setEditing(null);
+    setEditOpen(false);
   }
+  function updateImage(index: number, value: string) {
+    if (!editing) return;
+    setEditing({
+      ...editing,
+      images: editing.images.map((image, imageIndex) => (imageIndex === index ? value : image)),
+    });
+  }
+
+  function addImage() {
+    if (!editing) return;
+    setEditing({ ...editing, images: [...editing.images, ''] });
+  }
+
+  function removeImage(index: number) {
+    if (!editing) return;
+    setEditing({
+      ...editing,
+      images: editing.images.filter((_, imageIndex) => imageIndex !== index),
+    });
+  }
+
   async function moderate(id: string, next: 'approved' | 'rejected' | 'inactive') {
     const response = await fetch(`/api/admin/products/${id}`, {
       method: 'POST',
@@ -337,6 +366,30 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
                 aria-label="Description"
                 placeholder="Description"
               />
+              <div className="flex flex-col gap-2 rounded-lg border border-border p-3">
+                <p className="text-sm font-medium">Product images</p>
+                {editing.images.map((image, index) => (
+                  <div key={`${editing.id}-image-${index}`} className="flex gap-2">
+                    <Input
+                      value={image}
+                      onChange={(event) => updateImage(index, event.target.value)}
+                      aria-label={
+                        index === 0 ? 'Primary image URL' : `Secondary image ${index} URL`
+                      }
+                      placeholder={index === 0 ? 'Primary image URL' : 'Secondary image URL'}
+                      type="url"
+                    />
+                    {index > 0 && (
+                      <Button type="button" variant="outline" onClick={() => removeImage(index)}>
+                        Remove
+                      </Button>
+                    )}
+                  </div>
+                ))}
+                <Button type="button" variant="outline" onClick={addImage}>
+                  + Add secondary image
+                </Button>
+              </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 <Input
                   type="number"
