@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import { SiteFooter } from './site-footer';
 import { SiteHeader } from './site-header';
@@ -12,17 +12,28 @@ type SiteShellProps = {
 };
 
 export function SiteShell({ children }: SiteShellProps) {
-  const pathname = usePathname();
-  const isSellerDashboardRoute =
-    pathname === '/seller/dashboard' || pathname.startsWith('/seller/dashboard/');
-  const isAdminRoute = pathname === '/admin' || pathname.startsWith('/admin/');
+  const [isBareRoute, setIsBareRoute] = useState(false);
 
-  if (isSellerDashboardRoute || isAdminRoute) {
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const pathname = window.location.pathname;
+      setIsBareRoute(
+        pathname === '/admin' ||
+          pathname.startsWith('/admin/') ||
+          pathname === '/seller/dashboard' ||
+          pathname.startsWith('/seller/dashboard/'),
+      );
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  if (isBareRoute) {
     return <>{children}</>;
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background pb-16 text-foreground md:pb-0">
+    <div className="flex min-h-screen flex-col bg-background pb-16 text-foreground selection:bg-primary/20 md:pb-0">
       <SiteHeader />
 
       <main className="flex-1">{children}</main>

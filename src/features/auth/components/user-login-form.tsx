@@ -63,7 +63,7 @@ export function UserLoginForm() {
 
   return (
     <div className="mx-auto w-full max-w-md">
-      <Card>
+      <Card className="border-border/80 shadow-sm">
         <CardHeader className="text-center">
           <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-primary/10">
             <LogIn className="size-6 text-primary" />

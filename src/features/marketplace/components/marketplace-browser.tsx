@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+
 import { Search, SlidersHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,10 +22,11 @@ export function MarketplaceBrowser({
   const [categoryId, setCategoryId] = useState('');
   const [subcategoryId, setSubcategoryId] = useState('');
   const [sort, setSort] = useState('relevance');
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const visibleSubs = subcategories.filter((item) => !categoryId || item.categoryId === categoryId);
-  /* eslint-disable react-hooks/set-state-in-effect */
+
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
@@ -48,7 +49,7 @@ export function MarketplaceBrowser({
   }, [search, categoryId, subcategoryId, sort, pagination.page]);
   /* eslint-enable react-hooks/set-state-in-effect */
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
       <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
@@ -61,16 +62,16 @@ export function MarketplaceBrowser({
             Browse approved products from Socio Commerce sellers.
           </p>
         </div>
-        <Button asChild variant="outline">
-          <Link href="/cart">View cart</Link>
-        </Button>
       </div>
-      <section className="mb-8 rounded-2xl border border-border bg-card p-4">
-        <div className="flex flex-col gap-3 lg:flex-row">
-          <div className="relative flex-1">
+      <section
+        aria-label="Product filters"
+        className="mb-8 rounded-2xl border border-border bg-card p-4 shadow-sm"
+      >
+        <div className="flex flex-col gap-2 md:flex-row">
+          <div className="relative min-w-0 flex-1">
             <Search className="pointer-events-none absolute left-3 top-2.5 size-4 text-muted-foreground" />
             <Input
-              className="pl-9"
+              className="h-9 pl-9"
               placeholder="Search products, brands, models..."
               value={search}
               onChange={(event) => {
@@ -79,50 +80,139 @@ export function MarketplaceBrowser({
               }}
             />
           </div>
-          <select
-            className="h-8 rounded-lg border border-border bg-background px-3 text-sm"
-            value={categoryId}
-            onChange={(event) => {
-              setCategoryId(event.target.value);
-              setSubcategoryId('');
-              setPagination((current) => ({ ...current, page: 1 }));
-            }}
+          <div className="hidden gap-2 md:flex">
+            <select
+              className="h-9 rounded-lg border border-border bg-background px-3 text-sm"
+              value={categoryId}
+              onChange={(event) => {
+                setCategoryId(event.target.value);
+                setSubcategoryId('');
+                setPagination((current) => ({ ...current, page: 1 }));
+              }}
+            >
+              <option value="">All categories</option>
+              {categories.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+            <select
+              className="h-9 rounded-lg border border-border bg-background px-3 text-sm"
+              value={subcategoryId}
+              onChange={(event) => {
+                setSubcategoryId(event.target.value);
+                setPagination((current) => ({ ...current, page: 1 }));
+              }}
+            >
+              <option value="">All subcategories</option>
+              {visibleSubs.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+            <select
+              className="h-9 rounded-lg border border-border bg-background px-3 text-sm"
+              value={sort}
+              onChange={(event) => setSort(event.target.value)}
+            >
+              <option value="relevance">Relevance</option>
+              <option value="newest">Newest</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="rating">Top rated</option>
+              <option value="sold">Most sold</option>
+            </select>
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            className="h-9 md:hidden"
+            onClick={() => setMobileFiltersOpen((open) => !open)}
           >
-            <option value="">All categories</option>
-            {categories.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-          <select
-            className="h-8 rounded-lg border border-border bg-background px-3 text-sm"
-            value={subcategoryId}
-            onChange={(event) => {
-              setSubcategoryId(event.target.value);
-              setPagination((current) => ({ ...current, page: 1 }));
-            }}
-          >
-            <option value="">All subcategories</option>
-            {visibleSubs.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-          <select
-            className="h-8 rounded-lg border border-border bg-background px-3 text-sm"
-            value={sort}
-            onChange={(event) => setSort(event.target.value)}
-          >
-            <option value="relevance">Relevance</option>
-            <option value="newest">Newest</option>
-            <option value="price-asc">Price: low to high</option>
-            <option value="price-desc">Price: high to low</option>
-            <option value="rating">Top rated</option>
-            <option value="sold">Most sold</option>
-          </select>
+            <SlidersHorizontal data-icon="inline-start" />
+            Filters
+            {[categoryId, subcategoryId].filter(Boolean).length
+              ? ` (${[categoryId, subcategoryId].filter(Boolean).length})`
+              : ''}
+          </Button>
         </div>
+        {mobileFiltersOpen && (
+          <div className="mt-3 flex flex-col gap-2 rounded-xl border border-border bg-background p-3 md:hidden">
+            <label className="text-xs font-medium text-muted-foreground" htmlFor="mobile-category">
+              Category
+            </label>
+            <select
+              id="mobile-category"
+              className="h-9 rounded-lg border border-border bg-background px-3 text-sm"
+              value={categoryId}
+              onChange={(event) => {
+                setCategoryId(event.target.value);
+                setSubcategoryId('');
+                setPagination((current) => ({ ...current, page: 1 }));
+              }}
+            >
+              <option value="">All categories</option>
+              {categories.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+            <label
+              className="text-xs font-medium text-muted-foreground"
+              htmlFor="mobile-subcategory"
+            >
+              Subcategory
+            </label>
+            <select
+              id="mobile-subcategory"
+              className="h-9 rounded-lg border border-border bg-background px-3 text-sm"
+              value={subcategoryId}
+              onChange={(event) => {
+                setSubcategoryId(event.target.value);
+                setPagination((current) => ({ ...current, page: 1 }));
+              }}
+            >
+              <option value="">All subcategories</option>
+              {visibleSubs.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+            <label className="text-xs font-medium text-muted-foreground" htmlFor="mobile-sort">
+              Sort
+            </label>
+            <select
+              id="mobile-sort"
+              className="h-9 rounded-lg border border-border bg-background px-3 text-sm"
+              value={sort}
+              onChange={(event) => setSort(event.target.value)}
+            >
+              <option value="relevance">Relevance</option>
+              <option value="newest">Newest</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+              <option value="rating">Top rated</option>
+              <option value="sold">Most sold</option>
+            </select>
+            <Button
+              type="button"
+              variant="ghost"
+              className="self-start"
+              onClick={() => {
+                setCategoryId('');
+                setSubcategoryId('');
+                setSort('relevance');
+                setPagination((current) => ({ ...current, page: 1 }));
+              }}
+            >
+              Clear filters
+            </Button>
+          </div>
+        )}
       </section>
       {error ? (
         <div className="rounded-xl border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">

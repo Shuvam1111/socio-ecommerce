@@ -119,32 +119,38 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
       return;
     }
     setSaving(true);
-    const response = await fetch(`/api/admin/products/${editing.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: editing.name,
-        description: editing.description,
-        shortDescription: editing.shortDescription,
-        brand: editing.brand,
-        model: editing.model,
-        pricing: editing.pricing,
-        images,
-      }),
-    });
-    const data = await response.json();
-    setSaving(false);
-    if (!response.ok) {
-      setError(data.message ?? 'Unable to update product.');
-      return;
+    setError('');
+    try {
+      const response = await fetch(`/api/admin/products/${editing.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: editing.name,
+          description: editing.description,
+          shortDescription: editing.shortDescription,
+          brand: editing.brand,
+          model: editing.model,
+          pricing: editing.pricing,
+          images,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        setError(data.message ?? 'Unable to update product.');
+        return;
+      }
+      setItems(
+        (current) =>
+          current.map((item) => (item.id === editing.id ? data.product : item)) as
+            Product[] | Order[],
+      );
+      setEditing(null);
+      setEditOpen(false);
+    } catch (saveError) {
+      setError(saveError instanceof Error ? saveError.message : 'Unable to update product.');
+    } finally {
+      setSaving(false);
     }
-    setItems(
-      (current) =>
-        current.map((item) => (item.id === editing.id ? data.product : item)) as
-          Product[] | Order[],
-    );
-    setEditing(null);
-    setEditOpen(false);
   }
   function updateImage(index: number, value: string) {
     if (!editing) return;
@@ -191,7 +197,7 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
   }
   const reports = payload as Record<string, unknown>;
   return (
-    <div className="flex min-h-full min-w-0 flex-col gap-6">
+    <div className="flex min-w-0 flex-col gap-6">
       <div>
         <div className="flex items-center gap-3">
           <div className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">

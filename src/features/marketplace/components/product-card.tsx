@@ -42,9 +42,9 @@ export function ProductCard({ product }: { product: MarketplaceDetailProduct }) 
     }
   }
   return (
-    <article className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">
       <Link href={`/products/${product.slug}`} className="block">
-        <div className="flex aspect-[4/3] items-center justify-center bg-muted/50 p-6">
+        <div className="flex aspect-[4/3] items-center justify-center bg-muted/40 p-6 transition group-hover:bg-muted/60">
           <img
             src={product.images[0] || '/images/product-placeholder.svg'}
             alt=""
@@ -70,7 +70,7 @@ export function ProductCard({ product }: { product: MarketplaceDetailProduct }) 
           </div>
         </div>
       </Link>
-      <div className="px-4 pb-4">
+      <div className="mt-auto px-4 pb-4">
         <Button className="w-full" disabled={unavailable || adding} onClick={handleAdd}>
           <ShoppingBag />
           {unavailable ? 'Out of stock' : adding ? 'Adding...' : 'Add to cart'}

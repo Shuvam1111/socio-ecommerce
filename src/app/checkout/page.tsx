@@ -68,7 +68,7 @@ export default function CheckoutPage() {
       </main>
     );
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 lg:py-10">
       <div className="mb-8">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
           Secure order setup
@@ -76,7 +76,7 @@ export default function CheckoutPage() {
         <h1 className="mt-2 text-3xl font-bold">Checkout</h1>
       </div>
       <form onSubmit={submit} className="grid gap-8 lg:grid-cols-[1fr_340px]">
-        <section className="rounded-2xl border border-border bg-card p-5">
+        <section className="rounded-3xl border border-border bg-card p-5 shadow-sm sm:p-6">
           <h2 className="text-lg font-semibold">Shipping information</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             {(
@@ -119,7 +119,7 @@ export default function CheckoutPage() {
             <p className="mt-5 text-sm text-destructive">{message || error}</p>
           )}
         </section>
-        <aside className="h-fit rounded-2xl border border-border bg-card p-5">
+        <aside className="h-fit rounded-3xl border border-border bg-card p-5 shadow-sm">
           <h2 className="font-semibold">Order summary</h2>
           <div className="mt-4 space-y-3">
             {cart.items.map((item) => (

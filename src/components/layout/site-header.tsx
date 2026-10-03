@@ -1,16 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import { ChevronDown, CircleUserRound, LogOut, Search, ShoppingCart } from 'lucide-react';
+import { ChevronDown, CircleUserRound, LogOut, Moon, ShoppingCart, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { NotificationCenter } from '@/features/notifications/components/notification-center';
 import { useCart } from '@/features/marketplace/components/use-cart';
+import { useTheme } from '@/components/theme/theme-provider';
 
 export function SiteHeader() {
   const router = useRouter();
   const pathname = usePathname();
   const { cart } = useCart();
+  const { mode, setMode } = useTheme();
+  const cartCount = cart.items.reduce((total, item) => total + item.quantity, 0);
+
   const [buyer, setBuyer] = useState<{ firstName?: string } | null>(null);
   const [sellerLoggedIn, setSellerLoggedIn] = useState(false);
 
@@ -46,29 +50,16 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:gap-6 lg:px-8">
-        <Link href="/" className="shrink-0 text-lg font-bold tracking-tight text-foreground">
+        <Link
+          href="/"
+          aria-label="Socio Commerce home"
+          className="shrink-0 text-lg font-bold tracking-tight text-foreground"
+        >
           Socio<span className="text-primary">.</span>
         </Link>
-        <form
-          action="/marketplace"
-          className="hidden min-w-0 flex-1 items-center gap-2 rounded-xl border border-border bg-card px-3 py-1.5 md:flex md:max-w-xl"
-        >
-          <Search className="size-4 text-muted-foreground" />
-          <input
-            name="search"
-            aria-label="Search products"
-            placeholder="Search products, brands, and more"
-            className="min-w-0 flex-1 bg-transparent py-1 text-sm outline-none"
-          />
-          <button
-            type="submit"
-            className="rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground"
-          >
-            Search
-          </button>
-        </form>
+
         <nav className="ml-auto hidden items-center gap-5 lg:flex">
           <Link
             href="/marketplace"
@@ -84,13 +75,15 @@ export function SiteHeader() {
           </Link>
         </nav>
         <div className="ml-auto flex items-center gap-1 sm:gap-2 lg:ml-0">
-          <Link
-            href="/marketplace"
-            aria-label="Search products"
-            className="rounded-lg p-2 text-muted-foreground hover:bg-secondary md:hidden"
+          <button
+            type="button"
+            aria-label={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
+            className="rounded-lg p-2 text-muted-foreground hover:bg-secondary hover:text-foreground"
           >
-            <Search className="size-5" />
-          </Link>
+            {mode === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
+          </button>
           {buyer && <NotificationCenter />}
           <Link
             href="/cart"
@@ -98,9 +91,9 @@ export function SiteHeader() {
             className="relative rounded-lg p-2 text-muted-foreground hover:bg-secondary"
           >
             <ShoppingCart className="size-5" />
-            {buyer && cart.items.length > 0 && (
+            {cartCount > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                {cart.items.length}
+                {cartCount}
               </span>
             )}
           </Link>
@@ -164,20 +157,6 @@ export function SiteHeader() {
             </details>
           )}
         </div>
-      </div>
-      <div className="border-t border-border/60 px-4 py-2 md:hidden">
-        <form
-          action="/marketplace"
-          className="flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-1.5"
-        >
-          <Search className="size-4 text-muted-foreground" />
-          <input
-            name="search"
-            aria-label="Search products"
-            placeholder="Search products"
-            className="min-w-0 flex-1 bg-transparent py-1 text-sm outline-none"
-          />
-        </form>
       </div>
     </header>
   );

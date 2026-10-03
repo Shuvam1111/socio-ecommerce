@@ -19,15 +19,18 @@ export default function OrdersPage() {
       );
   }, []);
   return (
-    <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
+    <main className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:py-10">
       <h1 className="text-3xl font-bold">Your orders</h1>
       {error && <p className="mt-4 text-sm text-destructive">{error}</p>}
       {!orders.length && !error ? (
         <p className="mt-8 text-muted-foreground">No orders yet.</p>
       ) : (
-        <div className="mt-8 space-y-3">
+        <div className="mt-8 flex flex-col gap-3">
           {orders.map((order) => (
-            <article key={order.id} className="rounded-2xl border border-border bg-card p-5">
+            <article
+              key={order.id}
+              className="rounded-2xl border border-border bg-card p-4 shadow-sm transition hover:border-primary/30 sm:p-5"
+            >
               <Link href={`/orders/${order.id}`} className="block hover:text-primary">
                 <div className="flex justify-between gap-4">
                   <strong>{order.orderNumber}</strong>

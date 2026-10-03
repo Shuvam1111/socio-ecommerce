@@ -85,7 +85,7 @@ export function CommerceHome({
             </span>
           </div>
         </div>
-        <div className="relative hidden overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary/20 via-card to-secondary p-6 shadow-sm sm:block sm:p-8">
+        <div className="relative hidden overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-sm sm:block sm:p-8">
           <div className="absolute -right-16 -top-16 size-48 rounded-full bg-primary/15 blur-2xl" />
           <div className="relative mx-auto max-w-sm">
             <div className="mb-4 flex items-center justify-between text-xs font-semibold text-muted-foreground">
@@ -155,7 +155,7 @@ export function CommerceHome({
       </div>
       <ProductSection title="Popular with shoppers" products={popular} loading={loading} />
 
-      <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start justify-between gap-5 rounded-3xl bg-primary p-6 text-primary-foreground sm:p-8 md:flex-row md:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/70">
