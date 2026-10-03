@@ -64,6 +64,11 @@ export async function listProducts(query = '', status = 'all') {
       `${p.name} ${p.slug} ${p.vendorId}`.toLowerCase().includes(normalized),
   );
 }
+export async function getAdminProduct(id: string) {
+  const { products } = await read<{ products: SellerProduct[] }>('products.json');
+  return products.find((product) => product.id === id) ?? null;
+}
+
 export async function updateAdminProduct(
   id: string,
   input: Partial<
