@@ -4,7 +4,7 @@ import { Geist_Mono, Plus_Jakarta_Sans, Geist } from 'next/font/google';
 
 import { SiteShell } from '@/components/layout/site-shell';
 import { ThemeProvider } from '@/components/theme/theme-provider';
-import { ThemeScript } from '@/components/theme/theme-script';
+
 import { MockDataProvider } from '@/components/common/mock-data-provider';
 
 import './globals.css';
@@ -51,9 +51,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         geist.variable,
       )}
     >
-      <head suppressHydrationWarning>
-        <ThemeScript />
-      </head>
+      <head suppressHydrationWarning />
 
       <body className="min-h-full">
         <ThemeProvider>
