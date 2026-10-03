@@ -64,6 +64,44 @@ export async function listProducts(query = '', status = 'all') {
       `${p.name} ${p.slug} ${p.vendorId}`.toLowerCase().includes(normalized),
   );
 }
+export async function updateAdminProduct(
+  id: string,
+  input: Partial<
+    Pick<
+      SellerProduct,
+      | 'name'
+      | 'description'
+      | 'shortDescription'
+      | 'brand'
+      | 'model'
+      | 'categoryId'
+      | 'subcategoryId'
+      | 'images'
+      | 'video'
+      | 'pricing'
+      | 'inventory'
+      | 'variants'
+      | 'attributes'
+      | 'shipping'
+      | 'returnPolicy'
+      | 'commission'
+    >
+  >,
+) {
+  const data = await read<{ products: SellerProduct[] }>('products.json');
+  const product = data.products.find((item) => item.id === id);
+  if (!product) throw Object.assign(new Error('Product not found.'), { status: 404 });
+  const ownership = {
+    id: product.id,
+    vendorId: product.vendorId,
+    sellerId: product.sellerId,
+    createdAt: product.createdAt,
+  };
+  Object.assign(product, input, ownership, { updatedAt: new Date().toISOString() });
+  await write('products.json', data);
+  return product;
+}
+
 export async function moderateProduct(id: string, status: 'approved' | 'rejected' | 'inactive') {
   const data = await read<{ products: SellerProduct[] }>('products.json');
   const product = data.products.find((p) => p.id === id);

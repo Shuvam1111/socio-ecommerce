@@ -168,9 +168,7 @@ export function AdminUsers() {
         >
           <option value="">All roles</option>
           <option value="admin">Admin</option>
-          <option value="vendor">Vendor</option>
-          <option value="super_seller">Super Seller</option>
-          <option value="seller">Seller</option>
+
           <option value="buyer">Buyer</option>
         </select>
         <select

@@ -4,6 +4,7 @@ import { Package, Settings2, ShoppingCart, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { AdminPagination } from './admin-pagination';
 export type AdminResource =
   'products' | 'orders' | 'categories' | 'reviews' | 'promotions' | 'reports' | 'settings';
@@ -18,7 +19,11 @@ type Product = {
   name: string;
   status: string;
   vendorId: string;
-  pricing: { salePrice: number };
+  description: string;
+  shortDescription: string;
+  brand: string;
+  model: string;
+  pricing: { salePrice: number; regularPrice: number };
 };
 type Order = {
   id: string;
@@ -37,6 +42,8 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
   const [error, setError] = useState('');
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [editing, setEditing] = useState<Product | null>(null);
+  const [saving, setSaving] = useState(false);
   const info = meta[resource as keyof typeof meta] ?? [
     'Admin',
     'Manage platform operations.',
@@ -68,6 +75,34 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
   const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
   const currentPage = Math.min(page, totalPages);
   const pageItems = items.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  async function saveProduct() {
+    if (!editing) return;
+    setSaving(true);
+    const response = await fetch(`/api/admin/products/${editing.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: editing.name,
+        description: editing.description,
+        shortDescription: editing.shortDescription,
+        brand: editing.brand,
+        model: editing.model,
+        pricing: editing.pricing,
+      }),
+    });
+    const data = await response.json();
+    setSaving(false);
+    if (!response.ok) {
+      setError(data.message ?? 'Unable to update product.');
+      return;
+    }
+    setItems(
+      (current) =>
+        current.map((item) => (item.id === editing.id ? data.product : item)) as
+          Product[] | Order[],
+    );
+    setEditing(null);
+  }
   async function moderate(id: string, next: 'approved' | 'rejected' | 'inactive') {
     const response = await fetch(`/api/admin/products/${id}`, {
       method: 'POST',
@@ -150,6 +185,9 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
                     </div>
                     <div className="flex gap-2">
                       <span className="rounded-full bg-muted px-3 py-1 text-xs">{item.status}</span>
+                      <Button size="sm" variant="outline" onClick={() => setEditing(item)}>
+                        Edit
+                      </Button>
                       {item.status === 'pending' && (
                         <>
                           <Button size="sm" onClick={() => moderate(item.id, 'approved')}>
@@ -207,6 +245,76 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
         <p className="text-muted-foreground">
           This admin area is connected to its existing service.
         </p>
+      )}
+      {editing && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Edit product: {editing.name}</CardTitle>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-3">
+            <Input
+              value={editing.name}
+              onChange={(event) => setEditing({ ...editing, name: event.target.value })}
+              aria-label="Product name"
+            />
+            <Input
+              value={editing.brand}
+              onChange={(event) => setEditing({ ...editing, brand: event.target.value })}
+              aria-label="Brand"
+              placeholder="Brand"
+            />
+            <Input
+              value={editing.model}
+              onChange={(event) => setEditing({ ...editing, model: event.target.value })}
+              aria-label="Model"
+              placeholder="Model"
+            />
+            <Textarea
+              value={editing.shortDescription}
+              onChange={(event) => setEditing({ ...editing, shortDescription: event.target.value })}
+              aria-label="Short description"
+              placeholder="Short description"
+            />
+            <Textarea
+              value={editing.description}
+              onChange={(event) => setEditing({ ...editing, description: event.target.value })}
+              aria-label="Description"
+              placeholder="Description"
+            />
+            <div className="flex gap-2">
+              <Input
+                type="number"
+                value={editing.pricing.salePrice}
+                onChange={(event) =>
+                  setEditing({
+                    ...editing,
+                    pricing: { ...editing.pricing, salePrice: Number(event.target.value) },
+                  })
+                }
+                aria-label="Sale price"
+              />
+              <Input
+                type="number"
+                value={editing.pricing.regularPrice}
+                onChange={(event) =>
+                  setEditing({
+                    ...editing,
+                    pricing: { ...editing.pricing, regularPrice: Number(event.target.value) },
+                  })
+                }
+                aria-label="Regular price"
+              />
+            </div>
+            <div className="flex gap-2">
+              <Button onClick={() => void saveProduct()} disabled={saving}>
+                {saving ? 'Saving...' : 'Save changes'}
+              </Button>
+              <Button variant="outline" onClick={() => setEditing(null)}>
+                Cancel
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       )}
     </div>
   );

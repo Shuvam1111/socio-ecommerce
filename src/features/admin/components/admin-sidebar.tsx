@@ -5,12 +5,9 @@ import {
   BarChart3,
   FolderTree,
   LayoutDashboard,
-  MessageSquare,
   Package,
   Settings,
-  ShoppingCart,
   Store,
-  Tag,
   Users,
   UserRoundCog,
   UserCheck,
@@ -49,26 +46,13 @@ const navigation = [
     href: '/admin/products',
     icon: Package,
   },
-  {
-    label: 'Orders',
-    href: '/admin/orders',
-    icon: ShoppingCart,
-  },
+
   {
     label: 'Categories',
     href: '/admin/categories',
     icon: FolderTree,
   },
-  {
-    label: 'Reviews',
-    href: '/admin/reviews',
-    icon: MessageSquare,
-  },
-  {
-    label: 'Promotions',
-    href: '/admin/promotions',
-    icon: Tag,
-  },
+
   {
     label: 'Reports',
     href: '/admin/reports',

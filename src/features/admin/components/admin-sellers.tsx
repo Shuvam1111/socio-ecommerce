@@ -13,6 +13,7 @@ import {
   XCircle,
 } from 'lucide-react';
 
+import { AdminPagination } from './admin-pagination';
 import { getAdminSellers, type AdminSeller } from '../services/seller-admin-service';
 
 type SellerFilter = 'all' | 'super_seller' | 'seller' | 'active' | 'inactive';
@@ -27,6 +28,8 @@ export function AdminSellers() {
   const [search, setSearch] = useState('');
 
   const [filter, setFilter] = useState<SellerFilter>('all');
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
   async function loadSellers() {
     try {
@@ -99,6 +102,10 @@ export function AdminSellers() {
     }),
     [sellers],
   );
+
+  const totalPages = Math.max(1, Math.ceil(filteredSellers.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const pagedSellers = filteredSellers.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   function getStatusBadge(status: AdminSeller['status']) {
     if (status === 'active') {
@@ -336,7 +343,7 @@ export function AdminSellers() {
               </thead>
 
               <tbody className="divide-y divide-border">
-                {filteredSellers.map((seller) => (
+                {pagedSellers.map((seller) => (
                   <tr key={seller.id} className="transition-colors hover:bg-muted/30">
                     {/* Seller */}
                     <td className="px-5 py-4">
@@ -415,6 +422,18 @@ export function AdminSellers() {
 
           <div className="border-t border-border px-5 py-3 text-xs text-muted-foreground">
             Showing {filteredSellers.length} of {sellers.length} sellers
+          </div>
+          <div className="px-5 pb-5">
+            <AdminPagination
+              page={currentPage}
+              pageSize={pageSize}
+              totalItems={filteredSellers.length}
+              onPageChange={setPage}
+              onPageSizeChange={(size) => {
+                setPageSize(size);
+                setPage(1);
+              }}
+            />
           </div>
         </div>
       )}
