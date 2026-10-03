@@ -1,9 +1,18 @@
 import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/features/auth/services/admin-authorization';
 import {
+  getAdminProduct,
   moderateProduct,
   updateAdminProduct,
 } from '@/features/admin/services/platform-operations-service';
+export async function GET(request: Request, { params }: { params: Promise<unknown> }) {
+  const auth = await requireAdmin(request);
+  if (auth.response) return auth.response;
+  const product = await getAdminProduct(((await params) as { id: string }).id);
+  if (!product) return NextResponse.json({ message: 'Product not found.' }, { status: 404 });
+  return NextResponse.json({ product });
+}
+
 export async function PATCH(request: Request, { params }: { params: Promise<unknown> }) {
   const auth = await requireAdmin(request);
   if (auth.response) return auth.response;
