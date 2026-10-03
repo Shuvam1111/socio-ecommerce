@@ -19,6 +19,7 @@ import { toast } from 'sonner';
 import { adjustSellerInventory, getSellerInventory } from '../services/seller-inventory-service';
 
 import type { InventoryAdjustmentType, SellerInventoryItem } from '../types/inventory';
+import { SellerPagination } from './seller-pagination';
 
 type StockFilter = 'all' | 'in_stock' | 'low_stock' | 'out_of_stock';
 
@@ -47,6 +48,8 @@ export function SellerInventoryPage() {
   const [search, setSearch] = useState('');
 
   const [stockFilter, setStockFilter] = useState<StockFilter>('all');
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
 
   const [adjustment, setAdjustment] = useState<AdjustmentState | null>(null);
 
@@ -102,6 +105,12 @@ export function SellerInventoryPage() {
       return matchesSearch && matchesFilter;
     });
   }, [inventory, search, stockFilter]);
+
+  const pageCount = Math.max(1, Math.ceil(filteredInventory.length / pageSize));
+  const visibleInventory = filteredInventory.slice(
+    (Math.min(page, pageCount) - 1) * pageSize,
+    Math.min(page, pageCount) * pageSize,
+  );
 
   const stats = useMemo(() => {
     return {
@@ -312,7 +321,7 @@ export function SellerInventoryPage() {
                 </thead>
 
                 <tbody>
-                  {filteredInventory.map((item) => (
+                  {visibleInventory.map((item) => (
                     <tr key={item.productId} className="border-b border-border last:border-b-0">
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
@@ -393,6 +402,13 @@ export function SellerInventoryPage() {
               </table>
             </div>
           )}
+          <SellerPagination
+            page={page}
+            pageCount={pageCount}
+            total={filteredInventory.length}
+            pageSize={pageSize}
+            onPageChange={setPage}
+          />
         </div>
       </div>
 

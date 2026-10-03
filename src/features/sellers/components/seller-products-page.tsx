@@ -20,6 +20,7 @@ import { deleteSellerProduct, getSellerProducts } from '../services/seller-produ
 import type { SellerProduct } from '../types/product';
 
 import { SellerProductForm } from './seller-product-form';
+import { SellerPagination } from './seller-pagination';
 
 interface SellerProductsPageProps {
   onAddProduct?: () => void;
@@ -72,6 +73,8 @@ export function SellerProductsPage({ onAddProduct, onEditProduct }: SellerProduc
   const [showForm, setShowForm] = useState(false);
 
   const [editingProduct, setEditingProduct] = useState<SellerProduct | null>(null);
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
 
   async function loadProducts() {
     try {
@@ -164,6 +167,12 @@ export function SellerProductsPage({ onAddProduct, onEditProduct }: SellerProduc
       return matchesSearch && matchesStatus && matchesStock;
     });
   }, [products, search, statusFilter, stockFilter]);
+
+  const pageCount = Math.max(1, Math.ceil(filteredProducts.length / pageSize));
+  const visibleProducts = filteredProducts.slice(
+    (Math.min(page, pageCount) - 1) * pageSize,
+    Math.min(page, pageCount) * pageSize,
+  );
 
   const stats = useMemo(() => {
     const totalUnits = products.reduce((sum, product) => sum + product.inventory.quantity, 0);
@@ -382,7 +391,7 @@ export function SellerProductsPage({ onAddProduct, onEditProduct }: SellerProduc
                 </thead>
 
                 <tbody>
-                  {filteredProducts.map((product) => {
+                  {visibleProducts.map((product) => {
                     const stockStatus = getStockStatus(product);
 
                     return (
@@ -502,6 +511,13 @@ export function SellerProductsPage({ onAddProduct, onEditProduct }: SellerProduc
               </table>
             </div>
           )}
+          <SellerPagination
+            page={page}
+            pageCount={pageCount}
+            total={filteredProducts.length}
+            pageSize={pageSize}
+            onPageChange={setPage}
+          />
         </div>
       </div>
     </main>

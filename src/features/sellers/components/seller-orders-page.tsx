@@ -14,6 +14,7 @@ import {
 } from '../services/seller-order-service';
 
 import type { OrderStatus, SellerOrder } from '../types/order';
+import { SellerPagination } from './seller-pagination';
 
 const statusLabels: Record<OrderStatus, string> = {
   pending_payment: 'Pending Payment',
@@ -45,6 +46,8 @@ export function SellerOrdersPage() {
   const [processingId, setProcessingId] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | OrderStatus>('all');
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
 
   async function loadOrders() {
     try {
@@ -85,6 +88,12 @@ export function SellerOrdersPage() {
       return matchesSearch && matchesStatus;
     });
   }, [orders, search, statusFilter]);
+
+  const pageCount = Math.max(1, Math.ceil(filteredOrders.length / pageSize));
+  const visibleOrders = filteredOrders.slice(
+    (Math.min(page, pageCount) - 1) * pageSize,
+    Math.min(page, pageCount) * pageSize,
+  );
 
   const stats = useMemo(
     () => ({
@@ -255,7 +264,7 @@ export function SellerOrdersPage() {
               </thead>
 
               <tbody className="divide-y divide-border">
-                {filteredOrders.map((order) => (
+                {visibleOrders.map((order) => (
                   <tr key={order.id} className="transition-colors hover:bg-secondary/30">
                     <td className="px-4 py-4">
                       <p className="font-semibold text-foreground">{order.orderNumber}</p>
@@ -366,6 +375,13 @@ export function SellerOrdersPage() {
             </table>
           </div>
         )}
+        <SellerPagination
+          page={page}
+          pageCount={pageCount}
+          total={filteredOrders.length}
+          pageSize={pageSize}
+          onPageChange={setPage}
+        />
       </div>
     </div>
   );

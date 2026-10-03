@@ -38,13 +38,13 @@ export function SellerShell({ children, title, description }: SellerShellProps) 
   const initials = name.slice(0, 2).toUpperCase();
 
   return (
-    <div className="flex min-h-screen bg-muted/30 text-foreground">
+    <div className="fixed inset-0 flex overflow-hidden bg-muted/30 text-foreground">
       <SellerSidebar
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         isSuperSeller={isSuperSeller}
       />
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1 overflow-y-auto lg:ml-72">
         <header className="sticky top-0 z-30 border-b border-border/80 bg-background/90 backdrop-blur-xl">
           <div className="flex h-16 items-center gap-3 px-4 sm:px-6 lg:px-8">
             <button

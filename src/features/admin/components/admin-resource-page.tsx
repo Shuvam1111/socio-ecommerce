@@ -191,7 +191,7 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
   }
   const reports = payload as Record<string, unknown>;
   return (
-    <div className="flex h-full min-h-0 flex-col gap-6 overflow-hidden">
+    <div className="flex min-h-full min-w-0 flex-col gap-6">
       <div>
         <div className="flex items-center gap-3">
           <div className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -236,7 +236,7 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
               ))}
             </select>
           </div>
-          <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto pr-1">
+          <div className="min-w-0 pr-1">
             <div className="grid gap-3">
               {pageItems.map((item) =>
                 'vendorId' in item ? (
