@@ -3,9 +3,9 @@ import { AdminCategoryManagement } from '@/features/admin/components/admin-categ
 
 export default function AdminCategoriesPage() {
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="h-screen overflow-hidden bg-background">
       <AdminSidebar />
-      <main className="min-w-0 flex-1 p-6 lg:p-8">
+      <main className="ml-16 h-screen min-w-0 flex-1 overflow-y-auto p-6 sm:ml-64 lg:p-8">
         <AdminCategoryManagement />
       </main>
     </div>

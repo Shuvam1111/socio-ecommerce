@@ -91,7 +91,7 @@ export function AdminSidebar() {
   }
 
   return (
-    <aside className="flex min-h-screen w-16 shrink-0 flex-col border-r border-border bg-card sm:w-64">
+    <aside className="fixed inset-y-0 left-0 z-20 flex h-screen w-16 shrink-0 flex-col border-r border-border bg-card sm:w-64">
       <div className="border-b border-border px-2 py-5 sm:px-6">
         <Link
           href="/admin"
@@ -106,7 +106,7 @@ export function AdminSidebar() {
         </p>
       </div>
 
-      <nav className="flex-1 space-y-1 overflow-y-auto p-2 sm:p-4">
+      <nav className="min-h-0 flex-1 space-y-1 overflow-y-auto p-2 sm:p-4">
         {navigation.map((item) => {
           const Icon = item.icon;
 
