@@ -30,7 +30,7 @@ export function MobileCommerceNav() {
         icon={ShoppingCart}
         label="Cart"
         active={pathname.startsWith('/cart')}
-        badge={buyer ? cart.items.length : 0}
+        badge={buyer ? cart.count : 0}
       />
       <MobileLink
         href={buyer ? '/orders' : '/user/login'}
@@ -69,8 +69,11 @@ function MobileLink({
       <span className="relative">
         <Icon className="size-4" />
         {badge > 0 && (
-          <span className="absolute -right-2 -top-2 flex size-3.5 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-primary-foreground">
-            {badge}
+          <span
+            key={badge}
+            className="absolute -right-2.5 -top-2 flex h-4 min-w-4 animate-cart-pop items-center justify-center rounded-full bg-primary px-1 text-[9px] font-bold text-primary-foreground ring-2 ring-background"
+          >
+            {badge > 99 ? '99+' : badge}
           </span>
         )}
       </span>

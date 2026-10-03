@@ -300,6 +300,24 @@
 
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --animate-cart-pop: cart-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-cart-sweep: cart-sweep 0.7s ease-out both;
+  --animate-cart-bump: cart-bump 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  @keyframes cart-pop {
+    0% { transform: scale(0) rotate(-45deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+  @keyframes cart-sweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  @keyframes cart-bump {
+    0% { transform: scale(1); }
+    35% { transform: scale(1.35); }
+    65% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+  }
 
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);

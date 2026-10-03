@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { ArrowLeft, ShoppingBag, Star } from 'lucide-react';
+import { ArrowLeft, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from './use-cart';
+import { AddToCartButton } from './add-to-cart-button';
 import type { MarketplaceDetailProduct } from '../services/marketplace-service';
 export function ProductDetail({ product }: { product: MarketplaceDetailProduct }) {
   const [quantity, setQuantity] = useState(1);
@@ -13,17 +14,15 @@ export function ProductDetail({ product }: { product: MarketplaceDetailProduct }
     product.images[0] || '/images/product-placeholder.png',
   );
   const [variantId, setVariantId] = useState<string | null>(product.variants[0]?.id ?? null);
-  const [adding, setAdding] = useState(false);
   const router = useRouter();
-  const { add, error } = useCart();
+  const { add, error, cart } = useCart();
 
-  async function handleAdd() {
+  function handleAdd() {
     if (!localStorage.getItem('socio-user-token')) {
       router.push(`/user/login?next=/products/${product.slug}`);
-      return;
+      return false;
     }
     try {
-      setAdding(true);
       add({
         productId: product.id,
         quantity,
@@ -37,14 +36,20 @@ export function ProductDetail({ product }: { product: MarketplaceDetailProduct }
         availableQuantity: available,
         unavailable: false,
       });
-      toast.success('Added to cart');
+      toast.success('Added to cart', {
+        description: product.name,
+        action: { label: 'View cart', onClick: () => router.push('/cart') },
+      });
+      return true;
     } catch {
       toast.error('Unable to add this product to cart.');
-    } finally {
-      setAdding(false);
+      return false;
     }
   }
   const variant = product.variants.find((item) => item.id === variantId);
+  const inCartQuantity =
+    cart.items.find((item) => item.productId === product.id && item.selectedVariantId === variantId)
+      ?.quantity ?? 0;
   const available = variant?.quantity ?? product.inventory.availableQuantity;
   const price = variant?.price ?? product.pricing.salePrice;
   return (
@@ -157,13 +162,12 @@ export function ProductDetail({ product }: { product: MarketplaceDetailProduct }
             </span>
           </div>
           {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-          <Button
-            className="mt-6 w-full sm:w-auto"
-            disabled={available < 1 || adding}
-            onClick={handleAdd}
-          >
-            <ShoppingBag /> {adding ? 'Adding...' : 'Add to cart'}
-          </Button>
+          <AddToCartButton
+            className="mt-6 h-11 w-full min-w-48 sm:w-auto"
+            onAdd={handleAdd}
+            outOfStock={available < 1}
+            inCartQuantity={inCartQuantity}
+          />
           <div className="mt-8 grid gap-3 border-t border-border pt-6 text-sm text-muted-foreground">
             <p>
               {product.shipping.freeShipping

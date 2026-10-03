@@ -94,13 +94,24 @@ export function SiteHeader() {
           {buyer && <NotificationCenter />}
           <Link
             href="/cart"
-            aria-label="Shopping cart"
+            aria-label={
+              buyer && cart.count > 0 ? `Shopping cart, ${cart.count} items` : 'Shopping cart'
+            }
             className="relative rounded-lg p-2 text-muted-foreground hover:bg-secondary"
           >
-            <ShoppingCart className="size-5" />
-            {buyer && cart.items.length > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                {cart.items.length}
+            <span
+              key={`cart-icon-${buyer ? cart.count : 0}`}
+              className={`block ${buyer && cart.count > 0 ? 'animate-cart-bump' : ''}`}
+            >
+              <ShoppingCart className="size-5" />
+            </span>
+            {buyer && cart.count > 0 && (
+              <span
+                key={`cart-badge-${cart.count}`}
+                aria-hidden
+                className="absolute -right-1 -top-1 flex h-[18px] min-w-[18px] animate-cart-pop items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground ring-2 ring-background"
+              >
+                {cart.count > 99 ? '99+' : cart.count}
               </span>
             )}
           </Link>

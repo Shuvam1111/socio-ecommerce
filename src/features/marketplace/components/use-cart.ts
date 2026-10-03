@@ -1,8 +1,8 @@
 'use client';
-/* eslint-disable react-hooks/set-state-in-effect */
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 
 export const CART_STORAGE_KEY = 'socio-commerce-cart-v1';
+const CART_CHANGE_EVENT = 'socio-cart-change';
 
 export interface CartIntent {
   productId: string;
@@ -24,16 +24,15 @@ export interface CartDisplayItem extends CartIntent {
 export interface CartView {
   items: CartDisplayItem[];
   subtotal: number;
+  count: number;
 }
 
-function emptyCart(): CartView {
-  return { items: [], subtotal: 0 };
-}
+const EMPTY_CART: CartView = { items: [], subtotal: 0, count: 0 };
 
-function readStoredCart(): CartDisplayItem[] {
-  if (typeof window === 'undefined') return [];
+function parseItems(raw: string | null): CartDisplayItem[] {
+  if (!raw) return [];
   try {
-    const parsed: unknown = JSON.parse(window.localStorage.getItem(CART_STORAGE_KEY) ?? '[]');
+    const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
     return parsed.filter(
       (item): item is CartDisplayItem =>
@@ -44,35 +43,63 @@ function readStoredCart(): CartDisplayItem[] {
         (item as CartDisplayItem).quantity >= 1,
     );
   } catch {
-    window.localStorage.removeItem(CART_STORAGE_KEY);
     return [];
   }
 }
 
-function saveItems(items: CartDisplayItem[]) {
-  window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+function summarize(items: CartDisplayItem[]): CartView {
+  return {
+    items,
+    subtotal: items.reduce((sum, item) => sum + item.subtotal, 0),
+    count: items.reduce((sum, item) => sum + item.quantity, 0),
+  };
 }
 
-function summarize(items: CartDisplayItem[]): CartView {
-  return { items, subtotal: items.reduce((sum, item) => sum + item.subtotal, 0) };
+let cachedRaw: string | null | undefined;
+let cachedView: CartView = EMPTY_CART;
+
+// useSyncExternalStore requires a referentially stable snapshot between unchanged reads.
+function getSnapshot(): CartView {
+  const raw = window.localStorage.getItem(CART_STORAGE_KEY);
+  if (raw !== cachedRaw) {
+    cachedRaw = raw;
+    cachedView = summarize(parseItems(raw));
+  }
+  return cachedView;
+}
+
+function getServerSnapshot(): CartView {
+  return EMPTY_CART;
+}
+
+function subscribe(onChange: () => void) {
+  const handleStorage = (event: StorageEvent) => {
+    if (event.key === null || event.key === CART_STORAGE_KEY) onChange();
+  };
+  window.addEventListener(CART_CHANGE_EVENT, onChange);
+  window.addEventListener('storage', handleStorage);
+  return () => {
+    window.removeEventListener(CART_CHANGE_EVENT, onChange);
+    window.removeEventListener('storage', handleStorage);
+  };
+}
+
+function writeItems(items: CartDisplayItem[]) {
+  if (items.length) window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+  else window.localStorage.removeItem(CART_STORAGE_KEY);
+  window.dispatchEvent(new Event(CART_CHANGE_EVENT));
 }
 
 export function useCart() {
-  const [cart, setCart] = useState<CartView>(emptyCart);
-  const [error, setError] = useState('');
+  const cart = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const error = '';
 
   const refresh = useCallback(async () => {
-    setCart(summarize(readStoredCart()));
-    setError('');
+    window.dispatchEvent(new Event(CART_CHANGE_EVENT));
   }, []);
 
-  useEffect(() => {
-    void refresh();
-  }, [refresh]);
-
   const mutate = useCallback((action: 'add' | 'update' | 'remove', item: CartDisplayItem) => {
-    setError('');
-    const items = readStoredCart();
+    const items = [...getSnapshot().items];
     const index = items.findIndex(
       (candidate) =>
         candidate.productId === item.productId &&
@@ -81,20 +108,13 @@ export function useCart() {
     if (action === 'remove') {
       if (index >= 0) items.splice(index, 1);
     } else if (index >= 0) {
-      items[index] = {
-        ...items[index],
-        ...item,
-        quantity: action === 'add' ? items[index].quantity + item.quantity : item.quantity,
-        subtotal:
-          (action === 'add' ? items[index].quantity + item.quantity : item.quantity) * item.price,
-      };
+      const quantity = action === 'add' ? items[index].quantity + item.quantity : item.quantity;
+      items[index] = { ...items[index], ...item, quantity, subtotal: quantity * item.price };
     } else {
       items.push({ ...item, subtotal: item.quantity * item.price });
     }
-    saveItems(items);
-    const next = summarize(items);
-    setCart(next);
-    return next;
+    writeItems(items);
+    return getSnapshot();
   }, []);
 
   const add = useCallback((item: CartDisplayItem) => mutate('add', item), [mutate]);
@@ -103,10 +123,7 @@ export function useCart() {
     [mutate],
   );
   const remove = useCallback((item: CartDisplayItem) => mutate('remove', item), [mutate]);
-  const clear = useCallback(() => {
-    if (typeof window !== 'undefined') window.localStorage.removeItem(CART_STORAGE_KEY);
-    setCart(emptyCart());
-  }, []);
+  const clear = useCallback(() => writeItems([]), []);
 
   return { cart, error, refresh, add, update, remove, clear };
 }

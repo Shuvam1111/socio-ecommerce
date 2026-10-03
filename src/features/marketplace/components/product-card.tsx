@@ -1,26 +1,26 @@
 'use client';
 import Link from 'next/link';
-import { ShoppingBag, Star } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Star } from 'lucide-react';
 import { useCart } from './use-cart';
+import { AddToCartButton } from './add-to-cart-button';
 import type { MarketplaceDetailProduct } from '../services/marketplace-service';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { toast } from 'sonner';
 
 export function ProductCard({ product }: { product: MarketplaceDetailProduct }) {
-  const { add } = useCart();
+  const { add, cart } = useCart();
   const router = useRouter();
-  const [adding, setAdding] = useState(false);
   const price = product.pricing.salePrice || product.pricing.regularPrice;
   const unavailable = product.inventory.availableQuantity < 1;
-  async function handleAdd() {
+  const inCartQuantity = cart.items
+    .filter((item) => item.productId === product.id)
+    .reduce((sum, item) => sum + item.quantity, 0);
+  function handleAdd() {
     if (!localStorage.getItem('socio-user-token')) {
       router.push(`/user/login?next=/products/${product.slug}`);
-      return;
+      return false;
     }
     try {
-      setAdding(true);
       add({
         productId: product.id,
         quantity: 1,
@@ -34,11 +34,14 @@ export function ProductCard({ product }: { product: MarketplaceDetailProduct }) 
         availableQuantity: product.inventory.availableQuantity,
         unavailable: false,
       });
-      toast.success('Added to cart', { description: product.name });
+      toast.success('Added to cart', {
+        description: product.name,
+        action: { label: 'View cart', onClick: () => router.push('/cart') },
+      });
+      return true;
     } catch {
       toast.error('Unable to add this product to cart.');
-    } finally {
-      setAdding(false);
+      return false;
     }
   }
   return (
@@ -71,10 +74,12 @@ export function ProductCard({ product }: { product: MarketplaceDetailProduct }) 
         </div>
       </Link>
       <div className="px-4 pb-4">
-        <Button className="w-full" disabled={unavailable || adding} onClick={handleAdd}>
-          <ShoppingBag />
-          {unavailable ? 'Out of stock' : adding ? 'Adding...' : 'Add to cart'}
-        </Button>
+        <AddToCartButton
+          className="w-full"
+          onAdd={handleAdd}
+          outOfStock={unavailable}
+          inCartQuantity={inCartQuantity}
+        />
       </div>
     </article>
   );
