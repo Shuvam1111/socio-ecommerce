@@ -1,3 +1,5 @@
+import Script from 'next/script';
+
 import { defaultTheme, themes } from '@/lib/themes';
 
 const themeScript = `
@@ -19,5 +21,9 @@ const themeScript = `
 `;
 
 export function ThemeScript() {
-  return <script dangerouslySetInnerHTML={{ __html: themeScript }} />;
+  return (
+    <Script id="socio-theme-script" strategy="beforeInteractive">
+      {themeScript}
+    </Script>
+  );
 }
