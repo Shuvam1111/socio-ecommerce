@@ -1,15 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {
-  ChevronDown,
-  CircleUserRound,
-  LogOut,
-  Moon,
-  Search,
-  ShoppingCart,
-  Sun,
-} from 'lucide-react';
+import { ChevronDown, CircleUserRound, LogOut, Moon, ShoppingCart, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { NotificationCenter } from '@/features/notifications/components/notification-center';
@@ -67,24 +59,7 @@ export function SiteHeader() {
         >
           Socio<span className="text-primary">.</span>
         </Link>
-        <form
-          action="/marketplace"
-          className="hidden min-w-0 flex-1 items-center gap-2 rounded-xl border border-border bg-card px-3 py-1.5 md:flex md:max-w-xl"
-        >
-          <Search className="size-4 text-muted-foreground" />
-          <input
-            name="search"
-            aria-label="Search products"
-            placeholder="Search products, brands, and more"
-            className="min-w-0 flex-1 bg-transparent py-1 text-sm outline-none"
-          />
-          <button
-            type="submit"
-            className="rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground"
-          >
-            Search
-          </button>
-        </form>
+
         <nav className="ml-auto hidden items-center gap-5 lg:flex">
           <Link
             href="/marketplace"
@@ -100,13 +75,6 @@ export function SiteHeader() {
           </Link>
         </nav>
         <div className="ml-auto flex items-center gap-1 sm:gap-2 lg:ml-0">
-          <Link
-            href="/marketplace"
-            aria-label="Search products"
-            className="rounded-lg p-2 text-muted-foreground hover:bg-secondary md:hidden"
-          >
-            <Search className="size-5" />
-          </Link>
           <button
             type="button"
             aria-label={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
@@ -189,20 +157,6 @@ export function SiteHeader() {
             </details>
           )}
         </div>
-      </div>
-      <div className="border-t border-border/60 px-4 py-2 md:hidden">
-        <form
-          action="/marketplace"
-          className="flex items-center gap-2 rounded-xl border border-border bg-card px-3 py-1.5"
-        >
-          <Search className="size-4 text-muted-foreground" />
-          <input
-            name="search"
-            aria-label="Search products"
-            placeholder="Search products"
-            className="min-w-0 flex-1 bg-transparent py-1 text-sm outline-none"
-          />
-        </form>
       </div>
     </header>
   );
