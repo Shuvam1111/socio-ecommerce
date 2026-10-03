@@ -6,7 +6,7 @@ import { useCart } from '@/features/marketplace/components/use-cart';
 export default function CartPage() {
   const { cart, error, update, remove } = useCart();
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+    <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
       <div className="flex items-end justify-between gap-4">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
@@ -29,7 +29,7 @@ export default function CartPage() {
             {cart.items.map((item) => (
               <article
                 key={`${item.productId}-${item.selectedVariantId}`}
-                className="flex gap-4 rounded-2xl border border-border bg-card p-4"
+                className="flex gap-3 rounded-2xl border border-border bg-card p-3 shadow-sm sm:gap-4 sm:p-4"
               >
                 <div className="flex size-24 shrink-0 items-center justify-center rounded-xl bg-muted/50 p-3">
                   <img

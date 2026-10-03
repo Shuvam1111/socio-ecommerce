@@ -48,7 +48,7 @@ export function ProductDetail({ product }: { product: MarketplaceDetailProduct }
   const available = variant?.quantity ?? product.inventory.availableQuantity;
   const price = variant?.price ?? product.pricing.salePrice;
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
       <Link
         href="/marketplace"
         className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
@@ -56,7 +56,7 @@ export function ProductDetail({ product }: { product: MarketplaceDetailProduct }
         <ArrowLeft className="size-4" /> Back to marketplace
       </Link>
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="rounded-2xl border border-border bg-muted/30 p-5 sm:p-8">
+        <div className="rounded-3xl border border-border bg-card p-4 shadow-sm sm:p-8">
           <div className="flex aspect-square items-center justify-center">
             <img
               src={selectedImage}
@@ -179,7 +179,7 @@ export function ProductDetail({ product }: { product: MarketplaceDetailProduct }
           </div>
         </section>
       </div>
-      <div className="mt-12 grid gap-8 rounded-2xl border border-border bg-card p-6 md:grid-cols-2">
+      <div className="mt-12 grid gap-8 rounded-3xl border border-border bg-card p-6 shadow-sm md:grid-cols-2">
         <div>
           <h2 className="font-semibold">About this product</h2>
           <p className="mt-2 whitespace-pre-line text-sm leading-6 text-muted-foreground">

@@ -22,7 +22,7 @@ export function SiteShell({ children }: SiteShellProps) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-background pb-16 text-foreground md:pb-0">
+    <div className="flex min-h-screen flex-col bg-background pb-16 text-foreground selection:bg-primary/20 md:pb-0">
       <SiteHeader />
 
       <main className="flex-1">{children}</main>

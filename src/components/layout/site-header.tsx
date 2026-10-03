@@ -46,9 +46,13 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:gap-6 lg:px-8">
-        <Link href="/" className="shrink-0 text-lg font-bold tracking-tight text-foreground">
+        <Link
+          href="/"
+          aria-label="Socio Commerce home"
+          className="shrink-0 text-lg font-bold tracking-tight text-foreground"
+        >
           Socio<span className="text-primary">.</span>
         </Link>
         <form

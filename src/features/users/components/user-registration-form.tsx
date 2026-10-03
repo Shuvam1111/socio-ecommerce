@@ -68,7 +68,7 @@ export function UserRegistrationForm() {
   }
 
   return (
-    <Card className="mx-auto w-full max-w-2xl">
+    <Card className="mx-auto w-full max-w-2xl border-border/80 shadow-sm">
       <CardHeader className="space-y-4 text-center">
         <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
           <UserPlus className="size-6" />

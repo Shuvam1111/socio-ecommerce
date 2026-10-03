@@ -29,10 +29,10 @@ export default function UserProfilePage() {
   }, []);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
+    <main className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
       <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Account</p>
       <h1 className="mt-2 text-3xl font-bold">Profile</h1>
-      <section className="mt-8 rounded-2xl border border-border bg-card p-6">
+      <section className="mt-8 rounded-3xl border border-border bg-card p-6 shadow-sm sm:p-8">
         <div className="flex items-center gap-4">
           <div className="flex size-12 items-center justify-center rounded-full bg-primary/10">
             <UserRound className="size-5 text-primary" />
