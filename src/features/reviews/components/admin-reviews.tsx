@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { AdminPagination } from '@/features/admin/components/admin-pagination';
 type Review = {
   id: string;
   productId: string;
@@ -17,6 +18,8 @@ export function AdminReviews() {
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('all');
   const [error, setError] = useState('');
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   async function load() {
     const response = await fetch('/api/admin/reviews');
     const data = await response.json();
@@ -41,6 +44,9 @@ export function AdminReviews() {
         .toLowerCase()
         .includes(query.toLowerCase()),
   );
+  const totalPages = Math.max(1, Math.ceil(visible.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const pagedReviews = visible.slice((currentPage - 1) * pageSize, currentPage * pageSize);
   return (
     <section>
       <h1 className="text-3xl font-semibold">Review moderation</h1>
@@ -67,7 +73,7 @@ export function AdminReviews() {
       </div>
       {error && <p className="mt-4 text-destructive">{error}</p>}
       <div className="mt-6 grid gap-4">
-        {visible.map((review) => (
+        {pagedReviews.map((review) => (
           <article key={review.id} className="rounded-2xl border border-border bg-card p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
@@ -91,6 +97,18 @@ export function AdminReviews() {
         ))}
         {!visible.length && (
           <p className="text-muted-foreground">No reviews match these filters.</p>
+        )}
+        {visible.length > 0 && (
+          <AdminPagination
+            page={currentPage}
+            pageSize={pageSize}
+            totalItems={visible.length}
+            onPageChange={setPage}
+            onPageSizeChange={(size) => {
+              setPageSize(size);
+              setPage(1);
+            }}
+          />
         )}
       </div>
     </section>

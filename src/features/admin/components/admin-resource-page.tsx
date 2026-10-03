@@ -4,6 +4,7 @@ import { Package, Settings2, ShoppingCart, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { AdminPagination } from './admin-pagination';
 export type AdminResource =
   'products' | 'orders' | 'categories' | 'reviews' | 'promotions' | 'reports' | 'settings';
 const meta = {
@@ -34,6 +35,8 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
   const [payload, setPayload] = useState<Record<string, unknown>>({});
   const [settings, setSettings] = useState<Record<string, unknown>>({});
   const [error, setError] = useState('');
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const info = meta[resource as keyof typeof meta] ?? [
     'Admin',
     'Manage platform operations.',
@@ -62,6 +65,9 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
       })
       .catch((e) => setError(e.message));
   }, [resource, query, status]);
+  const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const pageItems = items.slice((currentPage - 1) * pageSize, currentPage * pageSize);
   async function moderate(id: string, next: 'approved' | 'rejected' | 'inactive') {
     const response = await fetch(`/api/admin/products/${id}`, {
       method: 'POST',
@@ -132,7 +138,7 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
             </select>
           </div>
           <div className="grid gap-3">
-            {items.map((item) =>
+            {pageItems.map((item) =>
               'vendorId' in item ? (
                 <Card key={item.id}>
                   <CardContent className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
@@ -182,6 +188,18 @@ export function AdminResourcePage({ resource }: { resource: AdminResource }) {
             )}
             {!items.length && (
               <p className="text-muted-foreground">No records match these filters.</p>
+            )}
+            {items.length > 0 && (
+              <AdminPagination
+                page={currentPage}
+                pageSize={pageSize}
+                totalItems={items.length}
+                onPageChange={setPage}
+                onPageSizeChange={(size) => {
+                  setPageSize(size);
+                  setPage(1);
+                }}
+              />
             )}
           </div>
         </>

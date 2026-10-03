@@ -14,6 +14,7 @@ import {
   XCircle,
 } from 'lucide-react';
 
+import { AdminPagination } from './admin-pagination';
 import {
   getAdminUsers,
   updateAdminUserStatus,
@@ -32,6 +33,8 @@ export function AdminUsers() {
   const [statusFilter, setStatusFilter] = useState('');
   const [verificationFilter, setVerificationFilter] = useState('');
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
   async function loadUsers() {
     try {
@@ -81,6 +84,10 @@ export function AdminUsers() {
       );
     });
   }, [users, search]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredUsers.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const pagedUsers = filteredUsers.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   if (loading) {
     return (
@@ -231,7 +238,7 @@ export function AdminUsers() {
               </thead>
 
               <tbody className="divide-y divide-border">
-                {filteredUsers.map((user) => (
+                {pagedUsers.map((user) => (
                   <tr key={user.id} className="transition-colors hover:bg-muted/30">
                     {/* User */}
                     <td className="px-5 py-4">
@@ -361,8 +368,20 @@ export function AdminUsers() {
           </div>
 
           {/* Result Count */}
-          <div className="border-t border-border px-5 py-3 text-xs text-muted-foreground">
+          <div className="px-5 py-3 text-xs text-muted-foreground">
             Showing {filteredUsers.length} of {users.length} users
+          </div>
+          <div className="px-5 pb-5">
+            <AdminPagination
+              page={currentPage}
+              pageSize={pageSize}
+              totalItems={filteredUsers.length}
+              onPageChange={setPage}
+              onPageSizeChange={(size) => {
+                setPageSize(size);
+                setPage(1);
+              }}
+            />
           </div>
         </div>
       )}
