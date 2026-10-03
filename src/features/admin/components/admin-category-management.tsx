@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { AdminPagination } from './admin-pagination';
 
 type Category = { id: string; name: string; slug: string; status: 'active' | 'inactive' };
 type Subcategory = {
@@ -23,6 +24,8 @@ export function AdminCategoryManagement() {
   const [subcategoryName, setSubcategoryName] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
   async function load() {
     const [categoryResponse, subcategoryResponse] = await Promise.all([
@@ -50,6 +53,13 @@ export function AdminCategoryManagement() {
       ),
     [categories, query],
   );
+  const totalPages = Math.max(1, Math.ceil(visibleCategories.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const pagedCategories = visibleCategories.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
+
   async function mutate(url: string, method: string, body?: unknown) {
     setError('');
     setMessage('');
@@ -124,7 +134,7 @@ export function AdminCategoryManagement() {
           {visibleCategories.length === 0 ? (
             <p className="text-sm text-muted-foreground">No categories found.</p>
           ) : (
-            visibleCategories.map((category) => (
+            pagedCategories.map((category) => (
               <div key={category.id} className="rounded-lg border p-4">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
@@ -210,6 +220,18 @@ export function AdminCategoryManagement() {
                 </div>
               </div>
             ))
+          )}
+          {visibleCategories.length > 0 && (
+            <AdminPagination
+              page={currentPage}
+              pageSize={pageSize}
+              totalItems={visibleCategories.length}
+              onPageChange={setPage}
+              onPageSizeChange={(size) => {
+                setPageSize(size);
+                setPage(1);
+              }}
+            />
           )}
         </CardContent>
       </Card>

@@ -12,6 +12,7 @@ export async function GET(request: Request) {
     });
     const search = new URL(request.url).searchParams.get('search')?.trim().toLowerCase() ?? '';
     const role = new URL(request.url).searchParams.get('role');
+    const adminManagedRoles = new Set(['admin', 'buyer']);
     const status = new URL(request.url).searchParams.get('status');
     const verification = new URL(request.url).searchParams.get('verification');
 
@@ -22,9 +23,13 @@ export async function GET(request: Request) {
           .join(' ')
           .toLowerCase();
         const roles = Array.isArray(user.roles) ? user.roles : [];
+        const isAdminManagedUser = roles.some(
+          (value): value is string => typeof value === 'string' && adminManagedRoles.has(value),
+        );
         return (
+          isAdminManagedUser &&
           (!search || text.includes(search)) &&
-          (!role || roles.includes(role)) &&
+          (!role || (adminManagedRoles.has(role) && roles.includes(role))) &&
           (!status || user.status === status) &&
           (!verification ||
             (verification === 'verified' ? user.isVerified === true : user.isVerified === false))

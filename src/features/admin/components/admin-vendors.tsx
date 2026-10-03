@@ -27,6 +27,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Textarea } from '@/components/ui/textarea';
+import { AdminPagination } from './admin-pagination';
 
 import {
   approveVendor,
@@ -57,6 +58,8 @@ export function AdminVendors() {
   const [rejectionReason, setRejectionReason] = useState('');
 
   const [actionLoading, setActionLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
   async function loadVendors() {
     try {
@@ -121,6 +124,10 @@ export function AdminVendors() {
       rejected: vendors.filter((vendor) => vendor.status === 'rejected').length,
     };
   }, [vendors]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredVendors.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const pagedVendors = filteredVendors.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
   function openApproveDialog(vendor: PendingVendor) {
     setSelectedVendor(vendor);
@@ -414,7 +421,7 @@ export function AdminVendors() {
               </thead>
 
               <tbody className="divide-y divide-border">
-                {filteredVendors.map((vendor) => (
+                {pagedVendors.map((vendor) => (
                   <tr key={vendor.id} className="transition-colors hover:bg-muted/30">
                     {/* Vendor */}
                     <td className="px-5 py-4">
@@ -552,6 +559,18 @@ export function AdminVendors() {
           {/* Result Count */}
           <div className="border-t border-border px-5 py-3 text-xs text-muted-foreground">
             Showing {filteredVendors.length} of {vendors.length} vendors
+          </div>
+          <div className="px-5 pb-5">
+            <AdminPagination
+              page={currentPage}
+              pageSize={pageSize}
+              totalItems={filteredVendors.length}
+              onPageChange={setPage}
+              onPageSizeChange={(size) => {
+                setPageSize(size);
+                setPage(1);
+              }}
+            />
           </div>
         </div>
       )}
