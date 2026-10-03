@@ -9,6 +9,7 @@ import { useCart } from '@/features/marketplace/components/use-cart';
 export function MobileCommerceNav() {
   const pathname = usePathname();
   const { cart } = useCart();
+  const cartCount = cart.items.reduce((total, item) => total + item.quantity, 0);
   const [buyer, setBuyer] = useState(false);
   useEffect(() => {
     const frame = requestAnimationFrame(() =>
@@ -30,7 +31,7 @@ export function MobileCommerceNav() {
         icon={ShoppingCart}
         label="Cart"
         active={pathname.startsWith('/cart')}
-        badge={buyer ? cart.items.length : 0}
+        badge={buyer ? cartCount : 0}
       />
       <MobileLink
         href={buyer ? '/orders' : '/user/login'}

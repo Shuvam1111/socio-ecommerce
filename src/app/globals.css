@@ -4,6 +4,30 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* App-controlled mode: never follows the device color scheme. */
+html[data-theme-mode='dark'] {
+  --background: #11111a;
+  --foreground: #f4f2ff;
+  --card: #1a1925;
+  --card-foreground: #f4f2ff;
+  --popover: #1a1925;
+  --popover-foreground: #f4f2ff;
+  --muted: #242330;
+  --muted-foreground: #aaa6bc;
+  --border: #373445;
+  --input: #403c50;
+  --secondary: #2b2940;
+  --secondary-foreground: #eeeaff;
+  --accent-foreground: #241b08;
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--card-foreground);
+  color-scheme: dark;
+}
+
+[data-theme-mode='light'] {
+  color-scheme: light;
+}
+
 /* =========================================================
    BASE THEME — VIOLET
    ========================================================= */

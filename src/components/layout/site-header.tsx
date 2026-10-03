@@ -1,16 +1,28 @@
 'use client';
 
 import Link from 'next/link';
-import { ChevronDown, CircleUserRound, LogOut, Search, ShoppingCart } from 'lucide-react';
+import {
+  ChevronDown,
+  CircleUserRound,
+  LogOut,
+  Moon,
+  Search,
+  ShoppingCart,
+  Sun,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { NotificationCenter } from '@/features/notifications/components/notification-center';
 import { useCart } from '@/features/marketplace/components/use-cart';
+import { useTheme } from '@/components/theme/theme-provider';
 
 export function SiteHeader() {
   const router = useRouter();
   const pathname = usePathname();
   const { cart } = useCart();
+  const { mode, setMode } = useTheme();
+  const cartCount = cart.items.reduce((total, item) => total + item.quantity, 0);
+
   const [buyer, setBuyer] = useState<{ firstName?: string } | null>(null);
   const [sellerLoggedIn, setSellerLoggedIn] = useState(false);
 
@@ -95,6 +107,15 @@ export function SiteHeader() {
           >
             <Search className="size-5" />
           </Link>
+          <button
+            type="button"
+            aria-label={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
+            className="rounded-lg p-2 text-muted-foreground hover:bg-secondary hover:text-foreground"
+          >
+            {mode === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
+          </button>
           {buyer && <NotificationCenter />}
           <Link
             href="/cart"
@@ -102,9 +123,9 @@ export function SiteHeader() {
             className="relative rounded-lg p-2 text-muted-foreground hover:bg-secondary"
           >
             <ShoppingCart className="size-5" />
-            {buyer && cart.items.length > 0 && (
+            {cartCount > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                {cart.items.length}
+                {cartCount}
               </span>
             )}
           </Link>
