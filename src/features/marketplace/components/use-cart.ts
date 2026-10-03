@@ -1,6 +1,6 @@
 'use client';
-/* eslint-disable react-hooks/set-state-in-effect */
-import { useCallback, useEffect, useState } from 'react';
+
+import { useCallback, useEffect, useState, useSyncExternalStore } from 'react';
 
 export const CART_STORAGE_KEY = 'socio-commerce-cart-v1';
 
@@ -57,18 +57,44 @@ function summarize(items: CartDisplayItem[]): CartView {
   return { items, subtotal: items.reduce((sum, item) => sum + item.subtotal, 0) };
 }
 
+let currentCart = emptyCart();
+const listeners = new Set<() => void>();
+
+function getCartSnapshot() {
+  return currentCart;
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+function publish(items: CartDisplayItem[]) {
+  currentCart = summarize(items);
+  listeners.forEach((listener) => listener());
+}
+
+function loadStoredCart() {
+  if (typeof window !== 'undefined') publish(readStoredCart());
+}
+
 export function useCart() {
-  const [cart, setCart] = useState<CartView>(emptyCart);
+  const cart = useSyncExternalStore(subscribe, getCartSnapshot, emptyCart);
   const [error, setError] = useState('');
 
-  const refresh = useCallback(async () => {
-    setCart(summarize(readStoredCart()));
-    setError('');
+  useEffect(() => {
+    loadStoredCart();
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === CART_STORAGE_KEY) loadStoredCart();
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
   }, []);
 
-  useEffect(() => {
-    void refresh();
-  }, [refresh]);
+  const refresh = useCallback(async () => {
+    loadStoredCart();
+    setError('');
+  }, []);
 
   const mutate = useCallback((action: 'add' | 'update' | 'remove', item: CartDisplayItem) => {
     setError('');
@@ -92,9 +118,8 @@ export function useCart() {
       items.push({ ...item, subtotal: item.quantity * item.price });
     }
     saveItems(items);
-    const next = summarize(items);
-    setCart(next);
-    return next;
+    publish(items);
+    return currentCart;
   }, []);
 
   const add = useCallback((item: CartDisplayItem) => mutate('add', item), [mutate]);
@@ -105,7 +130,7 @@ export function useCart() {
   const remove = useCallback((item: CartDisplayItem) => mutate('remove', item), [mutate]);
   const clear = useCallback(() => {
     if (typeof window !== 'undefined') window.localStorage.removeItem(CART_STORAGE_KEY);
-    setCart(emptyCart());
+    publish([]);
   }, []);
 
   return { cart, error, refresh, add, update, remove, clear };
