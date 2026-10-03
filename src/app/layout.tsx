@@ -51,7 +51,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         geist.variable,
       )}
     >
-      <head>
+      <head suppressHydrationWarning>
         <ThemeScript />
       </head>
 
