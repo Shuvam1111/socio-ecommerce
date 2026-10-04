@@ -584,7 +584,16 @@ function Collapse({ open, children }: { open: boolean; children: ReactNode }) {
   );
 }
 
-function MobileMenu({ showAuthLinks }: { showAuthLinks: boolean }) {
+function MobileMenu({
+  showAuthLinks,
+  account,
+  onLogout,
+}: {
+  showAuthLinks: boolean;
+  /** Who is logged in. Controls the Profile / Logout buttons at the bottom of the drawer. */
+  account: 'buyer' | 'seller' | null;
+  onLogout: () => void;
+}) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [openCategory, setOpenCategory] = useState<string | null>(null);
@@ -802,6 +811,29 @@ function MobileMenu({ showAuthLinks }: { showAuthLinks: boolean }) {
                 </Link>
               </div>
             )}
+            {/* Logged-in actions. The header's Logout button is hidden on phones, so it lives here. */}
+            {account === 'buyer' && (
+              <Link
+                href="/user/profile"
+                className="flex items-center justify-center gap-2 rounded-lg border border-border px-4 py-3 text-sm font-semibold hover:bg-secondary"
+              >
+                <CircleUserRound className="size-4" />
+                My profile
+              </Link>
+            )}
+            {account && (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false);
+                  onLogout();
+                }}
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-destructive/10 px-4 py-3 text-sm font-semibold text-destructive transition hover:bg-destructive/15"
+              >
+                <LogOut className="size-4" />
+                Log out
+              </button>
+            )}
           </div>
         </aside>
       </div>,
@@ -896,7 +928,11 @@ export function SiteHeader() {
       {/* ROW 1: [hamburger] logo | search | actions */}
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-2 sm:h-16 sm:gap-3 px-4 sm:px-6 lg:gap-8 lg:px-8">
         <div className="flex shrink-0 items-center gap-2">
-          <MobileMenu showAuthLinks={!buyer && !sellerLoggedIn} />
+          <MobileMenu
+            showAuthLinks={!buyer && !sellerLoggedIn}
+            account={buyer ? 'buyer' : sellerLoggedIn ? 'seller' : null}
+            onLogout={handleLogout}
+          />
           <Link
             href="/"
             aria-label="Socio Commerce home"
