@@ -562,6 +562,19 @@ function FloatingProducts({ products }: { products: MarketplaceDetailProduct[] }
 
 function MiniProduct({ product }: { product: MarketplaceDetailProduct }) {
   const { currency, current, onSale, percentOff } = priceOf(product);
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const image =
+    product.images[imageIndex] || '/images/product-placeholder.svg';
+
+  function handleImageError() {
+    if (imageIndex < product.images.length - 1) {
+      setImageIndex((current) => current + 1);
+    } else {
+      setImageIndex(product.images.length);
+    }
+  }
+
   return (
     <Link
       href={`/products/${product.slug}`}
@@ -569,24 +582,29 @@ function MiniProduct({ product }: { product: MarketplaceDetailProduct }) {
     >
       <div className="relative flex aspect-square items-center justify-center rounded-xl bg-muted/70 p-2">
         <img
-          src={product.images[0] || '/images/product-placeholder.svg'}
-          alt=""
+          src={image}
+          alt={product.name}
+          onError={handleImageError}
           className="max-h-full w-full object-contain"
         />
+
         {onSale && percentOff > 0 && (
           <span className="absolute left-1.5 top-1.5 rounded-full bg-destructive px-1.5 py-0.5 text-[10px] font-bold leading-none text-destructive-foreground">
             -{percentOff}%
           </span>
         )}
       </div>
-      <p className="mt-2 line-clamp-1 text-xs font-semibold">{product.name}</p>
+
+      <p className="mt-2 line-clamp-1 text-xs font-semibold">
+        {product.name}
+      </p>
+
       <p className="mt-0.5 text-xs font-bold text-primary">
         {currency} {current.toLocaleString()}
       </p>
     </Link>
   );
 }
-
 function MiniPlaceholder() {
   return (
     <div className="rounded-2xl bg-card p-2.5 shadow-2xl shadow-black/25">
