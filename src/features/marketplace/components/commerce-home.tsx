@@ -251,26 +251,25 @@ export function CommerceHome({
       <section id="categories" className="mx-auto max-w-7xl scroll-mt-24 px-4 pt-10 sm:px-6 lg:px-8">
         <SectionHeading eyebrow="Browse" title="Shop by category" href="/marketplace" />
         <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:gap-4 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-8 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
-          {categories.map((category) => {
-            const glyph =
-              category.icon && category.icon.length <= 4
-                ? category.icon
-                : category.name.charAt(0).toUpperCase();
-            return (
-              <Link
-                key={category.id}
-                href={`/marketplace?categoryId=${category.id}`}
-                className="group flex w-20 shrink-0 flex-col items-center gap-2 sm:w-24 lg:w-auto"
-              >
-                <span className="flex size-16 items-center justify-center rounded-full border border-border bg-card text-2xl font-bold text-primary shadow-sm transition group-hover:-translate-y-0.5 group-hover:border-primary group-hover:bg-primary/5 group-hover:shadow-md sm:size-20">
-                  {glyph}
-                </span>
-                <span className="line-clamp-2 text-center text-xs font-semibold text-foreground">
-                  {category.name}
-                </span>
-              </Link>
-            );
-          })}
+         {categories.map((category) => (
+            <Link
+              key={category.id}
+              href={`/marketplace?categoryId=${category.id}`}
+              className="group flex w-20 shrink-0 flex-col items-center gap-2 sm:w-24 lg:w-auto"
+            >
+              <span className="flex size-16 items-center justify-center overflow-hidden rounded-full border border-border bg-card shadow-sm transition group-hover:-translate-y-0.5 group-hover:border-primary group-hover:shadow-md sm:size-20">
+                <img
+                  src={category.icon}
+                  alt={category.name}
+                  className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </span>
+          
+              <span className="line-clamp-2 text-center text-xs font-semibold text-foreground">
+                {category.name}
+              </span>
+            </Link>
+          ))}
         </div>
       </section>
 
