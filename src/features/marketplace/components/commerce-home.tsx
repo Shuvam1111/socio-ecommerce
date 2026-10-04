@@ -8,7 +8,7 @@
  *   1. Hero: promo carousel (3 slides, floating product cards) + 2 side tiles
  *            (today's deals countdown, sell on Socio)
  *   2. Trust strip
- *   3. Shop by category (round icon rail)
+ *   3. Shop by category (image cards, photo + gradient + label)
  *   4. Deals of the day (only shows if some products have a sale price)
  *   5. Featured products, promo banners, Popular with shoppers
  *   6. Become a vendor CTA
@@ -247,28 +247,12 @@ export function CommerceHome({
         </div>
       </section>
 
-      {/* ============ 3. CATEGORIES ============ */}
+      {/* ============ 3. CATEGORIES (image cards) ============ */}
       <section id="categories" className="mx-auto max-w-7xl scroll-mt-24 px-4 pt-10 sm:px-6 lg:px-8">
         <SectionHeading eyebrow="Browse" title="Shop by category" href="/marketplace" />
-        <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:gap-4 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-8 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
-         {categories.map((category) => (
-            <Link
-              key={category.id}
-              href={`/marketplace?categoryId=${category.id}`}
-              className="group flex w-20 shrink-0 flex-col items-center gap-2 sm:w-24 lg:w-auto"
-            >
-              <span className="flex size-16 items-center justify-center overflow-hidden rounded-full border border-border bg-card shadow-sm transition group-hover:-translate-y-0.5 group-hover:border-primary group-hover:shadow-md sm:size-20">
-                <img
-                  src={category.icon}
-                  alt={category.name}
-                  className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </span>
-          
-              <span className="line-clamp-2 text-center text-xs font-semibold text-foreground">
-                {category.name}
-              </span>
-            </Link>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+          {categories.map((category) => (
+            <CategoryCard key={category.id} category={category} />
           ))}
         </div>
       </section>
@@ -564,15 +548,11 @@ function MiniProduct({ product }: { product: MarketplaceDetailProduct }) {
   const { currency, current, onSale, percentOff } = priceOf(product);
   const [imageIndex, setImageIndex] = useState(0);
 
-  const image =
-    product.images[imageIndex] || '/images/product-placeholder.svg';
+  const image = product.images[imageIndex] || '/images/product-placeholder.svg';
 
+  // Try the next image if one fails, then fall back to the placeholder.
   function handleImageError() {
-    if (imageIndex < product.images.length - 1) {
-      setImageIndex((current) => current + 1);
-    } else {
-      setImageIndex(product.images.length);
-    }
+    setImageIndex((prev) => (prev < product.images.length ? prev + 1 : prev));
   }
 
   return (
@@ -587,24 +567,20 @@ function MiniProduct({ product }: { product: MarketplaceDetailProduct }) {
           onError={handleImageError}
           className="max-h-full w-full object-contain"
         />
-
         {onSale && percentOff > 0 && (
           <span className="absolute left-1.5 top-1.5 rounded-full bg-destructive px-1.5 py-0.5 text-[10px] font-bold leading-none text-destructive-foreground">
             -{percentOff}%
           </span>
         )}
       </div>
-
-      <p className="mt-2 line-clamp-1 text-xs font-semibold">
-        {product.name}
-      </p>
-
+      <p className="mt-2 line-clamp-1 text-xs font-semibold">{product.name}</p>
       <p className="mt-0.5 text-xs font-bold text-primary">
         {currency} {current.toLocaleString()}
       </p>
     </Link>
   );
 }
+
 function MiniPlaceholder() {
   return (
     <div className="rounded-2xl bg-card p-2.5 shadow-2xl shadow-black/25">
@@ -696,6 +672,46 @@ function SellerTile() {
 /* ---------------------------------------------------------------------
  * SHARED SECTION PIECES
  * --------------------------------------------------------------------- */
+/**
+ * Category image card. `category.icon` is treated as an IMAGE URL (as in the MVP).
+ * The dark gradient + white text is intentional (not theme tokens) so the label stays
+ * readable on top of any photo in light and dark mode. If the image is missing or fails
+ * to load, a brand-colored fallback with the first letter is shown instead.
+ */
+function CategoryCard({ category }: { category: Category }) {
+  const [failed, setFailed] = useState(false);
+  const hasImage = Boolean(category.icon) && !failed;
+
+  return (
+    <Link
+      href={`/marketplace?categoryId=${category.id}`}
+      className="group relative block aspect-[4/3] overflow-hidden rounded-2xl bg-muted shadow-md shadow-black/10 ring-1 ring-inset ring-black/5 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
+    >
+      {hasImage ? (
+        <img
+          src={category.icon}
+          alt=""
+          loading="lazy"
+          onError={() => setFailed(true)}
+          className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary to-primary/50 text-5xl font-bold text-primary-foreground/80">
+          {category.name.charAt(0).toUpperCase()}
+        </div>
+      )}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent"
+      />
+      <span className="absolute inset-x-0 bottom-0 flex items-center gap-1.5 p-3 text-sm font-semibold text-white sm:p-4">
+        <span className="line-clamp-1">{category.name}</span>
+        <ArrowRight className="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
+      </span>
+    </Link>
+  );
+}
+
 function SectionHeading({
   eyebrow,
   title,
