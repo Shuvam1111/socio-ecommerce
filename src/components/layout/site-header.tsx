@@ -1275,66 +1275,66 @@ export function SiteHeader() {
   </Link>
 )}
 
-          {/* AUTH AREA: original MVP markup, unchanged */}
-          {buyer ? (
-            <>
-              <Link
-                href="/user/profile"
-                aria-label="Profile"
-                className="rounded-lg p-2 text-muted-foreground hover:bg-secondary hover:text-foreground"
-              >
-                <CircleUserRound className="size-5" />
-              </Link>
-              <button
-                type="button"
-                onClick={handleLogout}
-                className="hidden rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-secondary sm:block"
-              >
-                Logout
-              </button>
-            </>
-          ) : sellerLoggedIn ? (
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-secondary"
-            >
-              <LogOut className="size-4" />
-            </button>
-          ) : (
-            <details className="group relative">
-              <summary className="flex cursor-pointer list-none items-center gap-1 rounded-full bg-primary px-3.5 py-2 sm:px-4 text-sm font-semibold text-primary-foreground hover:opacity-90 [&::-webkit-details-marker]:hidden">
-                Login
-                <ChevronDown className="size-4 transition-transform group-open:rotate-180" />
-              </summary>
-              <div className="absolute right-0 top-12 z-50 w-52 rounded-xl border border-border bg-popover p-2 shadow-xl">
-                <Link
-                  href="/user/login"
-                  className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-                >
-                  Login as buyer
-                </Link>
-                <Link
-                  href="/seller/login"
-                  className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-                >
-                  Seller login
-                </Link>
-                <Link
-                  href="/admin/login"
-                  className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-                >
-                  Admin login
-                </Link>
-                <Link
-                  href="/register/user"
-                  className="mt-1 block rounded-lg border-t border-border px-3 py-2 text-sm font-medium text-primary hover:bg-accent"
-                >
-                  Create account
-                </Link>
-              </div>
-            </details>
-          )}
+       
+{/* AUTH AREA */}
+{buyer ? (
+  <button
+    type="button"
+    onClick={handleLogout}
+    className="rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-secondary"
+    aria-label="Logout"
+  >
+    <LogOut className="size-4" />
+  </button>
+) : sellerLoggedIn ? (
+  <button
+    type="button"
+    onClick={handleLogout}
+    className="rounded-lg border border-border px-3 py-2 text-sm font-medium hover:bg-secondary"
+    aria-label="Logout"
+  >
+    <LogOut className="size-4" />
+  </button>
+) : (
+  <details className="group relative">
+    <summary className="flex cursor-pointer list-none items-center gap-1 rounded-full bg-primary px-3.5 py-2 sm:px-4 text-sm font-semibold text-primary-foreground hover:opacity-90 [&::-webkit-details-marker]:hidden">
+      Login
+      <ChevronDown className="size-4 transition-transform group-open:rotate-180" />
+    </summary>
+
+    <div className="absolute right-0 top-12 z-50 w-52 rounded-xl border border-border bg-popover p-2 shadow-xl">
+      <Link
+        href="/user/login"
+        className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
+      >
+        Login as buyer
+      </Link>
+
+      <Link
+        href="/seller/login"
+        className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
+      >
+        Seller login
+      </Link>
+
+      <Link
+        href="/admin/login"
+        className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
+      >
+        Admin login
+      </Link>
+
+      <Link
+        href="/register/user"
+        className="mt-1 block rounded-lg border-t border-border px-3 py-2 text-sm font-medium text-primary hover:bg-accent"
+      >
+        Create account
+      </Link>
+    </div>
+  </details>
+)}
+
+
         </div>
       </div>
 
