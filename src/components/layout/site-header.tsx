@@ -1260,18 +1260,20 @@ export function SiteHeader() {
             {mode === 'dark' ? <Sun className="size-5" /> : <Moon className="size-5" />}
           </button>
           {buyer && <NotificationCenter />}
-          <Link
-            href="/cart"
-            aria-label="Shopping cart"
-            className="relative rounded-lg p-2 text-muted-foreground hover:bg-secondary hover:text-foreground"
-          >
-            <ShoppingCart className="size-5" />
-            {cartCount > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                {cartCount}
-              </span>
-            )}
-          </Link>
+          {(buyer || sellerLoggedIn) && (
+  <Link
+    href="/cart"
+    aria-label="Shopping cart"
+    className="relative rounded-lg p-2 text-muted-foreground hover:bg-secondary hover:text-foreground"
+  >
+    <ShoppingCart className="size-5" />
+    {cartCount > 0 && (
+      <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+        {cartCount}
+      </span>
+    )}
+  </Link>
+)}
 
           {/* AUTH AREA: original MVP markup, unchanged */}
           {buyer ? (
