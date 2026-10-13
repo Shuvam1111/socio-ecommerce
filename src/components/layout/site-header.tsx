@@ -1296,9 +1296,9 @@ export function SiteHeader() {
     <LogOut className="size-4" />
   </button>
 ) : (
-  <div className="flex items-center gap-1 sm:gap-2">
-    <Link
-      href="/user/login"
+  <div className="hidden items-center gap-1 sm:flex sm:gap-2">
+  <Link
+  href="/user/login"
       className="rounded-full px-2.5 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary sm:px-3"
     >
       Login
