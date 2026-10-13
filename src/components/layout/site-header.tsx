@@ -1296,42 +1296,21 @@ export function SiteHeader() {
     <LogOut className="size-4" />
   </button>
 ) : (
-  <details className="group relative">
-    <summary className="flex cursor-pointer list-none items-center gap-1 rounded-full bg-primary px-3.5 py-2 sm:px-4 text-sm font-semibold text-primary-foreground hover:opacity-90 [&::-webkit-details-marker]:hidden">
+  <div className="hidden items-center gap-1 sm:flex sm:gap-2">
+  <Link
+  href="/user/login"
+      className="rounded-full px-2.5 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary sm:px-3"
+    >
       Login
-      <ChevronDown className="size-4 transition-transform group-open:rotate-180" />
-    </summary>
-
-    <div className="absolute right-0 top-12 z-50 w-52 rounded-xl border border-border bg-popover p-2 shadow-xl">
-      <Link
-        href="/user/login"
-        className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-      >
-        Login as buyer
-      </Link>
-
-      <Link
-        href="/seller/login"
-        className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-      >
-        Seller login
-      </Link>
-
-      <Link
-        href="/admin/login"
-        className="block rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent"
-      >
-        Admin login
-      </Link>
-
-      <Link
-        href="/register/user"
-        className="mt-1 block rounded-lg border-t border-border px-3 py-2 text-sm font-medium text-primary hover:bg-accent"
-      >
-        Create account
-      </Link>
-    </div>
-  </details>
+    </Link>
+    <Link
+      href="/register/user"
+      className="rounded-full bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 sm:px-4"
+    >
+      <span className="hidden sm:inline">Sign up</span>
+      <span className="sm:hidden">Join</span>
+    </Link>
+  </div>
 )}
 
 
