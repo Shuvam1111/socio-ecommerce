@@ -40,7 +40,7 @@ export function MobileCommerceNav() {
    */
   if (!buyer && !seller) {
     return (
-      <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-background/95 px-2 pb-[env(safe-area-inset-bottom)] pt-2 backdrop-blur md:hidden">
+      <nav className={`fixed inset-x-0 bottom-0 z-40 grid border-t border-border bg-background/95 px-2 pb-[env(safe-area-inset-bottom)] pt-2 backdrop-blur md:hidden ${sellerRoute ? 'grid-cols-5' : 'grid-cols-4'}`}>
         <MobileLink
           href="/"
           icon={Home}
@@ -50,6 +50,13 @@ export function MobileCommerceNav() {
 
         {sellerRoute ? (
           <>
+            <MobileLink
+              href="/marketplace"
+              icon={ShoppingBag}
+              label="Shop"
+              active={pathname.startsWith('/marketplace')}
+            />
+
             <MobileLink
               href="/seller/login"
               icon={LogIn}
