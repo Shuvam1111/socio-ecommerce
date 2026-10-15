@@ -941,7 +941,7 @@ function MobileMenu({
     <>
       <button
         type="button"
-        aria-label="Open categories"
+        aria-label={isRootPage ? 'Open seller menu' : 'Open categories'}
         aria-expanded={isOpen}
         onClick={() => setIsOpen(true)}
         className="-ml-2 rounded-lg p-2 text-foreground hover:bg-secondary lg:hidden"
@@ -968,7 +968,7 @@ function MobileMenu({
         <aside
           role="dialog"
           aria-modal="true"
-          aria-label="Categories"
+          aria-label={isRootPage ? 'Seller navigation' : 'Categories'}
           className={`absolute inset-y-0 left-0 flex w-[88%] max-w-sm flex-col bg-background shadow-2xl transition-transform duration-300 ease-out ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
@@ -1134,13 +1134,13 @@ function MobileMenu({
                   href={isRootPage ? '/seller/login' : '/user/login'}
                   className="rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
                 >
-                  Log in
+                  {isRootPage ? 'Seller log in' : 'Log in'}
                 </Link>
                 <Link
                   href={isRootPage ? '/register/vendor' : '/register/user'}
                   className="rounded-lg border border-border px-4 py-3 text-center text-sm font-semibold hover:bg-secondary"
                 >
-                  Sign up
+                  {isRootPage ? 'Become a seller' : 'Sign up'}
                 </Link>
               </div>
             )}
