@@ -892,11 +892,13 @@ function MobileMenu({
   showAuthLinks,
   account,
   onLogout,
+  isRootPage,
 }: {
   showAuthLinks: boolean;
   /** Who is logged in. Controls the Profile / Logout buttons at the bottom of the drawer. */
   account: 'buyer' | 'seller' | null;
   onLogout: () => void;
+  isRootPage: boolean;
 }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -986,7 +988,31 @@ function MobileMenu({
             </button>
           </div>
 
-          <nav aria-label="Product categories" className="flex-1 overflow-y-auto overscroll-contain">
+          <nav aria-label={isRootPage ? 'Seller navigation' : 'Product categories'} className="flex-1 overflow-y-auto overscroll-contain">
+            {isRootPage ? (
+              <ul className="divide-y divide-border">
+                <li>
+                  <Link href="/seller/dashboard" className="block px-4 py-4 text-base font-semibold hover:bg-secondary">
+                    Seller dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/seller/dashboard/products" className="block px-4 py-4 text-base font-semibold hover:bg-secondary">
+                    Manage products
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/seller/dashboard/orders" className="block px-4 py-4 text-base font-semibold hover:bg-secondary">
+                    Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register/vendor" className="block px-4 py-4 text-base font-semibold text-primary hover:bg-secondary">
+                    How selling works
+                  </Link>
+                </li>
+              </ul>
+            ) : (
             <ul className="divide-y divide-border">
               {NAV_CATEGORIES.map((category) => {
                 if (category.subcategories.length === 0) {
@@ -1090,25 +1116,28 @@ function MobileMenu({
                 );
               })}
             </ul>
+            )}
           </nav>
 
           <div className="shrink-0 space-y-2 border-t border-border p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-            <Link
-              href="/register/vendor"
-              className="block rounded-lg border border-border px-4 py-3 text-center text-sm font-semibold hover:bg-secondary"
-            >
-              Become a vendor
-            </Link>
+            {!isRootPage && (
+              <Link
+                href="/register/vendor"
+                className="block rounded-lg border border-border px-4 py-3 text-center text-sm font-semibold hover:bg-secondary"
+              >
+                Become a vendor
+              </Link>
+            )}
             {showAuthLinks && (
               <div className="grid grid-cols-2 gap-2">
                 <Link
-                  href="/user/login"
+                  href={isRootPage ? '/seller/login' : '/user/login'}
                   className="rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
                 >
                   Log in
                 </Link>
                 <Link
-                  href="/register/user"
+                  href={isRootPage ? '/register/vendor' : '/register/user'}
                   className="rounded-lg border border-border px-4 py-3 text-center text-sm font-semibold hover:bg-secondary"
                 >
                   Sign up
@@ -1236,6 +1265,7 @@ export function SiteHeader() {
             showAuthLinks={!buyer && !sellerLoggedIn}
             account={buyer ? 'buyer' : sellerLoggedIn ? 'seller' : null}
             onLogout={handleLogout}
+            isRootPage={pathname === '/'}
           />
           <Link
             href="/"
@@ -1320,18 +1350,20 @@ export function SiteHeader() {
       {/* Mobile search row (below md). */}
       <div className="px-4 pb-2.5 sm:px-6 md:hidden">{searchForm('w-full')}</div>
 
-      {/* ROW 2 (desktop only): mega menu. See MegaMenu notes about `relative`. */}
-      <div className="hidden border-t border-border/60 lg:block">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <MegaMenu />
-          <Link
-            href="/register/vendor"
-            className="text-sm font-semibold text-muted-foreground hover:text-foreground"
-          >
-            Become a vendor
-          </Link>
+      {/* The storefront category mega menu stays available everywhere except the seller-focused root page. */}
+      {pathname !== '/' && (
+        <div className="hidden border-t border-border/60 lg:block">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+            <MegaMenu />
+            <Link
+              href="/register/vendor"
+              className="text-sm font-semibold text-muted-foreground hover:text-foreground"
+            >
+              Become a vendor
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }
