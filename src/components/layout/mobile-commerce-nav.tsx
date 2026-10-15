@@ -40,7 +40,7 @@ export function MobileCommerceNav() {
    */
   if (!buyer && !seller) {
     return (
-      <nav className={`fixed inset-x-0 bottom-0 z-40 grid border-t border-border bg-background/95 px-2 pb-[env(safe-area-inset-bottom)] pt-2 backdrop-blur md:hidden ${sellerRoute ? 'grid-cols-5' : 'grid-cols-4'}`}>
+      <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-background/95 px-2 pb-[env(safe-area-inset-bottom)] pt-2 backdrop-blur md:hidden">
         <MobileLink
           href="/"
           icon={Home}
@@ -48,53 +48,26 @@ export function MobileCommerceNav() {
           active={pathname === '/'}
         />
 
-        {sellerRoute ? (
-          <>
-            <MobileLink
-              href="/marketplace"
-              icon={ShoppingBag}
-              label="Shop"
-              active={pathname.startsWith('/marketplace')}
-            />
+        <MobileLink
+          href="/marketplace"
+          icon={ShoppingBag}
+          label="Shop"
+          active={pathname.startsWith('/marketplace')}
+        />
 
-            <MobileLink
-              href="/seller/login"
-              icon={LogIn}
-              label="Seller login"
-              active={pathname.startsWith('/seller/login')}
-            />
+        <MobileLink
+          href={sellerRoute ? '/seller/login' : '/user/login'}
+          icon={LogIn}
+          label="Login"
+          active={sellerRoute ? pathname.startsWith('/seller/login') : pathname.startsWith('/user/login')}
+        />
 
-            <MobileLink
-              href="/register/vendor"
-              icon={Store}
-              label="Register"
-              active={pathname.startsWith('/register/vendor')}
-            />
-          </>
-        ) : (
-          <>
-            <MobileLink
-              href="/marketplace"
-              icon={ShoppingBag}
-              label="Shop"
-              active={pathname.startsWith('/marketplace')}
-            />
-
-            <MobileLink
-              href="/user/login"
-              icon={LogIn}
-              label="Login"
-              active={pathname.startsWith('/user/login')}
-            />
-
-            <MobileLink
-              href="/register/user"
-              icon={UserPlus}
-              label="Join"
-              active={pathname.startsWith('/register')}
-            />
-          </>
-        )}
+        <MobileLink
+          href={sellerRoute ? '/register/vendor' : '/register/user'}
+          icon={sellerRoute ? Store : UserPlus}
+          label="Join"
+          active={sellerRoute ? pathname.startsWith('/register/vendor') : pathname.startsWith('/register')}
+        />
       </nav>
     );
   }
