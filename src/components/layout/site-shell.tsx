@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 import { SiteFooter } from './site-footer';
 import { SiteHeader } from './site-header';
@@ -12,21 +12,13 @@ type SiteShellProps = {
 };
 
 export function SiteShell({ children }: SiteShellProps) {
-  const [isBareRoute, setIsBareRoute] = useState(false);
+  const pathname = usePathname();
+  const isBareRoute =
+    pathname === '/admin' ||
+    pathname.startsWith('/admin/') ||
+    pathname === '/seller/dashboard' ||
+    pathname.startsWith('/seller/dashboard/');
 
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => {
-      const pathname = window.location.pathname;
-      setIsBareRoute(
-        pathname === '/admin' ||
-          pathname.startsWith('/admin/') ||
-          pathname === '/seller/dashboard' ||
-          pathname.startsWith('/seller/dashboard/'),
-      );
-    });
-
-    return () => cancelAnimationFrame(frame);
-  }, []);
 
   if (isBareRoute) {
     return <>{children}</>;
