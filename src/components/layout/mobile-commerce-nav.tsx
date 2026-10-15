@@ -10,6 +10,7 @@ import {
   UserRound,
   UserPlus,
   LayoutDashboard,
+  Store,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
@@ -19,6 +20,10 @@ export function MobileCommerceNav() {
 
   const [buyer, setBuyer] = useState(false);
   const [seller, setSeller] = useState(false);
+  const sellerRoute =
+    pathname === '/' ||
+    pathname.startsWith('/seller') ||
+    pathname.startsWith('/register/vendor');
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
@@ -43,26 +48,46 @@ export function MobileCommerceNav() {
           active={pathname === '/'}
         />
 
-        <MobileLink
-          href="/marketplace"
-          icon={ShoppingBag}
-          label="Shop"
-          active={pathname.startsWith('/marketplace')}
-        />
+        {sellerRoute ? (
+          <>
+            <MobileLink
+              href="/seller/login"
+              icon={LogIn}
+              label="Seller login"
+              active={pathname.startsWith('/seller/login')}
+            />
 
-        <MobileLink
-          href="/user/login"
-          icon={LogIn}
-          label="Login"
-          active={pathname.startsWith('/user/login')}
-        />
+            <MobileLink
+              href="/register/vendor"
+              icon={Store}
+              label="Register"
+              active={pathname.startsWith('/register/vendor')}
+            />
+          </>
+        ) : (
+          <>
+            <MobileLink
+              href="/marketplace"
+              icon={ShoppingBag}
+              label="Shop"
+              active={pathname.startsWith('/marketplace')}
+            />
 
-        <MobileLink
-          href="/register/user"
-          icon={UserPlus}
-          label="Join"
-          active={pathname.startsWith('/register')}
-        />
+            <MobileLink
+              href="/user/login"
+              icon={LogIn}
+              label="Login"
+              active={pathname.startsWith('/user/login')}
+            />
+
+            <MobileLink
+              href="/register/user"
+              icon={UserPlus}
+              label="Join"
+              active={pathname.startsWith('/register')}
+            />
+          </>
+        )}
       </nav>
     );
   }
