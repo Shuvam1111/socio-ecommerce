@@ -1184,6 +1184,7 @@ function MobileMenu({
 export function SiteHeader() {
   const router = useRouter();
   const pathname = usePathname();
+  const isSellerFlowPage = pathname === '/' || pathname === '/seller/login' || pathname === '/register/vendor';
   const { cart } = useCart();
   const { mode, setMode } = useTheme();
   const cartCount = cart.items.reduce((total, item) => total + item.quantity, 0);
@@ -1265,7 +1266,7 @@ export function SiteHeader() {
             showAuthLinks={!buyer && !sellerLoggedIn}
             account={buyer ? 'buyer' : sellerLoggedIn ? 'seller' : null}
             onLogout={handleLogout}
-            isRootPage={pathname === '/'}
+            isRootPage={isSellerFlowPage}
           />
           <Link
             href="/"
@@ -1328,13 +1329,13 @@ export function SiteHeader() {
 ) : (
   <div className="hidden items-center gap-1 sm:flex sm:gap-2">
   <Link
-  href="/user/login"
+  href={isSellerFlowPage ? '/seller/login' : '/user/login'}
       className="rounded-full px-2.5 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary sm:px-3"
     >
       Login
     </Link>
     <Link
-      href="/register/user"
+      href={isSellerFlowPage ? '/register/vendor' : '/register/user'}
       className="rounded-full bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 sm:px-4"
     >
       <span className="hidden sm:inline">Sign up</span>
@@ -1351,7 +1352,7 @@ export function SiteHeader() {
       <div className="px-4 pb-2.5 sm:px-6 md:hidden">{searchForm('w-full')}</div>
 
       {/* The storefront category mega menu stays available everywhere except the seller-focused root page. */}
-      {pathname !== '/' && (
+      {!isSellerFlowPage && (
         <div className="hidden border-t border-border/60 lg:block">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <MegaMenu />
