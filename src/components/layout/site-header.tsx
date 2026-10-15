@@ -892,11 +892,13 @@ function MobileMenu({
   showAuthLinks,
   account,
   onLogout,
+  isRootPage,
 }: {
   showAuthLinks: boolean;
   /** Who is logged in. Controls the Profile / Logout buttons at the bottom of the drawer. */
   account: 'buyer' | 'seller' | null;
   onLogout: () => void;
+  isRootPage: boolean;
 }) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -939,7 +941,7 @@ function MobileMenu({
     <>
       <button
         type="button"
-        aria-label="Open categories"
+        aria-label={isRootPage ? 'Open seller menu' : 'Open categories'}
         aria-expanded={isOpen}
         onClick={() => setIsOpen(true)}
         className="-ml-2 rounded-lg p-2 text-foreground hover:bg-secondary lg:hidden"
@@ -966,7 +968,7 @@ function MobileMenu({
         <aside
           role="dialog"
           aria-modal="true"
-          aria-label="Categories"
+          aria-label={isRootPage ? 'Seller navigation' : 'Categories'}
           className={`absolute inset-y-0 left-0 flex w-[88%] max-w-sm flex-col bg-background shadow-2xl transition-transform duration-300 ease-out ${
             isOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
@@ -986,7 +988,31 @@ function MobileMenu({
             </button>
           </div>
 
-          <nav aria-label="Product categories" className="flex-1 overflow-y-auto overscroll-contain">
+          <nav aria-label={isRootPage ? 'Seller navigation' : 'Product categories'} className="flex-1 overflow-y-auto overscroll-contain">
+            {isRootPage ? (
+              <ul className="divide-y divide-border">
+                <li>
+                  <Link href="/seller/dashboard" className="block px-4 py-4 text-base font-semibold hover:bg-secondary">
+                    Seller dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/seller/dashboard/products" className="block px-4 py-4 text-base font-semibold hover:bg-secondary">
+                    Manage products
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/seller/dashboard/orders" className="block px-4 py-4 text-base font-semibold hover:bg-secondary">
+                    Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/register/vendor" className="block px-4 py-4 text-base font-semibold text-primary hover:bg-secondary">
+                    How selling works
+                  </Link>
+                </li>
+              </ul>
+            ) : (
             <ul className="divide-y divide-border">
               {NAV_CATEGORIES.map((category) => {
                 if (category.subcategories.length === 0) {
@@ -1090,28 +1116,31 @@ function MobileMenu({
                 );
               })}
             </ul>
+            )}
           </nav>
 
           <div className="shrink-0 space-y-2 border-t border-border p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-            <Link
-              href="/register/vendor"
-              className="block rounded-lg border border-border px-4 py-3 text-center text-sm font-semibold hover:bg-secondary"
-            >
-              Become a vendor
-            </Link>
+            {!isRootPage && (
+              <Link
+                href="/register/vendor"
+                className="block rounded-lg border border-border px-4 py-3 text-center text-sm font-semibold hover:bg-secondary"
+              >
+                Become a vendor
+              </Link>
+            )}
             {showAuthLinks && (
               <div className="grid grid-cols-2 gap-2">
                 <Link
-                  href="/user/login"
+                  href={isRootPage ? '/seller/login' : '/user/login'}
                   className="rounded-lg bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
                 >
-                  Log in
+                  {isRootPage ? 'Seller log in' : 'Log in'}
                 </Link>
                 <Link
-                  href="/register/user"
+                  href={isRootPage ? '/register/vendor' : '/register/user'}
                   className="rounded-lg border border-border px-4 py-3 text-center text-sm font-semibold hover:bg-secondary"
                 >
-                  Sign up
+                  {isRootPage ? 'Become a seller' : 'Sign up'}
                 </Link>
               </div>
             )}
@@ -1155,6 +1184,7 @@ function MobileMenu({
 export function SiteHeader() {
   const router = useRouter();
   const pathname = usePathname();
+  const isSellerFlowPage = pathname === '/' || pathname === '/seller/login' || pathname === '/register/vendor';
   const { cart } = useCart();
   const { mode, setMode } = useTheme();
   const cartCount = cart.items.reduce((total, item) => total + item.quantity, 0);
@@ -1236,6 +1266,7 @@ export function SiteHeader() {
             showAuthLinks={!buyer && !sellerLoggedIn}
             account={buyer ? 'buyer' : sellerLoggedIn ? 'seller' : null}
             onLogout={handleLogout}
+            isRootPage={isSellerFlowPage}
           />
           <Link
             href="/"
@@ -1298,13 +1329,13 @@ export function SiteHeader() {
 ) : (
   <div className="hidden items-center gap-1 sm:flex sm:gap-2">
   <Link
-  href="/user/login"
+  href={isSellerFlowPage ? '/seller/login' : '/user/login'}
       className="rounded-full px-2.5 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-secondary sm:px-3"
     >
       Login
     </Link>
     <Link
-      href="/register/user"
+      href={isSellerFlowPage ? '/register/vendor' : '/register/user'}
       className="rounded-full bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 sm:px-4"
     >
       <span className="hidden sm:inline">Sign up</span>
@@ -1320,18 +1351,20 @@ export function SiteHeader() {
       {/* Mobile search row (below md). */}
       <div className="px-4 pb-2.5 sm:px-6 md:hidden">{searchForm('w-full')}</div>
 
-      {/* ROW 2 (desktop only): mega menu. See MegaMenu notes about `relative`. */}
-      <div className="hidden border-t border-border/60 lg:block">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <MegaMenu />
-          <Link
-            href="/register/vendor"
-            className="text-sm font-semibold text-muted-foreground hover:text-foreground"
-          >
-            Become a vendor
-          </Link>
+      {/* The storefront category mega menu stays available everywhere except the seller-focused root page. */}
+      {!isSellerFlowPage && (
+        <div className="hidden border-t border-border/60 lg:block">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+            <MegaMenu />
+            <Link
+              href="/register/vendor"
+              className="text-sm font-semibold text-muted-foreground hover:text-foreground"
+            >
+              Become a vendor
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

@@ -10,6 +10,7 @@ import {
   UserRound,
   UserPlus,
   LayoutDashboard,
+  Store,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
@@ -19,6 +20,10 @@ export function MobileCommerceNav() {
 
   const [buyer, setBuyer] = useState(false);
   const [seller, setSeller] = useState(false);
+  const sellerRoute =
+    pathname === '/' ||
+    pathname.startsWith('/seller') ||
+    pathname.startsWith('/register/vendor');
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
@@ -51,17 +56,17 @@ export function MobileCommerceNav() {
         />
 
         <MobileLink
-          href="/user/login"
+          href={sellerRoute ? '/seller/login' : '/user/login'}
           icon={LogIn}
           label="Login"
-          active={pathname.startsWith('/user/login')}
+          active={sellerRoute ? pathname.startsWith('/seller/login') : pathname.startsWith('/user/login')}
         />
 
         <MobileLink
-          href="/register/user"
-          icon={UserPlus}
+          href={sellerRoute ? '/register/vendor' : '/register/user'}
+          icon={sellerRoute ? Store : UserPlus}
           label="Join"
-          active={pathname.startsWith('/register')}
+          active={sellerRoute ? pathname.startsWith('/register/vendor') : pathname.startsWith('/register')}
         />
       </nav>
     );
